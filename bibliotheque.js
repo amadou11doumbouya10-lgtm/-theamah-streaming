@@ -573,12 +573,12 @@ var BIBLIOTHEQUE = [
     addedAt: "2026-05-15T00:00:00.000Z",
     seasons: [
       { episodes: [
-        {title: "L'héritage",           videoUrl: "./serie/one%20trillion%20dollar%20saison%201/E1.MP4",  mimeType: "video/mp4"},
-        {title: "La prophétie",         videoUrl: "./serie/one%20trillion%20dollar%20saison%201/E02.MP4", mimeType: "video/mp4"},
-        {title: "L'espoir",             videoUrl: "./serie/one%20trillion%20dollar%20saison%201/E03.MP4", mimeType: "video/mp4"},
-        {title: "La spirale infernale", videoUrl: "./serie/one%20trillion%20dollar%20saison%201/E04.MP4", mimeType: "video/mp4"},
-        {title: "La conspiration",      videoUrl: "./serie/one%20trillion%20dollar%20saison%201/E05.MP4", mimeType: "video/mp4"},
-        {title: "La fin du monde",      videoUrl: "./serie/one%20trillion%20dollar%20saison%201/E06.MP4", mimeType: "video/mp4"}
+        {title: "L'héritage",           videoUrl: "https://github.com/amadou11doumbouya10-lgtm/-theamah-streaming/releases/download/v1.0/E1.MP4",  mimeType: "video/mp4"},
+        {title: "La prophétie",         videoUrl: "https://github.com/amadou11doumbouya10-lgtm/-theamah-streaming/releases/download/v1.0/E02.MP4", mimeType: "video/mp4"},
+        {title: "L'espoir",             videoUrl: "https://github.com/amadou11doumbouya10-lgtm/-theamah-streaming/releases/download/v1.0/E03.MP4", mimeType: "video/mp4"},
+        {title: "La spirale infernale", videoUrl: "https://github.com/amadou11doumbouya10-lgtm/-theamah-streaming/releases/download/v1.0/E04.MP4", mimeType: "video/mp4"},
+        {title: "La conspiration",      videoUrl: "https://github.com/amadou11doumbouya10-lgtm/-theamah-streaming/releases/download/v1.0/E05.MP4", mimeType: "video/mp4"},
+        {title: "La fin du monde",      videoUrl: "https://github.com/amadou11doumbouya10-lgtm/-theamah-streaming/releases/download/v1.0/E06.MP4", mimeType: "video/mp4"}
       ]}
     ]
   }
