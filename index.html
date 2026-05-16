@@ -10,7 +10,6 @@
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://image.tmdb.org/t/p/w1280/s3TBrRGB1iav7gFOCNx3H31MoES.jpg">
 <meta name="theme-color" content="#e50914">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' https: data: blob:; media-src 'self' https: blob:; frame-src https://vidsrc.to https://vidsrc.me https://autoembed.cc https://2embed.cc https://2embed.skin https://superembed.stream https://www.youtube.com https://youtube.com; connect-src 'self' https://api.themoviedb.org https://api.emailjs.com;">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
 <link rel="manifest" href="manifest.json">
 <!-- EmailJS SDK — requis pour le formulaire Contact et les Suggestions -->
@@ -706,7 +705,7 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
 function esc(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
-var IFRAME_WHITELIST=['vidsrc.to','vidsrc.me','autoembed.cc','2embed.cc','2embed.skin','superembed.stream','www.youtube.com','youtube.com'];
+var IFRAME_WHITELIST=['vidsrc.to','vidsrc.me','autoembed.co','2embed.cc','2embed.skin','multiembed.mov','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
 function safeIframeSrc(url){
   if(!url)return '';
   try{
