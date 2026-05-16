@@ -1,0 +1,27 @@
+{
+  "name": "Theamah+ Streaming",
+  "short_name": "Theamah+",
+  "description": "Votre plateforme de streaming gratuite. Films, séries et bibliothèque personnelle.",
+  "start_url": "./theamah-streaming.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#080c14",
+  "theme_color": "#e50914",
+  "orientation": "any",
+  "lang": "fr",
+  "categories": ["entertainment"],
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
