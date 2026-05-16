@@ -1,5 +1,5 @@
 # CORRECTIONS & AMÉLIORATIONS — Theamah+
-# Dernière mise à jour : 15/05/2026
+# Dernière mise à jour : 16/05/2026
 
 ---
 
@@ -40,10 +40,55 @@
 
 ---
 
+## ✅ SESSION 4 — 16/05/2026
+
+### Nouvelles fonctionnalités
+- ✅ S4-1 — PWA : manifest.json + Service Worker (sw.js) + icône SVG → installable sur mobile/bureau
+- ✅ S4-2 — Page 404.html stylisée aux couleurs Theamah+
+- ✅ S4-3 — Modal Contact dans le footer (EmailJS) — adresse email protégée
+- ✅ S4-4 — Bouton 💡 Suggérer un titre (connectés uniquement) + modal suggestion EmailJS
+- ✅ S4-5 — Hero aléatoire : ordre des films mélangé à chaque chargement
+- ✅ S4-6 — Bouton "＋ Favoris" avec texte dans le Hero
+- ✅ S4-7 — og:image corrigée (vraie affiche TMDB)
+
+### Sécurité corrigée
+- ✅ SEC-1 — Fonction esc() — échappement HTML sur tous les champs TMDB (XSS)
+- ✅ SEC-2 — safeIframeSrc() — whitelist des 6 sources autorisées (vidsrc.to, vidsrc.me...)
+- ✅ SEC-3 — Iframes avec sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation"
+- ✅ SEC-4 — showToast() sécurisé : textContent au lieu de innerHTML
+- ✅ SEC-5 — Admin : token de session dérivé du hash (28 chars) — bypass console impossible
+- ✅ SEC-6 — Admin : délai progressif anti-brute-force (1s→2s→3s→4s→5s par tentative)
+- ✅ SEC-7 — Content Security Policy (CSP) dans le <head>
+
+### Limitations connues (inhérentes au site sans backend)
+- ⚠️ Clé TMDB visible dans le code source → restreindre au domaine github.io sur themoviedb.org
+- ⚠️ Auth utilisateur 100% client-side (localStorage) → acceptable pour usage perso
+
+---
+
 ## ⬜ RESTE À FAIRE
 
 - A3 — Historique de recherche (5 dernières recherches en dropdown)
 - A7 — Page d'aide complète dans le footer
+
+---
+
+## 🔴 PROBLÈME CONNU — Pubs et redirections
+
+- **Problème** : Les sources streaming gratuites (VidSrc, 2Embed...) affichent des pubs qui interceptent les clics et redirigent vers d'autres sites.
+- **Tentative** : Attribut `sandbox` sur les iframes → annulé car cassait le lecteur.
+- **Solution recommandée** : Installer **uBlock Origin** dans le navigateur.
+  - Chrome : https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
+  - Firefox : https://addons.mozilla.org/fr/firefox/addon/ublock-origin/
+- **Statut** : ⬜ Pas de solution technique côté code possible sans casser le lecteur.
+
+---
+
+## 🌐 ACCÈS AU SITE — 16/05/2026
+
+- **Lien complet** : https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/
+- **Lien court** : https://tinyurl.com/27k6aabj
+- **QR Code** : QRCode-Theamah.png sur le bureau
 
 ---
 

@@ -194,6 +194,22 @@ Breakpoints : `900px` (nav mobile) · `600px` (bottom sheets)
 - Raccourcis clavier, message aucun résultat, mode invité
 - Force mot de passe, 15 films + 8 séries pré-chargés
 
+### Session 3 — 16/05/2026
+- Lien court TinyURL : https://tinyurl.com/27k6aabj
+- QR Code généré (rouge/noir) → bureau : QRCode-Theamah.png
+- Tentative sandbox iframe pour bloquer redirections pubs → annulée (cassait le lecteur)
+- Recommandation : installer uBlock Origin pour bloquer les pubs
+- Message astuce son ajouté dans le lecteur streaming
+
+### Session 4 — 16/05/2026
+- PWA : manifest.json + sw.js + icon.svg → site installable sur mobile/bureau
+- Page 404.html stylisée Theamah+
+- Modal Contact footer (EmailJS : service_zoosqg8 / template_ehlpyjq)
+- Bouton 💡 Suggérer un titre (connectés uniquement) — modal EmailJS (template_s3bd6k2)
+- Hero aléatoire + bouton "+ Favoris" avec texte
+- og:image corrigée → backdrop Inception TMDB
+- Audit sécurité complet + 7 correctifs : esc(), safeIframeSrc(), sandbox iframes, CSP, admin token robuste, délai brute-force, showToast safe
+
 ### Session 2 — 15/05/2026
 - A1 : Tri/filtre Favoris + Bibliothèque
 - A2 : Stats "X films · Y séries"
