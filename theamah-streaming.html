@@ -916,7 +916,7 @@ function playLocal(id,sIdx,eIdx){
       var h=hist.find(function(x){return x.id===film.id;});
       var epTrack=ep.subtitleUrl?'<track kind="subtitles" src="'+ep.subtitleUrl+'" srclang="fr" label="Français" default>':'';
       document.getElementById('plyBox').innerHTML=ep.mimeType==='text/html'
-        ?'<iframe src="'+ep.fileData+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-pointer-lock allow-popups" style="width:100%;height:100%;border:none;"></iframe>'
+        ?'<iframe src="'+ep.fileData+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" style="width:100%;height:100%;border:none;"></iframe>'
         :'<video controls autoplay style="width:100%;height:100%;" onerror="showLocalFileError(this)"><source src="'+ep.fileData+'" type="'+(ep.mimeType||'video/mp4')+'">'+epTrack+'</video>';
       if(h&&h.currentTime>5){ var v=document.querySelector('#plyBox video'); if(v){ v.addEventListener('loadedmetadata',function(){v.currentTime=h.currentTime;},{once:true}); }}
     } else {
@@ -934,7 +934,7 @@ function playLocal(id,sIdx,eIdx){
       var h=hist.find(function(x){return x.id===film.id;});
       var filmTrack=film.subtitleUrl?'<track kind="subtitles" src="'+film.subtitleUrl+'" srclang="fr" label="Français" default>':'';
       document.getElementById('plyBox').innerHTML=mtype==='text/html'
-        ?'<iframe src="'+src+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-pointer-lock allow-popups" style="width:100%;height:100%;border:none;" referrerpolicy="origin"></iframe>'
+        ?'<iframe src="'+src+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" style="width:100%;height:100%;border:none;" referrerpolicy="origin"></iframe>'
         :'<video controls autoplay style="width:100%;height:100%;" onerror="showLocalFileError(this)"><source src="'+src+'" type="'+mtype+'">'+filmTrack+'</video>';
       if(h&&h.currentTime>5){ var v=document.querySelector('#plyBox video'); if(v){ v.addEventListener('loadedmetadata',function(){v.currentTime=h.currentTime;},{once:true}); }}
       if(mtype!=='text/html') startPlyAutoSave();
@@ -981,7 +981,7 @@ function _srcUrl(){
 function _loadEmbed(){
   clearTimeout(_autoTryTimer);
   document.getElementById('plyBox').innerHTML=
-    '<iframe src="'+_srcUrl()+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-pointer-lock allow-popups" style="width:100%;height:100%;border:none;" referrerpolicy="origin"></iframe>';
+    '<iframe src="'+_srcUrl()+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" style="width:100%;height:100%;border:none;" referrerpolicy="origin"></iframe>';
   if(_autoTryEnabled && _tSrc < _SRCS.length-1){
     _autoTryTimer=setTimeout(function(){
       if(document.getElementById('plyOv').classList.contains('open') && _autoTryEnabled && _tSrc < _SRCS.length-1){
