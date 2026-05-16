@@ -10,6 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://image.tmdb.org/t/p/w1280/s3TBrRGB1iav7gFOCNx3H31MoES.jpg">
 <meta name="theme-color" content="#e50914">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; img-src 'self' https: data: blob:; media-src 'self' https: blob:; frame-src https://vidsrc.to https://vidsrc.me https://autoembed.cc https://2embed.cc https://2embed.skin https://superembed.stream https://www.youtube.com https://youtube.com; connect-src 'self' https://api.themoviedb.org https://api.emailjs.com;">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
 <link rel="manifest" href="manifest.json">
 <!-- EmailJS SDK — requis pour le formulaire Contact et les Suggestions -->
@@ -701,6 +702,21 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
 <div class="toast" id="toast"></div>
 
 <script>
+// ════════ SÉCURITÉ — Échappement HTML & Whitelist iframes ════════
+function esc(s){
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+var IFRAME_WHITELIST=['vidsrc.to','vidsrc.me','autoembed.cc','2embed.cc','2embed.skin','superembed.stream','www.youtube.com','youtube.com'];
+function safeIframeSrc(url){
+  if(!url)return '';
+  try{
+    var u=new URL(url);
+    if(u.protocol!=='https:'&&u.protocol!=='http:')return '';
+    if(IFRAME_WHITELIST.some(function(d){return u.hostname===d||u.hostname.endsWith('.'+d);}))return url;
+  }catch(e){}
+  return '';
+}
+
 // ════════ CONFIG ════════
 var TK  = '4e44d9029b1270a757cddc766a1bcb63';
 var TB  = 'https://api.themoviedb.org/3';
@@ -955,7 +971,7 @@ function playLocal(id,sIdx,eIdx){
       var h=hist.find(function(x){return x.id===film.id;});
       var epTrack=ep.subtitleUrl?'<track kind="subtitles" src="'+ep.subtitleUrl+'" srclang="fr" label="Français" default>':'';
       document.getElementById('plyBox').innerHTML=ep.mimeType==='text/html'
-        ?'<iframe src="'+ep.fileData+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" style="width:100%;height:100%;border:none;"></iframe>'
+        ?'<iframe src="'+safeIframeSrc(ep.fileData)+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation" style="width:100%;height:100%;border:none;"></iframe>'
         :'<video controls autoplay style="width:100%;height:100%;" onerror="showLocalFileError(this)"><source src="'+ep.fileData+'" type="'+(ep.mimeType||'video/mp4')+'">'+epTrack+'</video>';
       if(h&&h.currentTime>5){ var v=document.querySelector('#plyBox video'); if(v){ v.addEventListener('loadedmetadata',function(){v.currentTime=h.currentTime;},{once:true}); }}
     } else {
@@ -973,7 +989,7 @@ function playLocal(id,sIdx,eIdx){
       var h=hist.find(function(x){return x.id===film.id;});
       var filmTrack=film.subtitleUrl?'<track kind="subtitles" src="'+film.subtitleUrl+'" srclang="fr" label="Français" default>':'';
       document.getElementById('plyBox').innerHTML=mtype==='text/html'
-        ?'<iframe src="'+src+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" style="width:100%;height:100%;border:none;" referrerpolicy="origin"></iframe>'
+        ?'<iframe src="'+safeIframeSrc(src)+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-presentation" style="width:100%;height:100%;border:none;"></iframe>'
         :'<video controls autoplay style="width:100%;height:100%;" onerror="showLocalFileError(this)"><source src="'+src+'" type="'+mtype+'">'+filmTrack+'</video>';
       if(h&&h.currentTime>5){ var v=document.querySelector('#plyBox video'); if(v){ v.addEventListener('loadedmetadata',function(){v.currentTime=h.currentTime;},{once:true}); }}
       if(mtype!=='text/html') startPlyAutoSave();
@@ -1225,9 +1241,9 @@ function renderHero(){
   if(m.backdrop_path) bg.style.backgroundImage='url('+IMG+'w1280'+m.backdrop_path+')';
   document.getElementById('heroC').innerHTML=
     '<div class="hero-badge '+(loc?'local':'trending')+'">'+(loc?'&#128190; Dans ta bibliotheque':'&#128293; Tendance')+'</div>'+
-    '<h1 class="hero-title">'+raw+'</h1>'+
-    '<div class="hero-meta"><span class="hero-star">&#11088; '+rat+'</span><span>/10</span><span>&bull;</span><span>'+yr+'</span></div>'+
-    '<p class="hero-desc">'+(m.overview||'Aucune description disponible.')+'</p>'+
+    '<h1 class="hero-title">'+esc(raw)+'</h1>'+
+    '<div class="hero-meta"><span class="hero-star">&#11088; '+esc(rat)+'</span><span>/10</span><span>&bull;</span><span>'+esc(yr)+'</span></div>'+
+    '<p class="hero-desc">'+esc(m.overview||'Aucune description disponible.')+'</p>'+
     '<div class="hero-btns">'+
     (loc
       ?'<button class="hbtn hbtn-play green" onclick="playLocal(\''+loc.id+'\')">&#9654; Regarder</button>'
@@ -1282,7 +1298,7 @@ async function openDetail(id,type){
   var yr=(d.release_date||d.first_air_date||'').slice(0,4);
   var rat=d.vote_average?d.vote_average.toFixed(1):'?';
   var rt=d.runtime?d.runtime+' min':(d.episode_run_time&&d.episode_run_time[0]?'~'+d.episode_run_time[0]+' min/ep':'');
-  var gs=(d.genres||[]).map(function(g){return '<span class="gtag">'+g.name+'</span>';}).join('');
+  var gs=(d.genres||[]).map(function(g){return '<span class="gtag">'+esc(g.name)+'</span>';}).join('');
   var isFav=favs.some(function(f){return f.id===id;});
   var trailer=null;
   (v.results||[]).forEach(function(x){if(!trailer&&x.type==='Trailer'&&x.site==='YouTube')trailer=x;});
@@ -1291,13 +1307,13 @@ async function openDetail(id,type){
   var ps=(d.poster_path||'').replace(/'/g,"\\'");
   var loc=myLib.find(function(m){return m.title&&m.title.toLowerCase()===raw.toLowerCase();});
   document.getElementById('modC').innerHTML=
-    '<div class="mod-hero">'+(bd?'<img src="'+bd+'" alt="'+raw+'">':'')+'<div class="mod-hero-grad"></div></div>'+
+    '<div class="mod-hero">'+(bd?'<img src="'+bd+'" alt="'+esc(raw)+'">':'')+'<div class="mod-hero-grad"></div></div>'+
     '<div class="mod-body">'+
-    '<h2 class="mod-title">'+raw+'</h2>'+
+    '<h2 class="mod-title">'+esc(raw)+'</h2>'+
     (loc?'<div class="loc-avail">&#128190; Ce film est dans ta bibliotheque — lecture directe disponible !</div>':'')+
-    '<div class="mod-meta"><span class="mod-rat">&#11088; '+rat+'</span><span>/10</span>'+(yr?'<span>&bull;</span><span>'+yr+'</span>':'')+(rt?'<span>&bull;</span><span>'+rt+'</span>':'')+(d.number_of_seasons?'<span>&bull;</span><span>'+d.number_of_seasons+' saison(s)</span>':'')+'</div>'+
+    '<div class="mod-meta"><span class="mod-rat">&#11088; '+esc(rat)+'</span><span>/10</span>'+(yr?'<span>&bull;</span><span>'+esc(yr)+'</span>':'')+(rt?'<span>&bull;</span><span>'+esc(rt)+'</span>':'')+(d.number_of_seasons?'<span>&bull;</span><span>'+d.number_of_seasons+' saison(s)</span>':'')+'</div>'+
     (gs?'<div class="genres">'+gs+'</div>':'')+
-    '<p class="mod-desc">'+(d.overview||'Aucune description disponible.')+'</p>'+
+    '<p class="mod-desc">'+esc(d.overview||'Aucune description disponible.')+'</p>'+
     '<div class="mod-acts">'+
     (loc
       ?'<button class="hbtn hbtn-play green" onclick="closeMod();playLocal(\''+loc.id+'\')">&#9654; Regarder (Local)</button>'
@@ -1432,8 +1448,9 @@ function applyMyFilters(){
 
 // ════════ ADMIN ════════
 var _admTries=0;
+var ADM_TOKEN=ADMIN_HASH.slice(0,20)+ADMIN_HASH.slice(-8);
 function openAdmin(){
-  if(sessionStorage.getItem('t_admin_ok')==='1'){
+  if(sessionStorage.getItem('t_admin_ok')===ADM_TOKEN){
     document.getElementById('admOv').classList.add('open');
     document.body.style.overflow='hidden';
     renderLib();
@@ -1462,7 +1479,7 @@ async function checkAdminPass(){
   var _buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(pass));
   var _hash=Array.from(new Uint8Array(_buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
   if(_hash===ADMIN_HASH){
-    sessionStorage.setItem('t_admin_ok','1');
+    sessionStorage.setItem('t_admin_ok',ADM_TOKEN);
     closeAdmPass();
     document.getElementById('admOv').classList.add('open');
     document.body.style.overflow='hidden';
@@ -1474,7 +1491,14 @@ async function checkAdminPass(){
     document.getElementById('admPassErr').textContent='Mot de passe incorrect.';
     document.getElementById('admPassTries').textContent=reste>0?reste+' tentative(s) restante(s)':'Accès bloqué.';
     document.getElementById('admPassInput').value='';
-    document.getElementById('admPassInput').focus();
+    // Délai progressif anti-brute-force
+    var delay=Math.min(_admTries*1000,5000);
+    var btn=document.querySelector('.adm-pass-btns button:last-child');
+    if(btn){btn.disabled=true;btn.textContent='Attends…';}
+    setTimeout(function(){
+      document.getElementById('admPassInput').focus();
+      if(btn){btn.disabled=false;btn.textContent='✓ Valider';}
+    },delay);
   }
 }
 function closeAdm(){document.getElementById('admOv').classList.remove('open');document.body.style.overflow='';}
@@ -1813,7 +1837,7 @@ function showLocalFileError(vid){
 }
 function toggleMob(){document.getElementById('mobMenu').classList.toggle('open');}
 function closeMob(){document.getElementById('mobMenu').classList.remove('open');}
-function showToast(msg,type){var t=document.getElementById('toast');t.innerHTML=msg;t.className='toast show'+(type?(' '+type):'');setTimeout(function(){t.classList.remove('show');},3500);}
+function showToast(msg,type){var t=document.getElementById('toast');t.textContent=msg;t.className='toast show'+(type?(' '+type):'');setTimeout(function(){t.classList.remove('show');},3500);}
 // ════════ RACCOURCIS CLAVIER ════════
 document.addEventListener('keydown',function(e){
   if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT') return;
