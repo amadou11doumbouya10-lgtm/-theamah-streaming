@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Theamah+ Streaming</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080c14;--bg2:#0f1521;--accent:#e50914;--gold:#f5c518;--text:#eef0f4;--text2:#8892a4;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center;overflow:hidden;}
+.bg-glow{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(229,9,20,0.08) 0%,transparent 70%);pointer-events:none;}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--accent);letter-spacing:3px;margin-bottom:40px;cursor:pointer;}
+.logo span{color:var(--text);}
+.err-code{font-family:'Bebas Neue',sans-serif;font-size:clamp(8rem,22vw,14rem);line-height:1;letter-spacing:-4px;background:linear-gradient(135deg,var(--accent) 0%,#ff4d4d 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;animation:pulse 3s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.7;}}
+.err-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.5rem,4vw,2.5rem);letter-spacing:3px;margin-bottom:16px;color:var(--text);}
+.err-desc{color:var(--text2);font-size:0.95rem;line-height:1.7;max-width:420px;margin:0 auto 36px;}
+.err-icon{font-size:3rem;margin-bottom:24px;animation:float 3s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.btn-home{display:inline-flex;align-items:center;gap:10px;background:var(--accent);color:#fff;text-decoration:none;padding:14px 30px;border-radius:10px;font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:700;transition:all 0.2s;margin:0 6px;}
+.btn-home:hover{background:#c40812;transform:scale(1.04);}
+.btn-back{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.08);color:var(--text);text-decoration:none;padding:14px 30px;border-radius:10px;font-family:'Outfit',sans-serif;font-size:0.95rem;font-weight:600;border:1px solid rgba(255,255,255,0.12);transition:all 0.2s;margin:0 6px;}
+.btn-back:hover{background:rgba(255,255,255,0.15);}
+.btn-wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:48px;}
+.suggestion{color:var(--text2);font-size:0.78rem;opacity:0.6;}
+</style>
+</head>
+<body>
+<div class="bg-glow"></div>
+
+<div class="logo" onclick="window.location.href='./theamah-streaming.html'">THEAMAH<span>+</span></div>
+
+<div class="err-icon">📽️</div>
+<div class="err-code">404</div>
+<h1 class="err-title">Page introuvable</h1>
+<p class="err-desc">Oups ! Cette page n'existe pas ou a été déplacée. Le film que tu cherches est peut-être sur notre catalogue.</p>
+
+<div class="btn-wrap">
+  <a href="./theamah-streaming.html" class="btn-home">▶ Retour à l'accueil</a>
+  <a href="javascript:history.back()" class="btn-back">← Page précédente</a>
+</div>
+
+<p class="suggestion">Tu cherches un film ? <a href="./theamah-streaming.html" style="color:var(--accent);text-decoration:none;">Explore le catalogue →</a></p>
+</body>
+</html>

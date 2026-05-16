@@ -8,9 +8,13 @@
 <meta property="og:title" content="Theamah+ Streaming">
 <meta property="og:description" content="Regardez des milliers de films et séries gratuitement sur Theamah+.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://image.tmdb.org/t/p/w500/poster.jpg">
+<meta property="og:image" content="https://image.tmdb.org/t/p/w1280/s3TBrRGB1iav7gFOCNx3H31MoES.jpg">
 <meta name="theme-color" content="#e50914">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+<link rel="manifest" href="manifest.json">
+<!-- EmailJS SDK — requis pour le formulaire Contact et les Suggestions -->
+<!-- Pour configurer : va sur https://www.emailjs.com/ et colle tes clés dans la section EMAILJS CONFIG du JS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="bibliotheque.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -345,6 +349,7 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
   <div class="nav-right">
     <div class="search-wrap"><span>&#128269;</span><input type="text" placeholder="Rechercher..." oninput="handleSearch(this.value)"></div>
     <button class="btn-n btn-admin" onclick="openAdmin()">&#9881; Admin</button>
+    <button id="suggestBtn" class="btn-n btn-ghost" onclick="openSuggest()" style="display:none;" title="Suggérer un titre">&#128161; Suggérer</button>
     <div id="authBtns" style="display:flex;gap:8px;">
       <button class="btn-n btn-ghost" onclick="openAuth('login')">Connexion</button>
       <button class="btn-n btn-red" onclick="openAuth('signup')">S'inscrire</button>
@@ -354,6 +359,7 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
       <div class="user-dd">
         <div class="dd-item" onclick="showPage('myfilms')">&#127916; Ma Bibliothèque</div>
         <div class="dd-item" onclick="showPage('favs')">&#11088; Favoris</div>
+        <div class="dd-item" onclick="openSuggest()">&#128161; Suggérer un titre</div>
         <div class="dd-item" onclick="openAdmin()">&#9881; Admin</div>
         <div class="dd-item red" onclick="logout()">&#128682; Déconnexion</div>
       </div>
@@ -370,6 +376,7 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
   <a href="#" onclick="showPage('catalog');closeMob();return false;">&#127909; Catalogue</a>
   <a href="#" onclick="showPage('favs');closeMob();return false;">&#11088; Favoris</a>
   <a href="#" onclick="openAdmin();closeMob();return false;">&#9881; Admin</a>
+  <a href="#" id="mobSuggest" onclick="openSuggest();closeMob();return false;" style="display:none;">&#128161; Suggérer un titre</a>
 </div>
 
 <!-- PAGE ACCUEIL -->
@@ -492,7 +499,7 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
 <footer>
   <div class="ft">
     <div class="logo">THEAMAH<span style="color:var(--text)">+</span></div>
-    <div class="fl"><a href="#" onclick="showToast('Section bientôt disponible')">À propos</a><a href="mailto:mkaba6181@gmail.com">Contact</a><a href="#" onclick="showToast('Appuyez sur Échap pour fermer les fenêtres, Espace pour pause, N pour changer de source')">Aide</a></div>
+    <div class="fl"><a href="#" onclick="showToast('Section bientôt disponible')">À propos</a><a href="#" onclick="openContact();return false;">Contact</a><a href="#" onclick="showToast('Appuyez sur Échap pour fermer les fenêtres, Espace pour pause, N pour changer de source')">Aide</a></div>
   </div>
   <div class="fb"><p class="fc">&#169; 2026 Theamah Streaming</p><span class="tmdb">TMDB</span></div>
 </footer>
@@ -659,6 +666,38 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
   </div>
 </div>
 
+<!-- MODAL CONTACT -->
+<div class="mod-ov" id="contactOv" onclick="if(event.target===this)closeContact()">
+  <div class="auth-box">
+    <button class="mod-close" onclick="closeContact()">&#10005;</button>
+    <div class="auth-logo" style="font-size:1.3rem;margin-bottom:4px;">&#9993; Contact</div>
+    <p class="auth-sub">Une question ? Un bug ? Écris-nous !</p>
+    <div class="fg"><label>Nom</label><input type="text" id="ctName" placeholder="Votre nom"></div>
+    <div class="fg"><label>Email</label><input type="email" id="ctEmail" placeholder="votre@email.com"></div>
+    <div class="fg"><label>Message</label><textarea id="ctMsg" placeholder="Votre message..." style="min-height:110px;"></textarea></div>
+    <button class="btn-save" id="ctSend" onclick="sendContact()" style="width:100%;margin-top:6px;">Envoyer</button>
+  </div>
+</div>
+
+<!-- MODAL SUGGESTION DE TITRE (visible uniquement si connecté) -->
+<div class="mod-ov" id="suggestOv" onclick="if(event.target===this)closeSuggest()">
+  <div class="auth-box" style="max-width:460px;">
+    <button class="mod-close" onclick="closeSuggest()">&#10005;</button>
+    <div class="auth-logo" style="font-size:1.2rem;margin-bottom:4px;">&#128161; Suggérer un titre</div>
+    <p class="auth-sub">Propose un film ou une série à ajouter au catalogue !</p>
+    <div class="fg"><label>Titre du film / série *</label><input type="text" id="sgTitle" placeholder="Ex: Dune, Euphoria..."></div>
+    <div class="fg">
+      <label>Type</label>
+      <select id="sgType" style="width:100%;background:var(--bg3);border:1px solid rgba(255,255,255,0.09);color:var(--text);padding:9px 12px;border-radius:7px;font-family:'Outfit',sans-serif;font-size:0.85rem;outline:none;cursor:pointer;">
+        <option value="movie">&#127909; Film</option>
+        <option value="tv">&#128250; Série</option>
+      </select>
+    </div>
+    <div class="fg"><label>Pourquoi le recommander ? *</label><textarea id="sgReason" placeholder="Dis-nous pourquoi ce titre mérite d'être ajouté..." style="min-height:100px;"></textarea></div>
+    <button class="btn-save" id="sgSend" onclick="sendSuggest()" style="width:100%;margin-top:6px;background:var(--green);">&#128640; Envoyer la suggestion</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -794,7 +833,7 @@ async function loadHome(){
       api('/discover/movie',{with_original_language:'fr',sort_by:'popularity.desc'}),
       api('/discover/tv',{with_original_language:'fr',sort_by:'popularity.desc'})
     ]);
-    heroMovies=r[0].results.slice(0,8);
+    heroMovies=r[0].results.slice(0,8).sort(function(){return Math.random()-0.5;});
     heroIdx=0;renderHero();setupDots();startTimer();
     var html='';
     var hist=JSON.parse(localStorage.getItem('t_history')||'[]');
@@ -1194,7 +1233,7 @@ function renderHero(){
       ?'<button class="hbtn hbtn-play green" onclick="playLocal(\''+loc.id+'\')">&#9654; Regarder</button>'
       :'<button class="hbtn hbtn-play" onclick="playTmdb('+m.id+',\'movie\',\''+t+'\')">&#9654; Regarder</button>')+
     '<button class="hbtn hbtn-info" onclick="openDetail('+m.id+',\'movie\')">&#8505; Plus d\'infos</button>'+
-    '<button class="hbtn hbtn-fav" onclick="toggleFav(event,'+m.id+',\''+t+'\',\''+ps+'\',\'movie\')">'+(favs.some(function(f){return f.id===m.id;})?'&#11088;':'&#9734;')+'</button>'+
+    '<button class="hbtn hbtn-fav" onclick="toggleFav(event,'+m.id+',\''+t+'\',\''+ps+'\',\'movie\')">'+(favs.some(function(f){return f.id===m.id;})?'&#11088; Favoris':'&#43; Favoris')+'</button>'+
     '</div>';
   document.querySelectorAll('.hero-dot').forEach(function(d,i){d.classList.toggle('active',i===heroIdx);});
 }
@@ -1203,12 +1242,20 @@ function goDot(i){heroIdx=i;renderHero();resetTimer();}
 function startTimer(){heroTimer=setInterval(function(){heroIdx=(heroIdx+1)%heroMovies.length;renderHero();},9000);}
 function resetTimer(){clearInterval(heroTimer);startTimer();}
 
-// Pause hero au survol
+// Pause hero au survol + PWA + EmailJS init
 document.addEventListener('DOMContentLoaded',function(){
   var hero=document.getElementById('hero');
   if(hero){
     hero.addEventListener('mouseenter',function(){clearInterval(heroTimer);});
     hero.addEventListener('mouseleave',function(){startTimer();});
+  }
+  // PWA — enregistrement du Service Worker
+  if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('./sw.js').catch(function(){});
+  }
+  // EmailJS — initialisation (remplace la clé dans la section EMAILJS CONFIG)
+  if(typeof emailjs!=='undefined'&&EJS_PUBLIC_KEY!=='VOTRE_PUBLIC_KEY'){
+    emailjs.init(EJS_PUBLIC_KEY);
   }
 });
 function scrollC(id,d){document.getElementById(id).scrollBy({left:d*380,behavior:'smooth'});}
@@ -1743,8 +1790,15 @@ async function doSignup(){
 function logout(){curUser=null;localStorage.removeItem('t_user');updateAuthUI();showToast('Déconnecté');}
 function updateAuthUI(){
   var ab=document.getElementById('authBtns'),um=document.getElementById('userMenu');
-  if(curUser){ab.style.display='none';um.style.display='block';document.getElementById('userAv').textContent=curUser.name.charAt(0).toUpperCase();}
-  else{ab.style.display='flex';um.style.display='none';}
+  var sb=document.getElementById('suggestBtn'),ms=document.getElementById('mobSuggest');
+  if(curUser){
+    ab.style.display='none';um.style.display='block';
+    document.getElementById('userAv').textContent=curUser.name.charAt(0).toUpperCase();
+    if(sb)sb.style.display='block';if(ms)ms.style.display='block';
+  }else{
+    ab.style.display='flex';um.style.display='none';
+    if(sb)sb.style.display='none';if(ms)ms.style.display='none';
+  }
 }
 
 // ════════ UTILS ════════
@@ -1821,6 +1875,85 @@ document.addEventListener('keydown',function(e){
 });
 
 window.addEventListener('scroll',function(){document.getElementById('nav').style.background=window.scrollY>40?'rgba(8,12,20,0.98)':'rgba(8,12,20,0.96)';});
+
+// ════════ EMAILJS CONFIG ════════
+// ⚠️ ÉTAPES POUR CONFIGURER L'ENVOI D'EMAILS :
+// 1. Crée un compte sur https://www.emailjs.com/ (gratuit jusqu'à 200 emails/mois)
+// 2. Crée un service (Gmail, Outlook, etc.) → note le SERVICE_ID
+// 3. Template Contact : variables requises → {{from_name}}, {{from_email}}, {{message}}
+// 4. Template Suggestion : variables requises → {{from_name}}, {{from_email}}, {{title}}, {{type}}, {{reason}}
+// 5. Va dans Account > API Keys → copie ta Public Key
+// Colle les 4 valeurs ci-dessous :
+var EJS_PUBLIC_KEY       = 'NUEI2sZCSKq4QpmB3';
+var EJS_SERVICE_ID       = 'service_zoosqg8';
+var EJS_TEMPLATE_CONTACT = 'template_ehlpyjq';
+var EJS_TEMPLATE_SUGGEST = 'template_s3bd6k2';
+
+// ════════ CONTACT MODAL ════════
+function openContact(){document.getElementById('contactOv').classList.add('open');document.body.style.overflow='hidden';}
+function closeContact(){document.getElementById('contactOv').classList.remove('open');document.body.style.overflow='';}
+function sendContact(){
+  var n=document.getElementById('ctName').value.trim();
+  var e=document.getElementById('ctEmail').value.trim();
+  var m=document.getElementById('ctMsg').value.trim();
+  if(!n||!e||!m){showToast('Remplissez tous les champs');return;}
+  if(!validEmail(e)){showToast('Email invalide');return;}
+  var btn=document.getElementById('ctSend');
+  btn.disabled=true;btn.textContent='Envoi...';
+  if(typeof emailjs==='undefined'||EJS_SERVICE_ID==='VOTRE_SERVICE_ID'){
+    showToast('EmailJS non configuré — colle tes clés dans le code (section EMAILJS CONFIG)','grn');
+    btn.disabled=false;btn.textContent='Envoyer';closeContact();return;
+  }
+  emailjs.send(EJS_SERVICE_ID,EJS_TEMPLATE_CONTACT,{from_name:n,from_email:e,message:m})
+    .then(function(){
+      showToast('Message envoyé ! Merci.','grn');
+      closeContact();
+      document.getElementById('ctName').value='';
+      document.getElementById('ctEmail').value='';
+      document.getElementById('ctMsg').value='';
+    })
+    .catch(function(){showToast('Erreur d\'envoi — vérifie tes clés EmailJS.');})
+    .finally(function(){btn.disabled=false;btn.textContent='Envoyer';});
+}
+
+// ════════ SUGGEST MODAL (connecté uniquement) ════════
+function openSuggest(){
+  if(!curUser){showToast('Connecte-toi pour suggérer un titre');openAuth('login');return;}
+  document.getElementById('suggestOv').classList.add('open');document.body.style.overflow='hidden';
+}
+function closeSuggest(){document.getElementById('suggestOv').classList.remove('open');document.body.style.overflow='';}
+function sendSuggest(){
+  var t=document.getElementById('sgTitle').value.trim();
+  var tp=document.getElementById('sgType').value;
+  var r=document.getElementById('sgReason').value.trim();
+  if(!t||!r){showToast('Le titre et la raison sont obligatoires');return;}
+  var btn=document.getElementById('sgSend');
+  btn.disabled=true;btn.textContent='Envoi...';
+  if(typeof emailjs==='undefined'||EJS_SERVICE_ID==='VOTRE_SERVICE_ID'){
+    showToast('Suggestion notée ! Merci '+curUser.name+' 🙏','grn');
+    closeSuggest();document.getElementById('sgTitle').value='';document.getElementById('sgReason').value='';
+    btn.disabled=false;btn.textContent='🚀 Envoyer la suggestion';return;
+  }
+  emailjs.send(EJS_SERVICE_ID,EJS_TEMPLATE_SUGGEST,{
+    from_name:curUser.name,from_email:curUser.email,
+    title:t,type:tp==='movie'?'Film':'Série',reason:r
+  })
+    .then(function(){
+      showToast('Suggestion envoyée ! Merci '+curUser.name+' !','grn');
+      closeSuggest();
+      document.getElementById('sgTitle').value='';document.getElementById('sgReason').value='';
+    })
+    .catch(function(){showToast('Erreur d\'envoi — vérifie tes clés EmailJS.');})
+    .finally(function(){btn.disabled=false;btn.textContent='🚀 Envoyer la suggestion';});
+}
+
+// ════════ ESCAPE — fermeture modals contact/suggest ════════
+document.addEventListener('keydown',function(e2){
+  if(e2.code==='Escape'){
+    if(document.getElementById('contactOv').classList.contains('open'))closeContact();
+    if(document.getElementById('suggestOv').classList.contains('open'))closeSuggest();
+  }
+},true);
 </script>
 </body>
 </html>
