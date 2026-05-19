@@ -746,7 +746,7 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
 function esc(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
-var IFRAME_WHITELIST=['vidsrc.to','vidsrc.me','vidsrc.sbs','vidsrc.fyi','vidsrc.mov','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
+var IFRAME_WHITELIST=['vidsrc.me','vidsrc-embed.ru','player.embed-api.stream','multiembed.mov','frembed.com','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
 function safeIframeSrc(url){
   if(!url)return '';
   try{
@@ -1059,13 +1059,13 @@ function buildEpPanel(film,cS,cE){
 }
 
 // ════════ STREAMING INTERNET — sources actives (testées le 19/05/2026) ════════
-// Sources ordonnées par stabilité — auto-essai toutes les 8s
+// 5 infrastructures DIFFÉRENTES — si une est bloquée, les autres fonctionnent
 var _SRCS=[
-  {n:'VidSrc',     mu:'https://vidsrc.to/embed/movie/{id}',              tu:'https://vidsrc.to/embed/tv/{id}/{s}/{e}',                              vf:true},
-  {n:'VidSrc.me',  mu:'https://vidsrc.me/embed/movie?tmdb={id}',         tu:'https://vidsrc.me/embed/tv?tmdb={id}&season={s}&episode={e}',          vf:true},
-  {n:'VidSrc.sbs', mu:'https://vidsrc.sbs/embed/movie/{id}',             tu:'https://vidsrc.sbs/embed/tv/{id}/{s}/{e}',                             vf:false},
-  {n:'VidSrc.fyi', mu:'https://vidsrc.fyi/embed/movie/{id}',             tu:'https://vidsrc.fyi/embed/tv/{id}/{s}/{e}',                             vf:false},
-  {n:'VidSrc.mov', mu:'https://vidsrc.mov/embed/movie/{id}',             tu:'https://vidsrc.mov/embed/tv/{id}/{s}/{e}',                             vf:false},
+  {n:'VidSrc.me',    mu:'https://vidsrc.me/embed/movie?tmdb={id}',                        tu:'https://vidsrc.me/embed/tv?tmdb={id}&season={s}&episode={e}',                     vf:true},
+  {n:'Embed-API',    mu:'https://player.embed-api.stream/?id={id}',                       tu:'https://player.embed-api.stream/?id={id}&s={s}&e={e}',                            vf:false},
+  {n:'SuperEmbed',   mu:'https://multiembed.mov/directstream.php?video_id={id}&tmdb=1',   tu:'https://multiembed.mov/directstream.php?video_id={id}&tmdb=1&s={s}&e={e}',        vf:false},
+  {n:'Frembed 🇫🇷',  mu:'https://frembed.com/api/film.php?id={id}',                       tu:'https://frembed.com/api/serie.php?id={id}&sa={s}&epi={e}',                        vf:true},
+  {n:'VidSrc Mirror',mu:'https://vidsrc-embed.ru/embed/movie?tmdb={id}',                 tu:'https://vidsrc-embed.ru/embed/tv?tmdb={id}&season={s}&episode={e}',               vf:true},
 ];
 var _tId=0,_tType='movie',_tS=1,_tE=1,_tSrc=0;
 var _autoTryTimer=null,_autoTryEnabled=false;
@@ -1108,7 +1108,7 @@ function _buildSrcBar(){
     '</div>'+
     '<div style="margin-top:6px;padding:7px 11px;background:rgba(29,185,84,0.08);border:1px solid rgba(29,185,84,0.2);border-radius:8px;font-size:0.75rem;color:#8892a4;display:flex;align-items:center;gap:7px;">'+
     '<span style="color:#1db954;font-size:1rem;">&#127467;&#127479;</span>'+
-    '<span><strong style="color:#eef0f4;">Astuce VF :</strong> <span style="color:#1db954;font-weight:700;">VidSrc</span> et <span style="color:#1db954;font-weight:700;">VidSrc.me</span> ont un sélecteur de langue. Cherchez &#127760; ou "Audio" dans le lecteur.</span>'+
+    '<span><strong style="color:#eef0f4;">Astuce VF :</strong> <span style="color:#1db954;font-weight:700;">VidSrc.me</span>, <span style="color:#1db954;font-weight:700;">Frembed 🇫🇷</span> et <span style="color:#1db954;font-weight:700;">VidSrc Mirror</span> sont en français ou ont un sélecteur langue. Cherchez &#127760; ou "Audio".</span>'+
     '</div>'+
     '<div style="margin-top:5px;padding:7px 11px;background:rgba(245,197,24,0.07);border:1px solid rgba(245,197,24,0.2);border-radius:8px;font-size:0.75rem;color:#8892a4;display:flex;align-items:center;gap:7px;">'+
     '<span style="color:#f5c518;font-size:1rem;">&#128276;</span>'+
