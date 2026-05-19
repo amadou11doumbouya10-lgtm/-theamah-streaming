@@ -746,7 +746,7 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
 function esc(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
-var IFRAME_WHITELIST=['vidsrc.me','vsembed.ru','vidsrc.fyi','www.2embed.stream','vidlink.pro','multiembed.mov','autoembed.co','embed.su','frembed.pro','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
+var IFRAME_WHITELIST=['vidsrc.me','vsembed.ru','vidsrc.fyi','www.2embed.stream','vidlink.pro','multiembed.mov','autoembed.co','autoembed.cc','embed.su','frembed.pro','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
 function safeIframeSrc(url){
   if(!url)return '';
   try{
@@ -1013,7 +1013,7 @@ function playLocal(id,sIdx,eIdx){
       var h=hist.find(function(x){return x.id===film.id;});
       var epTrack=ep.subtitleUrl?'<track kind="subtitles" src="'+ep.subtitleUrl+'" srclang="fr" label="Français" default>':'';
       document.getElementById('plyBox').innerHTML=ep.mimeType==='text/html'
-        ?'<iframe src="'+safeIframeSrc(ep.fileData)+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" style="width:100%;height:100%;border:none;" referrerpolicy="no-referrer"></iframe>'
+        ?'<iframe src="'+safeIframeSrc(ep.fileData)+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" style="width:100%;height:100%;border:none;" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-orientation-lock allow-pointer-lock"></iframe>'
         :'<video controls autoplay style="width:100%;height:100%;" onerror="showLocalFileError(this)"><source src="'+ep.fileData+'" type="'+(ep.mimeType||'video/mp4')+'">'+epTrack+'</video>';
       if(h&&h.currentTime>5){ var v=document.querySelector('#plyBox video'); if(v){ v.addEventListener('loadedmetadata',function(){v.currentTime=h.currentTime;},{once:true}); }}
       // Auto-next épisode
@@ -1033,7 +1033,7 @@ function playLocal(id,sIdx,eIdx){
       var h=hist.find(function(x){return x.id===film.id;});
       var filmTrack=film.subtitleUrl?'<track kind="subtitles" src="'+film.subtitleUrl+'" srclang="fr" label="Français" default>':'';
       document.getElementById('plyBox').innerHTML=mtype==='text/html'
-        ?'<iframe src="'+safeIframeSrc(src)+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" style="width:100%;height:100%;border:none;" referrerpolicy="no-referrer"></iframe>'
+        ?'<iframe src="'+safeIframeSrc(src)+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" style="width:100%;height:100%;border:none;" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-orientation-lock allow-pointer-lock"></iframe>'
         :'<video controls autoplay style="width:100%;height:100%;" onerror="showLocalFileError(this)"><source src="'+src+'" type="'+mtype+'">'+filmTrack+'</video>';
       if(h&&h.currentTime>5){ var v=document.querySelector('#plyBox video'); if(v){ v.addEventListener('loadedmetadata',function(){v.currentTime=h.currentTime;},{once:true}); }}
       if(mtype!=='text/html') startPlyAutoSave();
@@ -1067,7 +1067,7 @@ var _SRCS=[
   {n:'2Embed',      mu:'https://www.2embed.stream/embed/movie/{id}',                   tu:'https://www.2embed.stream/embed/tv/{id}/{s}/{e}',                             vf:false},
   {n:'VidLink',     mu:'https://vidlink.pro/movie/{id}?autoplay=true',                 tu:'https://vidlink.pro/tv/{id}/{s}/{e}?autoplay=true',                           vf:false},
   {n:'MultiEmbed',  mu:'https://multiembed.mov/?video_id={id}&tmdb=1',                 tu:'https://multiembed.mov/?video_id={id}&tmdb=1&s={s}&e={e}',                   vf:false},
-  {n:'AutoEmbed',   mu:'https://autoembed.co/movie/tmdb/{id}',                         tu:'https://autoembed.co/tv/tmdb/{id}-{s}-{e}',                                  vf:false},
+  {n:'AutoEmbed',   mu:'https://autoembed.cc/movie/tmdb/{id}',                         tu:'https://autoembed.cc/tv/tmdb/{id}-{s}-{e}',                                  vf:false},
   {n:'Embed.su',    mu:'https://embed.su/embed/movie/{id}',                            tu:'https://embed.su/embed/tv/{id}/{s}/{e}',                                     vf:false},
   {n:'Frembed VF',  mu:'https://frembed.pro/api/film.php?id={id}',                     tu:'https://frembed.pro/api/serie.php?id={id}&sa={s}&epi={e}',                   vf:true},
 ];
@@ -1083,7 +1083,7 @@ function _srcUrl(){
 function _loadEmbed(){
   clearTimeout(_autoTryTimer);
   document.getElementById('plyBox').innerHTML=
-    '<iframe src="'+_srcUrl()+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" style="width:100%;height:100%;border:none;" referrerpolicy="no-referrer"></iframe>';
+    '<iframe src="'+_srcUrl()+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" style="width:100%;height:100%;border:none;" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-orientation-lock allow-pointer-lock"></iframe>';
   if(_autoTryEnabled && _tSrc < _SRCS.length-1){
     _autoTryTimer=setTimeout(function(){
       if(document.getElementById('plyOv').classList.contains('open') && _autoTryEnabled && _tSrc < _SRCS.length-1){
