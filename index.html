@@ -746,7 +746,7 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
 function esc(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
-var IFRAME_WHITELIST=['vidsrc.me','vidsrcme.ru','vidsrcme.su','vidsrc-me.ru','vidsrc-me.su','vidsrc-embed.ru','vidsrc-embed.su','vsrc.su','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
+var IFRAME_WHITELIST=['vidsrc.me','vsembed.ru','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
 function safeIframeSrc(url){
   if(!url)return '';
   try{
@@ -1058,17 +1058,12 @@ function buildEpPanel(film,cS,cE){
     '<div class="ep-row">'+btns+'</div>';
 }
 
-// ════════ STREAMING INTERNET — miroirs officiels VidSrc.me (vidsrc.domains) ════════
-// Tous sur la même infrastructure — si un domaine est bloqué, le suivant prend le relai
-// Source : vidsrc.domains (liste officielle mise à jour)
+// ════════ STREAMING INTERNET — sources actives (testées le 19/05/2026) ════════
+// 2 sources confirmées actives — même infrastructure VidSrc.me
+// vidsrc-embed.ru redirige (301) vers vsembed.ru — URL corrigée directement
 var _SRCS=[
-  {n:'VidSrc.me',      mu:'https://vidsrc.me/embed/movie?tmdb={id}',          tu:'https://vidsrc.me/embed/tv?tmdb={id}&season={s}&episode={e}',          vf:true},
-  {n:'VidSrc-embed.ru',mu:'https://vidsrc-embed.ru/embed/movie?tmdb={id}',    tu:'https://vidsrc-embed.ru/embed/tv?tmdb={id}&season={s}&episode={e}',    vf:true},
-  {n:'VidSrcme.ru',    mu:'https://vidsrcme.ru/embed/movie?tmdb={id}',        tu:'https://vidsrcme.ru/embed/tv?tmdb={id}&season={s}&episode={e}',        vf:true},
-  {n:'VidSrc-me.ru',   mu:'https://vidsrc-me.ru/embed/movie?tmdb={id}',       tu:'https://vidsrc-me.ru/embed/tv?tmdb={id}&season={s}&episode={e}',       vf:true},
-  {n:'VidSrcme.su',    mu:'https://vidsrcme.su/embed/movie?tmdb={id}',        tu:'https://vidsrcme.su/embed/tv?tmdb={id}&season={s}&episode={e}',        vf:true},
-  {n:'VidSrc-embed.su',mu:'https://vidsrc-embed.su/embed/movie?tmdb={id}',    tu:'https://vidsrc-embed.su/embed/tv?tmdb={id}&season={s}&episode={e}',    vf:true},
-  {n:'vsrc.su',        mu:'https://vsrc.su/embed/movie?tmdb={id}',            tu:'https://vsrc.su/embed/tv?tmdb={id}&season={s}&episode={e}',            vf:true},
+  {n:'VidSrc.me',  mu:'https://vidsrc.me/embed/movie?tmdb={id}',   tu:'https://vidsrc.me/embed/tv?tmdb={id}&season={s}&episode={e}',   vf:true},
+  {n:'VSembed',    mu:'https://vsembed.ru/embed/movie?tmdb={id}',   tu:'https://vsembed.ru/embed/tv?tmdb={id}&season={s}&episode={e}',  vf:true},
 ];
 var _tId=0,_tType='movie',_tS=1,_tE=1,_tSrc=0;
 var _autoTryTimer=null,_autoTryEnabled=false;
@@ -1111,7 +1106,7 @@ function _buildSrcBar(){
     '</div>'+
     '<div style="margin-top:6px;padding:7px 11px;background:rgba(29,185,84,0.08);border:1px solid rgba(29,185,84,0.2);border-radius:8px;font-size:0.75rem;color:#8892a4;display:flex;align-items:center;gap:7px;">'+
     '<span style="color:#1db954;font-size:1rem;">&#127467;&#127479;</span>'+
-    '<span><strong style="color:#eef0f4;">Astuce VF :</strong> Toutes les sources sont des miroirs officiels VidSrc.me — elles ont toutes un sélecteur de langue. Cherchez &#127760; ou "Audio" dans le lecteur.</span>'+
+    '<span><strong style="color:#eef0f4;">Astuce VF :</strong> <span style="color:#1db954;font-weight:700;">VidSrc.me</span> et <span style="color:#1db954;font-weight:700;">VSembed</span> ont un sélecteur de langue intégré. Cherchez &#127760; ou "Audio" dans le lecteur.</span>'+
     '</div>'+
     '<div style="margin-top:5px;padding:7px 11px;background:rgba(245,197,24,0.07);border:1px solid rgba(245,197,24,0.2);border-radius:8px;font-size:0.75rem;color:#8892a4;display:flex;align-items:center;gap:7px;">'+
     '<span style="color:#f5c518;font-size:1rem;">&#128276;</span>'+

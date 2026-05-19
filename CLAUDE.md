@@ -10,6 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - **Site en ligne** : https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/
 - **Repo GitHub** : https://github.com/amadou11doumbouya10-lgtm/-theamah-streaming
+- **Lien court** : https://tinyurl.com/27k6aabj
 - **Mot de passe admin** : `theamah2026`
 
 ## Comment lancer le projet en local
@@ -65,30 +66,36 @@ var ADMIN_HASH = 'd956b3c...'; // SHA-256 de "theamah2026"
 | localStorage | `t_users` | Comptes (mots de passe hashés SHA-256) |
 | localStorage | `t_lib` | Films ajoutés via Admin |
 | localStorage | `t_history` | Historique + progression |
+| localStorage | `t_srch_hist` | Historique recherche (5 dernières) |
 | IndexedDB | `theamah_videos` | Blobs vidéo et sous-titres |
 
-## Sources de contenu
+## Sources de streaming actives — État au 19/05/2026
 
-1. **bibliotheque.js** → `window.SHARED_LIBRARY` (29 entrées)
-2. **TMDB API** → tendances, catalogue, recherche, bandes-annonces
-3. **6 sources embed actives** (testées 15/05/2026) :
+⚠️ **IMPORTANT** : Seules 2 sources répondent actuellement. Toutes les autres ont été testées et retournent 403 ou sont mortes.
 
-| Source | VF | Statut |
-|---|---|---|
-| VidSrc.to | ✅ | Actif |
-| VidSrc.me | ✅ | Actif |
-| AutoEmbed | — | Actif |
-| 2Embed.cc | — | Actif |
-| 2Embed.skin | — | Actif |
-| SuperEmbed | — | Actif |
+| Source | URL Film | URL Série | VF | Statut |
+|---|---|---|---|---|
+| **VidSrc.me** | `vidsrc.me/embed/movie?tmdb={id}` | `vidsrc.me/embed/tv?tmdb={id}&season={s}&episode={e}` | ✅ | ✅ Actif |
+| **VSembed** | `vsembed.ru/embed/movie?tmdb={id}` | `vsembed.ru/embed/tv?tmdb={id}&season={s}&episode={e}` | ✅ | ✅ Actif (ex vidsrc-embed.ru → 301) |
 
-4. **Auto-essai** : si source ne répond pas en 8s → source suivante automatique
+### Sources testées et mortes (403 / ECONNREFUSED)
+- vidsrc.to, vidsrc.sbs, vidsrc.fyi, vidsrc.mov, vidsrc.cc (famille VidSrc.to)
+- 2Embed.cc, AutoEmbed.co, SuperEmbed/multiembed.mov, 2Embed.skin
+- Frembed.com, Embed-API.stream
+- vidsrcme.ru, vidsrc-me.ru, vidsrcme.su, vidsrc-embed.su, vsrc.su (miroirs .ru/.su)
+
+### Raison des échecs 403
+Les sources embed bloquent les requêtes sans `Referer` navigateur valide ou ont une IP restriction. VidSrc.me et VSembed sont les seules à autoriser l'embed depuis github.io.
+
+### Si les sources tombent
+Vérifier la liste officielle des domaines actifs : https://vidsrc.community/ ou https://vidsrc.domains/
 
 ## Lecteur vidéo
 
 - **Local** : `playLocal(id, sIdx, eIdx)` → `<video>` HTML5
   - Sauvegarde progression toutes les 30s (`startPlyAutoSave`)
   - Sous-titres `.vtt`/`.srt` via `<track srclang="fr" default>`
+  - Auto-play épisode suivant : countdown 10s + bouton Annuler (`startNextEpCountdown`)
   - Si fichier introuvable en ligne → message `showLocalFileError()`
 - **Streaming** : `playTmdb(id, type, title)` → iframe embed
 - **Bibliothèque avec tmdbId** → `playTmdb()` automatique
@@ -103,7 +110,7 @@ var ADMIN_HASH = 'd956b3c...'; // SHA-256 de "theamah2026"
 
 - TMDB avec `language=fr-FR`
 - Sections **🇫🇷 Films Français** et **🇫🇷 Séries Françaises** (`with_original_language=fr`)
-- Badge **VF** sur VidSrc.to et VidSrc.me
+- Badge **VF** sur VidSrc.me et VSembed (sélecteur langue intégré)
 
 ## Structure bibliotheque.js
 
@@ -147,7 +154,7 @@ var ADMIN_HASH = 'd956b3c...'; // SHA-256 de "theamah2026"
   genre: "...", desc: "...", rating: "8.4",
   poster: "https://image.tmdb.org/t/p/w300/...",
   backdrop: "https://image.tmdb.org/t/p/w1280/...",
-  videoUrl: "https://vidsrc.to/embed/movie/27205",
+  videoUrl: "https://vidsrc.me/embed/movie?tmdb=27205",
   mimeType: "text/html",
   isLocal: true,
   tmdbId: 27205,
@@ -194,6 +201,21 @@ Breakpoints : `900px` (nav mobile) · `600px` (bottom sheets)
 - Raccourcis clavier, message aucun résultat, mode invité
 - Force mot de passe, 15 films + 8 séries pré-chargés
 
+### Session 2 — 15/05/2026
+- A1 : Tri/filtre Favoris + Bibliothèque
+- A2 : Stats "X films · Y séries"
+- A4 : Bouton ✕ par card "Continuer à regarder"
+- A5 : Mobile — touch targets 44px, bottom sheets
+- A10 : Recherche temps réel dans Bibliothèque
+- I2 : Auto-essai sources 8s + 4 sources mortes supprimées
+- Badge VF, message astuce langue
+- Sections 🇫🇷 Films/Séries Français
+- Support sous-titres VTT/SRT (films + épisodes)
+- Série locale : One Trillion Dollars S1 (6 épisodes)
+- Déploiement GitHub Pages
+- Vidéos hébergées sur GitHub Releases (v1.0)
+- `showLocalFileError()` si fichier absent en ligne
+
 ### Session 3 — 16/05/2026
 - Lien court TinyURL : https://tinyurl.com/27k6aabj
 - QR Code généré (rouge/noir) → bureau : QRCode-Theamah.png
@@ -210,17 +232,19 @@ Breakpoints : `900px` (nav mobile) · `600px` (bottom sheets)
 - og:image corrigée → backdrop Inception TMDB
 - Audit sécurité complet + 7 correctifs : esc(), safeIframeSrc(), sandbox iframes, CSP, admin token robuste, délai brute-force, showToast safe
 
-### Session 2 — 15/05/2026
-- A1 : Tri/filtre Favoris + Bibliothèque
-- A2 : Stats "X films · Y séries"
-- A4 : Bouton ✕ par card "Continuer à regarder"
-- A5 : Mobile — touch targets 44px, bottom sheets
-- A10 : Recherche temps réel dans Bibliothèque
-- I2 : Auto-essai sources 8s + 4 sources mortes supprimées
-- Badge VF, message astuce langue
-- Sections 🇫🇷 Films/Séries Français
-- Support sous-titres VTT/SRT (films + épisodes)
-- Série locale : One Trillion Dollars S1 (6 épisodes)
-- Déploiement GitHub Pages
-- Vidéos hébergées sur GitHub Releases (v1.0)
-- `showLocalFileError()` si fichier absent en ligne
+### Session 5 — 19/05/2026
+- Analyse comparative vs sites de streaming 2026 (LookMovie, Netflix, FMovies)
+- **Badges classement #1 #2 #3** sur sections Tendances Films et Séries
+- **Badge NEW** (vert) sur contenus ajoutés dans les 30 derniers jours
+- **Titres similaires** "Vous aimerez aussi" dans la modal de détail (TMDB /similar)
+- **Historique de recherche** (A3) : 5 dernières recherches en dropdown nav
+- **Auto-play épisode suivant** : countdown 10s + bouton Annuler + passage saison suivante
+- **Audit des sources streaming** : test de 15+ sources embed
+- Seules VidSrc.me et VSembed (vsembed.ru) confirment actives
+- Sources mortes retirées : 2Embed, AutoEmbed, SuperEmbed, Frembed, 5 miroirs .ru/.su
+- vidsrc-embed.ru → redirige vers vsembed.ru (301) — URL corrigée
+
+## ⬜ RESTE À FAIRE
+
+- A7 — Page d'aide complète dans le footer
+- Trouver de nouvelles sources streaming actives si VidSrc.me tombe
