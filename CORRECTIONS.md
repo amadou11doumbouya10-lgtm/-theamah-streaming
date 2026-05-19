@@ -1,5 +1,5 @@
 # CORRECTIONS & AMÉLIORATIONS — Theamah+
-# Dernière mise à jour : 16/05/2026
+# Dernière mise à jour : 19/05/2026
 
 ---
 
@@ -66,6 +66,21 @@
 
 ---
 
+---
+
+## ✅ SESSION 6 — 19/05/2026
+
+### Sources & Lecteurs
+- ✅ S6-1 — 7 nouvelles sources ajoutées : VidSrc.fyi, 2Embed, VidLink, MultiEmbed, AutoEmbed, Embed.su, Frembed VF → 9 sources total
+- ✅ S6-2 — autoembed.co corrigé → autoembed.cc (domaine officiel actuel)
+- ✅ S6-3 — IFRAME_WHITELIST mise à jour avec les 7 nouveaux domaines
+
+### Sécurité & Pubs
+- ✅ S6-4 — Sandbox anti-pub sur tous les iframes (bloque popups/redirections sans casser lecture)
+- ✅ S6-5 — Astuce VF mise à jour : "Frembed VF" ajouté dans le texte d'aide du lecteur
+
+---
+
 ## ⬜ RESTE À FAIRE
 
 - A3 — Historique de recherche (5 dernières recherches en dropdown)
@@ -73,14 +88,19 @@
 
 ---
 
-## 🔴 PROBLÈME CONNU — Pubs et redirections
+## ✅ PROBLÈME RÉSOLU — Pubs et redirections
 
 - **Problème** : Les sources streaming gratuites (VidSrc, 2Embed...) affichent des pubs qui interceptent les clics et redirigent vers d'autres sites.
-- **Tentative** : Attribut `sandbox` sur les iframes → annulé car cassait le lecteur.
-- **Solution recommandée** : Installer **uBlock Origin** dans le navigateur.
+- **Solution appliquée (19/05/2026)** : `sandbox` ciblé sur tous les iframes — bloque les popups et redirections sans casser la lecture :
+  ```
+  sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-orientation-lock allow-pointer-lock"
+  ```
+  - ✅ Popups publicitaires bloqués
+  - ✅ Redirections de page bloquées
+  - ✅ Lecture vidéo et fullscreen conservés
+- **Recommandation bonus** : Installer **uBlock Origin** pour bloquer les pubs dans le lecteur lui-même.
   - Chrome : https://chromewebstore.google.com/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
   - Firefox : https://addons.mozilla.org/fr/firefox/addon/ublock-origin/
-- **Statut** : ⬜ Pas de solution technique côté code possible sans casser le lecteur.
 
 ---
 
@@ -98,17 +118,28 @@
 
 ---
 
-## 🔧 SOURCES STREAMING — État au 15/05/2026
+## 🔧 SOURCES STREAMING — État au 19/05/2026
 
-| Source | Statut | VF |
+9 sources actives dans le lecteur :
+
+| # | Source | Domaine | Statut | VF |
+|---|---|---|---|---|
+| 1 | VidSrc.me | vidsrc.me | ✅ Actif | ✅ Oui |
+| 2 | VSembed | vsembed.ru | ✅ Actif | ✅ Oui |
+| 3 | VidSrc.fyi | vidsrc.fyi | ✅ Actif | — |
+| 4 | 2Embed | 2embed.stream | ✅ Actif | — |
+| 5 | VidLink | vidlink.pro | ✅ Actif | — |
+| 6 | MultiEmbed | multiembed.mov | ✅ Actif | — |
+| 7 | AutoEmbed | autoembed.cc | ✅ Actif | — |
+| 8 | Embed.su | embed.su | ✅ Actif | — |
+| 9 | Frembed VF | frembed.pro | ✅ Actif | ✅ Oui |
+
+Sources mortes / supprimées :
+
+| Source | Statut | Raison |
 |---|---|---|
-| VidSrc.to | ✅ Actif | ✅ Oui |
-| VidSrc.me | ✅ Actif | ✅ Oui |
-| AutoEmbed | ✅ Actif | — |
-| 2Embed.cc | ✅ Actif | — |
-| 2Embed.skin | ✅ Actif | — |
-| SuperEmbed | ✅ Actif | — |
-| VidSrc.xyz | ❌ Mort | — |
-| MoviesAPI | ❌ Mort | — |
-| Embed.su | ❌ Mort | — |
-| SmashyStream | ❌ Mort | — |
+| autoembed.co | ❌ Obsolète | Migré vers autoembed.cc |
+| VidSrc.to | ❌ Supprimé | Remplacé par vidsrc.fyi |
+| 2Embed.cc / .skin | ❌ Supprimés | Remplacés par 2embed.stream |
+| SuperEmbed | ❌ Supprimé | Instable |
+| SmashyStream | ❌ Mort | Fermé |
