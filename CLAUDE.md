@@ -244,7 +244,20 @@ Breakpoints : `900px` (nav mobile) · `600px` (bottom sheets)
 - Sources mortes retirées : 2Embed, AutoEmbed, SuperEmbed, Frembed, 5 miroirs .ru/.su
 - vidsrc-embed.ru → redirige vers vsembed.ru (301) — URL corrigée
 
+### Session 6 — 19/05/2026
+- 7 nouvelles sources ajoutées : VidSrc.fyi, 2Embed, VidLink, MultiEmbed, AutoEmbed, Embed.su, Frembed VF
+- autoembed.co → autoembed.cc (domaine officiel corrigé)
+- Sandbox anti-pub sur tous les iframes (bloque popups/redirections sans casser lecture)
+- IFRAME_WHITELIST mise à jour avec les 7 nouveaux domaines
+
+### Session 7 — 20/05/2026
+- **Film local ajouté** : How High (2001) — Comédie/Fantasy, TMDB ID 8386, note 6.2
+  - Fichier : `./filme/[ OxTorrent.com ] How_High_DVDRiP11.avi`
+  - ⚠️ Format `.avi` — conversion en `.mp4` requise pour lecture dans le navigateur
+- `bibliotheque.js` : 30 entrées (21 films + 9 séries)
+
 ## ⬜ RESTE À FAIRE
 
 - A7 — Page d'aide complète dans le footer
 - Trouver de nouvelles sources streaming actives si VidSrc.me tombe
+- Convertir `How_High_DVDRiP11.avi` en `.mp4` pour lecture dans le navigateur
