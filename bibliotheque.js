@@ -82,6 +82,21 @@ var BIBLIOTHEQUE = [
     isLocal: true,
     addedAt: "2026-05-06T00:00:00.000Z"
   },
+  {
+    id: "local_how_high_8386",
+    title: "How High",
+    year: "2001",
+    type: "movie",
+    genre: "Comédie, Fantasy",
+    desc: "Silas et Jamal cultivent une variété de marijuana qui donne la possibilité à quiconque la consomme d'augmenter exponentiellement son Q.I. Les deux amis se retrouvent à Harvard où leurs aventures ne font que commencer.",
+    rating: "6.2",
+    poster: "https://image.tmdb.org/t/p/w300/6mJqKTfq2i8F2g82yTqKHG4JiUB.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/lFn8azDMDXa1vEhW0DTfY7GNFDi.jpg",
+    videoUrl: "./filme/%5B%20OxTorrent.com%20%5D%20How_High_DVDRiP11.avi",
+    mimeType: "video/x-msvideo",
+    isLocal: true,
+    addedAt: "2026-05-20T00:00:00.000Z"
+  },
 
   // ── FILMS POPULAIRES — STREAMING ──────────────────────
 
