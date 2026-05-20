@@ -1,5 +1,5 @@
 # CORRECTIONS & AMÉLIORATIONS — Theamah+
-# Dernière mise à jour : 19/05/2026
+# Dernière mise à jour : 20/05/2026
 
 ---
 
@@ -81,10 +81,25 @@
 
 ---
 
+## ✅ SESSION 7 — 20/05/2026
+
+### Bibliothèque — Ajout de film local
+- ✅ S7-1 — Film **How High (2001)** ajouté dans `bibliotheque.js` (id: `local_how_high_8386`)
+  - Genre : Comédie, Fantasy · Note TMDB : 6.2
+  - Poster et backdrop récupérés depuis TMDB (ID 8386)
+  - Fichier local : `./filme/[ OxTorrent.com ] How_High_DVDRiP11.avi`
+  - ⚠️ Format `.avi` non supporté nativement par les navigateurs → conversion en `.mp4` recommandée
+
+### Maintenance
+- ✅ S7-2 — Vérification syntaxe `bibliotheque.js` (30 entrées, 0 erreur)
+- ✅ S7-3 — Vérification structure HTML (balises équilibrées, aucun ID dupliqué)
+
+---
+
 ## ⬜ RESTE À FAIRE
 
-- A3 — Historique de recherche (5 dernières recherches en dropdown)
 - A7 — Page d'aide complète dans le footer
+- ⚠️ Convertir `How_High_DVDRiP11.avi` en `.mp4` pour lecture dans le navigateur
 
 ---
 
