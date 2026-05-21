@@ -1494,8 +1494,13 @@ function handleSearch(val){
     document.getElementById('srchTitle').textContent='Resultats pour "'+val+'"';
     document.getElementById('srchGrid').innerHTML='<div class="loading" style="grid-column:1/-1"><div class="spin"></div></div>';
     var loc=myLib.filter(function(m){return(m.title||'').toLowerCase().indexOf(val.toLowerCase())!==-1;});
-    var r=await Promise.all([api('/search/movie',{query:val}),api('/search/tv',{query:val})]);
-    var all=r[0].results.map(function(m){m._t='movie';return m;}).concat(r[1].results.map(function(m){m._t='tv';return m;})).sort(function(a,b){return b.popularity-a.popularity;});
+    var all=[];
+    try{
+      var r=await Promise.all([api('/search/movie',{query:val}),api('/search/tv',{query:val})]);
+      all=r[0].results.map(function(m){m._t='movie';return m;}).concat(r[1].results.map(function(m){m._t='tv';return m;})).sort(function(a,b){return b.popularity-a.popularity;});
+    }catch(e){
+      if(loc.length===0) showToast('TMDB indisponible — vérifie ta connexion');
+    }
     var html=loc.map(function(m){return buildLocalCard(m);}).join('')+all.map(function(m){return buildCard(m,m._t);}).join('');
     var total=loc.length+all.length;
     document.getElementById('srchTitle').textContent=(total>0?total+' résultats':'Aucun résultat')+' pour "'+val+'"';
