@@ -256,8 +256,18 @@ Breakpoints : `900px` (nav mobile) · `600px` (bottom sheets)
   - ⚠️ Format `.avi` — conversion en `.mp4` requise pour lecture dans le navigateur
 - `bibliotheque.js` : 30 entrées (21 films + 9 séries)
 
+### Session 8 — 22/05/2026
+- **⏱ À regarder plus tard** : icône sur cards TMDB + onglet dédié dans Favoris (`t_later`)
+- **⭐ Notation personnelle 1-5 étoiles** : dans modal de détail (`t_rat_<id>`)
+- **📥 Import JSON** : Admin → Exporter → Importer fichier JSON
+- **🚀 Cache TMDB 10 min** : `_apiCache` en mémoire, TTL 600s
+- **❓ Page d'aide complète** (A7) : modal footer — raccourcis, guide VF, FAQ, PWA
+- **👤 Page Profil** : stats (vus / favoris / biblio) + changer mot de passe
+- **☀️ Mode clair/sombre** : toggle menu utilisateur + profil (`t_theme`)
+- **⊞☰ Vue liste/grille** dans Ma Bibliothèque (`t_view`)
+- **Fix** : `try/catch` manquant sur recherche TMDB (spinner infini)
+
 ## ⬜ RESTE À FAIRE
 
-- A7 — Page d'aide complète dans le footer
 - Trouver de nouvelles sources streaming actives si VidSrc.me tombe
 - Convertir `How_High_DVDRiP11.avi` en `.mp4` pour lecture dans le navigateur

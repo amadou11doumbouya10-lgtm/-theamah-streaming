@@ -1,5 +1,5 @@
 # CORRECTIONS & AMÉLIORATIONS — Theamah+
-# Dernière mise à jour : 20/05/2026
+# Dernière mise à jour : 22/05/2026
 
 ---
 
@@ -96,9 +96,30 @@
 
 ---
 
+## ✅ SESSION 8 — 22/05/2026
+
+### Nouvelles fonctionnalités
+
+- ✅ S8-1 — **À regarder plus tard** : icône 🕐 sur chaque card TMDB, section dédiée dans Favoris (onglet "Plus tard"), stocké dans `t_later`
+- ✅ S8-2 — **Notation personnelle étoiles (1-5)** : dans la modal de détail sous le titre, stocké dans `t_rat_<id>`
+- ✅ S8-3 — **Import bibliothèque JSON** : Admin → Exporter → bouton "Importer fichier JSON" (fusionne sans écraser)
+- ✅ S8-4 — **Cache TMDB 10 min** : toutes les réponses API stockées en mémoire `_apiCache`, TTL 600s — navigation plus rapide
+- ✅ S8-5 — **Page d'aide complète** (A7) : modal depuis footer "❓ Aide" — raccourcis, guide VF, guide Admin, sources streaming, PWA
+- ✅ S8-6 — **Page Profil utilisateur** : accessible depuis le menu utilisateur — avatar, stats (films vus / favoris / bibliothèque), changer mot de passe
+- ✅ S8-7 — **Mode clair / sombre** : toggle depuis menu utilisateur ou page profil, mémorisé dans `t_theme`
+- ✅ S8-8 — **Vue liste / grille** dans Ma Bibliothèque : boutons ⊞/☰, mémorisé dans `t_view`
+- ✅ S8-9 — **Tabs Favoris / Plus tard** dans la page Favoris
+- ✅ S8-10 — **Fix bug recherche** : `try/catch` manquant sur appel TMDB → spinner infini corrigé
+
+### Améliorations menu utilisateur
+- ✅ Lien "Mon Profil" dans le dropdown
+- ✅ Lien "Plus tard" dans le dropdown
+- ✅ Toggle thème dans le dropdown
+
+---
+
 ## ⬜ RESTE À FAIRE
 
-- A7 — Page d'aide complète dans le footer
 - ⚠️ Convertir `How_High_DVDRiP11.avi` en `.mp4` pour lecture dans le navigateur
 
 ---
