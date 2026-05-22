@@ -345,6 +345,69 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
 .srch-hist-clear{padding:8px 14px;font-size:0.72rem;color:var(--accent);cursor:pointer;text-align:center;border-top:1px solid rgba(255,255,255,0.05);transition:background 0.15s;}
 .srch-hist-clear:hover{background:rgba(229,9,20,0.08);}
 
+/* ── À REGARDER PLUS TARD ── */
+.card-later{position:absolute;bottom:7px;left:38px;background:rgba(8,12,20,0.72);border:none;color:var(--text2);width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:0.78rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;opacity:0;z-index:4;}
+.card:hover .card-later{opacity:1;}
+.card-later.on{color:#38bdf8;background:rgba(56,189,248,0.2);}
+
+/* ── NOTATION ÉTOILES ── */
+.star-rate{display:flex;align-items:center;gap:2px;margin-bottom:14px;}
+.star-rate>span:first-child{font-size:0.78rem;color:var(--text2);margin-right:6px;white-space:nowrap;}
+.star-btn{background:none;border:none;cursor:pointer;font-size:1.35rem;color:rgba(255,255,255,0.18);transition:color 0.1s;padding:0 1px;line-height:1;}
+.star-btn.on{color:var(--gold);}
+.star-val{font-size:0.75rem;color:var(--text2);margin-left:6px;min-width:28px;}
+
+/* ── MODE CLAIR ── */
+body.light{--bg:#f0f2f7;--bg2:#ffffff;--bg3:#e4e8f0;--text:#0f1521;--text2:#5a6475;}
+body.light nav{background:rgba(240,242,247,0.97)!important;border-bottom:1px solid rgba(0,0,0,0.08);}
+body.light .card{background:var(--bg3);}
+body.light .card-ph{background:var(--bg2);}
+body.light #hero-bg{filter:brightness(0.55);}
+body.light .toast{background:#fff;color:#0f1521;border-color:rgba(0,0,0,0.1);}
+body.light footer{background:var(--bg2);}
+body.light .mod-box,.body.light .auth-box,.body.light .adm-box,.body.light .help-box{background:var(--bg2);}
+
+/* ── TOGGLE LISTE / GRILLE ── */
+.view-btn{background:var(--bg3);border:1px solid rgba(255,255,255,0.1);color:var(--text2);width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:0.9rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;}
+.view-btn.on,.view-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
+.grid.list-mode{display:flex;flex-direction:column;gap:8px;}
+.grid.list-mode .card{flex:none;display:flex;flex-direction:row;width:100%;height:84px;border-radius:10px;}
+.grid.list-mode .card img,.grid.list-mode .card-ph{width:60px;height:84px;flex-shrink:0;border-radius:10px 0 0 10px;aspect-ratio:unset;}
+.grid.list-mode .card:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,0.35);}
+.grid.list-mode .card-ov{position:static;opacity:1;background:transparent;padding:10px 14px;flex:1;display:flex;flex-direction:column;justify-content:center;gap:3px;}
+.grid.list-mode .card-name{font-size:0.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.grid.list-mode .card-yr{font-size:0.76rem;margin-top:0;}
+.grid.list-mode .card-rat{position:static;display:inline;background:none;color:var(--gold);font-size:0.72rem;padding:0;}
+.grid.list-mode .card-ltag{font-size:0.52rem;top:5px;left:64px;}
+.grid.list-mode .card-pov,.grid.list-mode .card-fav,.grid.list-mode .card-type,.grid.list-mode .card-later,.grid.list-mode .card-new,.grid.list-mode .card-rank{display:none;}
+
+/* ── PAGE AIDE ── */
+.help-ov{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:5500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.help-ov.open{opacity:1;pointer-events:all;}
+.help-box{background:var(--bg2);border-radius:16px;max-width:660px;width:100%;max-height:88vh;overflow-y:auto;padding:28px;position:relative;}
+.help-sec{border-top:1px solid rgba(255,255,255,0.07);padding-top:16px;margin-top:16px;}
+.help-box h4{font-weight:700;font-size:0.95rem;margin:0 0 10px;color:var(--text);}
+.help-box p,.help-box li{font-size:0.85rem;color:var(--text2);line-height:1.8;}
+.help-box ul{padding-left:20px;margin:4px 0 0;}
+.help-krow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.85rem;}
+.help-krow:last-child{border-bottom:none;}
+.help-krow .kd{color:var(--text2);}
+.help-key{background:var(--bg3);border:1px solid rgba(255,255,255,0.15);color:var(--text);padding:2px 9px;border-radius:5px;font-size:0.72rem;font-weight:700;font-family:monospace;}
+
+/* ── PAGE PROFIL ── */
+.prof-av{width:74px;height:74px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:2.3rem;color:#fff;flex-shrink:0;}
+.prof-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0;}
+.stat-box{background:var(--bg3);border-radius:10px;padding:14px;text-align:center;}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--accent);}
+.stat-lbl{font-size:0.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.prof-sect{background:var(--bg3);border-radius:12px;padding:18px;margin-bottom:14px;}
+.prof-sect h4{font-weight:700;font-size:0.9rem;margin-bottom:14px;}
+
+/* ── TABS FAVORIS / PLUS TARD ── */
+.fav-tabs{display:flex;background:var(--bg3);border-radius:9px;padding:3px;margin-bottom:18px;gap:2px;}
+.fav-tab{flex:1;padding:9px;text-align:center;cursor:pointer;border-radius:7px;font-size:0.85rem;font-weight:600;color:var(--text2);transition:all 0.2s;border:none;background:none;font-family:'Outfit',sans-serif;}
+.fav-tab.on{background:var(--accent);color:#fff;}
+
 /* ── ÉPISODE SUIVANT AUTO ── */
 .next-ep-ov{position:absolute;bottom:14px;right:14px;background:rgba(8,12,20,0.94);border:1px solid rgba(255,255,255,0.13);border-radius:13px;padding:14px 16px;z-index:20;min-width:220px;display:none;backdrop-filter:blur(8px);}
 .next-ep-ov.show{display:block;animation:fadeUp 0.3s ease;}
@@ -398,8 +461,11 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
     <div id="userMenu" class="user-menu" style="display:none;">
       <div class="user-av" id="userAv">U</div>
       <div class="user-dd">
+        <div class="dd-item" onclick="showPage('profile')">&#128100; Mon Profil</div>
         <div class="dd-item" onclick="showPage('myfilms')">&#127916; Ma Bibliothèque</div>
         <div class="dd-item" onclick="showPage('favs')">&#11088; Favoris</div>
+        <div class="dd-item" onclick="showPage('favs');switchFavTab('later')">&#128336; Plus tard</div>
+        <div class="dd-item" onclick="toggleTheme()">&#127763; Mode clair/sombre</div>
         <div class="dd-item" onclick="openSuggest()">&#128161; Suggérer un titre</div>
         <div class="dd-item" onclick="openAdmin()">&#9881; Admin</div>
         <div class="dd-item red" onclick="logout()">&#128682; Déconnexion</div>
@@ -462,6 +528,8 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
         <option value="za">Titre Z-A</option>
         <option value="rating">&#11088; Mieux notés</option>
       </select>
+      <button class="view-btn on" id="btnGrid" onclick="setViewMode('grid')" title="Vue grille">&#8862;</button>
+      <button class="view-btn" id="btnList" onclick="setViewMode('list')" title="Vue liste">&#8801;</button>
     </div>
     <div class="grid" id="myGrid"></div>
   </div>
@@ -519,20 +587,37 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
 <div id="page-favs" class="page">
   <div class="pg-wrap">
     <h2>&#11088; Mes <span style="color:var(--accent)">Favoris</span></h2>
-    <p class="sub">Vos films et séries sauvegardés</p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center;">
-      <select id="favFilter" onchange="loadFavs()" style="background:var(--bg3);border:1px solid rgba(255,255,255,0.1);color:var(--text);padding:8px 14px;border-radius:8px;font-family:'Outfit',sans-serif;font-size:0.82rem;cursor:pointer;">
-        <option value="">Tout</option>
-        <option value="movie">&#127909; Films</option>
-        <option value="tv">&#128250; Séries</option>
-      </select>
-      <select id="favSort" onchange="loadFavs()" style="background:var(--bg3);border:1px solid rgba(255,255,255,0.1);color:var(--text);padding:8px 14px;border-radius:8px;font-family:'Outfit',sans-serif;font-size:0.82rem;cursor:pointer;">
-        <option value="default">Ordre ajout</option>
-        <option value="az">Titre A-Z</option>
-        <option value="za">Titre Z-A</option>
-      </select>
+    <div class="fav-tabs">
+      <button class="fav-tab on" id="favTabFavs" onclick="switchFavTab('favs')">&#11088; Favoris</button>
+      <button class="fav-tab" id="favTabLater" onclick="switchFavTab('later')">&#128336; Plus tard</button>
     </div>
-    <div class="grid" id="favGrid"></div>
+    <div id="favTabContent">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center;">
+        <select id="favFilter" onchange="loadFavs()" style="background:var(--bg3);border:1px solid rgba(255,255,255,0.1);color:var(--text);padding:8px 14px;border-radius:8px;font-family:'Outfit',sans-serif;font-size:0.82rem;cursor:pointer;">
+          <option value="">Tout</option>
+          <option value="movie">&#127909; Films</option>
+          <option value="tv">&#128250; Séries</option>
+        </select>
+        <select id="favSort" onchange="loadFavs()" style="background:var(--bg3);border:1px solid rgba(255,255,255,0.1);color:var(--text);padding:8px 14px;border-radius:8px;font-family:'Outfit',sans-serif;font-size:0.82rem;cursor:pointer;">
+          <option value="default">Ordre ajout</option>
+          <option value="az">Titre A-Z</option>
+          <option value="za">Titre Z-A</option>
+        </select>
+      </div>
+      <div class="grid" id="favGrid"></div>
+    </div>
+    <div id="laterTabContent" style="display:none;">
+      <p class="sub" style="margin-bottom:16px;">Films et séries mis de côté</p>
+      <div class="grid" id="laterGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE PROFIL -->
+<div id="page-profile" class="page">
+  <div class="pg-wrap">
+    <h2>&#128100; Mon <span style="color:var(--accent)">Profil</span></h2>
+    <div id="profileC"></div>
   </div>
 </div>
 
@@ -540,7 +625,7 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
 <footer>
   <div class="ft">
     <div class="logo">THEAMAH<span style="color:var(--text)">+</span></div>
-    <div class="fl"><a href="#" onclick="showToast('Section bientôt disponible')">À propos</a><a href="#" onclick="openContact();return false;">Contact</a><a href="#" onclick="showToast('Appuyez sur Échap pour fermer les fenêtres, Espace pour pause, N pour changer de source')">Aide</a></div>
+    <div class="fl"><a href="#" onclick="showToast('Section bientôt disponible')">À propos</a><a href="#" onclick="openContact();return false;">Contact</a><a href="#" onclick="openHelp();return false;">&#10067; Aide</a></div>
   </div>
   <div class="fb"><p class="fc">&#169; 2026 Theamah Streaming</p><span class="tmdb">TMDB</span></div>
 </footer>
@@ -647,6 +732,15 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
         </div>
         <button class="btn-exp" onclick="exportLib()">&#128229; Telecharger bibliotheque.js</button>
       </div>
+      <div class="exp-box" style="margin-top:14px;">
+        <h3>&#128228; Importer une liste JSON</h3>
+        <p>Restaure ta bibliothèque depuis un fichier <strong>.json</strong> exporté précédemment (favoris, films ajoutés).</p>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+          <input type="file" id="importIn" accept=".json,.js" style="display:none;" onchange="importLib(this)">
+          <button class="btn-exp" style="background:var(--green);" onclick="document.getElementById('importIn').click()">&#128228; Choisir fichier JSON</button>
+          <span id="importStatus" style="font-size:0.8rem;color:var(--text2);"></span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -717,6 +811,56 @@ footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.05);padding
     <div class="fg"><label>Email</label><input type="email" id="ctEmail" placeholder="votre@email.com"></div>
     <div class="fg"><label>Message</label><textarea id="ctMsg" placeholder="Votre message..." style="min-height:110px;"></textarea></div>
     <button class="btn-save" id="ctSend" onclick="sendContact()" style="width:100%;margin-top:6px;">Envoyer</button>
+  </div>
+</div>
+
+<!-- MODAL AIDE -->
+<div class="help-ov" id="helpOv" onclick="if(event.target===this)closeHelp()">
+  <div class="help-box">
+    <button class="mod-close" onclick="closeHelp()">&#10005;</button>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:2px;margin-bottom:18px;">&#10067; Guide d'utilisation</h2>
+    <div class="help-krow"><span class="kd">Lecture / Pause</span><span class="help-key">Espace</span></div>
+    <div class="help-krow"><span class="kd">Reculer 10 secondes</span><span class="help-key">← Gauche</span></div>
+    <div class="help-krow"><span class="kd">Avancer 10 secondes</span><span class="help-key">→ Droite</span></div>
+    <div class="help-krow"><span class="kd">Volume + / -</span><span class="help-key">↑ / ↓</span></div>
+    <div class="help-krow"><span class="kd">Muet</span><span class="help-key">M</span></div>
+    <div class="help-krow"><span class="kd">Plein écran</span><span class="help-key">F</span></div>
+    <div class="help-krow"><span class="kd">Picture-in-Picture</span><span class="help-key">P</span></div>
+    <div class="help-krow"><span class="kd">Source suivante</span><span class="help-key">N</span></div>
+    <div class="help-krow"><span class="kd">Fermer le lecteur</span><span class="help-key">Échap</span></div>
+    <div class="help-sec">
+      <h4>&#127467;&#127479; Avoir le son en français (VF)</h4>
+      <ul>
+        <li>Clique sur <strong>N</strong> ou le bouton "Source suivante" pour changer de lecteur</li>
+        <li><strong>VidSrc.me</strong> et <strong>VSembed</strong> ont un sélecteur de langue intégré dans leur player</li>
+        <li>Cherche une icône 🌐 ou "Audio" dans le lecteur pour choisir la VF</li>
+      </ul>
+    </div>
+    <div class="help-sec">
+      <h4>&#128193; Ajouter mes propres films</h4>
+      <ul>
+        <li>Clique sur ⚙ <strong>Admin</strong> → onglet <strong>+ Ajouter</strong></li>
+        <li>Glisse un fichier MP4 ou entre un lien de streaming</li>
+        <li>Les infos (poster, note, description) sont récupérées automatiquement depuis TMDB</li>
+      </ul>
+    </div>
+    <div class="help-sec">
+      <h4>&#128190; Exporter ma bibliothèque</h4>
+      <ul>
+        <li>Admin → onglet <strong>Exporter</strong> → télécharge <code>bibliotheque.js</code></li>
+        <li>Remplace le fichier sur ton PC pour que les films apparaissent partout</li>
+        <li>Tu peux aussi <strong>Importer</strong> un fichier JSON pour restaurer ta liste</li>
+      </ul>
+    </div>
+    <div class="help-sec">
+      <h4>&#128293; Les sources streaming</h4>
+      <p>Le site utilise des lecteurs tiers (VidSrc, VSembed...). Si un lecteur ne fonctionne pas, appuie sur <strong>N</strong> pour essayer la source suivante. Les sources actives : VidSrc.me · VSembed.</p>
+    </div>
+    <div class="help-sec">
+      <h4>&#128244; Installer l'appli (PWA)</h4>
+      <p>Sur mobile ou PC, clique sur "Installer" dans la barre du navigateur pour avoir Theamah+ comme une vraie appli sans publicité de navigateur.</p>
+    </div>
+    <button class="keys-close" onclick="closeHelp()" style="margin-top:20px;">Fermer</button>
   </div>
 </div>
 
@@ -2135,13 +2279,227 @@ function sendSuggest(){
     .finally(function(){btn.disabled=false;btn.textContent='🚀 Envoyer la suggestion';});
 }
 
-// ════════ ESCAPE — fermeture modals contact/suggest ════════
+// ════════ ESCAPE — fermeture modals contact/suggest/aide ════════
 document.addEventListener('keydown',function(e2){
   if(e2.code==='Escape'){
     if(document.getElementById('contactOv').classList.contains('open'))closeContact();
     if(document.getElementById('suggestOv').classList.contains('open'))closeSuggest();
+    if(document.getElementById('helpOv').classList.contains('open'))closeHelp();
   }
 },true);
+
+// ════════ CACHE TMDB (sessionStorage 10min) ════════
+var _apiCache={};
+var _origApi=api;
+api=async function(path,params){
+  params=params||{};
+  var key='tmdb|'+path+'|'+JSON.stringify(params);
+  var cached=_apiCache[key];
+  if(cached&&Date.now()-cached.ts<600000) return cached.data;
+  var data=await _origApi(path,params);
+  _apiCache[key]={data:data,ts:Date.now()};
+  return data;
+};
+
+// ════════ À REGARDER PLUS TARD ════════
+var laterList=JSON.parse(localStorage.getItem('t_later')||'[]');
+function isLater(id){return laterList.some(function(x){return x.id===id;});}
+function toggleLater(e,id,title,poster,type){
+  e.stopPropagation();
+  var i=laterList.findIndex(function(x){return x.id===id;});
+  if(i>=0){laterList.splice(i,1);showToast('"'+title+'" retiré de Plus tard');}
+  else{laterList.push({id:id,title:title,poster:poster,type:type||'movie'});showToast('"'+title+'" ajouté à Plus tard','grn');}
+  localStorage.setItem('t_later',JSON.stringify(laterList));
+  document.querySelectorAll('.card-later').forEach(function(btn){
+    var card=btn.closest('.card');
+    var m=card&&card.getAttribute('onclick')?card.getAttribute('onclick').match(/\d+/):null;
+    var cid=m?parseInt(m[0]):null;
+    if(cid===id) btn.classList.toggle('on',isLater(id));
+  });
+}
+function loadLater(){
+  var g=document.getElementById('laterGrid'); if(!g)return;
+  if(!laterList.length){g.innerHTML='<div class="empty"><div class="ic">&#128336;</div><h3>Aucun film en attente</h3><p>Clique sur &#128336; sur une card pour l\'ajouter ici.</p></div>';return;}
+  g.innerHTML=laterList.map(function(m){return buildCard(m,m.type||'movie');}).join('');
+}
+function switchFavTab(tab){
+  document.getElementById('favTabFavs').classList.toggle('on',tab==='favs');
+  document.getElementById('favTabLater').classList.toggle('on',tab==='later');
+  document.getElementById('favTabContent').style.display=tab==='favs'?'block':'none';
+  document.getElementById('laterTabContent').style.display=tab==='later'?'block':'none';
+  if(tab==='later')loadLater();
+}
+
+// ════════ NOTATION PERSONNELLE (étoiles 1-5) ════════
+function getRating(id){return parseInt(localStorage.getItem('t_rat_'+id)||'0');}
+function setRating(id,n){
+  localStorage.setItem('t_rat_'+id,n);
+  renderStarsFor(id);
+  showToast('Note : '+n+'/5 ★','grn');
+}
+function renderStarsFor(id){
+  var c=document.getElementById('starRate_'+id); if(!c)return;
+  var cur=getRating(id);
+  c.querySelectorAll('.star-btn').forEach(function(b,i){b.classList.toggle('on',i<cur);});
+  var v=c.querySelector('.star-val');
+  if(v)v.textContent=cur>0?cur+'/5':'';
+}
+function previewStars(id,n){
+  var c=document.getElementById('starRate_'+id); if(!c)return;
+  c.querySelectorAll('.star-btn').forEach(function(b,i){b.classList.toggle('on',i<n);});
+}
+function resetStars(id){renderStarsFor(id);}
+function buildStarHTML(id){
+  var cur=getRating(id);
+  var btns=[1,2,3,4,5].map(function(n){
+    return '<button class="star-btn'+(cur>=n?' on':'')+'" onclick="setRating('+id+','+n+')" onmouseenter="previewStars('+id+','+n+')" onmouseleave="resetStars('+id+')">&#9733;</button>';
+  }).join('');
+  return '<div class="star-rate" id="starRate_'+id+'"><span>Ma note :</span>'+btns+'<span class="star-val">'+(cur>0?cur+'/5':'')+'</span></div>';
+}
+
+// ════════ AIDE ════════
+function openHelp(){document.getElementById('helpOv').classList.add('open');document.body.style.overflow='hidden';}
+function closeHelp(){document.getElementById('helpOv').classList.remove('open');document.body.style.overflow='';}
+
+// ════════ PROFIL ════════
+function loadProfile(){
+  var c=document.getElementById('profileC'); if(!c)return;
+  if(!curUser){c.innerHTML='<div class="empty"><div class="ic">&#128100;</div><h3>Non connecté</h3><p>Connecte-toi pour voir ton profil.</p><button class="hbtn hbtn-play" style="margin:16px auto 0;display:inline-flex;" onclick="openAuth(\'login\')">Se connecter</button></div>';return;}
+  var hist=JSON.parse(localStorage.getItem('t_history')||'[]');
+  var favCount=favs.length;
+  var watchedCount=hist.length;
+  var libCount=myLib.length;
+  var initials=curUser.name.split(' ').map(function(w){return w[0]||'';}).join('').toUpperCase().slice(0,2);
+  c.innerHTML=
+    '<div class="prof-sect" style="display:flex;align-items:center;gap:18px;">'+
+      '<div class="prof-av">'+initials+'</div>'+
+      '<div>'+
+        '<div style="font-family:\'Bebas Neue\',sans-serif;font-size:1.6rem;letter-spacing:2px;">'+esc(curUser.name)+'</div>'+
+        '<div style="color:var(--text2);font-size:0.85rem;margin-top:2px;">'+esc(curUser.email)+'</div>'+
+        '<div style="font-size:0.72rem;color:var(--text2);margin-top:6px;">Membre Theamah+</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="prof-stats">'+
+      '<div class="stat-box"><div class="stat-num">'+watchedCount+'</div><div class="stat-lbl">Films vus</div></div>'+
+      '<div class="stat-box"><div class="stat-num">'+favCount+'</div><div class="stat-lbl">Favoris</div></div>'+
+      '<div class="stat-box"><div class="stat-num">'+libCount+'</div><div class="stat-lbl">Bibliothèque</div></div>'+
+    '</div>'+
+    '<div class="prof-sect">'+
+      '<h4>&#128274; Changer le mot de passe</h4>'+
+      '<div class="fg"><label>Nouveau mot de passe</label><input type="password" id="newPass" placeholder="Nouveau mot de passe (6 car. min)" oninput="updatePwStrength(this.value)"><div class="pw-strength" id="pwBar"></div></div>'+
+      '<div class="fg"><label>Confirmer</label><input type="password" id="newPass2" placeholder="Confirmer le mot de passe"></div>'+
+      '<button class="btn-save" onclick="changePassword()" style="margin-top:6px;">Changer le mot de passe</button>'+
+    '</div>'+
+    '<div class="prof-sect">'+
+      '<h4>&#9881; Paramètres</h4>'+
+      '<button class="btn-xs" onclick="toggleTheme()" style="padding:9px 16px;font-size:0.85rem;">&#127763; Mode clair / sombre</button>'+
+    '</div>';
+}
+async function changePassword(){
+  var p1=document.getElementById('newPass').value;
+  var p2=document.getElementById('newPass2').value;
+  if(!p1||p1.length<6){showToast('Mot de passe trop court (6 car. min)');return;}
+  if(p1!==p2){showToast('Les mots de passe ne correspondent pas');return;}
+  var h=await hashPass(p1);
+  var us=JSON.parse(localStorage.getItem('t_users')||'[]');
+  var u=us.find(function(x){return x.email===curUser.email;});
+  if(u){u.pass=h;localStorage.setItem('t_users',JSON.stringify(us));showToast('Mot de passe changé !','grn');}
+  document.getElementById('newPass').value='';
+  document.getElementById('newPass2').value='';
+}
+
+// ════════ MODE CLAIR / SOMBRE ════════
+function toggleTheme(){
+  var isLight=document.body.classList.toggle('light');
+  localStorage.setItem('t_theme',isLight?'light':'dark');
+  showToast(isLight?'Mode clair activé ☀️':'Mode sombre activé 🌙');
+}
+(function initTheme(){if(localStorage.getItem('t_theme')==='light')document.body.classList.add('light');})();
+
+// ════════ LISTE / GRILLE ════════
+var _viewMode=localStorage.getItem('t_view')||'grid';
+function setViewMode(mode){
+  _viewMode=mode;
+  localStorage.setItem('t_view',mode);
+  var g=document.getElementById('myGrid');
+  if(g){g.classList.toggle('list-mode',mode==='list');}
+  document.getElementById('btnGrid').classList.toggle('on',mode==='grid');
+  document.getElementById('btnList').classList.toggle('on',mode==='list');
+}
+function applyViewMode(){setViewMode(_viewMode);}
+
+// ════════ IMPORT BIBLIOTHEQUE JSON ════════
+function importLib(inp){
+  var f=inp.files[0]; if(!f)return;
+  var st=document.getElementById('importStatus');
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var txt=e.target.result;
+      var data;
+      if(f.name.endsWith('.js')){
+        var m=txt.match(/var BIBLIOTHEQUE\s*=\s*(\[[\s\S]*?\]);/);
+        if(!m)throw new Error('Format invalide');
+        data=JSON.parse(m[1]);
+      } else {
+        data=JSON.parse(txt);
+      }
+      if(!Array.isArray(data))throw new Error('Format invalide');
+      var added=0;
+      data.forEach(function(m){
+        if(m.id&&m.title&&!myLib.find(function(x){return x.id===m.id;})){
+          m.isLocal=true;
+          localLib.unshift(m);myLib.unshift(m);
+          added++;
+        }
+      });
+      localStorage.setItem('t_lib',JSON.stringify(localLib));
+      if(st)st.textContent=added+' film(s) importé(s) !';
+      showToast(added+' film(s) importé(s) !','grn');
+      renderLib();loadHome();
+    }catch(err){
+      if(st)st.textContent='Erreur : '+err.message;
+      showToast('Fichier invalide');
+    }
+    inp.value='';
+  };
+  reader.readAsText(f);
+}
+
+// ════════ MISE À JOUR showPage pour profile ════════
+var _origShowPage=showPage;
+showPage=function(p){
+  _origShowPage(p);
+  if(p==='profile')loadProfile();
+  if(p==='myfilms'){setTimeout(applyViewMode,50);}
+};
+
+// ════════ MISE À JOUR openDetail : ajouter étoiles ════════
+var _origOpenDetail=openDetail;
+openDetail=async function(id,type){
+  await _origOpenDetail(id,type);
+  var mb=document.getElementById('modC');
+  if(!mb)return;
+  var modBod=mb.querySelector('.mod-body');
+  if(!modBod)return;
+  var modTitle=modBod.querySelector('.mod-title');
+  if(!modTitle)return;
+  var starDiv=document.createElement('div');
+  starDiv.innerHTML=buildStarHTML(id);
+  modTitle.insertAdjacentElement('afterend',starDiv.firstChild);
+};
+
+// ════════ MISE À JOUR buildCard : bouton Plus tard ════════
+var _origBuildCard=buildCard;
+buildCard=function(m,type,rank){
+  var html=_origBuildCard(m,type,rank);
+  var raw=m.title||m.name||'';
+  var t=raw.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+  var ps=(m.poster_path||'').replace(/'/g,"\\'");
+  var tp=type||'movie';
+  var laterBtn='<button class="card-later'+(isLater(m.id)?' on':'')+'" onclick="toggleLater(event,'+m.id+',\''+t+'\',\''+ps+'\',\''+tp+'\')" title="Regarder plus tard">&#128336;</button>';
+  return html.replace('</div>',laterBtn+'</div>');
+};
 </script>
 </body>
 </html>
