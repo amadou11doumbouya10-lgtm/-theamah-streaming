@@ -44,6 +44,7 @@ git add . && git commit -m "description" && git push
 | `filme/` | Films locaux MP4 — exclus de Git |
 | `serie/` | Séries locales MP4 — exclues de Git |
 | `AMELIORATIONS/` | Dossier des idées et demandes de modifications futures |
+| `PUBLICITE/` | Visuels marketing HTML + INDEX.html (hub) |
 | `CORRECTIONS.md` | Journal de tous les bugs et corrections |
 | `CLAUDE.md` | Ce fichier — guide pour Claude Code |
 
@@ -266,6 +267,23 @@ Breakpoints : `900px` (nav mobile) · `600px` (bottom sheets)
 - **☀️ Mode clair/sombre** : toggle menu utilisateur + profil (`t_theme`)
 - **⊞☰ Vue liste/grille** dans Ma Bibliothèque (`t_view`)
 - **Fix** : `try/catch` manquant sur recherche TMDB (spinner infini)
+
+### Session 9 — 23/05/2026
+- Audit complet des 9 sources streaming — 3 retirées (Frembed, AutoEmbed, Embed.su : ECONNREFUSED)
+- IFRAME_WHITELIST nettoyée · streamingnow.mov ajouté (redirect 302 multiembed)
+- Tooltip VF amélioré · commentaire code mis à jour (9 → 6 sources)
+
+### Session 10 — 24/05/2026
+- **Dossier `PUBLICITE/`** créé avec 8 visuels HTML prêts à screenshotter
+- **pub-theamah.html** — affiche carrée 1080×1080 (Instagram/Facebook)
+- **pub-theamah-v2.html** — bannière PC côte à côte 1400×700
+- **pub-theamah-mobile.html** — maquette téléphone + QR 900×1600
+- **pub-theamah-pc.html** — maquette laptop 3 colonnes + QR 1600×900
+- **pub-theamah-qr.html** — carte QR grand format 800×800
+- **pub-theamah-createur.html** — carte créateur Amadou Doumbouya (@TheAmah)
+- **pub-before-after.html** — Netflix+Disney++Prime=39,97€ vs Theamah+=0€ · 479€/an économisés
+- **PUBLICITE/INDEX.html** — hub central : visuels + 6 idées vidéo + 4 textes copy-paste
+- Stratégie marketing 10 idées (cercle privé, before/after, diaspora, thread LinkedIn...)
 
 ## ⬜ RESTE À FAIRE
 

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Theamah+ — QR Card</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #12172a;
+  font-family: 'Outfit', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 60px;
+  padding: 60px 20px;
+}
+
+/* ══════════════════════════════════════════
+   CARTE QR — Format carré 800×800
+══════════════════════════════════════════ */
+.qr-card {
+  width: 800px;
+  height: 800px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  background: #0b0f1e;
+}
+
+/* Fond dégradé animé */
+.qr-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%,   rgba(229,9,20,0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 50% at 0%   80%,  rgba(100,60,200,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 100% 20%,  rgba(229,9,20,0.1)  0%, transparent 55%),
+    linear-gradient(160deg, #0d1225 0%, #111828 50%, #0b0f1e 100%);
+}
+
+/* Grille de fond */
+.qr-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Cercles décoratifs */
+.qr-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(229,9,20,0.12);
+}
+.qr-circle-1 { width: 500px; height: 500px; top: -120px; left: -120px; }
+.qr-circle-2 { width: 350px; height: 350px; bottom: -80px; right: -80px; border-color: rgba(100,80,200,0.1); }
+
+.qr-content {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 32px;
+  padding: 0 60px;
+  text-align: center;
+}
+
+/* Logo */
+.qr-logo-row {
+  display: flex; align-items: flex-start; gap: 2px;
+  line-height: 1;
+}
+.qr-logo {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 72px; letter-spacing: 5px;
+  color: #eef0f4;
+}
+.qr-logo-plus {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 72px; color: #e50914;
+  filter: drop-shadow(0 0 24px rgba(229,9,20,0.8));
+}
+
+.qr-tagline {
+  font-size: 16px; font-weight: 400;
+  color: #6a7a9a; letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: -16px;
+}
+
+/* Cadre QR */
+.qr-frame-outer {
+  position: relative;
+  padding: 6px;
+  background: linear-gradient(135deg, #e50914, #8b0000, #e50914);
+  border-radius: 28px;
+  box-shadow:
+    0 0 0 1px rgba(229,9,20,0.3),
+    0 24px 80px rgba(229,9,20,0.35),
+    0 0 120px rgba(229,9,20,0.12);
+}
+
+.qr-frame-inner {
+  background: white;
+  border-radius: 22px;
+  padding: 18px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.qr-frame-inner img {
+  width: 220px; height: 220px;
+  display: block; border-radius: 6px;
+}
+
+/* Coin coins décoratifs du QR */
+.qr-corner {
+  position: absolute;
+  width: 28px; height: 28px;
+  border-color: #e50914;
+  border-style: solid;
+}
+.qr-corner-tl { top: -2px; left: -2px; border-width: 3px 0 0 3px; border-radius: 6px 0 0 0; }
+.qr-corner-tr { top: -2px; right: -2px; border-width: 3px 3px 0 0; border-radius: 0 6px 0 0; }
+.qr-corner-bl { bottom: -2px; left: -2px; border-width: 0 0 3px 3px; border-radius: 0 0 0 6px; }
+.qr-corner-br { bottom: -2px; right: -2px; border-width: 0 3px 3px 0; border-radius: 0 0 6px 0; }
+
+/* Instruction scanner */
+.qr-scan-label {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 15px; font-weight: 600; color: #9aaac0;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 30px;
+  padding: 10px 22px;
+}
+.qr-scan-label::before, .qr-scan-label::after {
+  content: '─────';
+  color: rgba(255,255,255,0.12);
+  font-size: 12px;
+}
+
+/* Lien GitHub */
+.qr-link-box {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 18px;
+  padding: 18px 28px;
+  display: flex; align-items: center; gap: 16px;
+}
+
+.qr-link-icon {
+  width: 44px; height: 44px; flex-shrink: 0;
+  background: rgba(229,9,20,0.12);
+  border: 1px solid rgba(229,9,20,0.25);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+
+.qr-link-text { text-align: left; }
+.qr-link-text small {
+  display: block; font-size: 11px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: #4a5670; margin-bottom: 3px;
+}
+.qr-link-text span {
+  font-size: 13px; font-weight: 700; color: #e50914;
+  word-break: break-all; letter-spacing: 0.3px;
+}
+
+/* Badge libre */
+.qr-free-badge {
+  position: absolute;
+  top: 30px; right: 30px;
+  background: #1db954;
+  color: #000; font-size: 11px; font-weight: 800;
+  padding: 6px 14px; border-radius: 20px;
+  letter-spacing: 1px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 5px;
+}
+.qr-free-badge::before {
+  content: ''; width: 7px; height: 7px;
+  background: #000; border-radius: 50%;
+  opacity: 0.5;
+}
+
+
+/* ══════════════════════════════════════════
+   CARTE QR HORIZONTALE — 1000×420
+══════════════════════════════════════════ */
+.qr-banner {
+  width: 1000px;
+  height: 420px;
+  background: #0b0f1e;
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+}
+
+.qr-banner-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 100% at 0% 50%, rgba(229,9,20,0.2) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at 100% 50%, rgba(60,80,200,0.1) 0%, transparent 60%),
+    linear-gradient(135deg, #0e1428 0%, #111928 100%);
+}
+
+.qr-banner-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Ligne verticale séparatrice */
+.qr-banner-sep {
+  position: absolute;
+  left: 55%; top: 10%; bottom: 10%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(229,9,20,0.3), transparent);
+}
+
+/* Partie gauche */
+.qr-banner-left {
+  position: relative; z-index: 2;
+  width: 55%;
+  padding: 50px 60px;
+  display: flex; flex-direction: column;
+  justify-content: center; gap: 20px;
+}
+
+.qb-logo-row { display: flex; align-items: flex-start; gap: 2px; }
+.qb-logo {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 80px; letter-spacing: 4px; line-height: 0.85; color: #eef0f4;
+}
+.qb-logo-plus {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 80px; color: #e50914; line-height: 0.85;
+  filter: drop-shadow(0 0 20px rgba(229,9,20,0.7));
+}
+
+.qb-tagline {
+  font-size: 17px; font-weight: 400; color: #7a8aaa; line-height: 1.5;
+}
+
+.qb-feats { display: flex; flex-direction: column; gap: 8px; }
+.qb-feat {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: #c0cce0;
+}
+.qb-dot { width: 5px; height: 5px; background: #e50914; border-radius: 50%; flex-shrink: 0; }
+
+.qb-link {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(229,9,20,0.1);
+  border: 1px solid rgba(229,9,20,0.25);
+  border-radius: 12px;
+  padding: 12px 18px;
+  margin-top: 4px;
+}
+.qb-link-icon { font-size: 18px; }
+.qb-link-text small {
+  display: block; font-size: 10px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase; color: #4a5670; margin-bottom: 2px;
+}
+.qb-link-url { font-size: 13px; font-weight: 700; color: #e50914; }
+
+/* Partie droite : QR */
+.qr-banner-right {
+  position: relative; z-index: 2;
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 18px;
+}
+
+.qb-qr-outer {
+  padding: 5px;
+  background: linear-gradient(135deg, #e50914, #8b0000);
+  border-radius: 22px;
+  box-shadow: 0 16px 50px rgba(229,9,20,0.3);
+}
+.qb-qr-inner {
+  background: white; border-radius: 18px; padding: 14px;
+}
+.qb-qr-inner img { width: 160px; height: 160px; display: block; border-radius: 4px; }
+
+.qb-scan-hint {
+  font-size: 13px; font-weight: 600; color: #7a8aaa; text-align: center;
+  display: flex; align-items: center; gap: 6px;
+}
+.qb-scan-hint::before { content: '▸'; color: #e50914; }
+
+/* Labels pages */
+.page-label {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.18); text-align: center;
+  margin-bottom: -30px;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ CARTE CARRÉE QR ══════════ -->
+<p class="page-label">★ CARTE QR — Carré 800×800 (WhatsApp, Instagram, SMS)</p>
+
+<div class="qr-card">
+  <div class="qr-bg"></div>
+  <div class="qr-grid"></div>
+  <div class="qr-circle qr-circle-1"></div>
+  <div class="qr-circle qr-circle-2"></div>
+  <div class="qr-free-badge">Gratuit</div>
+
+  <div class="qr-content">
+
+    <div>
+      <div class="qr-logo-row">
+        <div class="qr-logo">Theamah</div>
+        <div class="qr-logo-plus">+</div>
+      </div>
+      <div class="qr-tagline">Ton cinéma privé en ligne</div>
+    </div>
+
+    <!-- QR Code -->
+    <div class="qr-frame-outer">
+      <div class="qr-corner qr-corner-tl"></div>
+      <div class="qr-corner qr-corner-tr"></div>
+      <div class="qr-corner qr-corner-bl"></div>
+      <div class="qr-corner qr-corner-br"></div>
+      <div class="qr-frame-inner">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=440x440&data=https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/&color=000000&bgcolor=ffffff&ecc=H"
+          alt="QR Code Theamah+">
+      </div>
+    </div>
+
+    <div class="qr-scan-label">📱 Scanner pour accéder</div>
+
+    <!-- Lien GitHub -->
+    <div class="qr-link-box">
+      <div class="qr-link-icon">🌐</div>
+      <div class="qr-link-text">
+        <small>Lien direct</small>
+        <span>amadou11doumbouya10-lgtm.github.io/-theamah-streaming/</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ══════════ BANNIÈRE HORIZONTALE QR ══════════ -->
+<p class="page-label">★ BANNIÈRE QR — Horizontal 1000×420 (Twitter/X, LinkedIn, Stories)</p>
+
+<div class="qr-banner">
+  <div class="qr-banner-bg"></div>
+  <div class="qr-banner-grid"></div>
+  <div class="qr-banner-sep"></div>
+
+  <!-- Gauche -->
+  <div class="qr-banner-left">
+    <div class="qb-logo-row">
+      <div class="qb-logo">Theamah</div>
+      <div class="qb-logo-plus">+</div>
+    </div>
+    <p class="qb-tagline">Films, séries, version française —<br>100% gratuit, sans abonnement.</p>
+    <div class="qb-feats">
+      <div class="qb-feat"><div class="qb-dot"></div>🎬 Films & Séries illimités</div>
+      <div class="qb-feat"><div class="qb-dot"></div>🇫🇷 Version Française intégrée</div>
+      <div class="qb-feat"><div class="qb-dot"></div>📱 Installable sur mobile (PWA)</div>
+      <div class="qb-feat"><div class="qb-dot"></div>⭐ Favoris, notes & profil perso</div>
+    </div>
+    <div class="qb-link">
+      <div class="qb-link-icon">🐙</div>
+      <div class="qb-link-text">
+        <small>GitHub Pages</small>
+        <div class="qb-link-url">amadou11doumbouya10-lgtm.github.io/-theamah-streaming/</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Droite : QR -->
+  <div class="qr-banner-right">
+    <div class="qb-qr-outer">
+      <div class="qb-qr-inner">
+        <img
+          src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/&color=000000&bgcolor=ffffff&ecc=H"
+          alt="QR Code Theamah+">
+      </div>
+    </div>
+    <div class="qb-scan-hint">Scanner pour ouvrir le site</div>
+  </div>
+
+</div>
+
+</body>
+</html>
