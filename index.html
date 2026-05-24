@@ -890,7 +890,7 @@ body.light .mod-box,.body.light .auth-box,.body.light .adm-box,.body.light .help
 function esc(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
-var IFRAME_WHITELIST=['vidsrc.me','vsembed.ru','vidsrcme.su','autoembed.co','streamvaultsrc.click','www.2embed.stream','vidlink.pro','multiembed.mov','streamingnow.mov','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
+var IFRAME_WHITELIST=['autoembed.co','ezvidapi.com','vidlux.xyz','vembed.click','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
 function safeIframeSrc(url){
   if(!url)return '';
   try{
@@ -1203,16 +1203,13 @@ function buildEpPanel(film,cS,cE){
 }
 
 // ════════ STREAMING INTERNET — sources actives (testées le 24/05/2026) ════════
-// 8 sources — serveurs vivants confirmés (403=robot-block, pas mort)
+// AutoEmbed = seule source confirmée active par l'utilisateur en navigateur
+// ezvidapi/VidLux/VikingEmbed = conçus pour embedding tiers, à tester
 var _SRCS=[
-  {n:'VidSrc.me',    mu:'https://vidsrc.me/embed/movie?tmdb={id}',                     tu:'https://vidsrc.me/embed/tv?tmdb={id}&season={s}&episode={e}',                vf:true},
-  {n:'VSembed',      mu:'https://vsembed.ru/embed/movie?tmdb={id}',                    tu:'https://vsembed.ru/embed/tv?tmdb={id}&season={s}&episode={e}',               vf:true},
-  {n:'VidSrc Mirror',mu:'https://vidsrcme.su/embed/movie?tmdb={id}',                   tu:'https://vidsrcme.su/embed/tv?tmdb={id}&season={s}&episode={e}',              vf:true},
   {n:'AutoEmbed',    mu:'https://autoembed.co/movie/tmdb/{id}',                        tu:'https://autoembed.co/tv/tmdb/{id}-{s}-{e}',                                  vf:false},
-  {n:'StreamVault',  mu:'https://streamvaultsrc.click/embed/movie/{id}',               tu:'https://streamvaultsrc.click/embed/tv/{id}/{s}/{e}',                         vf:false},
-  {n:'2Embed',       mu:'https://www.2embed.stream/embed/movie/{id}',                  tu:'https://www.2embed.stream/embed/tv/{id}/{s}/{e}',                            vf:false},
-  {n:'VidLink',      mu:'https://vidlink.pro/movie/{id}?autoplay=true',                tu:'https://vidlink.pro/tv/{id}/{s}/{e}?autoplay=true',                          vf:false},
-  {n:'MultiEmbed',   mu:'https://multiembed.mov/?video_id={id}&tmdb=1',                tu:'https://multiembed.mov/?video_id={id}&tmdb=1&s={s}&e={e}',                   vf:false},
+  {n:'EzVidAPI',     mu:'https://ezvidapi.com/embed/movie/{id}',                       tu:'https://ezvidapi.com/embed/tv/{id}/{s}/{e}',                                 vf:false},
+  {n:'VidLux',       mu:'https://vidlux.xyz/embed/movie/{id}',                         tu:'https://vidlux.xyz/embed/tv/{id}/{s}/{e}',                                   vf:false},
+  {n:'VikingEmbed',  mu:'https://vembed.click/movie/{id}',                             tu:'https://vembed.click/tv/{id}/{s}/{e}',                                       vf:false},
 ];
 var _tId=0,_tType='movie',_tS=1,_tE=1,_tSrc=0;
 var _autoTryTimer=null,_autoTryEnabled=false;
