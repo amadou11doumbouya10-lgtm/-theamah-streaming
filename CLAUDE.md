@@ -72,33 +72,30 @@ var ADMIN_HASH = 'd956b3c...'; // SHA-256 de "theamah2026"
 
 ## Sources de streaming actives — État au 24/05/2026
 
-**7 sources dans `_SRCS`** — toutes sandbox-compatibles, aucune n'affiche d'erreur iframe.
-Les 403 viennent du filtrage anti-bot (requêtes headless) : en vrai navigateur depuis github.io elles fonctionnent.
+**1 confirmée + 3 candidats à tester** — seules les sources conçues pour l'embedding tiers passent le X-Frame-Options depuis github.io.
 
-| Source | URL Film | URL Série | VF | Sandbox | Statut |
-|---|---|---|---|---|---|
-| **VidSrc.me** | `vidsrc.me/embed/movie?tmdb={id}` | `vidsrc.me/embed/tv?tmdb={id}&season={s}&episode={e}` | ✅ | ✅ | ✅ Actif |
-| **VSembed** | `vsembed.ru/embed/movie?tmdb={id}` | `vsembed.ru/embed/tv?tmdb={id}&season={s}&episode={e}` | ✅ | ✅ | ✅ Actif |
-| **VidSrc Mirror** | `vidsrcme.su/embed/movie?tmdb={id}` | `vidsrcme.su/embed/tv?tmdb={id}&season={s}&episode={e}` | ✅ | ✅ | ✅ Actif |
-| **AutoEmbed** | `autoembed.co/movie/tmdb/{id}` | `autoembed.co/tv/tmdb/{id}-{s}-{e}` | ❌ | ✅ | ✅ Actif |
-| **StreamVault** | `streamvaultsrc.click/embed/movie/{id}` | `streamvaultsrc.click/embed/tv/{id}/{s}/{e}` | ❌ | ✅ | ✅ Actif |
-| **2Embed** | `2embed.stream/embed/movie/{id}` | `2embed.stream/embed/tv/{id}/{s}/{e}` | ❌ | ✅ | ✅ Confirmé (répond avec titre film) |
-| **VidLink** | `vidlink.pro/movie/{id}?autoplay=true` | `vidlink.pro/tv/{id}/{s}/{e}?autoplay=true` | ❌ | ✅ | ✅ Confirmé (serveur répond) |
+| Source | URL Film | URL Série | VF | Statut |
+|---|---|---|---|---|
+| **AutoEmbed** | `autoembed.co/movie/tmdb/{id}` | `autoembed.co/tv/tmdb/{id}-{s}-{e}` | ❌ | ✅ **Confirmé en navigateur** |
+| **EzVidAPI** | `ezvidapi.com/embed/movie/{id}` | `ezvidapi.com/embed/tv/{id}/{s}/{e}` | ❌ | ⚠️ À tester (sandbox-friendly déclaré) |
+| **VidLux** | `vidlux.xyz/embed/movie/{id}` | `vidlux.xyz/embed/tv/{id}/{s}/{e}` | ❌ | ⚠️ À tester (conçu webmasters) |
+| **VikingEmbed** | `vembed.click/movie/{id}` | `vembed.click/tv/{id}/{s}/{e}` | ❌ | ⚠️ À tester |
 
-### Sources retirées définitivement
+### Sources retirées — ne fonctionnent pas en iframe depuis github.io
 
 | Source | Raison |
 |---|---|
-| **VidAPI** (vidapi.xyz) | Détecte notre `sandbox` iframe et bloque la lecture explicitement |
-| **Videasy** (player.videasy.net) | Contenu vide, aucun lecteur chargeable |
-| **MultiEmbed** (multiembed.mov) | Redirige vers streamingnow.mov avec URL encodée dynamique |
-| vidsrc.to, vidsrc.sbs, vidsrc.fyi, vidsrc.mov, vidsrc.cc | ECONNREFUSED (serveurs morts) |
-| 2Embed.cc, SuperEmbed, 2Embed.skin | ECONNREFUSED (serveurs morts) |
-| Frembed.com, Embed-API.stream | ECONNREFUSED (serveurs morts) |
-| vidsrcme.ru, vidsrc-me.ru, vidsrc-embed.su, vsrc.su | ECONNREFUSED (serveurs morts) |
+| VidSrc.me, VSembed, vidsrcme.su, StreamVault, 2Embed, VidLink, MultiEmbed | X-Frame-Options bloque l'embedding depuis github.io (testé en navigateur) |
+| **VidAPI** (vidapi.xyz) | Affiche "Sandbox not allowed" explicitement |
+| **Videasy** (player.videasy.net) | Contenu vide |
+| Frembed.pro, AutoEmbed.cc, Embed.su | ECONNREFUSED (morts) |
+| vidsrc.to, vidsrc.fyi, 2Embed.cc, SuperEmbed | ECONNREFUSED (morts) |
 
-### ⚠️ Note sandbox importante
-Notre iframe utilise `sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-orientation-lock allow-pointer-lock"`. **Ne jamais retirer le sandbox** (sécurité anti-pub). Toute nouvelle source à ajouter doit être testée pour la compatibilité sandbox — VidAPI est l'exemple de source qui bloque.
+### ⚠️ Règle avant d'ajouter une source
+1. Serveur vivant (pas ECONNREFUSED)
+2. Tester en navigateur depuis github.io — si écran noir = X-Frame-Options bloque
+3. Vérifier absence du message "Remove sandbox" dans le lecteur
+`sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-orientation-lock allow-pointer-lock"` — **ne jamais retirer**.
 
 ### Si les sources tombent
 Vérifier la liste officielle des domaines actifs : https://vidsrc.community/ ou https://vidsrc.domains/
@@ -297,7 +294,16 @@ Breakpoints : `900px` (nav mobile) · `600px` (bottom sheets)
 - **PUBLICITE/INDEX.html** — hub central : visuels + 6 idées vidéo + 4 textes copy-paste
 - Stratégie marketing 10 idées (cercle privé, before/after, diaspora, thread LinkedIn...)
 
+### Session 11 — 24/05/2026
+- Audit sources complet : test navigateur réel depuis github.io
+- Découverte : VidSrc.me, VSembed, 2Embed, VidLink, MultiEmbed, StreamVault, vidsrcme.su = **ne fonctionnent pas** (X-Frame-Options bloque embedding)
+- **AutoEmbed.co** = seule source confirmée fonctionnelle par test utilisateur en navigateur
+- **VidAPI** retiré : affiche "Sandbox not allowed" explicitement
+- Nouveaux candidats ajoutés : **EzVidAPI** (sandbox-friendly), **VidLux**, **VikingEmbed**
+- Tooltip VF mis à jour (Frembed retiré de la mention)
+- IFRAME_WHITELIST réduite aux 4 domaines actifs
+
 ## ⬜ RESTE À FAIRE
 
-- Trouver de nouvelles sources streaming actives si VidSrc.me tombe
+- Tester EzVidAPI, VidLux, VikingEmbed en navigateur depuis github.io
 - Convertir `How_High_DVDRiP11.avi` en `.mp4` pour lecture dans le navigateur

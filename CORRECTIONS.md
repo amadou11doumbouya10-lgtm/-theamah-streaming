@@ -176,8 +176,32 @@
 
 ---
 
+## ✅ SESSION 11 — 24/05/2026
+
+### Audit sources streaming — test navigateur réel
+
+- ✅ S11-1 — **Test navigateur github.io** : seul AutoEmbed.co fonctionne, les 7 autres affichent écran noir (X-Frame-Options)
+- ✅ S11-2 — **VidSrc.me, VSembed, vidsrcme.su, StreamVault, 2Embed, VidLink, MultiEmbed retirés** : bloqués par X-Frame-Options depuis github.io
+- ✅ S11-3 — **VidAPI retiré** : affiche "Sandbox not allowed" explicitement dans le lecteur
+- ✅ S11-4 — **Frembed VF, AutoEmbed.cc, Embed.su** déjà retirés (ECONNREFUSED)
+- ✅ S11-5 — **3 nouveaux candidats ajoutés** : EzVidAPI (sandbox-friendly déclaré), VidLux (9 serveurs), VikingEmbed
+- ✅ S11-6 — **IFRAME_WHITELIST** réduite : autoembed.co, ezvidapi.com, vidlux.xyz, vembed.click + YouTube + GitHub
+- ✅ S11-7 — **CLAUDE.md et CORRECTIONS.md mis à jour** avec état réel 24/05/2026
+
+### État sources après Session 11
+
+| # | Source | Statut | Note |
+|---|---|---|---|
+| 1 | AutoEmbed | ✅ **Confirmé navigateur** | Seule source 100% fonctionnelle |
+| 2 | EzVidAPI | ⚠️ À tester | "sandbox-friendly" déclaré |
+| 3 | VidLux | ⚠️ À tester | Conçu pour webmasters |
+| 4 | VikingEmbed | ⚠️ À tester | TMDB player tiers |
+
+---
+
 ## ⬜ RESTE À FAIRE
 
+- ⚠️ Tester EzVidAPI, VidLux, VikingEmbed en navigateur depuis github.io
 - ⚠️ Convertir `How_High_DVDRiP11.avi` en `.mp4` pour lecture dans le navigateur
 
 ---
