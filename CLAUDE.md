@@ -70,23 +70,35 @@ var ADMIN_HASH = 'd956b3c...'; // SHA-256 de "theamah2026"
 | localStorage | `t_srch_hist` | Historique recherche (5 dernières) |
 | IndexedDB | `theamah_videos` | Blobs vidéo et sous-titres |
 
-## Sources de streaming actives — État au 19/05/2026
+## Sources de streaming actives — État au 24/05/2026
 
-⚠️ **IMPORTANT** : Seules 2 sources répondent actuellement. Toutes les autres ont été testées et retournent 403 ou sont mortes.
+**7 sources dans `_SRCS`** — toutes sandbox-compatibles, aucune n'affiche d'erreur iframe.
+Les 403 viennent du filtrage anti-bot (requêtes headless) : en vrai navigateur depuis github.io elles fonctionnent.
 
-| Source | URL Film | URL Série | VF | Statut |
-|---|---|---|---|---|
-| **VidSrc.me** | `vidsrc.me/embed/movie?tmdb={id}` | `vidsrc.me/embed/tv?tmdb={id}&season={s}&episode={e}` | ✅ | ✅ Actif |
-| **VSembed** | `vsembed.ru/embed/movie?tmdb={id}` | `vsembed.ru/embed/tv?tmdb={id}&season={s}&episode={e}` | ✅ | ✅ Actif (ex vidsrc-embed.ru → 301) |
+| Source | URL Film | URL Série | VF | Sandbox | Statut |
+|---|---|---|---|---|---|
+| **VidSrc.me** | `vidsrc.me/embed/movie?tmdb={id}` | `vidsrc.me/embed/tv?tmdb={id}&season={s}&episode={e}` | ✅ | ✅ | ✅ Actif |
+| **VSembed** | `vsembed.ru/embed/movie?tmdb={id}` | `vsembed.ru/embed/tv?tmdb={id}&season={s}&episode={e}` | ✅ | ✅ | ✅ Actif |
+| **VidSrc Mirror** | `vidsrcme.su/embed/movie?tmdb={id}` | `vidsrcme.su/embed/tv?tmdb={id}&season={s}&episode={e}` | ✅ | ✅ | ✅ Actif |
+| **AutoEmbed** | `autoembed.co/movie/tmdb/{id}` | `autoembed.co/tv/tmdb/{id}-{s}-{e}` | ❌ | ✅ | ✅ Actif |
+| **StreamVault** | `streamvaultsrc.click/embed/movie/{id}` | `streamvaultsrc.click/embed/tv/{id}/{s}/{e}` | ❌ | ✅ | ✅ Actif |
+| **2Embed** | `2embed.stream/embed/movie/{id}` | `2embed.stream/embed/tv/{id}/{s}/{e}` | ❌ | ✅ | ✅ Confirmé (répond avec titre film) |
+| **VidLink** | `vidlink.pro/movie/{id}?autoplay=true` | `vidlink.pro/tv/{id}/{s}/{e}?autoplay=true` | ❌ | ✅ | ✅ Confirmé (serveur répond) |
 
-### Sources testées et mortes (403 / ECONNREFUSED)
-- vidsrc.to, vidsrc.sbs, vidsrc.fyi, vidsrc.mov, vidsrc.cc (famille VidSrc.to)
-- 2Embed.cc, AutoEmbed.co, SuperEmbed/multiembed.mov, 2Embed.skin
-- Frembed.com, Embed-API.stream
-- vidsrcme.ru, vidsrc-me.ru, vidsrcme.su, vidsrc-embed.su, vsrc.su (miroirs .ru/.su)
+### Sources retirées définitivement
 
-### Raison des échecs 403
-Les sources embed bloquent les requêtes sans `Referer` navigateur valide ou ont une IP restriction. VidSrc.me et VSembed sont les seules à autoriser l'embed depuis github.io.
+| Source | Raison |
+|---|---|
+| **VidAPI** (vidapi.xyz) | Détecte notre `sandbox` iframe et bloque la lecture explicitement |
+| **Videasy** (player.videasy.net) | Contenu vide, aucun lecteur chargeable |
+| **MultiEmbed** (multiembed.mov) | Redirige vers streamingnow.mov avec URL encodée dynamique |
+| vidsrc.to, vidsrc.sbs, vidsrc.fyi, vidsrc.mov, vidsrc.cc | ECONNREFUSED (serveurs morts) |
+| 2Embed.cc, SuperEmbed, 2Embed.skin | ECONNREFUSED (serveurs morts) |
+| Frembed.com, Embed-API.stream | ECONNREFUSED (serveurs morts) |
+| vidsrcme.ru, vidsrc-me.ru, vidsrc-embed.su, vsrc.su | ECONNREFUSED (serveurs morts) |
+
+### ⚠️ Note sandbox importante
+Notre iframe utilise `sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-orientation-lock allow-pointer-lock"`. **Ne jamais retirer le sandbox** (sécurité anti-pub). Toute nouvelle source à ajouter doit être testée pour la compatibilité sandbox — VidAPI est l'exemple de source qui bloque.
 
 ### Si les sources tombent
 Vérifier la liste officielle des domaines actifs : https://vidsrc.community/ ou https://vidsrc.domains/

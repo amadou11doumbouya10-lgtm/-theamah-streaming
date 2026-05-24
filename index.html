@@ -890,7 +890,7 @@ body.light .mod-box,.body.light .auth-box,.body.light .adm-box,.body.light .help
 function esc(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
-var IFRAME_WHITELIST=['vidsrc.me','vsembed.ru','streamvaultsrc.click','www.2embed.stream','vidlink.pro','vidapi.xyz','multiembed.mov','streamingnow.mov','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
+var IFRAME_WHITELIST=['vidsrc.me','vsembed.ru','www.2embed.stream','vidlink.pro','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
 function safeIframeSrc(url){
   if(!url)return '';
   try{
@@ -1203,15 +1203,12 @@ function buildEpPanel(film,cS,cE){
 }
 
 // ════════ STREAMING INTERNET — sources actives (testées le 24/05/2026) ════════
-// 7 sources — toutes HTTP 200 confirmées (films + séries)
+// 4 sources 100% confirmées — miroirs/non-vérifiés retirés
 var _SRCS=[
   {n:'VidSrc.me',    mu:'https://vidsrc.me/embed/movie?tmdb={id}',                     tu:'https://vidsrc.me/embed/tv?tmdb={id}&season={s}&episode={e}',                vf:true},
   {n:'VSembed',      mu:'https://vsembed.ru/embed/movie?tmdb={id}',                    tu:'https://vsembed.ru/embed/tv?tmdb={id}&season={s}&episode={e}',               vf:true},
-  {n:'StreamVault',  mu:'https://streamvaultsrc.click/embed/movie/{id}',               tu:'https://streamvaultsrc.click/embed/tv/{id}/{s}/{e}',                         vf:false},
   {n:'2Embed',       mu:'https://www.2embed.stream/embed/movie/{id}',                  tu:'https://www.2embed.stream/embed/tv/{id}/{s}/{e}',                            vf:false},
   {n:'VidLink',      mu:'https://vidlink.pro/movie/{id}?autoplay=true',                tu:'https://vidlink.pro/tv/{id}/{s}/{e}?autoplay=true',                          vf:false},
-  {n:'VidAPI',       mu:'https://vidapi.xyz/embed/movie/{id}',                         tu:'https://vidapi.xyz/embed/tv/{id}/{s}/{e}',                                   vf:false},
-  {n:'MultiEmbed',   mu:'https://multiembed.mov/?video_id={id}&tmdb=1',                tu:'https://multiembed.mov/?video_id={id}&tmdb=1&s={s}&e={e}',                   vf:false},
 ];
 var _tId=0,_tType='movie',_tS=1,_tE=1,_tSrc=0;
 var _autoTryTimer=null,_autoTryEnabled=false;
