@@ -1,5 +1,5 @@
 # CORRECTIONS & AMÉLIORATIONS — Theamah+
-# Dernière mise à jour : 22/05/2026
+# Dernière mise à jour : 24/05/2026
 
 ---
 
@@ -115,6 +115,64 @@
 - ✅ Lien "Mon Profil" dans le dropdown
 - ✅ Lien "Plus tard" dans le dropdown
 - ✅ Toggle thème dans le dropdown
+
+---
+
+## ✅ SESSION 9 — 23/05/2026
+
+### Maintenance sources streaming
+
+- ✅ S9-1 — **Audit complet des 9 sources** : test direct de chaque domaine
+- ✅ S9-2 — **Frembed VF retiré** : ECONNREFUSED (serveur mort depuis ~2024, dernier message forum : sept. 2023)
+- ✅ S9-3 — **AutoEmbed.cc retiré** : ECONNREFUSED confirmé (2 tests)
+- ✅ S9-4 — **Embed.su retiré** : ECONNREFUSED confirmé (2 tests)
+- ✅ S9-5 — **IFRAME_WHITELIST nettoyée** : frembed.pro, autoembed.co, autoembed.cc, embed.su retirés
+- ✅ S9-6 — **streamingnow.mov ajouté** à IFRAME_WHITELIST (redirect 302 de multiembed.mov)
+- ✅ S9-7 — **Tooltip VF amélioré** : suppression mention Frembed, guide "Audio/CC en bas à droite" plus clair
+- ✅ S9-8 — Commentaire code mis à jour : 9 sources → 6 sources, date 23/05/2026
+
+### Résultat sources
+
+| # | Source | Statut | VF |
+|---|---|---|---|
+| 1 | VidSrc.me | ✅ Actif | ✅ |
+| 2 | VSembed | ✅ Actif | ✅ |
+| 3 | VidSrc.fyi | ⚠️ Incertain | — |
+| 4 | 2Embed.stream | ✅ Actif | — |
+| 5 | VidLink | ✅ Actif | — |
+| 6 | MultiEmbed | ⚠️ Redirige → streamingnow.mov | — |
+
+---
+
+---
+
+## ✅ SESSION 10 — 24/05/2026
+
+### Communication & Marketing
+
+- ✅ S10-1 — **Dossier `PUBLICITE/`** créé — tous les visuels regroupés au même endroit
+- ✅ S10-2 — **Affiche carrée 1080×1080** (`pub-theamah.html`) — logo, fonctionnalités, fond sombre, bouton rouge
+- ✅ S10-3 — **Bannière PC côte à côte** (`pub-theamah-v2.html`) — texte promo gauche + interface du site droite (1400×700)
+- ✅ S10-4 — **Format téléphone** (`pub-theamah-mobile.html`) — maquette phone avec encoche + interface + QR code intégré (900×1600)
+- ✅ S10-5 — **Format laptop** (`pub-theamah-pc.html`) — maquette laptop 3 colonnes + QR code (1600×900)
+- ✅ S10-6 — **Carte QR seule** (`pub-theamah-qr.html`) — QR code grand format scannable + lien GitHub (800×800 + 1000×420)
+- ✅ S10-7 — **Carte Créateur** (`pub-theamah-createur.html`) — Amadou Doumbouya · @TheAmah · bio · compétences · projet phare + QR
+- ✅ S10-8 — **Before/After** (`pub-before-after.html`) — Netflix+Disney++Prime=39,97€/mois vs Theamah+=0€ · économie 479€/an (1080×1080 + story verticale)
+- ✅ S10-9 — **INDEX.html** dans `PUBLICITE/` — hub central avec accès à tous les visuels + 6 idées vidéo + 4 textes prêts à copier
+- ✅ S10-10 — **Stratégie marketing complète** — 10 idées chef marketer : cercle privé, défi communautaire, diaspora africaine, thread LinkedIn dev, before/after, micro-influenceurs, tutoriel PWA, commentaires stratégiques, calendrier hebdo
+
+### Contenu publicitaire créé
+
+| Fichier | Format | Usage |
+|---|---|---|
+| `pub-theamah.html` | 1080×1080 | Instagram · Facebook · WhatsApp |
+| `pub-theamah-v2.html` | 1400×700 | LinkedIn · Twitter/X |
+| `pub-theamah-mobile.html` | 900×1600 | Story · TikTok · Snap |
+| `pub-theamah-pc.html` | 1600×900 | LinkedIn · Twitter/X · Facebook cover |
+| `pub-theamah-qr.html` | 800×800 + 1000×420 | WhatsApp · SMS · Print |
+| `pub-theamah-createur.html` | 900px portrait | LinkedIn · Portfolio · Instagram |
+| `pub-before-after.html` | 1080×1080 + story | Instagram · Pinterest · TikTok |
+| `INDEX.html` | Hub | Menu central du dossier PUBLICITE |
 
 ---
 

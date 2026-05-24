@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Theamah+ — Carte Créateur</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0d1020;
+  font-family: 'Outfit', sans-serif;
+  color: #eef0f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 70px;
+  padding: 60px 20px;
+}
+
+/* ══════════════════════════════════════════
+   CARTE CRÉATEUR — Format portrait 900×1100
+══════════════════════════════════════════ */
+.creator-card {
+  width: 900px;
+  background: #0b0f1e;
+  border-radius: 40px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow:
+    0 60px 160px rgba(0,0,0,0.7),
+    0 0 0 1px rgba(229,9,20,0.08);
+}
+
+/* ── HAUT : Bannière rouge ── */
+.creator-top {
+  height: 220px;
+  position: relative;
+  background: linear-gradient(135deg, #c0070f 0%, #e50914 50%, #a00610 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 0 52px 28px;
+}
+
+/* Motif de fond sur la bannière */
+.creator-top-pattern {
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(0,0,0,0.06) 0px,
+      rgba(0,0,0,0.06) 1px,
+      transparent 1px,
+      transparent 18px
+    );
+}
+
+/* Lumière */
+.creator-top-glow {
+  position: absolute; top: -60px; right: 80px;
+  width: 300px; height: 300px;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.15) 0%, transparent 65%);
+}
+
+/* Logo Theamah+ en haut à droite */
+.creator-top-logo {
+  position: absolute; top: 28px; right: 40px;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 28px; letter-spacing: 3px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* Badge projet */
+.creator-top-badge {
+  position: absolute; top: 28px; left: 52px;
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+}
+
+/* Titre sur la bannière */
+.creator-top-title {
+  position: relative; z-index: 2;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ── SECTION PROFIL ── */
+.creator-profile {
+  padding: 0 52px 40px;
+  position: relative;
+}
+
+/* Avatar */
+.creator-avatar-wrap {
+  position: absolute;
+  top: -54px; left: 52px;
+}
+
+.creator-avatar {
+  width: 108px; height: 108px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1e2845 0%, #2a3560 100%);
+  border: 5px solid #0b0f1e;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 44px;
+  font-weight: 900;
+  color: #e50914;
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.creator-avatar::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 30%, rgba(229,9,20,0.2), transparent 60%);
+}
+
+/* Badge vérifié */
+.creator-verified {
+  position: absolute;
+  bottom: 4px; right: 4px;
+  width: 26px; height: 26px;
+  background: #e50914;
+  border: 3px solid #0b0f1e;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+}
+
+/* Contenu après l'avatar */
+.creator-info {
+  padding-top: 68px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Nom */
+.creator-name {
+  font-size: 42px; font-weight: 900; color: #eef0f4;
+  line-height: 1;
+  display: flex; align-items: center; gap: 14px;
+}
+
+.creator-name-badge {
+  background: rgba(229,9,20,0.15);
+  border: 1px solid rgba(229,9,20,0.3);
+  border-radius: 8px;
+  padding: 4px 12px;
+  font-size: 13px; font-weight: 700; color: #e50914;
+  letter-spacing: 1px;
+}
+
+/* Titre */
+.creator-title {
+  font-size: 17px; font-weight: 400; color: #8892a4;
+  display: flex; align-items: center; gap: 10px;
+}
+
+.creator-title-tag {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 13px; font-weight: 600; color: #c0cce0;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* Ligne séparatrice */
+.creator-sep {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(229,9,20,0.3), rgba(255,255,255,0.06), transparent);
+  border-radius: 1px;
+}
+
+/* Citation / phrase */
+.creator-quote {
+  position: relative;
+  padding: 20px 24px;
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid #e50914;
+  border-radius: 0 12px 12px 0;
+}
+
+.creator-quote::before {
+  content: '"';
+  position: absolute;
+  top: -8px; left: 16px;
+  font-size: 60px; font-weight: 900;
+  color: rgba(229,9,20,0.25);
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+.creator-quote p {
+  font-size: 17px; font-weight: 400;
+  color: #c0cce0; line-height: 1.7;
+  font-style: italic;
+}
+
+.creator-quote footer {
+  margin-top: 10px;
+  font-size: 13px; font-weight: 700; color: #6a7a9a;
+}
+
+/* Compétences */
+.creator-skills {
+  display: flex; flex-wrap: wrap; gap: 10px;
+}
+
+.creator-skill {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 20px;
+  padding: 7px 18px;
+  font-size: 13px; font-weight: 600; color: #9aaac0;
+  display: flex; align-items: center; gap: 7px;
+}
+
+/* Contacts */
+.creator-contacts {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+
+.creator-contact {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 14px 18px;
+  display: flex; align-items: center; gap: 12px;
+  transition: border-color 0.2s;
+}
+
+.creator-contact:hover { border-color: rgba(229,9,20,0.3); }
+
+.creator-contact-icon {
+  font-size: 22px; width: 42px; height: 42px;
+  background: rgba(229,9,20,0.1);
+  border: 1px solid rgba(229,9,20,0.2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.creator-contact-text small {
+  display: block; font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; color: #4a5670; margin-bottom: 2px;
+}
+.creator-contact-text span {
+  font-size: 14px; font-weight: 700; color: #eef0f4;
+}
+
+/* Projet phare */
+.creator-project {
+  background: linear-gradient(135deg, rgba(229,9,20,0.1), rgba(229,9,20,0.05));
+  border: 1px solid rgba(229,9,20,0.2);
+  border-radius: 20px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.creator-project-left {
+  flex: 1;
+}
+
+.creator-project-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: #e50914; margin-bottom: 6px;
+}
+
+.creator-project-name {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 36px; letter-spacing: 3px; color: #eef0f4;
+  line-height: 1; margin-bottom: 8px;
+}
+
+.creator-project-desc {
+  font-size: 13px; color: #8892a4; line-height: 1.5;
+}
+
+.creator-project-right {
+  flex-shrink: 0;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 10px;
+}
+
+.creator-project-qr {
+  background: white; border-radius: 12px; padding: 8px;
+  box-shadow: 0 8px 24px rgba(229,9,20,0.25);
+}
+.creator-project-qr img { width: 90px; height: 90px; display: block; border-radius: 3px; }
+
+.creator-project-link {
+  font-size: 11px; font-weight: 700; color: #e50914;
+  text-align: center; letter-spacing: 0.5px;
+}
+
+/* Footer de la carte */
+.creator-footer {
+  background: rgba(255,255,255,0.025);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 18px 52px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.creator-footer-left {
+  font-size: 12px; color: #4a5670;
+}
+
+.creator-footer-right {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 20px; letter-spacing: 2px; color: rgba(229,9,20,0.4);
+}
+
+
+/* ══════════════════════════════════════════
+   CARTE SIGNATURE — Format mini 800×400
+══════════════════════════════════════════ */
+.sig-card {
+  width: 900px;
+  height: 380px;
+  background: #0b0f1e;
+  border-radius: 28px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+  display: flex;
+  align-items: stretch;
+}
+
+.sig-accent {
+  width: 6px; flex-shrink: 0;
+  background: linear-gradient(180deg, #e50914, #8b0000);
+}
+
+.sig-content {
+  flex: 1;
+  padding: 40px 48px;
+  display: flex; flex-direction: column;
+  justify-content: center; gap: 18px;
+  position: relative;
+}
+
+.sig-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 0% 50%, rgba(229,9,20,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 60% at 100% 0%, rgba(60,80,200,0.06) 0%, transparent 50%);
+}
+
+.sig-tag {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: #e50914;
+  display: flex; align-items: center; gap: 8px;
+}
+.sig-tag::before { content: ''; width: 20px; height: 2px; background: #e50914; border-radius: 1px; }
+
+.sig-name {
+  font-size: 52px; font-weight: 900; color: #eef0f4; line-height: 1;
+}
+.sig-name span { color: #e50914; }
+
+.sig-title {
+  font-size: 16px; font-weight: 400; color: #7a8aaa;
+  display: flex; align-items: center; gap: 10px;
+}
+.sig-title::before { content: '◆'; color: #e50914; font-size: 8px; }
+
+.sig-row {
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+
+.sig-pill {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 20px; padding: 7px 16px;
+  font-size: 13px; font-weight: 600; color: #9aaac0;
+  display: flex; align-items: center; gap: 7px;
+}
+
+.sig-right {
+  width: 280px; flex-shrink: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 16px;
+  background: rgba(255,255,255,0.02);
+  border-left: 1px solid rgba(255,255,255,0.05);
+  padding: 40px 32px;
+}
+
+.sig-qr-wrap {
+  background: white; border-radius: 16px; padding: 10px;
+  box-shadow: 0 12px 40px rgba(229,9,20,0.2);
+}
+.sig-qr-wrap img { width: 130px; height: 130px; display: block; border-radius: 4px; }
+
+.sig-link-label { font-size: 11px; color: #4a5670; text-align: center; }
+.sig-link-url { font-size: 12px; font-weight: 700; color: #e50914; text-align: center; }
+
+/* Label */
+.page-label {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.18); text-align: center;
+  margin-bottom: -40px;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ CARTE CRÉATEUR COMPLÈTE ══════════ -->
+<p class="page-label">★ CARTE CRÉATEUR — Portrait 900px (Instagram, LinkedIn)</p>
+
+<div class="creator-card">
+
+  <!-- Bannière rouge -->
+  <div class="creator-top">
+    <div class="creator-top-pattern"></div>
+    <div class="creator-top-glow"></div>
+    <div class="creator-top-badge">🚀 Projet personnel</div>
+    <div class="creator-top-logo">THEAMAH+</div>
+    <div class="creator-top-title">Créateur &amp; Développeur</div>
+  </div>
+
+  <!-- Profil -->
+  <div class="creator-profile">
+
+    <!-- Avatar -->
+    <div class="creator-avatar-wrap">
+      <div class="creator-avatar">
+        AD
+        <div class="creator-verified">✓</div>
+      </div>
+    </div>
+
+    <div class="creator-info">
+
+      <!-- Nom -->
+      <div>
+        <div class="creator-name">
+          Amadou Doumbouya
+          <div class="creator-name-badge">@TheAmah</div>
+        </div>
+      </div>
+
+      <!-- Titre -->
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <div class="creator-title-tag"><span>💻</span> Développeur Web Full Stack</div>
+        <div class="creator-title-tag"><span>🤖</span> Design avec IA</div>
+        <div class="creator-title-tag"><span>🎬</span> Créateur Theamah+</div>
+      </div>
+
+      <div class="creator-sep"></div>
+
+      <!-- Citation -->
+      <div class="creator-quote">
+        <p>
+          Je construis des expériences numériques modernes de A à Z —
+          du backend au design d'interface, en exploitant la puissance
+          de l'intelligence artificielle pour aller plus vite, plus loin,
+          et créer des produits qui se démarquent vraiment.
+        </p>
+        <footer>— Amadou Doumbouya</footer>
+      </div>
+
+      <!-- Compétences -->
+      <div class="creator-skills">
+        <div class="creator-skill"><span>🌐</span> HTML / CSS / JS</div>
+        <div class="creator-skill"><span>⚙️</span> Full Stack</div>
+        <div class="creator-skill"><span>🤖</span> IA &amp; Automatisation</div>
+        <div class="creator-skill"><span>🎨</span> UI/UX Design</div>
+        <div class="creator-skill"><span>📱</span> PWA &amp; Mobile</div>
+        <div class="creator-skill"><span>🔒</span> Sécurité Web</div>
+      </div>
+
+      <!-- Contacts -->
+      <div class="creator-contacts">
+        <div class="creator-contact">
+          <div class="creator-contact-icon">📱</div>
+          <div class="creator-contact-text">
+            <small>Réseaux sociaux</small>
+            <span>@TheAmah</span>
+          </div>
+        </div>
+        <div class="creator-contact">
+          <div class="creator-contact-icon">✉️</div>
+          <div class="creator-contact-text">
+            <small>Email professionnel</small>
+            <span>contact.amah.officiel</span>
+          </div>
+        </div>
+        <div class="creator-contact">
+          <div class="creator-contact-icon">🐙</div>
+          <div class="creator-contact-text">
+            <small>GitHub</small>
+            <span>amadou11doumbouya10</span>
+          </div>
+        </div>
+        <div class="creator-contact">
+          <div class="creator-contact-icon">🌍</div>
+          <div class="creator-contact-text">
+            <small>Disponible pour</small>
+            <span>Projets &amp; collaborations</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projet phare -->
+      <div class="creator-project">
+        <div class="creator-project-left">
+          <div class="creator-project-label">⭐ Projet phare</div>
+          <div class="creator-project-name">Theamah+</div>
+          <div class="creator-project-desc">
+            Application de streaming vidéo style Netflix —<br>
+            100% gratuit · Films &amp; Séries · Version Française<br>
+            Construit en HTML / CSS / JS vanilla · GitHub Pages
+          </div>
+        </div>
+        <div class="creator-project-right">
+          <div class="creator-project-qr">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/&color=000000&bgcolor=ffffff&ecc=H" alt="QR">
+          </div>
+          <div class="creator-project-link">🌐 tinyurl.com/27k6aabj</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="creator-footer">
+    <div class="creator-footer-left">contact.amah.officiel@gmail.com · @TheAmah</div>
+    <div class="creator-footer-right">THEAMAH+</div>
+  </div>
+
+</div>
+
+
+<!-- ══════════ CARTE SIGNATURE ══════════ -->
+<p class="page-label">★ CARTE SIGNATURE — Paysage 900×380 (Twitter/X, WhatsApp)</p>
+
+<div class="sig-card">
+  <div class="sig-accent"></div>
+
+  <div class="sig-content">
+    <div class="sig-bg"></div>
+    <div style="position:relative;z-index:2;display:flex;flex-direction:column;gap:16px;">
+      <div class="sig-tag">Créateur &amp; Développeur</div>
+      <div class="sig-name">Amadou <span>Doumbouya</span></div>
+      <div class="sig-title">Développeur Web Full Stack · Design avec IA</div>
+      <div class="sig-row">
+        <div class="sig-pill">📱 @TheAmah</div>
+        <div class="sig-pill">✉️ contact.amah.officiel@gmail.com</div>
+        <div class="sig-pill">🎬 Créateur de Theamah+</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sig-right">
+    <div class="sig-qr-wrap">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=260x260&data=https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/&color=000000&bgcolor=ffffff&ecc=H" alt="QR Theamah+">
+    </div>
+    <div class="sig-link-label">Mon projet ↓</div>
+    <div class="sig-link-url">tinyurl.com/27k6aabj</div>
+  </div>
+</div>
+
+</body>
+</html>

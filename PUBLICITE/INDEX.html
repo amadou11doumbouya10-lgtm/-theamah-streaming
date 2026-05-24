@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Theamah+ — Dossier Publicité</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #0b0f1e;
+  font-family: 'Outfit', sans-serif;
+  color: #eef0f4;
+  padding: 60px 40px;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex; align-items: center; gap: 20px;
+  margin-bottom: 60px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.header-logo {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 52px; letter-spacing: 4px; color: #eef0f4;
+}
+.header-logo span { color: #e50914; filter: drop-shadow(0 0 16px rgba(229,9,20,0.6)); }
+
+.header-right { margin-left: auto; text-align: right; }
+.header-right p { font-size: 13px; color: #4a5670; }
+.header-right strong { color: #eef0f4; }
+
+h2 {
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: #e50914; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+h2::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(229,9,20,0.3), transparent);
+}
+
+/* ── GRILLE DES VISUELS ── */
+.visuels-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.visuel-card {
+  background: #111828;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.visuel-card:hover {
+  border-color: rgba(229,9,20,0.4);
+  transform: translateY(-3px);
+}
+
+.visuel-thumb {
+  height: 130px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 52px;
+  position: relative;
+  overflow: hidden;
+}
+
+.visuel-thumb-1 { background: linear-gradient(135deg, #0e1220, #1a0a10); }
+.visuel-thumb-2 { background: linear-gradient(135deg, #0e1a28, #1a1030); }
+.visuel-thumb-3 { background: linear-gradient(135deg, #0e1628, #101a30); }
+.visuel-thumb-4 { background: linear-gradient(135deg, #12102a, #1a1040); }
+.visuel-thumb-5 { background: linear-gradient(135deg, #0e1a20, #0a2020); }
+.visuel-thumb-6 { background: linear-gradient(135deg, #1a0e28, #2a0e40); }
+
+.visuel-thumb-label {
+  position: absolute; bottom: 8px; right: 10px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+}
+
+.visuel-info { padding: 16px 20px; }
+
+.visuel-title {
+  font-size: 15px; font-weight: 700; color: #eef0f4;
+  margin-bottom: 4px;
+}
+
+.visuel-desc {
+  font-size: 12px; color: #6a7a9a; margin-bottom: 10px; line-height: 1.5;
+}
+
+.visuel-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.visuel-tag {
+  background: rgba(229,9,20,0.12);
+  border: 1px solid rgba(229,9,20,0.2);
+  border-radius: 10px; padding: 3px 10px;
+  font-size: 11px; font-weight: 600; color: #e50914;
+}
+
+.visuel-btn {
+  display: block; width: 100%;
+  background: rgba(229,9,20,0.1);
+  border: 1px solid rgba(229,9,20,0.2);
+  border-radius: 0 0 18px 18px;
+  padding: 12px;
+  text-align: center;
+  font-size: 13px; font-weight: 700; color: #e50914;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.visuel-btn:hover { background: rgba(229,9,20,0.2); }
+
+/* ── IDÉES VIDÉO ── */
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 60px;
+}
+
+.video-card {
+  background: #111828;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  padding: 22px 24px;
+}
+
+.video-num {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 42px; color: rgba(229,9,20,0.2);
+  line-height: 1; margin-bottom: 6px;
+}
+
+.video-title {
+  font-size: 17px; font-weight: 800; color: #eef0f4;
+  margin-bottom: 4px;
+}
+
+.video-duration {
+  font-size: 11px; font-weight: 600;
+  color: #e50914; letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.video-script {
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid rgba(229,9,20,0.3);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  font-size: 13px; color: #8892a4; line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.video-tip {
+  font-size: 12px; color: #6a7a9a;
+  display: flex; align-items: flex-start; gap: 6px;
+}
+.video-tip::before { content: '💡'; flex-shrink: 0; }
+
+.video-platforms { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.video-platform {
+  background: rgba(255,255,255,0.05);
+  border-radius: 20px; padding: 4px 12px;
+  font-size: 11px; font-weight: 600; color: #9aaac0;
+}
+
+/* ── TEXTES PRÊTS ── */
+.textes-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  margin-bottom: 60px;
+}
+
+.texte-card {
+  background: #111828;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.texte-header {
+  background: rgba(229,9,20,0.1);
+  border-bottom: 1px solid rgba(229,9,20,0.15);
+  padding: 12px 20px;
+  font-size: 13px; font-weight: 700; color: #e50914;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.texte-body {
+  padding: 18px 20px;
+  font-size: 14px; color: #c0cce0; line-height: 1.8;
+  white-space: pre-wrap;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* ── FOOTER ── */
+.footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 30px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 13px; color: #4a5670;
+}
+.footer-logo {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 24px; color: rgba(229,9,20,0.3); letter-spacing: 2px;
+}
+</style>
+</head>
+<body>
+
+<!-- En-tête -->
+<div class="header">
+  <div>
+    <div class="header-logo">Theamah<span>+</span></div>
+    <div style="font-size:13px;color:#6a7a9a;margin-top:2px;">Dossier Publicité & Communication</div>
+  </div>
+  <div class="header-right">
+    <p>Créateur : <strong>Amadou Doumbouya</strong></p>
+    <p>Contact : <strong>contact.amah.officiel@gmail.com</strong></p>
+    <p>Réseaux : <strong>@TheAmah</strong></p>
+  </div>
+</div>
+
+<!-- ══════ VISUELS ══════ -->
+<h2>🖼️ Visuels prêts à partager</h2>
+
+<div class="visuels-grid">
+
+  <div class="visuel-card">
+    <div class="visuel-thumb visuel-thumb-1">🎬
+      <div class="visuel-thumb-label">1080×1080</div>
+    </div>
+    <div class="visuel-info">
+      <div class="visuel-title">Affiche Carrée</div>
+      <div class="visuel-desc">Affiche principale — logo, fonctionnalités, bouton rouge</div>
+      <div class="visuel-tags">
+        <span class="visuel-tag">Instagram</span>
+        <span class="visuel-tag">Facebook</span>
+        <span class="visuel-tag">WhatsApp</span>
+      </div>
+    </div>
+    <a class="visuel-btn" href="pub-theamah.html" target="_blank">▶ Ouvrir &amp; capturer</a>
+  </div>
+
+  <div class="visuel-card">
+    <div class="visuel-thumb visuel-thumb-2">💻
+      <div class="visuel-thumb-label">1400×700</div>
+    </div>
+    <div class="visuel-info">
+      <div class="visuel-title">Bannière PC + Interface</div>
+      <div class="visuel-desc">Texte promo à gauche · Interface du site à droite</div>
+      <div class="visuel-tags">
+        <span class="visuel-tag">LinkedIn</span>
+        <span class="visuel-tag">Twitter/X</span>
+      </div>
+    </div>
+    <a class="visuel-btn" href="pub-theamah-v2.html" target="_blank">▶ Ouvrir &amp; capturer</a>
+  </div>
+
+  <div class="visuel-card">
+    <div class="visuel-thumb visuel-thumb-3">📱
+      <div class="visuel-thumb-label">900×1600</div>
+    </div>
+    <div class="visuel-info">
+      <div class="visuel-title">Format Téléphone</div>
+      <div class="visuel-desc">Maquette téléphone avec l'interface + QR code</div>
+      <div class="visuel-tags">
+        <span class="visuel-tag">Instagram</span>
+        <span class="visuel-tag">TikTok</span>
+        <span class="visuel-tag">Story</span>
+      </div>
+    </div>
+    <a class="visuel-btn" href="pub-theamah-mobile.html" target="_blank">▶ Ouvrir &amp; capturer</a>
+  </div>
+
+  <div class="visuel-card">
+    <div class="visuel-thumb visuel-thumb-4">🖥️
+      <div class="visuel-thumb-label">1600×900</div>
+    </div>
+    <div class="visuel-info">
+      <div class="visuel-title">Format PC + Laptop</div>
+      <div class="visuel-desc">Maquette laptop · 3 colonnes · QR code intégré</div>
+      <div class="visuel-tags">
+        <span class="visuel-tag">LinkedIn</span>
+        <span class="visuel-tag">Twitter/X</span>
+        <span class="visuel-tag">Facebook</span>
+      </div>
+    </div>
+    <a class="visuel-btn" href="pub-theamah-pc.html" target="_blank">▶ Ouvrir &amp; capturer</a>
+  </div>
+
+  <div class="visuel-card">
+    <div class="visuel-thumb visuel-thumb-5">📲
+      <div class="visuel-thumb-label">800×800 + 1000×420</div>
+    </div>
+    <div class="visuel-info">
+      <div class="visuel-title">Carte QR Code</div>
+      <div class="visuel-desc">QR code grand format seul · Lien GitHub · Scanned direct</div>
+      <div class="visuel-tags">
+        <span class="visuel-tag">WhatsApp</span>
+        <span class="visuel-tag">SMS</span>
+        <span class="visuel-tag">Print</span>
+      </div>
+    </div>
+    <a class="visuel-btn" href="pub-theamah-qr.html" target="_blank">▶ Ouvrir &amp; capturer</a>
+  </div>
+
+  <div class="visuel-card">
+    <div class="visuel-thumb visuel-thumb-6">👤
+      <div class="visuel-thumb-label">900px portrait</div>
+    </div>
+    <div class="visuel-info">
+      <div class="visuel-title">Carte Créateur</div>
+      <div class="visuel-desc">Amadou Doumbouya · Bio · Compétences · @TheAmah · QR</div>
+      <div class="visuel-tags">
+        <span class="visuel-tag">LinkedIn</span>
+        <span class="visuel-tag">Portfolio</span>
+        <span class="visuel-tag">Instagram</span>
+      </div>
+    </div>
+    <a class="visuel-btn" href="pub-theamah-createur.html" target="_blank">▶ Ouvrir &amp; capturer</a>
+  </div>
+
+</div>
+
+
+<!-- ══════ IDÉES VIDÉO ══════ -->
+<h2>🎥 Idées de vidéos réseaux sociaux</h2>
+
+<div class="video-grid">
+
+  <div class="video-card">
+    <div class="video-num">01</div>
+    <div class="video-title">La Révélation</div>
+    <div class="video-duration">⏱ 15–30 secondes</div>
+    <div class="video-script">Montre Netflix avec "13€/mois requis" → ferme → ouvre Theamah+ → les films chargent.
+Texte : <strong>"J'ai construit mon propre Netflix... gratuitement"</strong></div>
+    <div class="video-tip">Son viral choc/surprise. La plus simple à filmer et la plus virale.</div>
+    <div class="video-platforms">
+      <span class="video-platform">TikTok</span>
+      <span class="video-platform">Reels</span>
+      <span class="video-platform">Shorts</span>
+    </div>
+  </div>
+
+  <div class="video-card">
+    <div class="video-num">02</div>
+    <div class="video-title">POV Tu Regardes Sans Payer</div>
+    <div class="video-duration">⏱ 20 secondes</div>
+    <div class="video-script">POV filmé depuis ton téléphone → tu scannes le QR → le site s'ouvre → tu lances un film.
+Texte : <strong>"POV : ton pote dev t'a fait un accès gratuit à vie"</strong></div>
+    <div class="video-tip">Utiliser le QR code de la carte créateur. Très naturel à filmer.</div>
+    <div class="video-platforms">
+      <span class="video-platform">TikTok</span>
+      <span class="video-platform">Reels</span>
+      <span class="video-platform">Status</span>
+    </div>
+  </div>
+
+  <div class="video-card">
+    <div class="video-num">03</div>
+    <div class="video-title">Comment J'ai Fait Ça</div>
+    <div class="video-duration">⏱ 45–60 secondes</div>
+    <div class="video-script">Screen recording du site en action — nav, hero, lecteur, VF, favoris.
+Texte : <strong>"J'ai codé un site de streaming complet. Voilà comment ça marche..."</strong></div>
+    <div class="video-tip">Utiliser Xbox Game Bar (Win+G) pour capturer l'écran en vidéo.</div>
+    <div class="video-platforms">
+      <span class="video-platform">YouTube Shorts</span>
+      <span class="video-platform">TikTok</span>
+    </div>
+  </div>
+
+  <div class="video-card">
+    <div class="video-num">04</div>
+    <div class="video-title">Les Fonctionnalités Cachées</div>
+    <div class="video-duration">⏱ 45 secondes</div>
+    <div class="video-script">Montre une par une : mode sombre/clair → notes étoiles → "plus tard" → installer sur mobile sans store.
+Texte : <strong>"Mon site a des fonctions que Netflix n'a pas 👀"</strong></div>
+    <div class="video-tip">Chaque fonctionnalité = 1 coupe rapide. Rythme rapide avec texte à l'écran.</div>
+    <div class="video-platforms">
+      <span class="video-platform">TikTok</span>
+      <span class="video-platform">Reels</span>
+    </div>
+  </div>
+
+  <div class="video-card">
+    <div class="video-num">05</div>
+    <div class="video-title">Mobile vs PC</div>
+    <div class="video-duration">⏱ 30 secondes</div>
+    <div class="video-script">Côte à côte — même site sur téléphone et PC.
+Tu tapes un film → ça apparaît → tu cliques → ça joue sur les deux.
+Texte : <strong>"Même interface que Netflix. 0€ par mois."</strong></div>
+    <div class="video-tip">Filmer l'écran PC + téléphone posé à côté. Simple et impressionnant.</div>
+    <div class="video-platforms">
+      <span class="video-platform">Reels</span>
+      <span class="video-platform">LinkedIn</span>
+      <span class="video-platform">Twitter/X</span>
+    </div>
+  </div>
+
+  <div class="video-card">
+    <div class="video-num">06</div>
+    <div class="video-title">WhatsApp Status Express</div>
+    <div class="video-duration">⏱ 7–10 secondes</div>
+    <div class="video-script">QR code qui apparaît à l'écran + texte : <strong>"Accès gratuit à vie → scanner maintenant"</strong>
+Ou : screen record rapide de la recherche → lancement film.</div>
+    <div class="video-tip">Le plus rapide à faire. Partager directement dans les groupes WhatsApp.</div>
+    <div class="video-platforms">
+      <span class="video-platform">WhatsApp</span>
+      <span class="video-platform">Stories</span>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ══════ TEXTES PRÊTS ══════ -->
+<h2>✍️ Textes prêts à copier-coller</h2>
+
+<div class="textes-grid">
+
+  <div class="texte-card">
+    <div class="texte-header">📱 WhatsApp / SMS</div>
+    <div class="texte-body">🎬 *Theamah+* — Mon site de streaming perso
+
+Films, séries, version française — 100% GRATUIT.
+Pas d'abonnement. Pas de carte bancaire.
+
+▶ Accéder maintenant :
+https://tinyurl.com/27k6aabj
+
+Ou scanner le QR code 📲</div>
+  </div>
+
+  <div class="texte-card">
+    <div class="texte-header">📸 Instagram / TikTok caption</div>
+    <div class="texte-body">J'ai construit mon propre Netflix 🎬
+
+✅ Films & Séries illimités
+🇫🇷 Version Française intégrée
+📱 Installable sur mobile
+💰 100% GRATUIT
+
+Lien en bio 👆
+
+#streaming #dev #netflix #gratuit #theamah #developpeur #fullstack</div>
+  </div>
+
+  <div class="texte-card">
+    <div class="texte-header">💼 LinkedIn — Post professionnel</div>
+    <div class="texte-body">Fier de partager mon dernier projet personnel : Theamah+
+
+Une application de streaming vidéo style Netflix, construite entièrement en HTML/CSS/JavaScript vanilla — sans framework, sans backend, sans abonnement.
+
+🔧 Ce que j'ai implémenté :
+→ Intégration API TMDB (films & séries)
+→ Authentification SHA-256 côté client
+→ PWA installable sur mobile
+→ Mode sombre, favoris, notation, profil
+→ Lecteur vidéo avec sources multiples
+
+🌐 tinyurl.com/27k6aabj
+
+#webdev #javascript #fullstack #projet #theamah</div>
+  </div>
+
+  <div class="texte-card">
+    <div class="texte-header">🐦 Twitter / X</div>
+    <div class="texte-body">J'ai codé mon propre Netflix en 1 seul fichier HTML 🎬
+
+✅ Gratuit
+🇫🇷 VF intégrée
+📱 Installable sur mobile
+⭐ Favoris, notes, profil
+
+→ tinyurl.com/27k6aabj
+
+#theamah #webdev #javascript #streaming 🧵</div>
+  </div>
+
+</div>
+
+
+<!-- Footer -->
+<div class="footer">
+  <div>
+    <strong>Amadou Doumbouya</strong> · @TheAmah · contact.amah.officiel@gmail.com<br>
+    <span style="font-size:12px;">Pour capturer les visuels : Windows + Shift + S → sélectionner la zone</span>
+  </div>
+  <div class="footer-logo">THEAMAH+</div>
+</div>
+
+</body>
+</html>

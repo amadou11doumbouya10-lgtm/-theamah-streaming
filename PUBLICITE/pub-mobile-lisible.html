@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Theamah+ — Mobile Lisible</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0a0d18;
+  font-family: 'Outfit', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px;
+  gap: 60px;
+}
+
+/* ══════════════════════════════════════════
+   CARTE 1 — BEFORE / AFTER mobile (1080×1350)
+══════════════════════════════════════════ */
+.card-1 {
+  width: 1080px;
+  background: #0b0e1c;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 50px 140px rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TOP rouge AVANT ── */
+.bloc-avant {
+  background: #110508;
+  padding: 70px 80px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bloc-avant::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 90% 70% at 50% 0%, rgba(200,0,0,0.18) 0%, transparent 65%);
+}
+
+.bloc-label {
+  position: relative; z-index: 2;
+  font-size: 20px; font-weight: 800;
+  letter-spacing: 6px; text-transform: uppercase;
+}
+.lbl-avant { color: rgba(255,80,80,0.55); }
+.lbl-apres { color: rgba(29,185,84,0.65); }
+
+/* Ligne service */
+.svc {
+  position: relative; z-index: 2;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 24px 32px;
+}
+
+.svc-left { display: flex; align-items: center; gap: 22px; }
+
+.svc-icon {
+  width: 72px; height: 72px;
+  border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; flex-shrink: 0;
+  font-family: Georgia, serif;
+}
+.icon-n { background: #e50914; color: white; font-size: 38px; }
+.icon-d { background: linear-gradient(135deg, #040b43, #1033a8); color: white; font-size: 13px; text-align: center; line-height: 1.3; letter-spacing: 0.5px; padding: 6px; font-family: 'Outfit', sans-serif; }
+.icon-p { background: linear-gradient(135deg, #00a8e0, #005f8e); color: white; font-size: 11px; text-align: center; line-height: 1.4; padding: 6px; font-family: 'Outfit', sans-serif; letter-spacing: 0.5px; }
+
+.svc-name { font-size: 26px; font-weight: 800; color: #eef0f4; }
+.svc-plan { font-size: 16px; color: #5a6a80; margin-top: 2px; }
+
+.svc-price {
+  font-size: 32px; font-weight: 900; color: #ff5555;
+  white-space: nowrap;
+}
+.svc-price small { font-size: 17px; font-weight: 400; color: #4a5670; }
+
+/* Total avant */
+.total-avant {
+  position: relative; z-index: 2;
+  background: rgba(229,9,20,0.1);
+  border: 2px solid rgba(229,9,20,0.28);
+  border-radius: 20px;
+  padding: 26px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.total-label {
+  font-size: 22px; font-weight: 700; color: #a0a8b8;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.total-price-red {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 58px; letter-spacing: 2px; color: #e50914;
+  filter: drop-shadow(0 0 14px rgba(229,9,20,0.4));
+  line-height: 1;
+}
+
+/* ── SÉPARATEUR ── */
+.separateur {
+  background: #0b0e1c;
+  padding: 32px 80px;
+  display: flex; align-items: center; gap: 24px;
+}
+
+.sep-line {
+  flex: 1; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08));
+}
+.sep-line.r { background: linear-gradient(90deg, rgba(255,255,255,0.08), transparent); }
+
+.sep-badge {
+  width: 80px; height: 80px;
+  background: white;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px;
+  box-shadow: 0 8px 36px rgba(0,0,0,0.5);
+  flex-shrink: 0;
+}
+
+/* ── BAS vert APRÈS ── */
+.bloc-apres {
+  background: #050d09;
+  padding: 60px 80px 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bloc-apres::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 90% 70% at 50% 100%, rgba(0,160,60,0.14) 0%, transparent 65%);
+}
+
+.apres-product {
+  position: relative; z-index: 2;
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 26px 32px;
+  display: flex; align-items: center; gap: 22px;
+}
+
+.apres-logo-box {
+  width: 72px; height: 72px;
+  background: linear-gradient(135deg, #e50914, #8b0000);
+  border-radius: 18px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 24px rgba(229,9,20,0.3);
+}
+.apres-logo-txt {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 22px; letter-spacing: 1px; color: white;
+  text-align: center; line-height: 1.1;
+}
+
+.apres-name { font-size: 28px; font-weight: 900; color: #eef0f4; }
+.apres-desc { font-size: 16px; color: #5a6a80; margin-top: 2px; }
+
+/* Grand 0€ */
+.zero-block {
+  position: relative; z-index: 2;
+  display: flex; align-items: flex-start; justify-content: center;
+  gap: 4px;
+  line-height: 1;
+}
+
+.zero-num {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 280px;
+  letter-spacing: -10px;
+  background: linear-gradient(160deg, #2dde6a 0%, #1db954 50%, #15a045 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 60px rgba(29,185,84,0.45));
+}
+
+.zero-eur {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 110px; color: #1db954;
+  padding-top: 28px;
+  filter: drop-shadow(0 0 24px rgba(29,185,84,0.5));
+}
+
+.zero-sub {
+  position: relative; z-index: 2;
+  font-size: 22px; font-weight: 700;
+  color: #3a7a54; letter-spacing: 4px; text-transform: uppercase;
+  text-align: center;
+  margin-top: -16px;
+}
+
+/* Grille features */
+.features {
+  position: relative; z-index: 2;
+  width: 100%;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.feat {
+  background: rgba(29,185,84,0.07);
+  border: 1px solid rgba(29,185,84,0.16);
+  border-radius: 16px;
+  padding: 18px 22px;
+  font-size: 19px; font-weight: 700; color: #c0d8c8;
+  display: flex; align-items: center; gap: 12px;
+}
+.feat::before { content: '✓'; color: #1db954; font-weight: 900; font-size: 20px; }
+
+/* Économie */
+.saving {
+  position: relative; z-index: 2;
+  width: 100%;
+  background: rgba(29,185,84,0.1);
+  border: 2px solid rgba(29,185,84,0.26);
+  border-radius: 20px;
+  padding: 26px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.saving-label {
+  font-size: 22px; font-weight: 700; color: #a0a8b8;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.saving-amount {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 56px; color: #1db954; letter-spacing: 2px; line-height: 1;
+}
+.saving-amount small { font-size: 22px; font-family: 'Outfit', sans-serif; font-weight: 700; }
+
+/* Footer */
+.card-footer {
+  background: rgba(0,0,0,0.5);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 28px 80px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.footer-info strong { display: block; font-size: 24px; font-weight: 900; color: #eef0f4; }
+.footer-info span { font-size: 16px; color: #e50914; font-weight: 600; }
+
+.footer-qr {
+  background: white; border-radius: 14px; padding: 10px;
+  box-shadow: 0 8px 28px rgba(229,9,20,0.2);
+}
+.footer-qr img { width: 100px; height: 100px; display: block; border-radius: 4px; }
+
+
+/* ══════════════════════════════════════════
+   CARTE 2 — SIMPLE & CHOC (1080×1080)
+══════════════════════════════════════════ */
+.card-2 {
+  width: 1080px;
+  height: 1080px;
+  background: #080b18;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: 0 50px 140px rgba(0,0,0,0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 0;
+}
+
+.c2-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(229,9,20,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 50% 100%, rgba(29,185,84,0.1) 0%, transparent 55%);
+}
+
+.c2-content {
+  position: relative; z-index: 2;
+  width: 100%;
+  display: flex; flex-direction: column;
+  align-items: center;
+}
+
+/* Moitié ROUGE haut */
+.c2-top {
+  width: 100%; padding: 80px 80px 50px;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+  border-bottom: 3px solid rgba(255,255,255,0.06);
+}
+
+.c2-top-label {
+  font-size: 18px; font-weight: 800; letter-spacing: 5px;
+  text-transform: uppercase; color: rgba(255,80,80,0.5);
+}
+
+.c2-services-row {
+  display: flex; gap: 20px; align-items: center;
+}
+
+.c2-svc-badge {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px; padding: 14px 22px;
+  display: flex; align-items: center; gap: 12px;
+}
+
+.c2-svc-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; flex-shrink: 0;
+}
+.c2-n { background: #e50914; color: white; font-family: Georgia, serif; font-size: 22px; }
+.c2-d { background: linear-gradient(135deg, #040b43, #1033a8); color: white; font-size: 9px; text-align: center; line-height: 1.3; letter-spacing: 0.4px; padding: 3px; font-family: 'Outfit', sans-serif; }
+.c2-p { background: linear-gradient(135deg, #00a8e0, #005f8e); color: white; font-size: 7px; text-align: center; line-height: 1.3; padding: 3px; font-family: 'Outfit', sans-serif; letter-spacing: 0.4px; }
+
+.c2-svc-price { font-size: 22px; font-weight: 900; color: #ff5555; }
+
+.c2-plus { font-size: 28px; color: #4a5670; font-weight: 300; }
+
+.c2-total-red {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 110px; letter-spacing: 2px; color: #e50914; line-height: 1;
+  filter: drop-shadow(0 0 30px rgba(229,9,20,0.4));
+}
+.c2-total-red span { font-size: 50px; font-family: 'Outfit', sans-serif; font-weight: 900; color: #c05050; }
+
+.c2-per-month { font-size: 20px; color: #4a5670; font-weight: 600; letter-spacing: 2px; }
+
+/* Divider fleche */
+.c2-divider {
+  display: flex; align-items: center; gap: 20px;
+  padding: 24px 80px;
+  width: 100%;
+}
+.c2-div-line { flex: 1; height: 1px; background: rgba(255,255,255,0.07); }
+.c2-div-badge {
+  width: 60px; height: 60px; background: #0b0e1c;
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+}
+
+/* Moitié VERTE bas */
+.c2-bot {
+  width: 100%; padding: 30px 80px 80px;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+
+.c2-bot-label {
+  font-size: 18px; font-weight: 800; letter-spacing: 5px;
+  text-transform: uppercase; color: rgba(29,185,84,0.55);
+}
+
+.c2-logo-row {
+  display: flex; align-items: center; gap: 16px;
+}
+
+.c2-logo-box {
+  width: 68px; height: 68px;
+  background: linear-gradient(135deg, #e50914, #8b0000);
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 22px rgba(229,9,20,0.3);
+}
+.c2-logo-box-txt {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 20px; letter-spacing: 1px; color: white; line-height: 1; text-align: center;
+}
+.c2-logo-name { font-size: 36px; font-weight: 900; color: #eef0f4; }
+
+.c2-total-green {
+  font-family: 'Bebas Neue', cursify, cursive;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 200px; letter-spacing: -4px; line-height: 0.85;
+  background: linear-gradient(160deg, #2dde6a, #1db954);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 50px rgba(29,185,84,0.4));
+}
+.c2-eur {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 90px; color: #1db954;
+  filter: drop-shadow(0 0 20px rgba(29,185,84,0.4));
+  padding-top: 12px;
+}
+
+.c2-per-month-g { font-size: 20px; color: #3a7a54; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; }
+
+.c2-url {
+  font-size: 18px; font-weight: 700; color: #2a5a3a;
+  letter-spacing: 2px; margin-top: 4px;
+}
+.c2-url span { color: #1db954; }
+
+
+/* Labels */
+.page-label {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.15); text-align: center;
+  margin-bottom: -30px;
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════ CARTE 1 : BEFORE/AFTER TALL ══════════ -->
+<p class="page-label">★ FORMAT TALL — 1080px large (lisible sur téléphone)</p>
+
+<div class="card-1">
+
+  <!-- AVANT -->
+  <div class="bloc-avant">
+    <div class="bloc-label lbl-avant">😔 — Avant</div>
+
+    <div class="svc">
+      <div class="svc-left">
+        <div class="svc-icon icon-n">N</div>
+        <div>
+          <div class="svc-name">Netflix Premium</div>
+          <div class="svc-plan">4 écrans · HD</div>
+        </div>
+      </div>
+      <div class="svc-price">20,99€ <small>/mois</small></div>
+    </div>
+
+    <div class="svc">
+      <div class="svc-left">
+        <div class="svc-icon icon-d">DISNEY<br>+</div>
+        <div>
+          <div class="svc-name">Disney+ Standard</div>
+          <div class="svc-plan">2 écrans · HD</div>
+        </div>
+      </div>
+      <div class="svc-price">11,99€ <small>/mois</small></div>
+    </div>
+
+    <div class="svc">
+      <div class="svc-left">
+        <div class="svc-icon icon-p">PRIME<br>VIDEO</div>
+        <div>
+          <div class="svc-name">Prime Video</div>
+          <div class="svc-plan">Abonnement mensuel</div>
+        </div>
+      </div>
+      <div class="svc-price">6,99€ <small>/mois</small></div>
+    </div>
+
+    <div class="total-avant">
+      <div class="total-label">💸 Total par mois</div>
+      <div class="total-price-red">39,97€<small style="font-size:22px;font-family:'Outfit',sans-serif;font-weight:700;color:#c05050;">/mois</small></div>
+    </div>
+  </div>
+
+  <!-- SÉPARATEUR -->
+  <div class="separateur">
+    <div class="sep-line"></div>
+    <div class="sep-badge">↓</div>
+    <div class="sep-line r"></div>
+  </div>
+
+  <!-- APRÈS -->
+  <div class="bloc-apres">
+    <div class="bloc-label lbl-apres">😊 — Après</div>
+
+    <div class="apres-product">
+      <div class="apres-logo-box">
+        <div class="apres-logo-txt">THEAMAH+</div>
+      </div>
+      <div>
+        <div class="apres-name">Theamah+</div>
+        <div class="apres-desc">Films · Séries · VF · Mobile · Profil</div>
+      </div>
+    </div>
+
+    <div class="zero-block">
+      <div class="zero-num">0</div>
+      <div class="zero-eur">€</div>
+    </div>
+
+    <div class="zero-sub">Gratuit · Pour toujours · Sans carte</div>
+
+    <div class="features">
+      <div class="feat">Films illimités</div>
+      <div class="feat">Séries illimitées</div>
+      <div class="feat">Version Française</div>
+      <div class="feat">Sur mobile</div>
+      <div class="feat">Favoris & Notes</div>
+      <div class="feat">Mode sombre</div>
+    </div>
+
+    <div class="saving">
+      <div class="saving-label">🎉 Tu économises</div>
+      <div class="saving-amount">479€ <small>/an</small></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="card-footer">
+    <div class="footer-info">
+      <strong>Theamah+</strong>
+      <span>tinyurl.com/27k6aabj</span>
+    </div>
+    <div class="footer-qr">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/&color=000000&bgcolor=ffffff&ecc=H" alt="QR">
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ══════════ CARTE 2 : CHOC MINIMALISTE ══════════ -->
+<p class="page-label">★ FORMAT CARRÉ CHOC — 1080×1080 (texte maximal, ultra-lisible)</p>
+
+<div class="card-2">
+  <div class="c2-bg"></div>
+
+  <div class="c2-content">
+
+    <!-- HAUT rouge -->
+    <div class="c2-top">
+      <div class="c2-top-label">Tu payais</div>
+
+      <div class="c2-services-row">
+        <div class="c2-svc-badge">
+          <div class="c2-svc-icon c2-n">N</div>
+          <div class="c2-svc-price">20,99€</div>
+        </div>
+        <div class="c2-plus">+</div>
+        <div class="c2-svc-badge">
+          <div class="c2-svc-icon c2-d">DISNEY +</div>
+          <div class="c2-svc-price">11,99€</div>
+        </div>
+        <div class="c2-plus">+</div>
+        <div class="c2-svc-badge">
+          <div class="c2-svc-icon c2-p">PRIME VIDEO</div>
+          <div class="c2-svc-price">6,99€</div>
+        </div>
+      </div>
+
+      <div class="c2-total-red">39,97€</div>
+      <div class="c2-per-month">par mois · chaque mois · sans fin</div>
+    </div>
+
+    <!-- Divider -->
+    <div class="c2-divider">
+      <div class="c2-div-line"></div>
+      <div class="c2-div-badge">VS</div>
+      <div class="c2-div-line"></div>
+    </div>
+
+    <!-- BAS vert -->
+    <div class="c2-bot">
+      <div class="c2-bot-label">Theamah+</div>
+
+      <div class="c2-logo-row">
+        <div class="c2-logo-box">
+          <div class="c2-logo-box-txt">T+</div>
+        </div>
+        <div class="c2-logo-name">Theamah+</div>
+      </div>
+
+      <div style="display:flex;align-items:flex-start;gap:4px;">
+        <div class="c2-total-green">0</div>
+        <div class="c2-eur">€</div>
+      </div>
+
+      <div class="c2-per-month-g">gratuit · pour toujours</div>
+      <div class="c2-url"><span>🌐</span> tinyurl.com/27k6aabj</div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

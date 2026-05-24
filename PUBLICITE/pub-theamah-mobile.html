@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Theamah+ — Format Téléphone</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #1b2235;
+  font-family: 'Outfit', sans-serif;
+  color: #eef0f4;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+/* ══════════════════════════════════════════
+   CARTE PRINCIPALE — Format portrait
+   Dimensions idéales : 900 × 1600 px
+══════════════════════════════════════════ */
+.card {
+  width: 900px;
+  min-height: 1600px;
+  background: linear-gradient(160deg, #1e2845 0%, #26304f 40%, #1a2035 100%);
+  border-radius: 40px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 60px 160px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 70px 60px 60px;
+  gap: 52px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Lumières de fond */
+.card::before {
+  content: '';
+  position: absolute;
+  top: -120px; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(ellipse, rgba(229,9,20,0.2) 0%, transparent 65%);
+  pointer-events: none;
+}
+.card::after {
+  content: '';
+  position: absolute;
+  bottom: 100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(ellipse, rgba(80,100,220,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ── EN-TÊTE ── */
+.card-header {
+  position: relative; z-index: 2;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  width: 100%;
+}
+
+.card-eyebrow {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: #e50914;
+}
+
+.card-eyebrow::before, .card-eyebrow::after {
+  content: '';
+  display: block;
+  width: 40px; height: 2px;
+  background: linear-gradient(90deg, transparent, #e50914);
+  border-radius: 1px;
+}
+.card-eyebrow::after { background: linear-gradient(90deg, #e50914, transparent); }
+
+.card-logo {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 110px;
+  letter-spacing: 6px;
+  line-height: 0.9;
+  background: linear-gradient(135deg, #ffffff 0%, #c8d4e8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+.card-logo-plus {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 110px;
+  color: #e50914;
+  filter: drop-shadow(0 0 30px rgba(229,9,20,0.7));
+  line-height: 0.9;
+}
+
+.card-logo-row { display: flex; align-items: flex-start; gap: 4px; }
+
+.card-tagline {
+  font-size: 20px; font-weight: 300;
+  color: #7a8aaa;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* ── TÉLÉPHONE ── */
+.phone-wrap {
+  position: relative; z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Ombre portée derrière le téléphone */
+.phone-shadow {
+  position: absolute;
+  bottom: -30px;
+  width: 360px; height: 60px;
+  background: rgba(229,9,20,0.25);
+  filter: blur(40px);
+  border-radius: 50%;
+}
+
+/* Coque du téléphone */
+.phone {
+  width: 380px;
+  height: 760px;
+  background: linear-gradient(160deg, #1a1e2e 0%, #0e1220 100%);
+  border-radius: 52px;
+  border: 10px solid #2a3050;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06),
+    0 40px 100px rgba(0,0,0,0.8),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Encoche */
+.phone-notch {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 130px; height: 28px;
+  background: #0e1220;
+  border-radius: 0 0 20px 20px;
+  z-index: 10;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+
+.notch-cam {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: #1a2030;
+  border: 2px solid #252d42;
+}
+
+/* Boutons latéraux */
+.phone::before {
+  content: '';
+  position: absolute;
+  top: 100px; right: -14px;
+  width: 4px; height: 60px;
+  background: #2a3050;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Contenu à l'intérieur du téléphone */
+.phone-screen {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  padding-top: 28px;
+}
+
+/* Status bar */
+.status-bar {
+  height: 28px;
+  padding: 0 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 10px; font-weight: 700; color: #eef0f4;
+  flex-shrink: 0;
+}
+
+.status-time { font-size: 12px; }
+.status-icons { display: flex; gap: 5px; align-items: center; font-size: 11px; }
+
+/* Mini nav */
+.ph-nav {
+  background: rgba(8,12,20,0.98);
+  height: 44px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  flex-shrink: 0;
+}
+
+.ph-nav-logo {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 22px; color: #e50914; letter-spacing: 2px;
+}
+
+.ph-nav-icons { display: flex; gap: 12px; font-size: 16px; color: #8892a4; }
+
+/* Hero dans le téléphone */
+.ph-hero {
+  position: relative;
+  height: 210px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.ph-hero-bg {
+  position: absolute; inset: 0;
+  background: url('https://image.tmdb.org/t/p/w780/s3TBrRGB1iav7gFOCNx3H31MoES.jpg') center/cover;
+}
+
+.ph-hero-grad {
+  position: absolute; inset: 0;
+  background: linear-gradient(0deg, rgba(8,12,20,1) 0%, rgba(8,12,20,0.4) 60%, transparent 100%);
+}
+
+.ph-hero-content {
+  position: absolute; bottom: 14px; left: 14px; right: 14px; z-index: 2;
+}
+
+.ph-hero-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 30px; letter-spacing: 1px;
+  color: #eef0f4; line-height: 1; margin-bottom: 5px;
+}
+
+.ph-hero-meta {
+  font-size: 10px; color: #8892a4;
+  display: flex; gap: 8px; margin-bottom: 8px;
+}
+
+.ph-star { color: #f5c518; }
+.ph-vf {
+  background: #1db954; color: #000;
+  font-size: 9px; font-weight: 800;
+  padding: 1px 5px; border-radius: 3px;
+}
+
+.ph-hero-btns { display: flex; gap: 8px; }
+
+.ph-btn-play {
+  background: #e50914; color: white;
+  font-size: 11px; font-weight: 700;
+  padding: 6px 14px; border-radius: 6px;
+}
+
+.ph-btn-more {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #eef0f4;
+  font-size: 11px; font-weight: 600;
+  padding: 6px 12px; border-radius: 6px;
+}
+
+/* Sections dans le téléphone */
+.ph-sections {
+  flex: 1; background: #080c14;
+  padding: 12px 14px;
+  display: flex; flex-direction: column; gap: 14px;
+  overflow: hidden;
+}
+
+.ph-sec-title {
+  font-size: 12px; font-weight: 700; color: #eef0f4;
+  margin-bottom: 8px;
+}
+
+.ph-cards {
+  display: flex; gap: 7px; overflow: hidden;
+}
+
+.ph-card {
+  width: 70px; flex-shrink: 0;
+  border-radius: 7px; overflow: hidden;
+  background: #161d2e; position: relative;
+}
+
+.ph-card img {
+  width: 70px; height: 105px;
+  object-fit: cover; display: block;
+}
+
+.ph-card-ph {
+  width: 70px; height: 105px;
+  background: linear-gradient(135deg, #161d2e, #1e2740);
+  border-radius: 7px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+
+.ph-card-badge {
+  position: absolute; top: 3px; left: 3px;
+  background: #e50914; color: white;
+  font-size: 7px; font-weight: 700;
+  padding: 1px 4px; border-radius: 2px;
+}
+
+.ph-card-rank {
+  position: absolute; top: 3px; right: 3px;
+  background: rgba(0,0,0,0.8); color: #f5c518;
+  font-size: 7px; font-weight: 700;
+  padding: 1px 4px; border-radius: 2px;
+}
+
+.ph-card-vf {
+  position: absolute; bottom: 14px; right: 3px;
+  background: #1db954; color: #000;
+  font-size: 7px; font-weight: 800;
+  padding: 1px 4px; border-radius: 2px;
+}
+
+.ph-card-title {
+  padding: 4px 5px;
+  font-size: 9px; font-weight: 600;
+  color: #eef0f4;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Bottom nav */
+.ph-bottom-nav {
+  background: #0e1220;
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-around;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+
+.ph-nav-item {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  font-size: 9px; color: #6e7e98;
+}
+
+.ph-nav-item.on { color: #e50914; }
+.ph-nav-item span { font-size: 18px; }
+
+/* ── FEATURES SOUS LE TÉLÉPHONE ── */
+.features-grid {
+  position: relative; z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  width: 100%;
+}
+
+.feat-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 22px 24px;
+  display: flex; align-items: center; gap: 16px;
+  transition: border-color 0.2s;
+}
+
+.feat-card:hover { border-color: rgba(229,9,20,0.3); }
+
+.feat-icon {
+  font-size: 34px; flex-shrink: 0;
+  width: 56px; height: 56px;
+  background: rgba(229,9,20,0.1);
+  border: 1px solid rgba(229,9,20,0.2);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.feat-text strong {
+  display: block; font-size: 15px; font-weight: 700;
+  color: #eef0f4; margin-bottom: 3px;
+}
+
+.feat-text small { font-size: 12px; color: #6e7e98; line-height: 1.4; }
+
+/* ── BADGES ROW ── */
+.badges-row {
+  position: relative; z-index: 2;
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  width: 100%;
+}
+
+.badge-pill {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 30px;
+  padding: 10px 22px;
+  font-size: 14px; font-weight: 600; color: #9aaac0;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ── CTA ── */
+.cta-block {
+  position: relative; z-index: 2;
+  width: 100%;
+  background: linear-gradient(135deg, #e50914 0%, #c0070f 100%);
+  border-radius: 22px;
+  padding: 36px 40px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(229,9,20,0.35);
+}
+
+.cta-title {
+  font-size: 28px; font-weight: 900; color: white;
+  margin-bottom: 8px;
+}
+
+.cta-sub {
+  font-size: 15px; color: rgba(255,255,255,0.75);
+  margin-bottom: 20px;
+}
+
+.cta-qr-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 24px;
+}
+
+.cta-qr-frame {
+  background: white;
+  border-radius: 16px;
+  padding: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  flex-shrink: 0;
+}
+
+.cta-qr-frame img {
+  width: 120px; height: 120px;
+  display: block; border-radius: 4px;
+}
+
+.cta-qr-info {
+  text-align: left;
+}
+
+.cta-qr-info strong {
+  display: block;
+  font-size: 18px; font-weight: 900; color: white;
+  margin-bottom: 6px;
+}
+
+.cta-qr-info p {
+  font-size: 13px; color: rgba(255,255,255,0.7);
+  line-height: 1.5; margin-bottom: 10px;
+}
+
+.cta-qr-info span {
+  display: inline-block;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  padding: 4px 12px;
+  font-size: 12px; color: rgba(255,255,255,0.9);
+  font-weight: 600; letter-spacing: 0.5px;
+}
+
+.cta-url {
+  background: rgba(0,0,0,0.25);
+  border-radius: 50px;
+  padding: 12px 28px;
+  font-size: 16px; font-weight: 700;
+  color: white; letter-spacing: 1px;
+  display: inline-block;
+}
+
+.cta-url span { opacity: 0.7; margin-right: 6px; }
+</style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- En-tête -->
+  <div class="card-header">
+    <div class="card-eyebrow">Streaming gratuit</div>
+    <div class="card-logo-row">
+      <div class="card-logo">Theamah</div>
+      <div class="card-logo-plus">+</div>
+    </div>
+    <div class="card-tagline">Ton cinéma dans ta poche</div>
+  </div>
+
+  <!-- Téléphone -->
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="phone-screen">
+
+        <!-- Encoche -->
+        <div class="phone-notch">
+          <div class="notch-cam"></div>
+        </div>
+
+        <!-- Status bar -->
+        <div class="status-bar">
+          <div class="status-time">9:41</div>
+          <div class="status-icons">
+            <span>▂▄█</span>
+            <span>WiFi</span>
+            <span>🔋</span>
+          </div>
+        </div>
+
+        <!-- Nav -->
+        <div class="ph-nav">
+          <div class="ph-nav-logo">THEAMAH+</div>
+          <div class="ph-nav-icons">
+            <span>🔍</span>
+            <span>👤</span>
+          </div>
+        </div>
+
+        <!-- Hero -->
+        <div class="ph-hero">
+          <div class="ph-hero-bg"></div>
+          <div class="ph-hero-grad"></div>
+          <div class="ph-hero-content">
+            <div class="ph-hero-title">Inception</div>
+            <div class="ph-hero-meta">
+              <span>2010</span>
+              <span>·</span>
+              <span>Sci-Fi</span>
+              <span>·</span>
+              <span class="ph-star">★ 8.4</span>
+              <span>·</span>
+              <span class="ph-vf">VF</span>
+            </div>
+            <div class="ph-hero-btns">
+              <div class="ph-btn-play">▶ Regarder</div>
+              <div class="ph-btn-more">+ Favoris</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sections -->
+        <div class="ph-sections">
+          <div>
+            <div class="ph-sec-title">🔥 Tendances</div>
+            <div class="ph-cards">
+              <div class="ph-card">
+                <img src="https://image.tmdb.org/t/p/w300/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg" alt="">
+                <div class="ph-card-badge">STREAM</div>
+                <div class="ph-card-rank">#1</div>
+                <div class="ph-card-vf">VF</div>
+                <div class="ph-card-title">Inception</div>
+              </div>
+              <div class="ph-card">
+                <img src="https://image.tmdb.org/t/p/w300/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="">
+                <div class="ph-card-badge">STREAM</div>
+                <div class="ph-card-rank">#2</div>
+                <div class="ph-card-title">Dark Knight</div>
+              </div>
+              <div class="ph-card">
+                <img src="https://image.tmdb.org/t/p/w300/gEU2QniE6E77NI6lCU6MxlNBvIe.jpg" alt="">
+                <div class="ph-card-badge">STREAM</div>
+                <div class="ph-card-rank">#3</div>
+                <div class="ph-card-title">Parasite</div>
+              </div>
+              <div class="ph-card">
+                <img src="https://image.tmdb.org/t/p/w300/6KErczPBROKMWkO1lwOoFBGLGRo.jpg" alt="">
+                <div class="ph-card-badge">STREAM</div>
+                <div class="ph-card-title">Interstellar</div>
+              </div>
+              <div class="ph-card-ph">🎬</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="ph-sec-title">🇫🇷 Films Français</div>
+            <div class="ph-cards">
+              <div class="ph-card">
+                <img src="https://image.tmdb.org/t/p/w300/2CAL2433ZeIihfX1Fn5GkMCqRvI.jpg" alt="">
+                <div class="ph-card-badge">STREAM</div>
+                <div class="ph-card-vf">VF</div>
+                <div class="ph-card-title">Intouchables</div>
+              </div>
+              <div class="ph-card">
+                <img src="https://image.tmdb.org/t/p/w300/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="">
+                <div class="ph-card-badge">STREAM</div>
+                <div class="ph-card-vf">VF</div>
+                <div class="ph-card-title">Amélie</div>
+              </div>
+              <div class="ph-card-ph">🇫🇷</div>
+              <div class="ph-card-ph">🏆</div>
+              <div class="ph-card-ph">🎭</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom nav -->
+        <div class="ph-bottom-nav">
+          <div class="ph-nav-item on"><span>🏠</span>Accueil</div>
+          <div class="ph-nav-item"><span>🎬</span>Catalogue</div>
+          <div class="ph-nav-item"><span>📚</span>Biblio</div>
+          <div class="ph-nav-item"><span>❤️</span>Favoris</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="phone-shadow"></div>
+  </div>
+
+  <!-- Features -->
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">🎬</div>
+      <div class="feat-text">
+        <strong>Films & Séries</strong>
+        <small>Catalogue illimité,<br>mise à jour régulière</small>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🇫🇷</div>
+      <div class="feat-text">
+        <strong>Version Française</strong>
+        <small>Sélecteur VF intégré<br>dans le lecteur</small>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">📱</div>
+      <div class="feat-text">
+        <strong>App sur mobile</strong>
+        <small>Installable sans<br>passer par un store</small>
+      </div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">⭐</div>
+      <div class="feat-text">
+        <strong>Profil & Notes</strong>
+        <small>Favoris, historique<br>et notation perso</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- Badges -->
+  <div class="badges-row">
+    <div class="badge-pill">✅ 100% Gratuit</div>
+    <div class="badge-pill">🔒 Sécurisé</div>
+    <div class="badge-pill">⚡ Sans pub</div>
+    <div class="badge-pill">🌙 Mode sombre</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <div class="cta-title">▶ Accéder au site</div>
+    <div class="cta-sub">Gratuit · Sans inscription obligatoire</div>
+
+    <div class="cta-qr-row">
+      <div class="cta-qr-frame">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/&color=000000&bgcolor=ffffff" alt="QR Code Theamah+">
+      </div>
+      <div class="cta-qr-info">
+        <strong>📱 Scanner le QR</strong>
+        <p>Pointe l'appareil photo<br>de ton téléphone<br>vers ce code</p>
+        <span>🌐 tinyurl.com/27k6aabj</span>
+      </div>
+    </div>
+
+    <div class="cta-url"><span>🌐</span>amadou11doumbouya10-lgtm.github.io/-theamah-streaming/</div>
+  </div>
+
+</div>
+
+</body>
+</html>

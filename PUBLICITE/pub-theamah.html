@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theamah+ — Publicité</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #050810;
+    font-family: 'Outfit', sans-serif;
+    color: #eef0f4;
+  }
+
+  /* ── SECTION 1 : AFFICHE PUBLICITAIRE ── */
+  .poster {
+    width: 1080px;
+    height: 1080px;
+    position: relative;
+    overflow: hidden;
+    background: #080c14;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px auto;
+    border-radius: 24px;
+  }
+
+  .poster-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(229,9,20,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(229,9,20,0.15) 0%, transparent 60%),
+      linear-gradient(180deg, #080c14 0%, #0f1521 50%, #080c14 100%);
+  }
+
+  .poster-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(229,9,20,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(229,9,20,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .poster-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 60px;
+    text-align: center;
+  }
+
+  .poster-logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 120px;
+    letter-spacing: 6px;
+    background: linear-gradient(135deg, #e50914 0%, #ff4455 40%, #e50914 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 40px rgba(229,9,20,0.6));
+    line-height: 1;
+  }
+
+  .poster-plus {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 120px;
+    color: #e50914;
+    margin-left: -8px;
+    filter: drop-shadow(0 0 40px rgba(229,9,20,0.8));
+    line-height: 1;
+  }
+
+  .poster-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    line-height: 1;
+  }
+
+  .poster-tagline {
+    font-size: 28px;
+    font-weight: 300;
+    color: #8892a4;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  .poster-divider {
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #e50914, transparent);
+    border-radius: 2px;
+  }
+
+  .poster-desc {
+    font-size: 22px;
+    font-weight: 400;
+    color: #c0c8d8;
+    max-width: 700px;
+    line-height: 1.6;
+  }
+
+  .poster-features {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .poster-feat {
+    background: rgba(229,9,20,0.12);
+    border: 1px solid rgba(229,9,20,0.3);
+    border-radius: 50px;
+    padding: 12px 28px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #eef0f4;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .poster-feat span { font-size: 20px; }
+
+  .poster-cta {
+    background: linear-gradient(135deg, #e50914, #c0070f);
+    color: white;
+    font-size: 26px;
+    font-weight: 700;
+    padding: 20px 60px;
+    border-radius: 50px;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 40px rgba(229,9,20,0.5);
+    margin-top: 8px;
+  }
+
+  .poster-url {
+    font-size: 18px;
+    color: #8892a4;
+    letter-spacing: 2px;
+  }
+
+  .poster-url strong {
+    color: #e50914;
+  }
+
+  .poster-badge {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    background: #e50914;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .poster-free {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    font-size: 15px;
+    color: #1db954;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .poster-free::before {
+    content: '';
+    display: block;
+    width: 8px; height: 8px;
+    background: #1db954;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+  }
+
+  /* ── SECTION 2 : MOCKUP INTERFACE ── */
+  .mockup-section {
+    width: 1200px;
+    margin: 40px auto;
+    padding: 60px;
+    background: #080c14;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .mockup-label {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8892a4;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  /* Fenêtre navigateur */
+  .browser-window {
+    background: #1a1f2e;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .browser-bar {
+    background: #0f1521;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .browser-dots {
+    display: flex; gap: 7px;
+  }
+
+  .dot { width: 13px; height: 13px; border-radius: 50%; }
+  .dot-r { background: #e50914; }
+  .dot-y { background: #f5c518; }
+  .dot-g { background: #1db954; }
+
+  .browser-url {
+    flex: 1;
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    color: #8892a4;
+    margin: 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .url-lock { color: #1db954; font-size: 14px; }
+
+  /* ── NAV ── */
+  .mock-nav {
+    background: rgba(8,12,20,0.95);
+    padding: 0 32px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .mock-nav-logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 32px;
+    color: #e50914;
+    letter-spacing: 2px;
+  }
+
+  .mock-nav-links {
+    display: flex; gap: 28px;
+  }
+
+  .mock-nav-link {
+    font-size: 13px;
+    font-weight: 500;
+    color: #8892a4;
+    padding: 4px 0;
+  }
+
+  .mock-nav-link.active {
+    color: #eef0f4;
+    border-bottom: 2px solid #e50914;
+  }
+
+  .mock-nav-right {
+    display: flex; gap: 16px; align-items: center;
+  }
+
+  .mock-search-box {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 7px 14px;
+    font-size: 13px;
+    color: #8892a4;
+    display: flex; align-items: center; gap: 8px;
+    width: 200px;
+  }
+
+  .mock-avatar {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: linear-gradient(135deg, #e50914, #8b0000);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: white;
+  }
+
+  /* ── HERO ── */
+  .mock-hero {
+    position: relative;
+    height: 380px;
+    background: linear-gradient(
+      135deg,
+      #0a0e1a 0%,
+      #161d2e 40%,
+      #1a0a10 100%
+    );
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+  }
+
+  .mock-hero-bg {
+    position: absolute; inset: 0;
+    background: url('https://image.tmdb.org/t/p/w1280/s3TBrRGB1iav7gFOCNx3H31MoES.jpg') center/cover no-repeat;
+    opacity: 0.35;
+  }
+
+  .mock-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(8,12,20,0.92) 40%, transparent 100%);
+  }
+
+  .mock-hero-content {
+    position: relative; z-index: 2;
+    max-width: 500px;
+  }
+
+  .mock-badge-new {
+    background: #1db954;
+    color: #000;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+
+  .mock-hero-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 56px;
+    letter-spacing: 2px;
+    color: #eef0f4;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .mock-hero-meta {
+    font-size: 13px;
+    color: #8892a4;
+    margin-bottom: 14px;
+    display: flex; gap: 16px; align-items: center;
+  }
+
+  .mock-star { color: #f5c518; }
+
+  .mock-hero-desc {
+    font-size: 14px;
+    color: #c0c8d8;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .mock-hero-btns {
+    display: flex; gap: 12px;
+  }
+
+  .mock-btn-play {
+    background: #e50914;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 11px 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .mock-btn-fav {
+    background: rgba(255,255,255,0.1);
+    color: #eef0f4;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 11px 22px;
+    border-radius: 8px;
+    display: flex; align-items: center; gap: 6px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .mock-hero-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 8px;
+  }
+
+  .mock-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+  }
+  .mock-dot.on { background: #e50914; width: 20px; border-radius: 4px; }
+
+  /* ── SECTIONS ── */
+  .mock-sections {
+    background: #080c14;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .mock-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #eef0f4;
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .mock-section-flag { font-size: 18px; }
+
+  .mock-cards {
+    display: flex;
+    gap: 12px;
+  }
+
+  .mock-card {
+    width: 140px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    background: #161d2e;
+  }
+
+  .mock-card img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .mock-card-placeholder {
+    width: 140px;
+    height: 210px;
+    background: linear-gradient(135deg, #161d2e 0%, #1e2740 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    flex-shrink: 0;
+  }
+
+  .mock-card-badge {
+    position: absolute;
+    top: 6px; left: 6px;
+    background: #e50914;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .mock-card-rank {
+    position: absolute;
+    top: 6px; right: 6px;
+    background: rgba(0,0,0,0.75);
+    color: #f5c518;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    border: 1px solid rgba(245,197,24,0.3);
+  }
+
+  .mock-card-title {
+    padding: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #eef0f4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .mock-card-vf {
+    position: absolute;
+    bottom: 30px; right: 6px;
+    background: #1db954;
+    color: #000;
+    font-size: 9px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── SECTION 3 : STORY INSTAGRAM ── */
+  .story-poster {
+    width: 1080px;
+    height: 1920px;
+    position: relative;
+    overflow: hidden;
+    background: #080c14;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px auto;
+    border-radius: 24px;
+    padding: 80px 60px;
+    gap: 40px;
+  }
+
+  .story-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 100% 50% at 50% 0%, rgba(229,9,20,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 40% at 30% 100%, rgba(229,9,20,0.2) 0%, transparent 50%),
+      linear-gradient(180deg, #080c14 0%, #0f1521 50%, #080c14 100%);
+  }
+
+  .story-content { position: relative; z-index: 2; text-align: center; width: 100%; }
+
+  .story-logo {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 160px;
+    letter-spacing: 6px;
+    background: linear-gradient(135deg, #e50914, #ff6677);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 60px rgba(229,9,20,0.7));
+    line-height: 1;
+    display: block;
+  }
+
+  .story-sub {
+    font-size: 36px;
+    font-weight: 300;
+    color: #8892a4;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    margin-top: -10px;
+  }
+
+  .story-separator {
+    width: 80px;
+    height: 4px;
+    background: #e50914;
+    border-radius: 2px;
+    margin: 40px auto;
+  }
+
+  .story-big-text {
+    font-size: 56px;
+    font-weight: 900;
+    color: #eef0f4;
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .story-big-text em {
+    color: #e50914;
+    font-style: normal;
+  }
+
+  .story-features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 40px 0;
+    text-align: left;
+  }
+
+  .story-feature {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 22px 28px;
+  }
+
+  .story-feature-icon {
+    font-size: 40px;
+    flex-shrink: 0;
+    width: 60px;
+    text-align: center;
+  }
+
+  .story-feature-text strong {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+    color: #eef0f4;
+    margin-bottom: 4px;
+  }
+
+  .story-feature-text span {
+    font-size: 17px;
+    color: #8892a4;
+  }
+
+  .story-cta-box {
+    background: linear-gradient(135deg, #e50914, #c0070f);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    margin-top: 40px;
+    box-shadow: 0 20px 60px rgba(229,9,20,0.4);
+    width: 100%;
+  }
+
+  .story-cta-title {
+    font-size: 36px;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 12px;
+  }
+
+  .story-cta-url {
+    font-size: 22px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 2px;
+  }
+
+  /* ── PAGE LABELS ── */
+  .page-header {
+    text-align: center;
+    padding: 60px 20px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.15);
+  }
+
+  /* ── PRINT INSTRUCTIONS ── */
+  .instructions {
+    width: 900px;
+    margin: 40px auto 80px;
+    padding: 40px;
+    background: #0f1521;
+    border-radius: 16px;
+    border: 1px solid rgba(229,9,20,0.2);
+  }
+
+  .instructions h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #e50914;
+    margin-bottom: 20px;
+  }
+
+  .instructions ol {
+    padding-left: 24px;
+  }
+
+  .instructions li {
+    font-size: 16px;
+    color: #c0c8d8;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+
+  .instructions li strong { color: #eef0f4; }
+
+  .instructions code {
+    background: rgba(229,9,20,0.15);
+    border: 1px solid rgba(229,9,20,0.3);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #f5a0a5;
+  }
+
+  @media print {
+    body { background: white; }
+    .instructions { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     AFFICHE 1 × 1 — POST CARRÉ (1080×1080)
+════════════════════════════════════════════ -->
+<p class="page-header">★ AFFICHE CARRÉE — Copier/Coller sur Instagram, WhatsApp, Facebook (1080×1080px)</p>
+
+<div class="poster">
+  <div class="poster-bg"></div>
+  <div class="poster-grid"></div>
+
+  <div class="poster-badge">100% GRATUIT</div>
+  <div class="poster-free">Site en ligne maintenant</div>
+
+  <div class="poster-content">
+    <div class="poster-title-row">
+      <div class="poster-logo">Theamah</div>
+      <div class="poster-plus">+</div>
+    </div>
+
+    <div class="poster-tagline">Votre cinéma privé, en ligne</div>
+
+    <div class="poster-divider"></div>
+
+    <p class="poster-desc">
+      Films, séries, comédies — regardez tout ce que vous aimez,
+      quand vous voulez, depuis n'importe quel appareil.
+      Pas d'abonnement. Pas de carte bancaire.
+    </p>
+
+    <div class="poster-features">
+      <div class="poster-feat"><span>🎬</span> Films & Séries</div>
+      <div class="poster-feat"><span>🇫🇷</span> Version Française</div>
+      <div class="poster-feat"><span>📱</span> Mobile & Bureau</div>
+      <div class="poster-feat"><span>⭐</span> Favoris & Notes</div>
+      <div class="poster-feat"><span>🚀</span> Rapide & Fluide</div>
+      <div class="poster-feat"><span>🔒</span> Compte sécurisé</div>
+    </div>
+
+    <div class="poster-cta">▶ Regarder Maintenant</div>
+
+    <div class="poster-url">
+      🌐 <strong>amadou11doumbouya10-lgtm.github.io/-theamah-streaming/</strong>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     MOCKUP INTERFACE — Screenshot de l'app
+════════════════════════════════════════════ -->
+<p class="page-header">★ MOCKUP INTERFACE — Screenshot de l'application Theamah+</p>
+
+<div class="mockup-section">
+  <div class="mockup-label">📱 Interface Theamah+ — Aperçu réel</div>
+
+  <div class="browser-window">
+    <!-- Barre navigateur -->
+    <div class="browser-bar">
+      <div class="browser-dots">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+      </div>
+      <div class="browser-url">
+        <span class="url-lock">🔒</span>
+        amadou11doumbouya10-lgtm.github.io/-theamah-streaming/
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="mock-nav">
+      <div class="mock-nav-logo">THEAMAH+</div>
+      <div class="mock-nav-links">
+        <span class="mock-nav-link active">Accueil</span>
+        <span class="mock-nav-link">Catalogue</span>
+        <span class="mock-nav-link">Ma Bibliothèque</span>
+        <span class="mock-nav-link">Favoris</span>
+      </div>
+      <div class="mock-nav-right">
+        <div class="mock-search-box">🔍 Rechercher...</div>
+        <div class="mock-avatar">A</div>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="mock-hero">
+      <div class="mock-hero-bg"></div>
+      <div class="mock-hero-overlay"></div>
+      <div class="mock-hero-content">
+        <span class="mock-badge-new">★ NEW</span>
+        <div class="mock-hero-title">Inception</div>
+        <div class="mock-hero-meta">
+          <span>2010</span>
+          <span>·</span>
+          <span>Science-Fiction</span>
+          <span>·</span>
+          <span class="mock-star">★</span>
+          <span>8.4 / 10</span>
+          <span>·</span>
+          <span style="color:#1db954;font-weight:700;">VF</span>
+        </div>
+        <p class="mock-hero-desc">
+          Dom Cobb est un voleur expérimenté — le meilleur dans l'art périlleux
+          de l'extraction, soit voler des secrets au plus profond du subconscient
+          durant une phase de rêve.
+        </p>
+        <div class="mock-hero-btns">
+          <div class="mock-btn-play">▶ Regarder</div>
+          <div class="mock-btn-fav">+ Favoris</div>
+        </div>
+      </div>
+      <div class="mock-hero-dots">
+        <div class="mock-dot on"></div>
+        <div class="mock-dot"></div>
+        <div class="mock-dot"></div>
+        <div class="mock-dot"></div>
+      </div>
+    </div>
+
+    <!-- Sections films -->
+    <div class="mock-sections">
+      <!-- Tendances -->
+      <div>
+        <div class="mock-section-title">🔥 Tendances Films</div>
+        <div class="mock-cards">
+          <div class="mock-card">
+            <img src="https://image.tmdb.org/t/p/w300/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg" alt="Inception" loading="lazy">
+            <div class="mock-card-badge">STREAM</div>
+            <div class="mock-card-rank">#1</div>
+            <div class="mock-card-vf">VF</div>
+            <div class="mock-card-title">Inception</div>
+          </div>
+          <div class="mock-card">
+            <img src="https://image.tmdb.org/t/p/w300/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="The Dark Knight" loading="lazy">
+            <div class="mock-card-badge">STREAM</div>
+            <div class="mock-card-rank">#2</div>
+            <div class="mock-card-title">The Dark Knight</div>
+          </div>
+          <div class="mock-card">
+            <img src="https://image.tmdb.org/t/p/w300/gEU2QniE6E77NI6lCU6MxlNBvIe.jpg" alt="Parasite" loading="lazy">
+            <div class="mock-card-badge">STREAM</div>
+            <div class="mock-card-rank">#3</div>
+            <div class="mock-card-title">Parasite</div>
+          </div>
+          <div class="mock-card">
+            <img src="https://image.tmdb.org/t/p/w300/6KErczPBROKMWkO1lwOoFBGLGRo.jpg" alt="Interstellar" loading="lazy">
+            <div class="mock-card-badge">STREAM</div>
+            <div class="mock-card-title">Interstellar</div>
+          </div>
+          <div class="mock-card">
+            <img src="https://image.tmdb.org/t/p/w300/3bhkrj58Vtu7enYsLegHnDmni59.jpg" alt="The Godfather" loading="lazy">
+            <div class="mock-card-badge">STREAM</div>
+            <div class="mock-card-title">The Godfather</div>
+          </div>
+          <div class="mock-card-placeholder">🎬</div>
+          <div class="mock-card-placeholder">🎥</div>
+        </div>
+      </div>
+
+      <!-- Films français -->
+      <div>
+        <div class="mock-section-title"><span class="mock-section-flag">🇫🇷</span> Films Français</div>
+        <div class="mock-cards">
+          <div class="mock-card">
+            <img src="https://image.tmdb.org/t/p/w300/2CAL2433ZeIihfX1Fn5GkMCqRvI.jpg" alt="Intouchables" loading="lazy">
+            <div class="mock-card-badge">STREAM</div>
+            <div class="mock-card-vf">VF</div>
+            <div class="mock-card-title">Intouchables</div>
+          </div>
+          <div class="mock-card">
+            <img src="https://image.tmdb.org/t/p/w300/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="Amélie" loading="lazy">
+            <div class="mock-card-badge">STREAM</div>
+            <div class="mock-card-vf">VF</div>
+            <div class="mock-card-title">Le Fabuleux Destin...</div>
+          </div>
+          <div class="mock-card-placeholder">🇫🇷</div>
+          <div class="mock-card-placeholder">🎭</div>
+          <div class="mock-card-placeholder">🏆</div>
+          <div class="mock-card-placeholder">🌟</div>
+          <div class="mock-card-placeholder">🎬</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     STORY INSTAGRAM (1080×1920)
+════════════════════════════════════════════ -->
+<p class="page-header">★ STORY INSTAGRAM — Format vertical 9:16 (1080×1920px)</p>
+
+<div class="story-poster">
+  <div class="story-bg"></div>
+
+  <div class="story-content">
+    <span class="story-logo">THEAMAH</span>
+    <div class="story-sub">Streaming +</div>
+
+    <div class="story-separator"></div>
+
+    <div class="story-big-text">
+      Regarde tout ce que<br>
+      tu aimes <em>gratuitement</em>
+    </div>
+
+    <div class="story-features">
+      <div class="story-feature">
+        <div class="story-feature-icon">🎬</div>
+        <div class="story-feature-text">
+          <strong>Films & Séries en illimité</strong>
+          <span>Des centaines de titres disponibles</span>
+        </div>
+      </div>
+      <div class="story-feature">
+        <div class="story-feature-icon">🇫🇷</div>
+        <div class="story-feature-text">
+          <strong>Version Française disponible</strong>
+          <span>Sélecteur de langue intégré</span>
+        </div>
+      </div>
+      <div class="story-feature">
+        <div class="story-feature-icon">📱</div>
+        <div class="story-feature-text">
+          <strong>Installable sur mobile</strong>
+          <span>Application PWA — sans passer par un store</span>
+        </div>
+      </div>
+      <div class="story-feature">
+        <div class="story-feature-icon">⭐</div>
+        <div class="story-feature-text">
+          <strong>Favoris, notes & profil</strong>
+          <span>Ton espace personnel sauvegardé</span>
+        </div>
+      </div>
+      <div class="story-feature">
+        <div class="story-feature-icon">🔒</div>
+        <div class="story-feature-text">
+          <strong>Compte sécurisé</strong>
+          <span>Mot de passe crypté SHA-256</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-cta-box">
+      <div class="story-cta-title">▶ Accéder au site</div>
+      <div class="story-cta-url">tinyurl.com/27k6aabj</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     INSTRUCTIONS
+════════════════════════════════════════════ -->
+<div class="instructions">
+  <h2>📸 Comment utiliser ces visuels</h2>
+  <ol>
+    <li>
+      <strong>Ouvrir ce fichier dans Chrome</strong> : clic droit → Ouvrir avec → Chrome
+      <br>(ou via le serveur local : <code>http://localhost:8765/pub-theamah.html</code>)
+    </li>
+    <li>
+      <strong>Affiche carrée (1080×1080)</strong> : Faire défiler vers le haut.
+      Appuyer sur <code>F12</code> → Outils développeur → bouton "Toggle Device Toolbar"
+      → régler la largeur à 1080px → faire une capture d'écran avec <code>Ctrl+Shift+P</code> → "Capture node screenshot" en cliquant sur <code>&lt;div class="poster"&gt;</code>
+    </li>
+    <li>
+      <strong>Mockup interface</strong> : Faire de même avec <code>&lt;div class="browser-window"&gt;</code>
+    </li>
+    <li>
+      <strong>Story Instagram (9:16)</strong> : Faire de même avec <code>&lt;div class="story-poster"&gt;</code>
+    </li>
+    <li>
+      <strong>Alternative simple</strong> : Appuyer sur <code>Windows + Shift + S</code> pour la capture d'écran Windows et sélectionner la zone souhaitée.
+    </li>
+  </ol>
+</div>
+
+</body>
+</html>

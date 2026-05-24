@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theamah+ — Publicité v2</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #1a2035;
+  font-family: 'Outfit', sans-serif;
+  color: #eef0f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+  gap: 60px;
+}
+
+/* ══════════════════════════════════════════
+   BANNIÈRE PRINCIPALE — Côte à côte
+══════════════════════════════════════════ */
+.banner {
+  width: 1400px;
+  min-height: 700px;
+  background: linear-gradient(135deg, #1c2540 0%, #243058 50%, #1c2540 100%);
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 40px 120px rgba(0,0,0,0.5);
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Lumière de fond douce */
+.banner::before {
+  content: '';
+  position: absolute;
+  top: -100px; left: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(ellipse, rgba(229,9,20,0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+.banner::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; right: 400px;
+  width: 400px; height: 400px;
+  background: radial-gradient(ellipse, rgba(100,120,220,0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── GAUCHE : Contenu promo ── */
+.promo-left {
+  width: 480px;
+  flex-shrink: 0;
+  padding: 60px 52px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+  position: relative;
+  z-index: 2;
+}
+
+.promo-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #e50914;
+}
+
+.promo-eyebrow::before {
+  content: '';
+  display: block;
+  width: 28px; height: 2px;
+  background: #e50914;
+  border-radius: 1px;
+}
+
+.promo-logo {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 88px;
+  letter-spacing: 4px;
+  line-height: 0.9;
+  color: #eef0f4;
+}
+
+.promo-logo span {
+  color: #e50914;
+  filter: drop-shadow(0 0 20px rgba(229,9,20,0.6));
+}
+
+.promo-tagline {
+  font-size: 18px;
+  font-weight: 400;
+  color: #9aaac0;
+  line-height: 1.5;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.promo-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.promo-feat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  color: #c8d4e8;
+}
+
+.promo-feat-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: rgba(229,9,20,0.15);
+  border: 1px solid rgba(229,9,20,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+
+.promo-feat-text strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #eef0f4;
+  line-height: 1.2;
+}
+
+.promo-feat-text small {
+  font-size: 12px;
+  color: #6e7e98;
+}
+
+.promo-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.promo-btn-main {
+  background: linear-gradient(135deg, #e50914, #c0070f);
+  color: white;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 16px 32px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(229,9,20,0.4);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+
+.promo-url {
+  font-size: 12px;
+  color: #6e7e98;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.promo-url span { color: #e50914; }
+
+.promo-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.promo-badge {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #9aaac0;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* ── DROITE : Interface du site ── */
+.promo-right {
+  flex: 1;
+  padding: 28px 28px 28px 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Fenêtre navigateur simulée */
+.browser {
+  width: 100%;
+  height: 100%;
+  background: #0e1525;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.08),
+    0 20px 60px rgba(0,0,0,0.6),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.browser-topbar {
+  background: #131c2e;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+
+.b-dots { display: flex; gap: 6px; }
+.b-dot { width: 11px; height: 11px; border-radius: 50%; }
+.b-red { background: #e50914; }
+.b-yel { background: #f5c518; }
+.b-grn { background: #1db954; }
+
+.b-url {
+  flex: 1;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 7px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: #6e7e98;
+  margin: 0 10px;
+  display: flex; align-items: center; gap: 7px;
+}
+
+.b-url-lock { color: #1db954; font-size: 12px; }
+
+/* NAV */
+.b-nav {
+  background: rgba(8,12,20,0.98);
+  padding: 0 22px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  flex-shrink: 0;
+}
+
+.b-nav-logo {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 24px;
+  color: #e50914;
+  letter-spacing: 2px;
+}
+
+.b-nav-links {
+  display: flex; gap: 20px;
+}
+
+.b-nav-link {
+  font-size: 11px;
+  font-weight: 500;
+  color: #6e7e98;
+}
+
+.b-nav-link.on {
+  color: #eef0f4;
+  border-bottom: 2px solid #e50914;
+  padding-bottom: 1px;
+}
+
+.b-nav-right {
+  display: flex; gap: 10px; align-items: center;
+}
+
+.b-search {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 7px;
+  padding: 5px 12px;
+  font-size: 11px;
+  color: #6e7e98;
+  width: 150px;
+}
+
+.b-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: linear-gradient(135deg, #e50914, #8b0000);
+  font-size: 11px; font-weight: 700; color: white;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* HERO */
+.b-hero {
+  position: relative;
+  height: 240px;
+  background: linear-gradient(135deg, #0a0e1a, #1a0a10);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  flex-shrink: 0;
+}
+
+.b-hero-bg {
+  position: absolute; inset: 0;
+  background: url('https://image.tmdb.org/t/p/w1280/s3TBrRGB1iav7gFOCNx3H31MoES.jpg') center/cover;
+  opacity: 0.3;
+}
+
+.b-hero-grad {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(8,12,20,0.95) 35%, transparent 100%);
+}
+
+.b-hero-content {
+  position: relative; z-index: 2;
+  max-width: 320px;
+}
+
+.b-badge-new {
+  background: #1db954; color: #000;
+  font-size: 9px; font-weight: 800;
+  padding: 2px 8px; border-radius: 4px;
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-bottom: 8px; display: inline-block;
+}
+
+.b-hero-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 40px; letter-spacing: 2px;
+  color: #eef0f4; line-height: 1;
+  margin-bottom: 8px;
+}
+
+.b-hero-meta {
+  font-size: 11px; color: #6e7e98;
+  display: flex; gap: 10px; align-items: center;
+  margin-bottom: 10px;
+}
+
+.b-star { color: #f5c518; }
+.b-vf { color: #1db954; font-weight: 800; }
+
+.b-hero-desc {
+  font-size: 11px; color: #9aaac0; line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+.b-hero-btns { display: flex; gap: 8px; }
+
+.b-btn-play {
+  background: #e50914; color: white;
+  font-size: 12px; font-weight: 700;
+  padding: 8px 18px; border-radius: 7px;
+}
+
+.b-btn-fav {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #eef0f4;
+  font-size: 12px; font-weight: 600;
+  padding: 8px 14px; border-radius: 7px;
+}
+
+/* SECTIONS CARDS */
+.b-sections {
+  flex: 1;
+  background: #080c14;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow: hidden;
+}
+
+.b-sec-title {
+  font-size: 14px; font-weight: 700; color: #eef0f4;
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.b-cards {
+  display: flex; gap: 8px;
+}
+
+.b-card {
+  width: 90px; flex-shrink: 0;
+  border-radius: 8px; overflow: hidden;
+  background: #161d2e;
+  position: relative;
+}
+
+.b-card img {
+  width: 90px; height: 135px;
+  object-fit: cover; display: block;
+}
+
+.b-card-ph {
+  width: 90px; height: 135px;
+  background: linear-gradient(135deg, #161d2e, #1e2740);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; flex-shrink: 0;
+}
+
+.b-card-badge {
+  position: absolute; top: 4px; left: 4px;
+  background: #e50914; color: white;
+  font-size: 8px; font-weight: 700;
+  padding: 1px 5px; border-radius: 3px;
+}
+
+.b-card-rank {
+  position: absolute; top: 4px; right: 4px;
+  background: rgba(0,0,0,0.75); color: #f5c518;
+  font-size: 9px; font-weight: 700;
+  padding: 1px 5px; border-radius: 3px;
+}
+
+.b-card-vf {
+  position: absolute; bottom: 18px; right: 4px;
+  background: #1db954; color: #000;
+  font-size: 8px; font-weight: 800;
+  padding: 1px 5px; border-radius: 3px;
+}
+
+.b-card-title {
+  padding: 5px 6px;
+  font-size: 10px; font-weight: 600;
+  color: #eef0f4;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+
+/* ══════════════════════════════════════════
+   LABEL + INSTRUCTIONS
+══════════════════════════════════════════ */
+.page-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+  margin-bottom: -30px;
+}
+
+.instructions {
+  width: 1000px;
+  padding: 36px 44px;
+  background: #1c2540;
+  border-radius: 16px;
+  border: 1px solid rgba(229,9,20,0.2);
+}
+
+.instructions h2 {
+  font-size: 18px; font-weight: 700; color: #e50914; margin-bottom: 16px;
+}
+
+.instructions ol { padding-left: 20px; }
+
+.instructions li {
+  font-size: 14px; color: #9aaac0; margin-bottom: 10px; line-height: 1.6;
+}
+
+.instructions li strong { color: #eef0f4; }
+
+.instructions code {
+  background: rgba(229,9,20,0.15);
+  border: 1px solid rgba(229,9,20,0.3);
+  padding: 1px 7px; border-radius: 4px;
+  font-size: 13px; color: #f5a0a5;
+}
+</style>
+</head>
+<body>
+
+<p class="page-label">★ Bannière — Publicité + Interface côte à côte (1400×700px)</p>
+
+<!-- ════════ BANNIÈRE PRINCIPALE ════════ -->
+<div class="banner">
+
+  <!-- ── GAUCHE : Promo ── -->
+  <div class="promo-left">
+    <div class="promo-eyebrow">Streaming gratuit</div>
+
+    <div class="promo-logo">Theamah<span>+</span></div>
+
+    <p class="promo-tagline">
+      Votre cinéma privé en ligne — films, séries,
+      version française, sans abonnement.
+    </p>
+
+    <div class="promo-features">
+      <div class="promo-feat">
+        <div class="promo-feat-icon">🎬</div>
+        <div class="promo-feat-text">
+          <strong>Films & Séries en illimité</strong>
+          <small>Bibliothèque personnelle + catalogue en ligne</small>
+        </div>
+      </div>
+      <div class="promo-feat">
+        <div class="promo-feat-icon">🇫🇷</div>
+        <div class="promo-feat-text">
+          <strong>Version Française disponible</strong>
+          <small>Badge VF · Sélecteur de langue intégré</small>
+        </div>
+      </div>
+      <div class="promo-feat">
+        <div class="promo-feat-icon">📱</div>
+        <div class="promo-feat-text">
+          <strong>Installable sur mobile</strong>
+          <small>PWA — Ajouter à l'écran d'accueil</small>
+        </div>
+      </div>
+      <div class="promo-feat">
+        <div class="promo-feat-icon">⭐</div>
+        <div class="promo-feat-text">
+          <strong>Profil, favoris & notes perso</strong>
+          <small>Ton espace sauvegardé sur ton appareil</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="promo-badges">
+      <div class="promo-badge">✅ 100% Gratuit</div>
+      <div class="promo-badge">🔒 Sécurisé</div>
+      <div class="promo-badge">⚡ Rapide</div>
+      <div class="promo-badge">📵 Sans pub</div>
+    </div>
+
+    <div class="promo-cta-group">
+      <div class="promo-btn-main">▶ Regarder maintenant</div>
+      <div class="promo-url">🌐 <span>tinyurl.com/27k6aabj</span></div>
+    </div>
+  </div>
+
+  <!-- ── DROITE : Interface ── -->
+  <div class="promo-right">
+    <div class="browser">
+
+      <!-- Barre navigateur -->
+      <div class="browser-topbar">
+        <div class="b-dots">
+          <div class="b-dot b-red"></div>
+          <div class="b-dot b-yel"></div>
+          <div class="b-dot b-grn"></div>
+        </div>
+        <div class="b-url">
+          <span class="b-url-lock">🔒</span>
+          amadou11doumbouya10-lgtm.github.io/-theamah-streaming/
+        </div>
+      </div>
+
+      <!-- Nav -->
+      <div class="b-nav">
+        <div class="b-nav-logo">THEAMAH+</div>
+        <div class="b-nav-links">
+          <span class="b-nav-link on">Accueil</span>
+          <span class="b-nav-link">Catalogue</span>
+          <span class="b-nav-link">Bibliothèque</span>
+          <span class="b-nav-link">Favoris</span>
+        </div>
+        <div class="b-nav-right">
+          <div class="b-search">🔍 Rechercher...</div>
+          <div class="b-avatar">A</div>
+        </div>
+      </div>
+
+      <!-- Hero -->
+      <div class="b-hero">
+        <div class="b-hero-bg"></div>
+        <div class="b-hero-grad"></div>
+        <div class="b-hero-content">
+          <span class="b-badge-new">★ NEW</span>
+          <div class="b-hero-title">Inception</div>
+          <div class="b-hero-meta">
+            <span>2010</span>
+            <span>·</span>
+            <span>Sci-Fi</span>
+            <span>·</span>
+            <span class="b-star">★ 8.4</span>
+            <span>·</span>
+            <span class="b-vf">VF</span>
+          </div>
+          <p class="b-hero-desc">
+            Dom Cobb est un voleur spécialisé dans l'art de pénétrer dans les rêves
+            pour y dérober des secrets.
+          </p>
+          <div class="b-hero-btns">
+            <div class="b-btn-play">▶ Regarder</div>
+            <div class="b-btn-fav">+ Favoris</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sections -->
+      <div class="b-sections">
+        <!-- Tendances -->
+        <div>
+          <div class="b-sec-title">🔥 Tendances Films</div>
+          <div class="b-cards">
+            <div class="b-card">
+              <img src="https://image.tmdb.org/t/p/w300/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg" alt="">
+              <div class="b-card-badge">STREAM</div>
+              <div class="b-card-rank">#1</div>
+              <div class="b-card-vf">VF</div>
+              <div class="b-card-title">Inception</div>
+            </div>
+            <div class="b-card">
+              <img src="https://image.tmdb.org/t/p/w300/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="">
+              <div class="b-card-badge">STREAM</div>
+              <div class="b-card-rank">#2</div>
+              <div class="b-card-title">The Dark Knight</div>
+            </div>
+            <div class="b-card">
+              <img src="https://image.tmdb.org/t/p/w300/gEU2QniE6E77NI6lCU6MxlNBvIe.jpg" alt="">
+              <div class="b-card-badge">STREAM</div>
+              <div class="b-card-rank">#3</div>
+              <div class="b-card-title">Parasite</div>
+            </div>
+            <div class="b-card">
+              <img src="https://image.tmdb.org/t/p/w300/6KErczPBROKMWkO1lwOoFBGLGRo.jpg" alt="">
+              <div class="b-card-badge">STREAM</div>
+              <div class="b-card-title">Interstellar</div>
+            </div>
+            <div class="b-card">
+              <img src="https://image.tmdb.org/t/p/w300/3bhkrj58Vtu7enYsLegHnDmni59.jpg" alt="">
+              <div class="b-card-badge">STREAM</div>
+              <div class="b-card-title">The Godfather</div>
+            </div>
+            <div class="b-card-ph">🎬</div>
+            <div class="b-card-ph">🎥</div>
+            <div class="b-card-ph">🏆</div>
+          </div>
+        </div>
+
+        <!-- Films Français -->
+        <div>
+          <div class="b-sec-title">🇫🇷 Films Français</div>
+          <div class="b-cards">
+            <div class="b-card">
+              <img src="https://image.tmdb.org/t/p/w300/2CAL2433ZeIihfX1Fn5GkMCqRvI.jpg" alt="">
+              <div class="b-card-badge">STREAM</div>
+              <div class="b-card-vf">VF</div>
+              <div class="b-card-title">Intouchables</div>
+            </div>
+            <div class="b-card">
+              <img src="https://image.tmdb.org/t/p/w300/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="">
+              <div class="b-card-badge">STREAM</div>
+              <div class="b-card-vf">VF</div>
+              <div class="b-card-title">Amélie</div>
+            </div>
+            <div class="b-card-ph">🇫🇷</div>
+            <div class="b-card-ph">🎭</div>
+            <div class="b-card-ph">🌟</div>
+            <div class="b-card-ph">🎬</div>
+            <div class="b-card-ph">🏅</div>
+            <div class="b-card-ph">🎪</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- INSTRUCTIONS -->
+<div class="instructions">
+  <h2>📸 Comment faire le screenshot</h2>
+  <ol>
+    <li>
+      <strong>Via le serveur local</strong> : ouvrir <code>http://localhost:8765/pub-theamah-v2.html</code>
+    </li>
+    <li>
+      <strong>Screenshot Windows</strong> : <code>Windows + Shift + S</code> → sélectionner la bannière bleue entière
+    </li>
+    <li>
+      <strong>Screenshot précis avec DevTools</strong> : <code>F12</code> → <code>Ctrl+Shift+P</code> → taper <code>screenshot</code> → "Capture node screenshot" → cliquer sur <code>&lt;div class="banner"&gt;</code>
+    </li>
+    <li>
+      <strong>Format recommandé</strong> : 1400×700px — parfait pour LinkedIn, Twitter/X, Facebook cover
+    </li>
+  </ol>
+</div>
+
+</body>
+</html>

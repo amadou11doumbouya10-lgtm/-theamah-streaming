@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Theamah+ — Format PC + QR Code</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #12172a;
+  font-family: 'Outfit', sans-serif;
+  color: #eef0f4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px;
+  gap: 60px;
+}
+
+/* ══════════════════════════════════════════
+   AFFICHE PC — Format paysage 1600 × 900
+══════════════════════════════════════════ */
+.poster-pc {
+  width: 1600px;
+  height: 900px;
+  background: linear-gradient(135deg, #1a2238 0%, #232d4a 50%, #1a2238 100%);
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 60px 160px rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 70px;
+  position: relative;
+  overflow: hidden;
+  gap: 50px;
+}
+
+/* Lumières d'ambiance */
+.poster-pc::before {
+  content: '';
+  position: absolute;
+  top: -150px; left: -100px;
+  width: 600px; height: 600px;
+  background: radial-gradient(ellipse, rgba(229,9,20,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+.poster-pc::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; right: 300px;
+  width: 500px; height: 500px;
+  background: radial-gradient(ellipse, rgba(60,90,220,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ── COLONNE GAUCHE : texte promo ── */
+.col-left {
+  width: 340px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  position: relative; z-index: 2;
+}
+
+.col-eyebrow {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: #e50914;
+  display: flex; align-items: center; gap: 8px;
+}
+.col-eyebrow::before {
+  content: '';
+  width: 24px; height: 2px;
+  background: #e50914; border-radius: 1px;
+}
+
+.col-logo {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 90px; letter-spacing: 4px; line-height: 0.9;
+  color: #eef0f4;
+}
+.col-logo span { color: #e50914; filter: drop-shadow(0 0 20px rgba(229,9,20,0.6)); }
+
+.col-tagline {
+  font-size: 16px; font-weight: 400; color: #7a8aaa; line-height: 1.6;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 18px;
+}
+
+.col-feats {
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.col-feat {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; color: #c0cce0;
+}
+
+.col-feat-dot {
+  width: 6px; height: 6px;
+  background: #e50914; border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* QR Code dans la colonne gauche */
+.qr-block {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.qr-img {
+  width: 90px; height: 90px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: white;
+  padding: 6px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.qr-img img { width: 78px; height: 78px; display: block; }
+
+.qr-text strong {
+  display: block; font-size: 13px; font-weight: 700; color: #eef0f4;
+  margin-bottom: 4px;
+}
+.qr-text small { font-size: 11px; color: #6e7e98; line-height: 1.5; }
+.qr-url { font-size: 11px; color: #e50914; font-weight: 600; margin-top: 4px; }
+
+/* ── COLONNE CENTRALE : Laptop ── */
+.col-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; z-index: 2;
+}
+
+/* Laptop */
+.laptop {
+  width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  filter: drop-shadow(0 30px 80px rgba(0,0,0,0.7));
+}
+
+/* Écran */
+.laptop-screen-wrap {
+  width: 100%;
+  background: #111827;
+  border-radius: 18px 18px 0 0;
+  border: 8px solid #1e2840;
+  border-bottom: 0;
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.05),
+    0 0 0 1px rgba(255,255,255,0.04);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Petite caméra en haut de l'écran */
+.laptop-cam {
+  height: 20px;
+  background: #1e2840;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.laptop-cam-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #2a3560;
+}
+
+.laptop-display {
+  width: 100%;
+  height: 380px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+
+/* Pied du laptop */
+.laptop-base {
+  width: 106%;
+  height: 22px;
+  background: linear-gradient(180deg, #1e2840 0%, #161e34 100%);
+  border-radius: 0 0 6px 6px;
+  border: 6px solid #1e2840;
+  border-top: none;
+  position: relative;
+}
+
+.laptop-base::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 4px;
+  background: #0e1525;
+  border-radius: 0 0 4px 4px;
+}
+
+/* ── Contenu de l'écran ── */
+.sc-nav {
+  background: rgba(8,12,20,0.98);
+  height: 40px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  flex-shrink: 0;
+}
+
+.sc-nav-logo {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 22px; color: #e50914; letter-spacing: 2px;
+}
+
+.sc-nav-links { display: flex; gap: 18px; }
+.sc-nav-link { font-size: 11px; font-weight: 500; color: #6e7e98; }
+.sc-nav-link.on { color: #eef0f4; border-bottom: 2px solid #e50914; }
+
+.sc-nav-right { display: flex; gap: 10px; align-items: center; }
+.sc-search {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 6px;
+  padding: 5px 12px; font-size: 11px; color: #6e7e98; width: 140px;
+}
+.sc-avatar {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: linear-gradient(135deg, #e50914, #8b0000);
+  font-size: 10px; font-weight: 700; color: white;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.sc-hero {
+  position: relative; height: 200px; flex-shrink: 0; overflow: hidden;
+}
+.sc-hero-bg {
+  position: absolute; inset: 0;
+  background: url('https://image.tmdb.org/t/p/w1280/s3TBrRGB1iav7gFOCNx3H31MoES.jpg') center/cover;
+  opacity: 0.35;
+}
+.sc-hero-grad {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(8,12,20,0.95) 35%, transparent 100%);
+}
+.sc-hero-content { position: absolute; bottom: 16px; left: 24px; z-index: 2; }
+
+.sc-badge-new {
+  background: #1db954; color: #000;
+  font-size: 8px; font-weight: 800; padding: 2px 7px;
+  border-radius: 3px; letter-spacing: 1px; margin-bottom: 6px; display: inline-block;
+}
+.sc-hero-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 36px; letter-spacing: 1px; color: #eef0f4; line-height: 1; margin-bottom: 6px;
+}
+.sc-meta { font-size: 10px; color: #6e7e98; display: flex; gap: 8px; margin-bottom: 10px; }
+.sc-star { color: #f5c518; }
+.sc-vf {
+  background: #1db954; color: #000; font-size: 8px; font-weight: 800;
+  padding: 1px 5px; border-radius: 3px;
+}
+.sc-btns { display: flex; gap: 8px; }
+.sc-btn-play {
+  background: #e50914; color: white;
+  font-size: 11px; font-weight: 700; padding: 7px 16px; border-radius: 6px;
+}
+.sc-btn-fav {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  color: #eef0f4; font-size: 11px; font-weight: 600; padding: 7px 12px; border-radius: 6px;
+}
+
+.sc-sections {
+  flex: 1; background: #080c14; padding: 12px 18px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.sc-sec-title { font-size: 12px; font-weight: 700; color: #eef0f4; margin-bottom: 7px; }
+.sc-cards { display: flex; gap: 7px; }
+
+.sc-card {
+  width: 76px; flex-shrink: 0; border-radius: 7px; overflow: hidden;
+  background: #161d2e; position: relative;
+}
+.sc-card img { width: 76px; height: 114px; object-fit: cover; display: block; }
+.sc-card-ph {
+  width: 76px; height: 114px; border-radius: 7px; flex-shrink: 0;
+  background: linear-gradient(135deg, #161d2e, #1e2740);
+  display: flex; align-items: center; justify-content: center; font-size: 24px;
+}
+.sc-card-badge {
+  position: absolute; top: 3px; left: 3px;
+  background: #e50914; color: white; font-size: 6px; font-weight: 700;
+  padding: 1px 4px; border-radius: 2px;
+}
+.sc-card-rank {
+  position: absolute; top: 3px; right: 3px;
+  background: rgba(0,0,0,0.8); color: #f5c518;
+  font-size: 7px; font-weight: 700; padding: 1px 4px; border-radius: 2px;
+}
+.sc-card-vf {
+  position: absolute; bottom: 15px; right: 3px;
+  background: #1db954; color: #000; font-size: 6px; font-weight: 800;
+  padding: 1px 4px; border-radius: 2px;
+}
+.sc-card-title {
+  padding: 4px 5px; font-size: 9px; font-weight: 600; color: #eef0f4;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ── COLONNE DROITE : infos + QR ── */
+.col-right {
+  width: 260px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 22px;
+  position: relative; z-index: 2;
+}
+
+.col-right-title {
+  font-size: 20px; font-weight: 900; color: #eef0f4;
+  line-height: 1.3;
+}
+.col-right-title em { color: #e50914; font-style: normal; }
+
+.right-feats {
+  display: flex; flex-direction: column; gap: 12px;
+}
+.right-feat {
+  display: flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+.right-feat-icon {
+  font-size: 22px; width: 38px; height: 38px;
+  background: rgba(229,9,20,0.1); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.right-feat-text strong { font-size: 13px; font-weight: 700; color: #eef0f4; display: block; }
+.right-feat-text small { font-size: 11px; color: #6e7e98; }
+
+/* Grand QR */
+.qr-main {
+  background: white;
+  border-radius: 16px;
+  padding: 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  box-shadow: 0 8px 30px rgba(229,9,20,0.2);
+}
+.qr-main img { width: 140px; height: 140px; display: block; border-radius: 4px; }
+.qr-main-label {
+  font-size: 11px; font-weight: 700; color: #080c14;
+  text-align: center; letter-spacing: 0.5px;
+}
+
+
+/* ══════════════════════════════════════════
+   AFFICHE AVEC QR — Format carré
+══════════════════════════════════════════ */
+.poster-qr {
+  width: 900px;
+  background: linear-gradient(160deg, #1c2540 0%, #243058 50%, #1c2540 100%);
+  border-radius: 32px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 40px 120px rgba(0,0,0,0.5);
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  position: relative;
+}
+
+.pq-left {
+  flex: 1;
+  padding: 52px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+  position: relative; z-index: 2;
+}
+
+.pq-left::before {
+  content: '';
+  position: absolute; top: -80px; left: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(ellipse, rgba(229,9,20,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.pq-logo {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 80px; letter-spacing: 4px; line-height: 0.9; color: #eef0f4;
+}
+.pq-logo em { color: #e50914; font-style: normal; filter: drop-shadow(0 0 18px rgba(229,9,20,0.6)); }
+
+.pq-tagline { font-size: 17px; font-weight: 400; color: #7a8aaa; line-height: 1.6; }
+
+.pq-list {
+  display: flex; flex-direction: column; gap: 12px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.pq-item {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14px; font-weight: 600; color: #c0cce0;
+}
+.pq-item-icon {
+  font-size: 20px; width: 40px; height: 40px;
+  background: rgba(229,9,20,0.12); border: 1px solid rgba(229,9,20,0.22);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.pq-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.pq-badge {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 20px; padding: 6px 14px;
+  font-size: 12px; font-weight: 600; color: #9aaac0;
+}
+
+/* QR Panel droite */
+.pq-right {
+  width: 280px;
+  flex-shrink: 0;
+  background: rgba(8,12,20,0.6);
+  border-left: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 48px 32px;
+  position: relative; z-index: 2;
+}
+
+.pq-right-label {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: #6e7e98; text-align: center;
+}
+
+.pq-qr-frame {
+  background: white;
+  border-radius: 20px;
+  padding: 14px;
+  box-shadow:
+    0 0 0 4px rgba(229,9,20,0.3),
+    0 20px 50px rgba(0,0,0,0.5);
+}
+.pq-qr-frame img { width: 160px; height: 160px; display: block; border-radius: 6px; }
+
+.pq-url-box {
+  text-align: center;
+}
+.pq-url-box strong {
+  display: block; font-size: 13px; font-weight: 700; color: #eef0f4; margin-bottom: 4px;
+}
+.pq-url-box span {
+  font-size: 12px; color: #e50914; font-weight: 600; letter-spacing: 0.5px;
+}
+
+.pq-scan-hint {
+  font-size: 12px; color: #4a5670; text-align: center; line-height: 1.5;
+}
+
+/* Ligne déco verticale */
+.pq-deco-line {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%; width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(229,9,20,0.3), transparent);
+  pointer-events: none;
+}
+
+/* Page label */
+.page-label {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.15); text-align: center;
+  margin-bottom: -30px;
+}
+
+/* Instructions */
+.instructions {
+  width: 900px; padding: 36px 44px;
+  background: #1c2540; border-radius: 16px;
+  border: 1px solid rgba(229,9,20,0.2);
+  margin-bottom: 40px;
+}
+.instructions h2 { font-size: 18px; font-weight: 700; color: #e50914; margin-bottom: 16px; }
+.instructions ol { padding-left: 20px; }
+.instructions li { font-size: 14px; color: #9aaac0; margin-bottom: 10px; line-height: 1.6; }
+.instructions li strong { color: #eef0f4; }
+.instructions code {
+  background: rgba(229,9,20,0.15); border: 1px solid rgba(229,9,20,0.3);
+  padding: 1px 7px; border-radius: 4px; font-size: 13px; color: #f5a0a5;
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     AFFICHE PC — Paysage 1600×900
+════════════════════════════════════════════ -->
+<p class="page-label">★ FORMAT PC — Paysage 1600×900px (Twitter/X, couverture LinkedIn)</p>
+
+<div class="poster-pc">
+
+  <!-- Colonne gauche : texte + mini QR -->
+  <div class="col-left">
+    <div class="col-eyebrow">Streaming gratuit</div>
+    <div class="col-logo">Theamah<span>+</span></div>
+    <p class="col-tagline">Films, séries, version française —<br>regardez tout depuis votre ordinateur,<br>sans abonnement.</p>
+    <div class="col-feats">
+      <div class="col-feat"><div class="col-feat-dot"></div>Catalogue illimité films & séries</div>
+      <div class="col-feat"><div class="col-feat-dot"></div>Version Française (VF) intégrée</div>
+      <div class="col-feat"><div class="col-feat-dot"></div>Favoris, notes & profil personnel</div>
+      <div class="col-feat"><div class="col-feat-dot"></div>Mode sombre · Rapide · Sécurisé</div>
+    </div>
+    <!-- Mini QR dans la colonne gauche -->
+    <div class="qr-block">
+      <div class="qr-img">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/&color=000000&bgcolor=ffffff" alt="QR Code Theamah+">
+      </div>
+      <div class="qr-text">
+        <strong>Scanner pour accéder</strong>
+        <small>Ou taper l'adresse<br>dans le navigateur</small>
+        <div class="qr-url">tinyurl.com/27k6aabj</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Colonne centrale : Laptop -->
+  <div class="col-center">
+    <div class="laptop">
+      <div class="laptop-screen-wrap">
+        <div class="laptop-cam"><div class="laptop-cam-dot"></div></div>
+        <div class="laptop-display">
+
+          <!-- Nav -->
+          <div class="sc-nav">
+            <div class="sc-nav-logo">THEAMAH+</div>
+            <div class="sc-nav-links">
+              <span class="sc-nav-link on">Accueil</span>
+              <span class="sc-nav-link">Catalogue</span>
+              <span class="sc-nav-link">Bibliothèque</span>
+              <span class="sc-nav-link">Favoris</span>
+            </div>
+            <div class="sc-nav-right">
+              <div class="sc-search">🔍 Rechercher...</div>
+              <div class="sc-avatar">A</div>
+            </div>
+          </div>
+
+          <!-- Hero -->
+          <div class="sc-hero">
+            <div class="sc-hero-bg"></div>
+            <div class="sc-hero-grad"></div>
+            <div class="sc-hero-content">
+              <span class="sc-badge-new">★ NEW</span>
+              <div class="sc-hero-title">Inception</div>
+              <div class="sc-meta">
+                <span>2010</span><span>·</span>
+                <span>Sci-Fi</span><span>·</span>
+                <span class="sc-star">★ 8.4</span><span>·</span>
+                <span class="sc-vf">VF</span>
+              </div>
+              <div class="sc-btns">
+                <div class="sc-btn-play">▶ Regarder</div>
+                <div class="sc-btn-fav">+ Favoris</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sections -->
+          <div class="sc-sections">
+            <div>
+              <div class="sc-sec-title">🔥 Tendances Films</div>
+              <div class="sc-cards">
+                <div class="sc-card">
+                  <img src="https://image.tmdb.org/t/p/w300/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg" alt="">
+                  <div class="sc-card-badge">STREAM</div><div class="sc-card-rank">#1</div>
+                  <div class="sc-card-vf">VF</div><div class="sc-card-title">Inception</div>
+                </div>
+                <div class="sc-card">
+                  <img src="https://image.tmdb.org/t/p/w300/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="">
+                  <div class="sc-card-badge">STREAM</div><div class="sc-card-rank">#2</div>
+                  <div class="sc-card-title">The Dark Knight</div>
+                </div>
+                <div class="sc-card">
+                  <img src="https://image.tmdb.org/t/p/w300/gEU2QniE6E77NI6lCU6MxlNBvIe.jpg" alt="">
+                  <div class="sc-card-badge">STREAM</div><div class="sc-card-rank">#3</div>
+                  <div class="sc-card-title">Parasite</div>
+                </div>
+                <div class="sc-card">
+                  <img src="https://image.tmdb.org/t/p/w300/6KErczPBROKMWkO1lwOoFBGLGRo.jpg" alt="">
+                  <div class="sc-card-badge">STREAM</div><div class="sc-card-title">Interstellar</div>
+                </div>
+                <div class="sc-card">
+                  <img src="https://image.tmdb.org/t/p/w300/3bhkrj58Vtu7enYsLegHnDmni59.jpg" alt="">
+                  <div class="sc-card-badge">STREAM</div><div class="sc-card-title">The Godfather</div>
+                </div>
+                <div class="sc-card-ph">🎬</div>
+                <div class="sc-card-ph">🎥</div>
+              </div>
+            </div>
+            <div>
+              <div class="sc-sec-title">🇫🇷 Films Français</div>
+              <div class="sc-cards">
+                <div class="sc-card">
+                  <img src="https://image.tmdb.org/t/p/w300/2CAL2433ZeIihfX1Fn5GkMCqRvI.jpg" alt="">
+                  <div class="sc-card-badge">STREAM</div><div class="sc-card-vf">VF</div>
+                  <div class="sc-card-title">Intouchables</div>
+                </div>
+                <div class="sc-card">
+                  <img src="https://image.tmdb.org/t/p/w300/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="">
+                  <div class="sc-card-badge">STREAM</div><div class="sc-card-vf">VF</div>
+                  <div class="sc-card-title">Amélie</div>
+                </div>
+                <div class="sc-card-ph">🇫🇷</div>
+                <div class="sc-card-ph">🏆</div>
+                <div class="sc-card-ph">🎭</div>
+                <div class="sc-card-ph">🌟</div>
+                <div class="sc-card-ph">🎪</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="laptop-base"></div>
+    </div>
+  </div>
+
+  <!-- Colonne droite : features + grand QR -->
+  <div class="col-right">
+    <div class="col-right-title">Tout ce que<br>tu aimes,<br><em>gratuit.</em></div>
+    <div class="right-feats">
+      <div class="right-feat">
+        <div class="right-feat-icon">🎬</div>
+        <div class="right-feat-text">
+          <strong>Films & Séries</strong>
+          <small>Bibliothèque complète</small>
+        </div>
+      </div>
+      <div class="right-feat">
+        <div class="right-feat-icon">🇫🇷</div>
+        <div class="right-feat-text">
+          <strong>Version Française</strong>
+          <small>Badge VF intégré</small>
+        </div>
+      </div>
+      <div class="right-feat">
+        <div class="right-feat-icon">📱</div>
+        <div class="right-feat-text">
+          <strong>Mobile & Bureau</strong>
+          <small>Application PWA</small>
+        </div>
+      </div>
+    </div>
+    <!-- Grand QR -->
+    <div class="qr-main">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/&color=000000&bgcolor=ffffff" alt="QR Theamah+">
+      <div class="qr-main-label" style="color:#080c14;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;">📱 Scanner pour ouvrir</div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════
+     AFFICHE CARRÉE + QR — 900×auto
+════════════════════════════════════════════ -->
+<p class="page-label">★ FORMAT CARRÉ + QR — Post Instagram / WhatsApp (900px)</p>
+
+<div class="poster-qr">
+  <div class="pq-deco-line"></div>
+
+  <!-- Gauche : texte -->
+  <div class="pq-left">
+    <div class="col-eyebrow" style="font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#e50914;display:flex;align-items:center;gap:8px;">
+      <span style="display:block;width:24px;height:2px;background:#e50914;border-radius:1px;"></span>
+      Streaming gratuit
+    </div>
+
+    <div class="pq-logo">Theamah<em>+</em></div>
+
+    <p class="pq-tagline">Films, séries, version française —<br>sans abonnement, sans limite.</p>
+
+    <div class="pq-list">
+      <div class="pq-item">
+        <div class="pq-item-icon">🎬</div>
+        Films & Séries en illimité
+      </div>
+      <div class="pq-item">
+        <div class="pq-item-icon">🇫🇷</div>
+        Version Française disponible
+      </div>
+      <div class="pq-item">
+        <div class="pq-item-icon">📱</div>
+        Installable sur mobile (PWA)
+      </div>
+      <div class="pq-item">
+        <div class="pq-item-icon">⭐</div>
+        Favoris, notes & profil perso
+      </div>
+      <div class="pq-item">
+        <div class="pq-item-icon">🔒</div>
+        Compte sécurisé SHA-256
+      </div>
+    </div>
+
+    <div class="pq-badges">
+      <div class="pq-badge">✅ Gratuit</div>
+      <div class="pq-badge">⚡ Rapide</div>
+      <div class="pq-badge">🚫 Sans pub intrusives</div>
+      <div class="pq-badge">🌙 Mode sombre</div>
+    </div>
+  </div>
+
+  <!-- Droite : QR -->
+  <div class="pq-right">
+    <div class="pq-right-label">Accéder au site</div>
+
+    <div class="pq-qr-frame">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=320x320&data=https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/&color=000000&bgcolor=ffffff" alt="QR Code Theamah+">
+    </div>
+
+    <div class="pq-url-box">
+      <strong>📱 Scanner le QR code</strong>
+      <span>tinyurl.com/27k6aabj</span>
+    </div>
+
+    <div class="pq-scan-hint">
+      Pointe l'appareil photo<br>de ton téléphone ici
+    </div>
+  </div>
+</div>
+
+
+<!-- Instructions -->
+<div class="instructions">
+  <h2>📸 Comment capturer les images</h2>
+  <ol>
+    <li><strong>Ouvrir via le serveur</strong> : <code>http://localhost:8765/pub-theamah-pc.html</code> (les QR codes et affiches TMDB ont besoin d'internet)</li>
+    <li><strong>Format PC (1600×900)</strong> : <code>Windows + Shift + S</code> → sélectionner la bannière du haut</li>
+    <li><strong>Format carré + QR</strong> : <code>Windows + Shift + S</code> → sélectionner la carte du bas</li>
+    <li><strong>Screenshot parfait via DevTools</strong> : <code>F12</code> → <code>Ctrl+Shift+P</code> → "Capture node screenshot" → cliquer sur <code>.poster-pc</code> ou <code>.poster-qr</code></li>
+    <li><strong>QR Code</strong> : il est déjà intégré dans les deux visuels. Il pointe vers le site Theamah+.</li>
+  </ol>
+</div>
+
+</body>
+</html>
