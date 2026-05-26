@@ -254,7 +254,13 @@ main{padding:0 4%;}
 .auth-tab.on{background:var(--accent);color:#fff;}
 
 /* ── PAGES ── */
-.page{display:none;}.page.on{display:block;}
+.page{display:none;}.page.on{display:block;animation:pageIn 0.28s ease;}
+@keyframes pageIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+.skel-card{flex:0 0 var(--card-w);border-radius:var(--radius);overflow:hidden;background:var(--bg3);scroll-snap-align:start;}
+.skel-img{width:100%;aspect-ratio:2/3;background:linear-gradient(90deg,var(--bg3) 25%,var(--bg2) 50%,var(--bg3) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
+.skel-line{height:11px;border-radius:5px;background:linear-gradient(90deg,var(--bg3) 25%,var(--bg2) 50%,var(--bg3) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin:9px 10px 4px;}
+.skel-line.s{width:55%;height:9px;}
 .pg-wrap{padding:90px 4% 40px;}
 .pg-wrap h2{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:2px;margin-bottom:6px;}
 .pg-wrap>.sub{color:var(--text2);font-size:0.88rem;margin-bottom:22px;}
@@ -1023,6 +1029,10 @@ async function api(path,params){
 
 // ════════ HOME ════════
 async function loadHome(){
+  document.getElementById('homeC').innerHTML=
+    buildSkelSec('&#128293; Tendances — Films')+
+    buildSkelSec('&#11088; Les Mieux Notés')+
+    buildSkelSec('&#128250; Séries Populaires');
   try{
     var r=await Promise.all([
       api('/trending/movie/week'),
@@ -1459,6 +1469,15 @@ function toggleFullPly(){
 }
 
 // ════════ TMDB SECTIONS ════════
+function buildSkelSec(title,n){
+  n=n||8;
+  var id='sk'+Math.random().toString(36).slice(2);
+  var cards='';
+  for(var i=0;i<n;i++) cards+='<div class="skel-card"><div class="skel-img"></div><div class="skel-line"></div><div class="skel-line s"></div></div>';
+  return '<div class="section"><div class="sec-head"><h2 class="sec-title">'+title+'</h2></div>'+
+    '<div class="car-wrap"><div class="car" id="'+id+'">'+cards+'</div></div></div>';
+}
+
 function buildSec(title,items,type,ranked){
   var id='c'+Math.random().toString(36).slice(2);
   var cards=items.map(function(m,i){return buildCard(m,type,ranked?i+1:0);}).join('');
@@ -1555,8 +1574,8 @@ async function openDetail(id,type){
   document.getElementById('modOv').classList.add('open');
   document.getElementById('modC').innerHTML='<div class="loading"><div class="spin"></div></div>';
   document.body.style.overflow='hidden';
-  var r=await Promise.all([api('/'+type+'/'+id),api('/'+type+'/'+id+'/videos'),api('/'+type+'/'+id+'/similar')]);
-  var d=r[0],v=r[1],sim=r[2];
+  var r=await Promise.all([api('/'+type+'/'+id),api('/'+type+'/'+id+'/videos'),api('/'+type+'/'+id+'/similar'),api('/'+type+'/'+id+'/credits')]);
+  var d=r[0],v=r[1],sim=r[2],credits=r[3];
   var raw=d.title||d.name||'';
   var t=raw.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
   var yr=(d.release_date||d.first_air_date||'').slice(0,4);
@@ -1570,6 +1589,20 @@ async function openDetail(id,type){
   var bd=d.backdrop_path?IMG+'w1280'+d.backdrop_path:(d.poster_path?IMG+'w500'+d.poster_path:'');
   var ps=(d.poster_path||'').replace(/'/g,"\\'");
   var loc=myLib.find(function(m){return m.title&&m.title.toLowerCase()===raw.toLowerCase();});
+  // Casting — top 6 acteurs
+  var cast=(credits&&credits.cast||[]).slice(0,6);
+  var dir=(credits&&credits.crew||[]).find(function(c){return c.job==='Director';});
+  var castHtml='';
+  if(cast.length){
+    castHtml='<div style="margin:14px 0 10px;"><p style="font-size:0.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--text2);font-weight:700;margin-bottom:8px;">Avec</p>'+
+      '<div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;">'+
+      cast.map(function(a){
+        var av=a.profile_path?'<img src="'+IMG+'w92'+a.profile_path+'" alt="'+esc(a.name)+'" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 5px;" loading="lazy">':'<div style="width:52px;height:52px;border-radius:50%;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin:0 auto 5px;">&#128100;</div>';
+        return '<div style="flex:0 0 64px;text-align:center;">'+av+'<div style="font-size:0.62rem;font-weight:600;color:var(--text);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:64px;">'+esc(a.name)+'</div></div>';
+      }).join('')+
+      '</div>'+(dir?'<p style="font-size:0.78rem;color:var(--text2);margin-top:8px;">&#127911; Réalisateur : <strong style="color:var(--text);">'+esc(dir.name)+'</strong></p>':'')+
+    '</div>';
+  }
   // Section titres similaires
   var simItems=(sim&&sim.results||[]).filter(function(x){return x.poster_path;}).slice(0,12);
   var simHtml='';
@@ -1593,6 +1626,7 @@ async function openDetail(id,type){
     '<div class="mod-meta"><span class="mod-rat">&#11088; '+esc(rat)+'</span><span>/10</span>'+(yr?'<span>&bull;</span><span>'+esc(yr)+'</span>':'')+(rt?'<span>&bull;</span><span>'+esc(rt)+'</span>':'')+(d.number_of_seasons?'<span>&bull;</span><span>'+d.number_of_seasons+' saison(s)</span>':'')+'</div>'+
     (gs?'<div class="genres">'+gs+'</div>':'')+
     '<p class="mod-desc">'+esc(d.overview||'Aucune description disponible.')+'</p>'+
+    castHtml+
     '<div class="mod-acts">'+
     (loc
       ?'<button class="hbtn hbtn-play green" onclick="closeMod();playLocal(\''+loc.id+'\')">&#9654; Regarder (Local)</button>'
@@ -1600,6 +1634,7 @@ async function openDetail(id,type){
         ?'<button class="hbtn hbtn-play" onclick="closeMod();playTmdb('+id+',\''+type+'\',\''+t+'\')">&#9654; Regarder</button>'
         :'<button class="hbtn hbtn-info" onclick="window.open(\'https://www.youtube.com/results?search_query='+encodeURIComponent(raw)+' bande annonce\',\'_blank\')">&#9654; YouTube</button>'))+
     '<button class="hbtn hbtn-fav" id="mFavB" onclick="toggleFav(event,'+id+',\''+t+'\',\''+ps+'\',\''+type+'\');updMFav('+id+')">'+(isFav?'&#11088;':'&#9734;')+'</button>'+
+    '<button class="hbtn hbtn-info" onclick="shareFilm(\''+t+'\','+id+')" title="Partager">&#128257; Partager</button>'+
     (loc?'':'<button class="hbtn hbtn-info" onclick="closeMod();openAdmin()">&#9881; Ajouter</button>')+
     '</div>'+
     (trailer?'<p style="font-weight:700;font-size:0.85rem;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Bande-annonce</p><iframe style="width:100%;aspect-ratio:16/9;border-radius:9px;border:none;" src="https://www.youtube.com/embed/'+trailer.key+'?rel=0" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe>':'')+
@@ -1609,6 +1644,12 @@ async function openDetail(id,type){
 function updMFav(id){var f=favs.some(function(x){return x.id===id;});var b=document.getElementById('mFavB');if(b)b.innerHTML=f?'&#11088;':'&#9734;';}
 function closeMod(){document.getElementById('modOv').classList.remove('open');document.body.style.overflow='';}
 function modOut(e){if(e.target===document.getElementById('modOv'))closeMod();}
+function shareFilm(title,tmdbId){
+  var url='https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/';
+  var text='Regarde "'+title+'" gratuitement sur Theamah+ !';
+  if(navigator.share){navigator.share({title:'Theamah+',text:text,url:url}).catch(function(){});}
+  else{navigator.clipboard.writeText(text+' '+url).then(function(){showToast('Lien copié dans le presse-papier !','grn');}).catch(function(){showToast('Lien : '+url);});}
+}
 
 // ════════ FAVS ════════
 function toggleFav(e,id,title,poster,type){
