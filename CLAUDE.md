@@ -72,12 +72,13 @@ var ADMIN_HASH = 'd956b3c...'; // SHA-256 de "theamah2026"
 
 ## Sources de streaming actives — État au 26/05/2026
 
-**2 sources confirmées** — résultat de 30+ sources testées en WebFetch et navigateur réel depuis github.io.
+**3 sources confirmées** — résultat de 40+ sources testées en WebFetch et navigateur réel depuis github.io.
 
 | Source | URL Film | URL Série | VF | Statut |
 |---|---|---|---|---|
 | **AutoEmbed** | `autoembed.co/movie/tmdb/{id}` | `autoembed.co/tv/tmdb/{id}-{s}-{e}` | ❌ | ✅ **Confirmé navigateur réel** |
 | **VidSrc.pm** | `vidsrc.pm/embed/movie/{id}` | `vidsrc.pm/embed/tv?tmdb={id}&season={s}&episode={e}` | ❌ | ✅ **Confirmé navigateur réel** |
+| **VidSrc.lol** | `vidsrc.lol/embed/movie/{id}` | `vidsrc.lol/embed/tv/{id}/{s}/{e}` | ❌ | ✅ **Confirmé navigateur réel** |
 
 ### Sources retirées — testées navigateur réel depuis github.io le 26/05/2026
 
@@ -86,6 +87,8 @@ var ADMIN_HASH = 'd956b3c...'; // SHA-256 de "theamah2026"
 | VidSrc.io, VidSrc.su, AnyEmbed.xyz | Testées navigateur — ne répondent pas |
 | Streamsrc.cc, VidPlus.to, VidSrcMe.ru | Testées navigateur — ne répondent pas |
 | VidSrcMe.su, EzVidAPI, VidLux, VikingEmbed | Testées navigateur — ne répondent pas |
+| NontonGo, MoviesAPI.to, VidSrc.cc | Testées github.io — ne répondent pas (asiatique/Cloudflare) |
+| VidSrc.io, VidSrc.su, AnyEmbed, Streamsrc.cc, VidPlus | Testées navigateur — ne répondent pas |
 | VidSrc.me, VSembed, StreamVault, 2Embed, VidLink | X-Frame-Options bloque l'embedding depuis github.io |
 | **VidAPI** (vidapi.xyz) | Affiche "Sandbox not allowed" explicitement |
 | **Videasy** (player.videasy.net) | Contenu vide |
