@@ -70,26 +70,33 @@ var ADMIN_HASH = 'd956b3c...'; // SHA-256 de "theamah2026"
 | localStorage | `t_srch_hist` | Historique recherche (5 dernières) |
 | IndexedDB | `theamah_videos` | Blobs vidéo et sous-titres |
 
-## Sources de streaming actives — État au 24/05/2026
+## Sources de streaming actives — État au 26/05/2026
 
-**1 confirmée + 3 candidats à tester** — seules les sources conçues pour l'embedding tiers passent le X-Frame-Options depuis github.io.
+**2 sources confirmées** — résultat de 30+ sources testées en WebFetch et navigateur réel depuis github.io.
 
 | Source | URL Film | URL Série | VF | Statut |
 |---|---|---|---|---|
-| **AutoEmbed** | `autoembed.co/movie/tmdb/{id}` | `autoembed.co/tv/tmdb/{id}-{s}-{e}` | ❌ | ✅ **Confirmé en navigateur** |
-| **EzVidAPI** | `ezvidapi.com/embed/movie/{id}` | `ezvidapi.com/embed/tv/{id}/{s}/{e}` | ❌ | ⚠️ À tester (sandbox-friendly déclaré) |
-| **VidLux** | `vidlux.xyz/embed/movie/{id}` | `vidlux.xyz/embed/tv/{id}/{s}/{e}` | ❌ | ⚠️ À tester (conçu webmasters) |
-| **VikingEmbed** | `vembed.click/movie/{id}` | `vembed.click/tv/{id}/{s}/{e}` | ❌ | ⚠️ À tester |
+| **AutoEmbed** | `autoembed.co/movie/tmdb/{id}` | `autoembed.co/tv/tmdb/{id}-{s}-{e}` | ❌ | ✅ **Confirmé navigateur réel** |
+| **VidSrc.pm** | `vidsrc.pm/embed/movie/{id}` | `vidsrc.pm/embed/tv?tmdb={id}&season={s}&episode={e}` | ❌ | ✅ **Confirmé navigateur réel** |
 
-### Sources retirées — ne fonctionnent pas en iframe depuis github.io
+### Sources retirées — testées navigateur réel depuis github.io le 26/05/2026
 
 | Source | Raison |
 |---|---|
-| VidSrc.me, VSembed, vidsrcme.su, StreamVault, 2Embed, VidLink, MultiEmbed | X-Frame-Options bloque l'embedding depuis github.io (testé en navigateur) |
+| VidSrc.io, VidSrc.su, AnyEmbed.xyz | Testées navigateur — ne répondent pas |
+| Streamsrc.cc, VidPlus.to, VidSrcMe.ru | Testées navigateur — ne répondent pas |
+| VidSrcMe.su, EzVidAPI, VidLux, VikingEmbed | Testées navigateur — ne répondent pas |
+| VidSrc.me, VSembed, StreamVault, 2Embed, VidLink | X-Frame-Options bloque l'embedding depuis github.io |
 | **VidAPI** (vidapi.xyz) | Affiche "Sandbox not allowed" explicitement |
 | **Videasy** (player.videasy.net) | Contenu vide |
-| Frembed.pro, AutoEmbed.cc, Embed.su | ECONNREFUSED (morts) |
-| vidsrc.to, vidsrc.fyi, 2Embed.cc, SuperEmbed | ECONNREFUSED (morts) |
+| vidsrc.xyz, moviesapi.club, rive.fun, gomo.stream | ECONNREFUSED (morts) |
+| Frembed.pro, AutoEmbed.cc, Embed.su, vidsrc.to | ECONNREFUSED (morts) |
+
+### Où trouver de nouvelles sources (sans X-Frame-Options)
+- `reddit.com/r/Piracy/wiki/megathread` → section Streaming Sites
+- `github.com/sussy-code/smov` → liste ses embed providers
+- `github.com/consumet/consumet.ts` → API qui agrège des sources embed
+- Mots-clés à chercher : "embed api", "webmaster embed", "tmdb embed", "no X-Frame-Options"
 
 ### ⚠️ Règle avant d'ajouter une source
 1. Serveur vivant (pas ECONNREFUSED)
