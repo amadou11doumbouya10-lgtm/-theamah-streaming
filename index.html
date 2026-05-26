@@ -141,8 +141,15 @@ main{padding:0 4%;}
 .ply-btn.pip{font-size:0.85rem;}
 .ply-close{background:rgba(255,255,255,0.1);border:none;color:var(--text);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.1rem;transition:all 0.2s;}
 .ply-close:hover{background:var(--accent);}
-.ply-box{width:100%;max-width:1000px;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;position:relative;}
+.ply-box-wrap{width:100%;max-width:1000px;position:relative;}
+.ply-box{width:100%;aspect-ratio:16/9;background:#000;border-radius:12px;overflow:hidden;position:relative;}
 .ply-box video,.ply-box iframe{width:100%;height:100%;border:none;}
+.sub-ov{position:absolute;bottom:52px;left:50%;transform:translateX(-50%);z-index:50;pointer-events:none;text-align:center;width:92%;max-width:900px;}
+.sub-text{display:inline;background:rgba(0,0,0,0.82);color:#fff;font-size:1.05rem;font-weight:500;padding:4px 14px;border-radius:5px;line-height:1.8;white-space:pre-line;text-shadow:0 1px 4px #000;}
+.sub-bar{display:none;align-items:center;gap:8px;padding:7px 0 3px;flex-wrap:wrap;}
+.sub-bar.show{display:flex;}
+.sub-sync-btn{background:var(--bg3);border:1px solid rgba(255,255,255,0.12);color:var(--text2);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+.sub-sync-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
 .ply-idle{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:var(--bg2);}
 .ply-idle p{color:var(--text2);font-size:0.88rem;text-align:center;max-width:340px;line-height:1.6;}
 .src-bar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 0 2px;}
@@ -651,13 +658,27 @@ body.light .mod-box,.body.light .auth-box,.body.light .adm-box,.body.light .help
   <div class="ply-head">
     <div class="ply-info"><div class="ply-title" id="plyTitle">Film</div><div class="ply-sub" id="plySub"></div></div>
     <div class="ply-acts">
+      <label class="ply-btn" title="Charger sous-titres .srt / .vtt (CC)" style="cursor:pointer;font-size:0.7rem;font-weight:700;letter-spacing:.5px;" onclick="document.getElementById('subFileInput').click()">CC</label>
+      <input type="file" id="subFileInput" accept=".srt,.vtt" style="display:none;" onchange="loadSubFile(this.files[0])">
       <button class="ply-btn" onclick="openKeys()" title="Raccourcis clavier">&#63;</button>
       <button class="ply-btn pip" onclick="togglePiP()" title="Picture-in-Picture (P)">&#8689;</button>
       <button class="ply-btn" onclick="toggleFullPly()" title="Plein écran (F)">&#9974;</button>
       <button class="ply-close" onclick="closePly()" title="Fermer (Échap)">&#10005;</button>
     </div>
   </div>
-  <div class="ply-box" id="plyBox"><div class="ply-idle"><div class="spin"></div></div></div>
+  <div class="ply-box-wrap">
+    <div class="ply-box" id="plyBox"><div class="ply-idle"><div class="spin"></div></div></div>
+    <div class="sub-ov" id="subOverlay"></div>
+  </div>
+  <div class="sub-bar" id="subBar">
+    <span style="color:var(--text2);font-size:0.7rem;font-weight:700;letter-spacing:1px;">SOUS-TITRES :</span>
+    <span id="subFileName" style="font-size:0.75rem;color:var(--green);font-weight:600;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">—</span>
+    <span style="color:var(--text2);font-size:0.7rem;margin-left:4px;">Décalage :</span>
+    <button class="sub-sync-btn" onclick="adjustSubSync(-0.5)" title="-0.5s">&#8592;</button>
+    <span id="subSyncVal" style="font-size:0.72rem;color:var(--text2);min-width:44px;text-align:center;">0.0s</span>
+    <button class="sub-sync-btn" onclick="adjustSubSync(+0.5)" title="+0.5s">&#8594;</button>
+    <button onclick="clearSubs()" style="background:rgba(229,9,20,0.15);border:1px solid rgba(229,9,20,0.3);color:var(--accent);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:0.72rem;font-weight:700;font-family:Outfit,sans-serif;margin-left:4px;">&#10005; Retirer</button>
+  </div>
   <div class="ep-wrap" id="epWrap" style="display:none;"></div>
 </div>
 
@@ -1239,6 +1260,7 @@ function _srcUrl(){
 
 function _loadEmbed(){
   clearTimeout(_autoTryTimer);
+  _subStart=Date.now(); // reset sync sur changement source
   document.getElementById('plyBox').innerHTML=
     '<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000;z-index:1;gap:12px;"><div class="spin"></div><span style="color:var(--text2);font-size:0.78rem;">Chargement source '+(_tSrc+1)+'/'+_SRCS.length+' — '+_SRCS[_tSrc].n+'</span></div>'+
     '<iframe src="'+_srcUrl()+'" allowfullscreen allow="autoplay;encrypted-media;fullscreen;picture-in-picture" style="width:100%;height:100%;border:none;position:absolute;inset:0;z-index:2;" referrerpolicy="origin" sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-orientation-lock allow-pointer-lock" onload="var l=this.previousElementSibling;if(l)l.style.display=\'none\';"></iframe>';
@@ -1447,6 +1469,7 @@ function closePly(){
   savePlyProgress();
   clearInterval(_plyAutoSave);
   clearTimeout(_autoTryTimer); _autoTryEnabled=false;
+  stopSubTimer();
   if(document.fullscreenElement) document.exitFullscreen();
   document.getElementById('plyOv').classList.remove('open');
   document.getElementById('plyBox').innerHTML='<div class="ply-idle"><div class="spin"></div></div>';
@@ -1454,6 +1477,76 @@ function closePly(){
   document.getElementById('epWrap').style.display='none';
   document.getElementById('plySub').textContent='';
   document.body.style.overflow='';
+}
+
+// ════════ SOUS-TITRES ════════
+var _subCues=[],_subTimer=null,_subOffset=0,_subStart=0;
+
+function parseSrtTime(t){
+  var m=t.match(/(\d{1,2}):(\d{2}):(\d{2})[,.](\d{1,3})/);
+  if(!m)return null;
+  return +m[1]*3600 + +m[2]*60 + +m[3] + +m[4]/1000;
+}
+function parseSrt(text){
+  var cues=[];
+  text=text.replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+  text.trim().split(/\n\n+/).forEach(function(b){
+    var lines=b.split('\n');
+    var ti=lines.findIndex(function(l){return l.indexOf('-->')!==-1;});
+    if(ti<0)return;
+    var pts=lines[ti].split('-->');
+    var s=parseSrtTime(pts[0]),e=parseSrtTime(pts[1]);
+    var txt=lines.slice(ti+1).join('\n').replace(/<[^>]+>/g,'').trim();
+    if(s!==null&&e!==null&&txt)cues.push({start:s,end:e,text:txt});
+  });
+  return cues;
+}
+function parseVtt(text){
+  return parseSrt(text.replace(/^WEBVTT[^\n]*/,''));
+}
+function loadSubFile(file){
+  if(!file)return;
+  var rd=new FileReader();
+  rd.onload=function(e){
+    var isVtt=file.name.toLowerCase().endsWith('.vtt');
+    _subCues=isVtt?parseVtt(e.target.result):parseSrt(e.target.result);
+    _subOffset=0; _subStart=Date.now();
+    document.getElementById('subFileName').textContent=file.name;
+    document.getElementById('subSyncVal').textContent='0.0s';
+    document.getElementById('subBar').classList.add('show');
+    startSubTimer();
+    showToast(_subCues.length+' sous-titres chargés','grn');
+  };
+  rd.readAsText(file,'UTF-8');
+}
+function startSubTimer(){
+  clearInterval(_subTimer);
+  _subTimer=setInterval(function(){
+    var vid=document.querySelector('#plyBox video');
+    var t=vid?vid.currentTime:(Date.now()-_subStart)/1000;
+    t+=_subOffset;
+    var cue=null;
+    for(var i=0;i<_subCues.length;i++){if(t>=_subCues[i].start&&t<=_subCues[i].end){cue=_subCues[i];break;}}
+    var ov=document.getElementById('subOverlay');
+    if(ov)ov.innerHTML=cue?'<span class="sub-text">'+esc(cue.text)+'</span>':'';
+  },100);
+}
+function stopSubTimer(){
+  clearInterval(_subTimer);_subTimer=null;
+  var ov=document.getElementById('subOverlay');if(ov)ov.innerHTML='';
+}
+function adjustSubSync(d){
+  _subOffset+=d;
+  var v=document.getElementById('subSyncVal');
+  if(v)v.textContent=(_subOffset>=0?'+':'')+_subOffset.toFixed(1)+'s';
+}
+function clearSubs(){
+  _subCues=[];_subOffset=0;
+  stopSubTimer();
+  document.getElementById('subBar').classList.remove('show');
+  document.getElementById('subFileName').textContent='—';
+  document.getElementById('subSyncVal').textContent='0.0s';
+  var fi=document.getElementById('subFileInput');if(fi)fi.value='';
 }
 
 function openKeys(){document.getElementById('keysOv').classList.add('open');}
