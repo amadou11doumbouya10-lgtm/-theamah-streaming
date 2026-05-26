@@ -890,7 +890,7 @@ body.light .mod-box,.body.light .auth-box,.body.light .adm-box,.body.light .help
 function esc(s){
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
-var IFRAME_WHITELIST=['autoembed.co','ezvidapi.com','vidlux.xyz','vembed.click','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
+var IFRAME_WHITELIST=['autoembed.co','streamsrc.cc','vidlink.pro','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
 function safeIframeSrc(url){
   if(!url)return '';
   try{
@@ -1202,14 +1202,12 @@ function buildEpPanel(film,cS,cE){
     '<div class="ep-row">'+btns+'</div>';
 }
 
-// ════════ STREAMING INTERNET — sources actives (testées le 24/05/2026) ════════
-// AutoEmbed = seule source confirmée active par l'utilisateur en navigateur
-// ezvidapi/VidLux/VikingEmbed = conçus pour embedding tiers, à tester
+// ════════ STREAMING INTERNET — sources actives (testées le 26/05/2026) ════════
+// AutoEmbed = confirmée navigateur | Streamsrc.cc + Vidlink.pro = candidates (à tester navigateur)
 var _SRCS=[
-  {n:'AutoEmbed',    mu:'https://autoembed.co/movie/tmdb/{id}',                        tu:'https://autoembed.co/tv/tmdb/{id}-{s}-{e}',                                  vf:false},
-  {n:'EzVidAPI',     mu:'https://ezvidapi.com/embed/movie/{id}',                       tu:'https://ezvidapi.com/embed/tv/{id}/{s}/{e}',                                 vf:false},
-  {n:'VidLux',       mu:'https://vidlux.xyz/embed/movie/{id}',                         tu:'https://vidlux.xyz/embed/tv/{id}/{s}/{e}',                                   vf:false},
-  {n:'VikingEmbed',  mu:'https://vembed.click/movie/{id}',                             tu:'https://vembed.click/tv/{id}/{s}/{e}',                                       vf:false},
+  {n:'AutoEmbed',  mu:'https://autoembed.co/movie/tmdb/{id}',              tu:'https://autoembed.co/tv/tmdb/{id}-{s}-{e}',                    vf:false},
+  {n:'Streamsrc',  mu:'https://streamsrc.cc/watch/movie/{id}',             tu:'https://streamsrc.cc/watch/series/{id}?season={s}&episode={e}', vf:false},
+  {n:'VidLink',    mu:'https://vidlink.pro/movie/{id}',                    tu:'https://vidlink.pro/tv/{id}/{s}/{e}',                           vf:false},
 ];
 var _tId=0,_tType='movie',_tS=1,_tE=1,_tSrc=0;
 var _autoTryTimer=null,_autoTryEnabled=false;
