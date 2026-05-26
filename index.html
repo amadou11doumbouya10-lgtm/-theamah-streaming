@@ -587,7 +587,14 @@ body.light .mod-box,.body.light .auth-box,.body.light .adm-box,.body.light .help
 <!-- PAGE RECHERCHE -->
 <div id="page-search" class="page">
   <div class="pg-wrap">
-    <h2 id="srchTitle">Resultats</h2>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px;">
+      <h2 id="srchTitle">Résultats</h2>
+      <div style="display:flex;gap:6px;">
+        <button class="cat-pill on" id="sfAll"   onclick="filterSearch('all')">Tout</button>
+        <button class="cat-pill"    id="sfMovie" onclick="filterSearch('movie')">Films</button>
+        <button class="cat-pill"    id="sfTv"    onclick="filterSearch('tv')">Séries</button>
+      </div>
+    </div>
     <div class="grid" id="srchGrid"></div>
   </div>
 </div>
@@ -1052,16 +1059,16 @@ async function loadHome(){
     var hist=JSON.parse(localStorage.getItem('t_history')||'[]');
     if(hist.length) html+=buildContinueSec(hist);
     if(myLib.length) html+=buildLocalSec();
-    html+=buildSec('&#128293; Tendances — Films',r[0].results,'movie',true);
-    html+=buildSec('&#11088; Les Mieux Notés',r[1].results,'movie');
-    html+=buildSec('&#127467;&#127479; Films Français',r[8].results,'movie');
-    html+=buildSec('&#128165; Action',r[3].results,'movie');
-    html+=buildSec('&#128561; Horreur',r[4].results,'movie');
-    html+=buildSec('&#128250; Séries Populaires',r[2].results,'tv');
-    html+=buildSec('&#127467;&#127479; Séries Françaises',r[9].results,'tv');
-    html+=buildSec('&#128293; Tendances — Séries',r[5].results,'tv',true);
-    html+=buildSec('&#128514; Comédie',r[6].results,'movie');
-    html+=buildSec('&#128640; Science-Fiction',r[7].results,'movie');
+    html+=buildSec('&#128293; Tendances — Films',r[0].results,'movie',true,'/trending/movie/week',{page:2});
+    html+=buildSec('&#11088; Les Mieux Notés',r[1].results,'movie',false,'/movie/top_rated',{page:2});
+    html+=buildSec('&#127467;&#127479; Films Français',r[8].results,'movie',false,'/discover/movie',{with_original_language:'fr',sort_by:'popularity.desc',page:2});
+    html+=buildSec('&#128165; Action',r[3].results,'movie',false,'/discover/movie',{with_genres:28,page:2});
+    html+=buildSec('&#128561; Horreur',r[4].results,'movie',false,'/discover/movie',{with_genres:27,page:2});
+    html+=buildSec('&#128250; Séries Populaires',r[2].results,'tv',false,'/tv/popular',{page:2});
+    html+=buildSec('&#127467;&#127479; Séries Françaises',r[9].results,'tv',false,'/discover/tv',{with_original_language:'fr',sort_by:'popularity.desc',page:2});
+    html+=buildSec('&#128293; Tendances — Séries',r[5].results,'tv',true,'/trending/tv/week',{page:2});
+    html+=buildSec('&#128514; Comédie',r[6].results,'movie',false,'/discover/movie',{with_genres:35,page:2});
+    html+=buildSec('&#128640; Science-Fiction',r[7].results,'movie',false,'/discover/movie',{with_genres:878,page:2});
     document.getElementById('homeC').innerHTML=html;
   }catch(err){
     document.getElementById('homeC').innerHTML=
@@ -1478,14 +1485,28 @@ function buildSkelSec(title,n){
     '<div class="car-wrap"><div class="car" id="'+id+'">'+cards+'</div></div></div>';
 }
 
-function buildSec(title,items,type,ranked){
+function buildSec(title,items,type,ranked,moreEp,moreP){
   var id='c'+Math.random().toString(36).slice(2);
   var cards=items.map(function(m,i){return buildCard(m,type,ranked?i+1:0);}).join('');
-  return '<div class="section"><div class="sec-head"><h2 class="sec-title">'+title+'</h2>' +
-    '<a class="see-all" onclick="showPage(\'catalog\')">Voir tout</a></div>' +
+  var moreBtn=moreEp
+    ?'<a class="see-all" onclick="loadMoreSec(\''+id+'\',\''+moreEp+'\','+JSON.stringify(moreP||{})+',\''+type+'\',this)">+ Voir plus</a>'
+    :'<a class="see-all" onclick="showPage(\'catalog\')">Voir tout</a>';
+  return '<div class="section"><div class="sec-head"><h2 class="sec-title">'+title+'</h2>'+moreBtn+'</div>' +
     '<div class="car-wrap"><button class="car-btn l" onclick="scrollC(\''+id+'\',-1)">&#8249;</button>' +
     '<div class="car" id="'+id+'">'+cards+'</div>' +
     '<button class="car-btn r" onclick="scrollC(\''+id+'\',1)">&#8250;</button></div></div>';
+}
+async function loadMoreSec(carId,ep,params,type,btn){
+  if(btn){btn.textContent='Chargement...';btn.style.pointerEvents='none';}
+  try{
+    var p=Object.assign({},params,{page:(params.page||1)+1});
+    var r=await api(ep,p);
+    var car=document.getElementById(carId);
+    if(car&&r.results) car.innerHTML+=r.results.map(function(m){return buildCard(m,type);}).join('');
+    if(btn){btn.textContent='+ Voir plus';btn.style.pointerEvents='';if(r.page>=r.total_pages)btn.style.display='none';}
+    // Mettre à jour page pour prochain clic
+    if(btn) btn.setAttribute('onclick','loadMoreSec(\''+carId+'\',\''+ep+'\','+JSON.stringify(p)+',\''+type+'\',this)');
+  }catch(e){if(btn){btn.textContent='+ Voir plus';btn.style.pointerEvents='';}}
 }
 
 function buildCard(m,type,rank){
@@ -1500,10 +1521,13 @@ function buildCard(m,type,rank){
   var ps=(m.poster_path||'').replace(/'/g,"\\'");
   var loc=myLib.find(function(x){return x.title&&x.title.toLowerCase()===raw.toLowerCase();});
   var rankBadge=rank?'<div class="card-rank">'+rank+'</div>':'';
+  var myRat=getRating(m.id);
+  var myRatBadge=myRat?'<span style="position:absolute;bottom:32px;left:7px;background:rgba(8,12,20,0.85);color:var(--gold);font-size:0.6rem;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:0.5px;">'+('★'.repeat(myRat))+'</span>':'';
   // Clic sur card → ouvrir detail modal
   return '<div class="card" onclick="openDetail('+m.id+',\''+type+'\')">'+post+
     rankBadge+
     (loc?'<div class="card-ltag">LOCAL</div>':'')+
+    myRatBadge+
     '<div class="card-pov"><div class="play-c '+(loc?'grn':'red')+'">&#9654;</div></div>'+
     '<span class="card-rat">&#11088; '+rat+'</span>'+
     '<button class="card-fav'+(isFav?' on':'')+'" onclick="toggleFav(event,'+m.id+',\''+t+'\',\''+ps+'\',\''+type+'\')">'+(isFav?'&#11088;':'&#9734;')+'</button>'+
@@ -1680,29 +1704,44 @@ function loadFavs(){
 }
 
 // ════════ SEARCH ════════
+var _srchLoc=[],_srchAll=[],_srchQ='',_srchFilter='all';
 function handleSearch(val){
   clearTimeout(srchTO);
   hideSearchHist();
   if(!val.trim())return;
   srchTO=setTimeout(async function(){
-    saveSearch(val.trim());
+    _srchQ=val.trim(); _srchFilter='all';
+    saveSearch(_srchQ);
     showPage('search');
-    document.getElementById('srchTitle').textContent='Resultats pour "'+val+'"';
+    ['sfAll','sfMovie','sfTv'].forEach(function(id,i){var b=document.getElementById(id);if(b)b.classList.toggle('on',i===0);});
+    document.getElementById('srchTitle').textContent='Résultats pour "'+val+'"';
     document.getElementById('srchGrid').innerHTML='<div class="loading" style="grid-column:1/-1"><div class="spin"></div></div>';
-    var loc=myLib.filter(function(m){return(m.title||'').toLowerCase().indexOf(val.toLowerCase())!==-1;});
-    var all=[];
+    _srchLoc=myLib.filter(function(m){return(m.title||'').toLowerCase().indexOf(val.toLowerCase())!==-1;});
+    _srchAll=[];
     try{
       var r=await Promise.all([api('/search/movie',{query:val}),api('/search/tv',{query:val})]);
-      all=r[0].results.map(function(m){m._t='movie';return m;}).concat(r[1].results.map(function(m){m._t='tv';return m;})).sort(function(a,b){return b.popularity-a.popularity;});
+      _srchAll=r[0].results.map(function(m){m._t='movie';return m;}).concat(r[1].results.map(function(m){m._t='tv';return m;})).sort(function(a,b){return b.popularity-a.popularity;});
     }catch(e){
-      if(loc.length===0) showToast('TMDB indisponible — vérifie ta connexion');
+      if(_srchLoc.length===0) showToast('TMDB indisponible — vérifie ta connexion');
     }
-    var html=loc.map(function(m){return buildLocalCard(m);}).join('')+all.map(function(m){return buildCard(m,m._t);}).join('');
-    var total=loc.length+all.length;
-    document.getElementById('srchTitle').textContent=(total>0?total+' résultats':'Aucun résultat')+' pour "'+val+'"';
-    document.getElementById('srchGrid').innerHTML=html||
-      '<div class="empty" style="grid-column:1/-1"><div class="ic">&#128269;</div><h3>Aucun résultat</h3><p>Essayez un autre terme ou ajoutez ce film via Admin.</p><button class="hbtn hbtn-play" style="margin:14px auto 0;display:inline-flex;" onclick="openAdmin()">&#9881; Admin</button></div>';
+    renderSearchResults();
   },500);
+}
+function filterSearch(f){
+  _srchFilter=f;
+  var map={all:'sfAll',movie:'sfMovie',tv:'sfTv'};
+  ['sfAll','sfMovie','sfTv'].forEach(function(id){var b=document.getElementById(id);if(b)b.classList.remove('on');});
+  var active=document.getElementById(map[f]);if(active)active.classList.add('on');
+  renderSearchResults();
+}
+function renderSearchResults(){
+  var loc=_srchLoc.filter(function(m){return _srchFilter==='all'||m.type===_srchFilter;});
+  var all=_srchAll.filter(function(m){return _srchFilter==='all'||m._t===_srchFilter;});
+  var html=loc.map(function(m){return buildLocalCard(m);}).join('')+all.map(function(m){return buildCard(m,m._t);}).join('');
+  var total=loc.length+all.length;
+  document.getElementById('srchTitle').textContent=(total>0?total+' résultats':'Aucun résultat')+' pour "'+_srchQ+'"';
+  document.getElementById('srchGrid').innerHTML=html||
+    '<div class="empty" style="grid-column:1/-1"><div class="ic">&#128269;</div><h3>Aucun résultat</h3><p>Essayez un autre terme ou ajoutez ce film via Admin.</p><button class="hbtn hbtn-play" style="margin:14px auto 0;display:inline-flex;" onclick="openAdmin()">&#9881; Admin</button></div>';
 }
 
 // ════════ HISTORIQUE RECHERCHE ════════
