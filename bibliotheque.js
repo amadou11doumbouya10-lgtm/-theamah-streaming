@@ -598,6 +598,367 @@ var BIBLIOTHEQUE = [
     ]
   }
 
+  // ── FILMS 2020+ ───────────────────────────────────────────
+
+  ,{
+    id: "stream_tenet_577922",
+    title: "Tenet",
+    year: "2020",
+    type: "movie",
+    genre: "Action, Science-Fiction, Thriller",
+    desc: "Un agent secret traverse le temps pour empêcher une guerre qui menace l'humanité. Christopher Nolan pousse les limites de la narration avec ce thriller temporel époustouflant.",
+    rating: "7.4",
+    poster: "https://image.tmdb.org/t/p/w300/k68nPLbIST6NP96JmTxmZijMTUs.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/wzJRB4MKi3yK138bpywnWo69mBh.jpg",
+    videoUrl: "https://autoembed.co/movie/tmdb/577922",
+    mimeType: "text/html",
+    isLocal: true,
+    tmdbId: 577922,
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_soul_508442",
+    title: "Soul",
+    year: "2020",
+    type: "movie",
+    genre: "Animation, Comédie, Fantastique",
+    desc: "Joe Gardner, musicien de jazz, se retrouve dans le monde des âmes avant de naître. Il doit trouver la signification de la vie avant de retourner sur Terre.",
+    rating: "8.1",
+    poster: "https://image.tmdb.org/t/p/w300/hm58fzdcnsSDOrwbjNBHbLPOlns.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/kf456ZqeC45XTvo6W9pW5clXTQC.jpg",
+    videoUrl: "https://autoembed.co/movie/tmdb/508442",
+    mimeType: "text/html",
+    isLocal: true,
+    tmdbId: 508442,
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_batman_2022_414906",
+    title: "The Batman",
+    year: "2022",
+    type: "movie",
+    genre: "Action, Crime, Drame",
+    desc: "Dans sa deuxième année de combat contre le crime, Batman démêle une série de meurtres sadiques perpétrés par l'Énigmiste, tout en exposant la corruption à Gotham City.",
+    rating: "7.9",
+    poster: "https://image.tmdb.org/t/p/w300/74xTEgt7R36Fpooo50r9T25onhq.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/b0PlSFdDwbyK0cf5RxwDpaOJQvQ.jpg",
+    videoUrl: "https://autoembed.co/movie/tmdb/414906",
+    mimeType: "text/html",
+    isLocal: true,
+    tmdbId: 414906,
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_eeaao_545611",
+    title: "Everything Everywhere All at Once",
+    year: "2022",
+    type: "movie",
+    genre: "Action, Aventure, Science-Fiction",
+    desc: "Une mère de famille débordée découvre qu'elle peut accéder aux vies de ses versions alternatives dans d'autres univers. Oscar du Meilleur Film 2023.",
+    rating: "7.9",
+    poster: "https://image.tmdb.org/t/p/w300/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/fP4ioO2vAYujPbSC4Sy58Oe52oP.jpg",
+    videoUrl: "https://autoembed.co/movie/tmdb/545611",
+    mimeType: "text/html",
+    isLocal: true,
+    tmdbId: 545611,
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_avatar2_76600",
+    title: "Avatar : La Voie de l'eau",
+    year: "2022",
+    type: "movie",
+    genre: "Science-Fiction, Aventure, Action",
+    desc: "Jake Sully et Neytiri ont fondé une famille sur Pandora. Lorsqu'une ancienne menace ressurgit, ils doivent fuir et explorer les régions des Omaticaya des océans.",
+    rating: "7.6",
+    poster: "https://image.tmdb.org/t/p/w300/t6HIqrRAclMCA60NsSbj7t234S9.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/s16H6tpK2utvwDtzZ8Qy4impTx.jpg",
+    videoUrl: "https://autoembed.co/movie/tmdb/76600",
+    mimeType: "text/html",
+    isLocal: true,
+    tmdbId: 76600,
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_wakanda_505642",
+    title: "Black Panther : Wakanda Forever",
+    year: "2022",
+    type: "movie",
+    genre: "Action, Aventure, Science-Fiction",
+    desc: "Suite à la mort du roi T'Challa, Wakanda doit affronter une nouvelle menace venue des profondeurs de l'océan : le puissant royaume de Talocan.",
+    rating: "7.1",
+    poster: "https://image.tmdb.org/t/p/w300/sv1xJUazXoQuIDfvqfwMVUBmwXk.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/xDMIl84Qo5Tsu62c9DGWhmPI67A.jpg",
+    videoUrl: "https://autoembed.co/movie/tmdb/505642",
+    mimeType: "text/html",
+    isLocal: true,
+    tmdbId: 505642,
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_bullet_train_718821",
+    title: "Bullet Train",
+    year: "2022",
+    type: "movie",
+    genre: "Action, Thriller, Comédie",
+    desc: "Ladybug, un assassin à la malchance légendaire, embarque dans le Shinkansen Tokyo-Kyoto et réalise que son objectif est lié à d'autres tueurs à bord.",
+    rating: "7.4",
+    poster: "https://image.tmdb.org/t/p/w300/tVxDe0Dn4ZSNFoMcB11IDimEj7B.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/1Lm8Cbz2ikXXgP4H8nifX0YKPZA.jpg",
+    videoUrl: "https://autoembed.co/movie/tmdb/718821",
+    mimeType: "text/html",
+    isLocal: true,
+    tmdbId: 718821,
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_glass_onion_661374",
+    title: "Glass Onion",
+    year: "2022",
+    type: "movie",
+    genre: "Crime, Comédie, Mystère",
+    desc: "Le détective Benoit Blanc enquête sur un meurtre dans la villa d'un milliardaire en Grèce. Tous les invités ont un mobile — mais qui est vraiment coupable ?",
+    rating: "7.2",
+    poster: "https://image.tmdb.org/t/p/w300/vDGr1OdrNEcb3NVeDDw1TBWFA8T.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/dGLWxhPdMjEcBFnLe3yGmFXMBhB.jpg",
+    videoUrl: "https://autoembed.co/movie/tmdb/661374",
+    mimeType: "text/html",
+    isLocal: true,
+    tmdbId: 661374,
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_the_menu_593643",
+    title: "The Menu",
+    year: "2022",
+    type: "movie",
+    genre: "Horreur, Thriller, Comédie",
+    desc: "Un couple se rend dans un restaurant gastronomique sur une île isolée. Le chef Slowik leur a préparé un menu avec de terribles surprises.",
+    rating: "7.2",
+    poster: "https://image.tmdb.org/t/p/w300/v3QyboWRoA4O9RbcsqH8tJMe8ER.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/tBa9FLFmunfKKcmEBYNgClUcUbr.jpg",
+    videoUrl: "https://autoembed.co/movie/tmdb/593643",
+    mimeType: "text/html",
+    isLocal: true,
+    tmdbId: 593643,
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_nope_762504",
+    title: "Nope",
+    year: "2022",
+    type: "movie",
+    genre: "Horreur, Science-Fiction, Mystère",
+    desc: "Les propriétaires d'un ranch en Californie font une découverte terrifiante dans le ciel au-dessus de leur ferme. Jordan Peele signe un thriller extraterrestre haletant.",
+    rating: "7.0",
+    poster: "https://image.tmdb.org/t/p/w300/AcKVlWaNVVVFQwro3nLXqPljcYA.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/tFNJRSJUGmFHC5IQJBfBJbvniGA.jpg",
+    videoUrl: "https://autoembed.co/movie/tmdb/762504",
+    mimeType: "text/html",
+    isLocal: true,
+    tmdbId: 762504,
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_guardians3_447365",
+    title: "Les Gardiens de la Galaxie Vol. 3",
+    year: "2023",
+    type: "movie",
+    genre: "Action, Aventure, Science-Fiction",
+    desc: "Peter Quill et l'équipe partent en mission pour protéger Rocket. Le passé douloureux de leur ami met en jeu l'existence même des Gardiens.",
+    rating: "8.0",
+    poster: "https://image.tmdb.org/t/p/w300/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/5YZbUmjbMa3ClvSW1Wj3D6XGkVA.jpg",
+    videoUrl: "https://autoembed.co/movie/tmdb/447365",
+    mimeType: "text/html",
+    isLocal: true,
+    tmdbId: 447365,
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_dune2_693134",
+    title: "Dune : Deuxième Partie",
+    year: "2024",
+    type: "movie",
+    genre: "Science-Fiction, Aventure",
+    desc: "Paul Atreides s'unit aux Fremen pour mener une guerre de vengeance contre les comploteurs qui ont détruit sa famille. Un film épique de Denis Villeneuve.",
+    rating: "8.5",
+    poster: "https://image.tmdb.org/t/p/w300/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/xOMo8BRK7PfcJv9JCnx7s5hj0PX.jpg",
+    videoUrl: "https://autoembed.co/movie/tmdb/693134",
+    mimeType: "text/html",
+    isLocal: true,
+    tmdbId: 693134,
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+
+  // ── SÉRIES 2020+ ──────────────────────────────────────────
+
+  ,{
+    id: "stream_lupin_96677",
+    title: "Lupin",
+    year: "2021",
+    type: "tv",
+    genre: "Crime, Mystère, Thriller",
+    desc: "Inspiré par Arsène Lupin, Assane Diop utilise ses talents de gentleman cambrioleur pour se venger de la famille qui a détruit son père. Omar Sy au sommet.",
+    rating: "7.5",
+    poster: "https://image.tmdb.org/t/p/w300/sgxawbFB7oSMRK4tFIVM3GRRAlm.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/rPPfvfZo7E5mSHWnHJGTYIGk2EV.jpg",
+    isLocal: true,
+    tmdbId: 96677,
+    seasons: [
+      { episodes: [
+        {title:"S1E1 — Le Vol du Collier de la Reine", fileData:"https://autoembed.co/tv/tmdb/96677-1-1", mimeType:"text/html"},
+        {title:"S1E2 — Entre les deux, mon cœur balance", fileData:"https://autoembed.co/tv/tmdb/96677-1-2", mimeType:"text/html"},
+        {title:"S1E3 — Dans la peau d'Hubert Pellegrini", fileData:"https://autoembed.co/tv/tmdb/96677-1-3", mimeType:"text/html"},
+        {title:"S1E4 — Le Fils du Diable", fileData:"https://autoembed.co/tv/tmdb/96677-1-4", mimeType:"text/html"},
+        {title:"S1E5 — La Femme au collier de rubis", fileData:"https://autoembed.co/tv/tmdb/96677-1-5", mimeType:"text/html"}
+      ]},
+      { episodes: [
+        {title:"S2E1 — L'Ombre d'Assane", fileData:"https://autoembed.co/tv/tmdb/96677-2-1", mimeType:"text/html"},
+        {title:"S2E2 — On ne plaisante pas avec l'amour", fileData:"https://autoembed.co/tv/tmdb/96677-2-2", mimeType:"text/html"},
+        {title:"S2E3 — L'homme à la tête de Lupin", fileData:"https://autoembed.co/tv/tmdb/96677-2-3", mimeType:"text/html"},
+        {title:"S2E4 — Le Fugitif", fileData:"https://autoembed.co/tv/tmdb/96677-2-4", mimeType:"text/html"},
+        {title:"S2E5 — La Justice d'Assane", fileData:"https://autoembed.co/tv/tmdb/96677-2-5", mimeType:"text/html"}
+      ]}
+    ],
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_wednesday_119051",
+    title: "Wednesday",
+    year: "2022",
+    type: "tv",
+    genre: "Comédie, Fantastique, Mystère",
+    desc: "Wednesday Addams intègre l'Académie Nevermore, une école pour monstres. Entre meurtres mystérieux et révélations sur ses pouvoirs, elle doit apprendre à faire confiance aux autres.",
+    rating: "8.1",
+    poster: "https://image.tmdb.org/t/p/w300/9PFonBhy4cQy7hjcThk461oTdnL.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/URlDX93FmNLzJJT2dWvL7mCLCba.jpg",
+    isLocal: true,
+    tmdbId: 119051,
+    seasons: [
+      { episodes: [
+        {title:"S1E1 — Attention où tu mets les pieds", fileData:"https://autoembed.co/tv/tmdb/119051-1-1", mimeType:"text/html"},
+        {title:"S1E2 — Woe is the Loneliest Number", fileData:"https://autoembed.co/tv/tmdb/119051-1-2", mimeType:"text/html"},
+        {title:"S1E3 — Friend or Woe", fileData:"https://autoembed.co/tv/tmdb/119051-1-3", mimeType:"text/html"},
+        {title:"S1E4 — Woe What a Night", fileData:"https://autoembed.co/tv/tmdb/119051-1-4", mimeType:"text/html"},
+        {title:"S1E5 — You Reap What You Woe", fileData:"https://autoembed.co/tv/tmdb/119051-1-5", mimeType:"text/html"},
+        {title:"S1E6 — Quelle barbe !", fileData:"https://autoembed.co/tv/tmdb/119051-1-6", mimeType:"text/html"},
+        {title:"S1E7 — If You Don't Woe Me by Now", fileData:"https://autoembed.co/tv/tmdb/119051-1-7", mimeType:"text/html"},
+        {title:"S1E8 — A Murder of Woes", fileData:"https://autoembed.co/tv/tmdb/119051-1-8", mimeType:"text/html"}
+      ]}
+    ],
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_the_bear_136315",
+    title: "The Bear",
+    year: "2022",
+    type: "tv",
+    genre: "Drame, Comédie",
+    desc: "Carmy, un chef étoilé new-yorkais, rentre à Chicago pour reprendre le sandwich shop de son frère décédé. Il doit gérer une équipe chaotique et un restaurant en faillite.",
+    rating: "8.7",
+    poster: "https://image.tmdb.org/t/p/w300/sJCLV3Wuomn2TxWJHdizJfG9bUX.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/lhGNaRWEIFUMJPmXJzGmSdZvfFo.jpg",
+    isLocal: true,
+    tmdbId: 136315,
+    seasons: [
+      { episodes: [
+        {title:"S1E1 — Système", fileData:"https://autoembed.co/tv/tmdb/136315-1-1", mimeType:"text/html"},
+        {title:"S1E2 — Hands", fileData:"https://autoembed.co/tv/tmdb/136315-1-2", mimeType:"text/html"},
+        {title:"S1E3 — Brigade", fileData:"https://autoembed.co/tv/tmdb/136315-1-3", mimeType:"text/html"},
+        {title:"S1E4 — Dogs", fileData:"https://autoembed.co/tv/tmdb/136315-1-4", mimeType:"text/html"},
+        {title:"S1E5 — Sheridan", fileData:"https://autoembed.co/tv/tmdb/136315-1-5", mimeType:"text/html"},
+        {title:"S1E6 — Crock", fileData:"https://autoembed.co/tv/tmdb/136315-1-6", mimeType:"text/html"},
+        {title:"S1E7 — Review", fileData:"https://autoembed.co/tv/tmdb/136315-1-7", mimeType:"text/html"},
+        {title:"S1E8 — Braciole", fileData:"https://autoembed.co/tv/tmdb/136315-1-8", mimeType:"text/html"}
+      ]}
+    ],
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_house_of_dragon_94997",
+    title: "House of the Dragon",
+    year: "2022",
+    type: "tv",
+    genre: "Action, Aventure, Drame, Fantasy",
+    desc: "200 ans avant Game of Thrones, la maison Targaryen est déchirée par une guerre civile pour la succession au Trône de Fer.",
+    rating: "8.4",
+    poster: "https://image.tmdb.org/t/p/w300/z2yahl2uefxDCl0nogcRBstwruJ.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/etj8E2o0Bud0HkONVQPjyCkIvpv.jpg",
+    isLocal: true,
+    tmdbId: 94997,
+    seasons: [
+      { episodes: [
+        {title:"S1E1 — Les Héritiers du Dragon", fileData:"https://autoembed.co/tv/tmdb/94997-1-1", mimeType:"text/html"},
+        {title:"S1E2 — Le Prince Voyou", fileData:"https://autoembed.co/tv/tmdb/94997-1-2", mimeType:"text/html"},
+        {title:"S1E3 — Deuxième de ce Nom", fileData:"https://autoembed.co/tv/tmdb/94997-1-3", mimeType:"text/html"},
+        {title:"S1E4 — Le Roi du Trône de Fer", fileData:"https://autoembed.co/tv/tmdb/94997-1-4", mimeType:"text/html"},
+        {title:"S1E5 — Nous l'Avons Éclairé le Chemin", fileData:"https://autoembed.co/tv/tmdb/94997-1-5", mimeType:"text/html"},
+        {title:"S1E6 — La Princesse et la Reine", fileData:"https://autoembed.co/tv/tmdb/94997-1-6", mimeType:"text/html"},
+        {title:"S1E7 — Driftmark", fileData:"https://autoembed.co/tv/tmdb/94997-1-7", mimeType:"text/html"},
+        {title:"S1E8 — Lord of the Tides", fileData:"https://autoembed.co/tv/tmdb/94997-1-8", mimeType:"text/html"},
+        {title:"S1E9 — La Verte Chagrin", fileData:"https://autoembed.co/tv/tmdb/94997-1-9", mimeType:"text/html"},
+        {title:"S1E10 — Noir et Vert", fileData:"https://autoembed.co/tv/tmdb/94997-1-10", mimeType:"text/html"}
+      ]}
+    ],
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_last_of_us_100088",
+    title: "The Last of Us",
+    year: "2023",
+    type: "tv",
+    genre: "Action, Aventure, Drame, Science-Fiction",
+    desc: "Vingt ans après la fin de la civilisation, Joel est chargé de faire sortir Ellie d'une zone de quarantaine. Un voyage intense qui va transformer les deux survivants.",
+    rating: "8.8",
+    poster: "https://image.tmdb.org/t/p/w300/uKvVjHNqB5VmOrdxqAt2F7J78ED.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/uDgy6hyPd82kOHh6I95qQtnSkGD.jpg",
+    isLocal: true,
+    tmdbId: 100088,
+    seasons: [
+      { episodes: [
+        {title:"S1E1 — Quand tu es perdu dans les ténèbres", fileData:"https://autoembed.co/tv/tmdb/100088-1-1", mimeType:"text/html"},
+        {title:"S1E2 — Contaminé", fileData:"https://autoembed.co/tv/tmdb/100088-1-2", mimeType:"text/html"},
+        {title:"S1E3 — Long Long Time", fileData:"https://autoembed.co/tv/tmdb/100088-1-3", mimeType:"text/html"},
+        {title:"S1E4 — S'il vous plaît garde ta main", fileData:"https://autoembed.co/tv/tmdb/100088-1-4", mimeType:"text/html"},
+        {title:"S1E5 — Endure and Survive", fileData:"https://autoembed.co/tv/tmdb/100088-1-5", mimeType:"text/html"},
+        {title:"S1E6 — Kin", fileData:"https://autoembed.co/tv/tmdb/100088-1-6", mimeType:"text/html"},
+        {title:"S1E7 — Left Behind", fileData:"https://autoembed.co/tv/tmdb/100088-1-7", mimeType:"text/html"},
+        {title:"S1E8 — When We Are in Need", fileData:"https://autoembed.co/tv/tmdb/100088-1-8", mimeType:"text/html"},
+        {title:"S1E9 — Look for the Light", fileData:"https://autoembed.co/tv/tmdb/100088-1-9", mimeType:"text/html"}
+      ]}
+    ],
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
+    id: "stream_euphoria_85552",
+    title: "Euphoria",
+    year: "2019",
+    type: "tv",
+    genre: "Drame",
+    desc: "Rue, 17 ans, fraîchement sortie de cure de désintoxication, rencontre Jules. Une plongée brute dans le monde de la drogue, du sexe et de l'identité chez les adolescents américains.",
+    rating: "8.3",
+    poster: "https://image.tmdb.org/t/p/w300/3Q0hd3heuWwDWivDMn3XKE9aFgM.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/jQaGalXOHmhDFMLcQfhYGYiDDSG.jpg",
+    isLocal: true,
+    tmdbId: 85552,
+    seasons: [
+      { episodes: [
+        {title:"S1E1 — Pilote", fileData:"https://autoembed.co/tv/tmdb/85552-1-1", mimeType:"text/html"},
+        {title:"S1E2 — Stuntin' Like My Daddy", fileData:"https://autoembed.co/tv/tmdb/85552-1-2", mimeType:"text/html"},
+        {title:"S1E3 — Made You Look", fileData:"https://autoembed.co/tv/tmdb/85552-1-3", mimeType:"text/html"},
+        {title:"S1E4 — Shook Ones Pt. II", fileData:"https://autoembed.co/tv/tmdb/85552-1-4", mimeType:"text/html"},
+        {title:"S1E5 — '03 Bonnie & Clyde", fileData:"https://autoembed.co/tv/tmdb/85552-1-5", mimeType:"text/html"},
+        {title:"S1E6 — The Next Episode", fileData:"https://autoembed.co/tv/tmdb/85552-1-6", mimeType:"text/html"},
+        {title:"S1E7 — The Trials and Tribulations", fileData:"https://autoembed.co/tv/tmdb/85552-1-7", mimeType:"text/html"},
+        {title:"S1E8 — And Salt the Earth Behind You", fileData:"https://autoembed.co/tv/tmdb/85552-1-8", mimeType:"text/html"}
+      ]}
+    ],
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+
 ];
 
 window.SHARED_LIBRARY = BIBLIOTHEQUE;
