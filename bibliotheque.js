@@ -933,6 +933,32 @@ var BIBLIOTHEQUE = [
     addedAt: "2026-05-27T00:00:00.000Z"
   }
   ,{
+    id: "stream_euphoria_85552",
+    title: "Euphoria",
+    year: "2019",
+    type: "tv",
+    genre: "Drame",
+    desc: "Rue, 17 ans, fraîchement sortie de cure de désintoxication, rencontre Jules. Une plongée brute dans le monde de la drogue, du sexe et de l'identité chez les adolescents américains.",
+    rating: "8.3",
+    poster: "https://image.tmdb.org/t/p/w300/lPmLrzVy5uGz7nNOtruirVz0Q38.jpg",
+    backdrop: "https://image.tmdb.org/t/p/w1280/mez2Z3WqlPKNXpi7mWoiiE5guE9.jpg",
+    isLocal: true,
+    tmdbId: 85552,
+    seasons: [
+      { episodes: [
+        {title:"S1E1 — Pilote", fileData:"https://autoembed.co/tv/tmdb/85552-1-1", mimeType:"text/html"},
+        {title:"S1E2 — Stuntin' Like My Daddy", fileData:"https://autoembed.co/tv/tmdb/85552-1-2", mimeType:"text/html"},
+        {title:"S1E3 — Made You Look", fileData:"https://autoembed.co/tv/tmdb/85552-1-3", mimeType:"text/html"},
+        {title:"S1E4 — Shook Ones Pt. II", fileData:"https://autoembed.co/tv/tmdb/85552-1-4", mimeType:"text/html"},
+        {title:"S1E5 — '03 Bonnie & Clyde", fileData:"https://autoembed.co/tv/tmdb/85552-1-5", mimeType:"text/html"},
+        {title:"S1E6 — The Next Episode", fileData:"https://autoembed.co/tv/tmdb/85552-1-6", mimeType:"text/html"},
+        {title:"S1E7 — The Trials and Tribulations", fileData:"https://autoembed.co/tv/tmdb/85552-1-7", mimeType:"text/html"},
+        {title:"S1E8 — And Salt the Earth Behind You", fileData:"https://autoembed.co/tv/tmdb/85552-1-8", mimeType:"text/html"}
+      ]}
+    ],
+    addedAt: "2026-05-27T00:00:00.000Z"
+  }
+  ,{
     id: "stream_john_wick_2_324552",
     title: "John Wick 2",
     year: "2017",
