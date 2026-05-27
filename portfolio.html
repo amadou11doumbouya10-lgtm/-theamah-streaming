@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amadou Doumbouya — Développeur</title>
+<meta name="description" content="Portfolio d'Amadou Doumbouya — Développeur passionné, créateur de Theamah+.">
+<meta property="og:title" content="Amadou Doumbouya — Développeur">
+<meta property="og:description" content="Développeur passionné, créateur de Theamah+, la plateforme de streaming gratuite.">
+<meta property="og:image" content="https://image.tmdb.org/t/p/w1280/s3TBrRGB1iav7gFOCNx3H31MoES.jpg">
+<meta name="theme-color" content="#e50914">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💻</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080c14;--bg2:#0f1521;--bg3:#161d2e;
+  --accent:#e50914;--gold:#f5c518;--green:#1db954;--blue:#3b82f6;
+  --text:#eef0f4;--text2:#8892a4;--radius:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;min-height:100vh;overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 6%;height:64px;background:rgba(8,12,20,0.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.06);}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--accent);letter-spacing:3px;text-decoration:none;}
+.logo span{color:var(--text);}
+.nav-links{display:flex;gap:6px;list-style:none;}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:0.85rem;font-weight:500;padding:7px 14px;border-radius:8px;transition:all 0.2s;}
+.nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.07);}
+.nav-back{display:inline-flex;align-items:center;gap:7px;color:var(--text2);text-decoration:none;font-size:0.82rem;font-weight:500;padding:7px 13px;border-radius:8px;border:1px solid rgba(255,255,255,0.12);transition:all 0.2s;}
+.nav-back:hover{color:var(--text);border-color:rgba(255,255,255,0.3);}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 6% 60px;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(229,9,20,0.12) 0%,transparent 60%);}
+.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 80%,rgba(59,130,246,0.08) 0%,transparent 50%);}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:0 auto;width:100%;}
+.hero-text{}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(229,9,20,0.12);border:1px solid rgba(229,9,20,0.3);border-radius:20px;padding:5px 14px;font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,5.5rem);line-height:1;letter-spacing:2px;margin-bottom:10px;}
+.hero-name .accent{color:var(--accent);}
+.hero-role{font-size:1.15rem;font-weight:500;color:var(--text2);margin-bottom:20px;}
+.hero-role span{color:var(--text);}
+.hero-desc{color:rgba(238,240,244,0.72);line-height:1.7;font-size:0.92rem;margin-bottom:32px;max-width:460px;}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;background:var(--accent);color:#fff;font-family:'Outfit',sans-serif;font-size:0.88rem;font-weight:700;text-decoration:none;transition:all 0.2s;border:none;cursor:pointer;}
+.btn-primary:hover{background:#c40812;transform:translateY(-1px);}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:10px;background:transparent;color:var(--text);font-family:'Outfit',sans-serif;font-size:0.88rem;font-weight:600;text-decoration:none;transition:all 0.2s;border:1px solid rgba(255,255,255,0.18);}
+.btn-secondary:hover{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.35);transform:translateY(-1px);}
+.hero-avatar{display:flex;justify-content:center;align-items:center;}
+.avatar-wrap{position:relative;width:280px;height:280px;}
+.avatar-ring{position:absolute;inset:-12px;border-radius:50%;border:2px solid rgba(229,9,20,0.35);animation:pulse-ring 3s ease-in-out infinite;}
+.avatar-ring2{position:absolute;inset:-24px;border-radius:50%;border:1px solid rgba(229,9,20,0.15);animation:pulse-ring 3s ease-in-out infinite 0.5s;}
+.avatar-circle{width:280px;height:280px;border-radius:50%;background:linear-gradient(135deg,var(--bg3) 0%,var(--bg2) 100%);border:3px solid rgba(229,9,20,0.4);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:7rem;color:var(--accent);position:relative;z-index:1;box-shadow:0 0 60px rgba(229,9,20,0.2),inset 0 0 40px rgba(0,0,0,0.5);}
+.avatar-badge{position:absolute;bottom:10px;right:10px;background:var(--green);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;border:3px solid var(--bg);z-index:2;}
+@keyframes pulse-ring{0%,100%{transform:scale(1);opacity:0.6;}50%{transform:scale(1.04);opacity:1;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.hero-text{animation:fadeUp 0.6s ease;}
+.hero-avatar{animation:fadeUp 0.6s ease 0.15s both;}
+
+/* ── STATS BAR ── */
+.stats-bar{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);}
+.stats-inner{max-width:1100px;margin:0 auto;padding:28px 6%;display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.stat-item{padding:0 20px;text-align:center;position:relative;}
+.stat-item+.stat-item::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);height:50%;width:1px;background:rgba(255,255,255,0.08);}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--accent);letter-spacing:1px;}
+.stat-lbl{font-size:0.75rem;color:var(--text2);margin-top:2px;font-weight:500;}
+
+/* ── SECTIONS ── */
+section{padding:80px 6%;}
+.sec-inner{max-width:1100px;margin:0 auto;}
+.sec-tag{display:inline-block;background:rgba(229,9,20,0.1);border:1px solid rgba(229,9,20,0.25);border-radius:20px;padding:4px 13px;font-size:0.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3rem);letter-spacing:1px;margin-bottom:10px;}
+.sec-sub{color:var(--text2);font-size:0.92rem;line-height:1.65;max-width:560px;margin-bottom:48px;}
+
+/* ── PROJECTS ── */
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.project-card{background:var(--bg2);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);overflow:hidden;transition:all 0.3s;cursor:pointer;text-decoration:none;color:inherit;display:block;}
+.project-card:hover{border-color:rgba(229,9,20,0.4);transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,0.4);}
+.project-card.featured{grid-column:span 2;}
+.project-thumb{width:100%;height:200px;object-fit:cover;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:4rem;}
+.project-thumb.featured-thumb{height:260px;}
+.project-thumb-img{width:100%;height:100%;object-fit:cover;}
+.project-thumb-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;}
+.project-body{padding:20px 22px 22px;}
+.project-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.badge{display:inline-block;padding:3px 9px;border-radius:6px;font-size:0.65rem;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;}
+.badge-red{background:rgba(229,9,20,0.15);border:1px solid rgba(229,9,20,0.3);color:var(--accent);}
+.badge-blue{background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.3);color:#60a5fa;}
+.badge-green{background:rgba(29,185,84,0.15);border:1px solid rgba(29,185,84,0.3);color:var(--green);}
+.badge-gold{background:rgba(245,197,24,0.15);border:1px solid rgba(245,197,24,0.3);color:var(--gold);}
+.project-name{font-size:1.05rem;font-weight:700;margin-bottom:6px;}
+.project-desc{font-size:0.82rem;color:var(--text2);line-height:1.6;margin-bottom:14px;}
+.project-links{display:flex;gap:10px;}
+.proj-link{display:inline-flex;align-items:center;gap:5px;font-size:0.78rem;font-weight:600;color:var(--text2);text-decoration:none;padding:5px 11px;border-radius:7px;border:1px solid rgba(255,255,255,0.12);transition:all 0.2s;}
+.proj-link:hover{color:var(--text);border-color:rgba(255,255,255,0.3);}
+.proj-link.main{background:var(--accent);color:#fff;border-color:transparent;}
+.proj-link.main:hover{background:#c40812;}
+
+/* ── SKILLS ── */
+.skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.skill-group{background:var(--bg2);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);padding:22px;}
+.skill-group-title{font-size:0.78rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+.skill-list{display:flex;flex-wrap:wrap;gap:8px;}
+.skill-tag{padding:5px 11px;border-radius:7px;font-size:0.75rem;font-weight:600;background:var(--bg3);border:1px solid rgba(255,255,255,0.08);color:var(--text);}
+.skill-tag:hover{border-color:rgba(229,9,20,0.4);color:var(--accent);transition:all 0.2s;}
+
+/* ── TIMELINE ── */
+.timeline{display:flex;flex-direction:column;gap:0;}
+.tl-item{display:grid;grid-template-columns:120px 1fr;gap:32px;position:relative;}
+.tl-item+.tl-item{margin-top:32px;}
+.tl-date{font-size:0.78rem;font-weight:700;color:var(--text2);padding-top:4px;text-align:right;}
+.tl-content{padding-left:28px;position:relative;}
+.tl-content::before{content:'';position:absolute;left:0;top:8px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px rgba(229,9,20,0.6);}
+.tl-content::after{content:'';position:absolute;left:4px;top:22px;width:2px;bottom:-36px;background:rgba(229,9,20,0.15);}
+.tl-item:last-child .tl-content::after{display:none;}
+.tl-title{font-size:0.95rem;font-weight:700;margin-bottom:4px;}
+.tl-place{font-size:0.78rem;color:var(--accent);font-weight:600;margin-bottom:6px;}
+.tl-desc{font-size:0.82rem;color:var(--text2);line-height:1.6;}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+.contact-info{display:flex;flex-direction:column;gap:16px;}
+.contact-item{display:flex;align-items:center;gap:14px;padding:16px 18px;background:var(--bg2);border:1px solid rgba(255,255,255,0.06);border-radius:var(--radius);text-decoration:none;color:inherit;transition:all 0.2s;}
+.contact-item:hover{border-color:rgba(229,9,20,0.3);background:rgba(229,9,20,0.04);transform:translateX(4px);}
+.contact-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.contact-icon.red{background:rgba(229,9,20,0.15);}
+.contact-icon.dark{background:rgba(255,255,255,0.08);}
+.contact-icon.green{background:rgba(29,185,84,0.15);}
+.contact-label{font-size:0.7rem;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;color:var(--text2);margin-bottom:2px;}
+.contact-val{font-size:0.88rem;font-weight:600;color:var(--text);}
+.contact-form{display:flex;flex-direction:column;gap:14px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group label{font-size:0.75rem;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--text2);}
+.form-group input,.form-group textarea{background:var(--bg2);border:1px solid rgba(255,255,255,0.1);border-radius:9px;padding:11px 14px;color:var(--text);font-family:'Outfit',sans-serif;font-size:0.88rem;outline:none;transition:border-color 0.2s;}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--accent);}
+.form-group textarea{resize:vertical;min-height:110px;}
+.form-submit{padding:13px 28px;border-radius:10px;background:var(--accent);color:#fff;font-family:'Outfit',sans-serif;font-size:0.9rem;font-weight:700;border:none;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px;}
+.form-submit:hover{background:#c40812;transform:translateY(-1px);}
+.form-msg{font-size:0.82rem;color:var(--green);display:none;}
+
+/* ── FOOTER ── */
+footer{background:var(--bg2);border-top:1px solid rgba(255,255,255,0.06);padding:32px 6%;text-align:center;}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--accent);letter-spacing:2px;}
+.footer-copy{font-size:0.78rem;color:var(--text2);}
+.footer-links{display:flex;gap:16px;}
+.footer-links a{font-size:0.78rem;color:var(--text2);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--text);}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:28px;right:28px;background:var(--bg2);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:13px 20px;font-size:0.84rem;display:none;z-index:9999;box-shadow:0 10px 40px rgba(0,0,0,0.5);animation:fadeUp 0.25s ease;}
+#toast.grn{border-color:rgba(29,185,84,0.4);color:var(--green);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;text-align:center;gap:40px;}
+  .hero-avatar{order:-1;}
+  .hero-desc{margin:0 auto 32px;}
+  .hero-ctas{justify-content:center;}
+  .stats-inner{grid-template-columns:repeat(2,1fr);}
+  .stat-item:nth-child(3)::before{display:none;}
+  .projects-grid{grid-template-columns:1fr;}
+  .project-card.featured{grid-column:span 1;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .nav-links{display:none;}
+  .footer-inner{flex-direction:column;text-align:center;}
+}
+@media(max-width:600px){
+  .avatar-wrap{width:200px;height:200px;}
+  .avatar-circle{width:200px;height:200px;font-size:5rem;}
+  .stats-inner{grid-template-columns:1fr 1fr;}
+  .skills-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .tl-item{grid-template-columns:80px 1fr;gap:16px;}
+  section{padding:60px 5%;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">AD<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="theamah-streaming.html" class="nav-back">
+    🎬 Voir Theamah+
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">🚀 Disponible pour de nouveaux projets</div>
+      <h1 class="hero-name">Amadou<br><span class="accent">Doumbouya</span></h1>
+      <p class="hero-role">Développeur <span>Web & Applications</span></p>
+      <p class="hero-desc">
+        Passionné par la création d'expériences numériques impactantes. Je construis des applications web complètes — du front-end au déploiement — avec un focus sur la performance et l'expérience utilisateur.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projets" class="btn-primary">Voir mes projets ↓</a>
+        <a href="#contact" class="btn-secondary">Me contacter</a>
+        <a href="https://github.com/amadou11doumbouya10-lgtm" target="_blank" class="btn-secondary" rel="noopener">
+          GitHub →
+        </a>
+      </div>
+    </div>
+    <div class="hero-avatar">
+      <div class="avatar-wrap">
+        <div class="avatar-ring"></div>
+        <div class="avatar-ring2"></div>
+        <div class="avatar-circle">
+          AD
+          <div class="avatar-badge">✓</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">1+</div>
+      <div class="stat-lbl">Projets déployés</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">10+</div>
+      <div class="stat-lbl">Sessions de développement</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">2400+</div>
+      <div class="stat-lbl">Lignes de code — Theamah+</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100%</div>
+      <div class="stat-lbl">Gratuit &amp; Open source</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJETS -->
+<section id="projets">
+  <div class="sec-inner">
+    <div class="sec-tag">Réalisations</div>
+    <h2 class="sec-title">Mes Projets</h2>
+    <p class="sec-sub">Des applications web que j'ai conçues, développées et déployées de A à Z.</p>
+
+    <div class="projects-grid">
+
+      <!-- FEATURED: Theamah+ -->
+      <a href="theamah-streaming.html" class="project-card featured">
+        <div class="project-thumb featured-thumb" style="background:linear-gradient(135deg,#0f1521 0%,#1a0a0a 50%,#080c14 100%);position:relative;overflow:hidden;">
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+            <div style="text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:4rem;color:#e50914;letter-spacing:4px;">THEAMAH<span style="color:#eef0f4">+</span></div>
+              <div style="font-size:0.78rem;color:#8892a4;letter-spacing:2px;margin-top:4px;">PLATEFORME DE STREAMING GRATUITE</div>
+            </div>
+          </div>
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(229,9,20,0.08) 0%,transparent 70%);pointer-events:none;"></div>
+        </div>
+        <div class="project-body">
+          <div class="project-badges">
+            <span class="badge badge-red">Projet phare</span>
+            <span class="badge badge-blue">HTML/CSS/JS</span>
+            <span class="badge badge-green">Déployé</span>
+            <span class="badge badge-gold">GitHub Pages</span>
+          </div>
+          <div class="project-name">Theamah+ — Plateforme de Streaming</div>
+          <p class="project-desc">
+            Application Netflix-style 100% côté client, sans backend ni dépendances npm.
+            Intègre l'API TMDB (600 000+ titres), 3 sources embed, sous-titres SRT/VTT,
+            bibliothèque personnelle, favoris, historique de visionnage, système de comptes avec hash SHA-256, mode admin, et PWA installable.
+          </p>
+          <div class="project-links" onclick="event.stopPropagation()">
+            <a href="theamah-streaming.html" class="proj-link main">▶ Regarder</a>
+            <a href="https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/" target="_blank" class="proj-link" rel="noopener">🌐 En ligne</a>
+            <a href="https://github.com/amadou11doumbouya10-lgtm/-theamah-streaming" target="_blank" class="proj-link" rel="noopener">GitHub</a>
+          </div>
+        </div>
+      </a>
+
+      <!-- Projet 2: placeholder -->
+      <div class="project-card">
+        <div class="project-thumb" style="background:var(--bg3);height:180px;">
+          <div class="project-thumb-placeholder">🔧</div>
+        </div>
+        <div class="project-body">
+          <div class="project-badges">
+            <span class="badge badge-blue">En cours</span>
+          </div>
+          <div class="project-name">Prochain projet — Bientôt</div>
+          <p class="project-desc">Un nouveau projet est en préparation. Restez connecté sur GitHub pour le découvrir dès sa sortie.</p>
+          <div class="project-links">
+            <a href="https://github.com/amadou11doumbouya10-lgtm" target="_blank" class="proj-link" rel="noopener">Suivre sur GitHub →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projet 3: placeholder -->
+      <div class="project-card">
+        <div class="project-thumb" style="background:var(--bg3);height:180px;">
+          <div class="project-thumb-placeholder">💡</div>
+        </div>
+        <div class="project-body">
+          <div class="project-badges">
+            <span class="badge badge-gold">Idée</span>
+          </div>
+          <div class="project-name">Projet en réflexion</div>
+          <p class="project-desc">Toujours en train d'explorer de nouvelles idées et technologies. Contactez-moi pour collaborer !</p>
+          <div class="project-links">
+            <a href="#contact" class="proj-link">Collaborer →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMPÉTENCES -->
+<section id="competences" style="background:var(--bg2);">
+  <div class="sec-inner">
+    <div class="sec-tag">Savoir-faire</div>
+    <h2 class="sec-title">Compétences</h2>
+    <p class="sec-sub">Les technologies et outils que j'utilise pour construire des produits de qualité.</p>
+
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">🎨 Front-end</div>
+        <div class="skill-list">
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">JavaScript ES6+</span>
+          <span class="skill-tag">DOM API</span>
+          <span class="skill-tag">Responsive Design</span>
+          <span class="skill-tag">PWA</span>
+          <span class="skill-tag">Animations CSS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">⚙️ APIs & Données</div>
+        <div class="skill-list">
+          <span class="skill-tag">REST API</span>
+          <span class="skill-tag">Fetch / Async</span>
+          <span class="skill-tag">TMDB API</span>
+          <span class="skill-tag">EmailJS</span>
+          <span class="skill-tag">localStorage</span>
+          <span class="skill-tag">IndexedDB</span>
+          <span class="skill-tag">Web Share API</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">🛠️ Outils & Déploiement</div>
+        <div class="skill-list">
+          <span class="skill-tag">Git / GitHub</span>
+          <span class="skill-tag">GitHub Pages</span>
+          <span class="skill-tag">GitHub Releases</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">Claude Code</span>
+          <span class="skill-tag">Service Workers</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">🔐 Sécurité</div>
+        <div class="skill-list">
+          <span class="skill-tag">SHA-256 Hash</span>
+          <span class="skill-tag">CSP Headers</span>
+          <span class="skill-tag">Iframe Sandbox</span>
+          <span class="skill-tag">XSS Prevention</span>
+          <span class="skill-tag">Input Sanitization</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">📱 UX & Design</div>
+        <div class="skill-list">
+          <span class="skill-tag">UI Design</span>
+          <span class="skill-tag">Skeleton Loading</span>
+          <span class="skill-tag">Dark Mode</span>
+          <span class="skill-tag">Mobile First</span>
+          <span class="skill-tag">Accessibilité</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">🌐 Divers</div>
+        <div class="skill-list">
+          <span class="skill-tag">Video Streaming</span>
+          <span class="skill-tag">Sous-titres SRT/VTT</span>
+          <span class="skill-tag">Marketing Digital</span>
+          <span class="skill-tag">Débogage</span>
+          <span class="skill-tag">Documentation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section id="parcours">
+  <div class="sec-inner">
+    <div class="sec-tag">Expérience</div>
+    <h2 class="sec-title">Parcours</h2>
+    <p class="sec-sub">Mon évolution dans le développement web.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">2026</div>
+        <div class="tl-content">
+          <div class="tl-title">Créateur — Theamah+ Streaming Platform</div>
+          <div class="tl-place">Projet personnel · Déployé sur GitHub Pages</div>
+          <div class="tl-desc">Conception et développement complet d'une plateforme de streaming style Netflix. Application HTML/CSS/JS vanilla de 2400+ lignes, intégrant TMDB API, gestion d'utilisateurs, bibliothèque personnelle, sous-titres, PWA et audit de sécurité complet.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2025</div>
+        <div class="tl-content">
+          <div class="tl-title">Apprentissage du développement web</div>
+          <div class="tl-place">Auto-formation · HTML, CSS, JavaScript</div>
+          <div class="tl-desc">Apprentissage des fondamentaux du web : HTML/CSS, JavaScript ES6+, APIs REST, responsive design, outils de développement et versioning avec Git.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Futur</div>
+        <div class="tl-content">
+          <div class="tl-title">Prochaines étapes</div>
+          <div class="tl-place">En cours d'exploration</div>
+          <div class="tl-desc">Approfondissement des frameworks (React, Vue), backend (Node.js), bases de données, et déploiement cloud. Ouvert à des opportunités de collaboration et à des projets ambitieux.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="background:var(--bg2);">
+  <div class="sec-inner">
+    <div class="sec-tag">Contact</div>
+    <h2 class="sec-title">Me Contacter</h2>
+    <p class="sec-sub">Vous avez un projet en tête ? Une question ? Je lis tous mes messages.</p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <a href="mailto:amadou11doumbouya10@gmail.com" class="contact-item">
+          <div class="contact-icon red">📧</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-val">amadou11doumbouya10@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://github.com/amadou11doumbouya10-lgtm" target="_blank" class="contact-item" rel="noopener">
+          <div class="contact-icon dark">🐙</div>
+          <div>
+            <div class="contact-label">GitHub</div>
+            <div class="contact-val">amadou11doumbouya10-lgtm</div>
+          </div>
+        </a>
+        <a href="theamah-streaming.html" class="contact-item">
+          <div class="contact-icon green">🎬</div>
+          <div>
+            <div class="contact-label">Projet phare</div>
+            <div class="contact-val">Theamah+ — Plateforme streaming</div>
+          </div>
+        </a>
+        <div class="contact-item" style="cursor:default;">
+          <div class="contact-icon dark">📍</div>
+          <div>
+            <div class="contact-label">Localisation</div>
+            <div class="contact-val">Disponible à distance · Monde entier</div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm" onsubmit="sendMessage(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prénom</label>
+            <input type="text" id="cfPrenom" placeholder="John" required>
+          </div>
+          <div class="form-group">
+            <label>Nom</label>
+            <input type="text" id="cfNom" placeholder="Doe" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="cfEmail" placeholder="john@exemple.com" required>
+        </div>
+        <div class="form-group">
+          <label>Sujet</label>
+          <input type="text" id="cfSujet" placeholder="Proposition de projet, question..." required>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea id="cfMsg" placeholder="Décrivez votre projet ou votre question..." required></textarea>
+        </div>
+        <div>
+          <button type="submit" class="form-submit" id="cfSubmit">Envoyer le message ✉️</button>
+          <div class="form-msg" id="cfOk">✅ Message envoyé ! Je vous réponds rapidement.</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Amadou Doumbouya</div>
+    <div class="footer-copy">© 2026 · Développé avec ❤️ par Amadou Doumbouya</div>
+    <div class="footer-links">
+      <a href="theamah-streaming.html">Theamah+</a>
+      <a href="https://github.com/amadou11doumbouya10-lgtm" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:amadou11doumbouya10@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+function showToast(msg,type){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.className=type==='grn'?'grn':'';
+  t.style.display='block';
+  setTimeout(function(){t.style.display='none';},3500);
+}
+
+function sendMessage(e){
+  e.preventDefault();
+  var btn=document.getElementById('cfSubmit');
+  btn.disabled=true;btn.textContent='Envoi en cours...';
+  var prenom=document.getElementById('cfPrenom').value.trim();
+  var nom=document.getElementById('cfNom').value.trim();
+  var email=document.getElementById('cfEmail').value.trim();
+  var sujet=document.getElementById('cfSujet').value.trim();
+  var msg=document.getElementById('cfMsg').value.trim();
+  var mailtoUrl='mailto:amadou11doumbouya10@gmail.com'
+    +'?subject='+encodeURIComponent('[Portfolio] '+sujet+' — '+prenom+' '+nom)
+    +'&body='+encodeURIComponent('De : '+prenom+' '+nom+'\nEmail : '+email+'\n\n'+msg);
+  window.open(mailtoUrl,'_blank');
+  setTimeout(function(){
+    document.getElementById('cfOk').style.display='block';
+    document.getElementById('contactForm').reset();
+    btn.disabled=false;btn.textContent='Envoyer le message ✉️';
+    showToast('Message prêt — vérifiez votre client email','grn');
+  },600);
+}
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var target=document.querySelector(this.getAttribute('href'));
+    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
+</script>
+</body>
+</html>
