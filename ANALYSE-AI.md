@@ -325,6 +325,7 @@ git push
 | 🟡 À corriger | Modal d'aide (ligne ~894) mentionne encore "VidSrc.me · VSembed" (sources mortes). |
 | 🟡 À faire | Trouver de nouvelles sources streaming compatibles github.io (actuellement seulement 3). |
 | 🟢 Informatif | `brightadnetwork.com` chargé par les embed services (non bloquable depuis notre page). Bandeau uBlock Origin ajouté le 02/06/2026. |
+| 🟢 Fait | Barre tactile mobile ajoutée le 02/06/2026 — classe `embed-mode` sur `#plyOv`, CSS `.ply-mob-bar` / `.ply-mob-btn`. |
 
 ---
 
@@ -344,7 +345,8 @@ git push
 | 10 | 24/05/2026 | Dossier PUBLICITE/ : 8 visuels marketing HTML |
 | 11 | 24/05/2026 | Audit navigateur réel → AutoEmbed seule confirmée. Nouveaux candidats ajoutés |
 | 12 | 26/05/2026 | Audit 40+ sources — 3 confirmées : AutoEmbed + VidSrc.pm + VidSrc.lol |
-| 13 | 02/06/2026 | Bandeau uBlock Origin dans lecteur, message VF corrigé, investigation brightadnetwork.com |
+| 13 | 02/06/2026 | Bandeau uBlock Origin dans lecteur, message VF corrigé, investigation brightadnetwork.com, ANALYSE-AI.md créé |
+| 14 | 02/06/2026 | Barre tactile mobile dans le lecteur embed (3 boutons : Suivante / Plein écran / Fermer) — visible uniquement sur mobile <600px et uniquement en mode streaming (classe `embed-mode`) |
 
 ---
 

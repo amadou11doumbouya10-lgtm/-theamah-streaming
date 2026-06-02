@@ -147,6 +147,13 @@ main{padding:0 4%;}
 .sub-ov{position:absolute;bottom:52px;left:50%;transform:translateX(-50%);z-index:50;pointer-events:none;text-align:center;width:92%;max-width:900px;}
 .sub-text{display:inline;background:rgba(0,0,0,0.82);color:#fff;font-size:1.05rem;font-weight:500;padding:4px 14px;border-radius:5px;line-height:1.8;white-space:pre-line;text-shadow:0 1px 4px #000;}
 .sub-bar{display:none;align-items:center;gap:8px;padding:7px 0 3px;flex-wrap:wrap;}
+.ply-mob-bar{display:none;}
+@media(max-width:600px){
+  .ply-ov.embed-mode .ply-mob-bar{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:6001;background:rgba(8,12,20,0.97);border-top:1px solid rgba(255,255,255,0.09);padding:10px 16px env(safe-area-inset-bottom,14px);gap:10px;justify-content:space-around;align-items:stretch;}
+  .ply-mob-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.07);color:var(--text);border-radius:12px;padding:12px 8px;cursor:pointer;font-size:0.65rem;font-weight:700;letter-spacing:.5px;min-height:58px;transition:background 0.15s,border-color 0.15s;font-family:'Outfit',sans-serif;}
+  .ply-mob-btn:active{background:var(--accent);border-color:var(--accent);}
+  .ply-mob-icon{font-size:1.3rem;line-height:1;}
+}
 .sub-bar.show{display:flex;}
 .sub-sync-btn{background:var(--bg3);border:1px solid rgba(255,255,255,0.12);color:var(--text2);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:700;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
 .sub-sync-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);}
@@ -680,6 +687,11 @@ body.light .mod-box,.body.light .auth-box,.body.light .adm-box,.body.light .help
     <button onclick="clearSubs()" style="background:rgba(229,9,20,0.15);border:1px solid rgba(229,9,20,0.3);color:var(--accent);padding:4px 10px;border-radius:6px;cursor:pointer;font-size:0.72rem;font-weight:700;font-family:Outfit,sans-serif;margin-left:4px;">&#10005; Retirer</button>
   </div>
   <div class="ep-wrap" id="epWrap" style="display:none;"></div>
+  <div class="ply-mob-bar" id="plyMobBar">
+    <button class="ply-mob-btn" onclick="nextSrc()"><span class="ply-mob-icon">&#8594;</span><span>Suivante</span></button>
+    <button class="ply-mob-btn" onclick="toggleFullPly()"><span class="ply-mob-icon">&#9974;</span><span>Plein écran</span></button>
+    <button class="ply-mob-btn" onclick="closePly()" style="background:rgba(229,9,20,0.12);border-color:rgba(229,9,20,0.25);"><span class="ply-mob-icon">&#10005;</span><span>Fermer</span></button>
+  </div>
 </div>
 
 <!-- PANEL ADMIN -->
@@ -1185,6 +1197,7 @@ function playLocal(id,sIdx,eIdx){
   sIdx=sIdx||0; eIdx=eIdx||0;
   document.getElementById('plyTitle').textContent=film.title||'Film';
   document.getElementById('plyOv').classList.add('open');
+  document.getElementById('plyOv').classList.remove('embed-mode');
   document.body.style.overflow='hidden';
   var isTv=film.type==='tv';
   var hasSeas=isTv&&film.seasons&&film.seasons.length>0;
@@ -1327,7 +1340,7 @@ async function playTmdb(id,type,title){
   document.getElementById('plyTitle').textContent=title;
   document.getElementById('plySub').textContent=type==='tv'?'Série — S1E1':'Film';
   document.getElementById('epWrap').style.display='none';
-  document.getElementById('plyOv').classList.add('open');
+  document.getElementById('plyOv').classList.add('open','embed-mode');
   document.body.style.overflow='hidden';
   document.getElementById('plyBox').dataset.filmId='';
   _loadEmbed();
@@ -1471,7 +1484,7 @@ function closePly(){
   clearTimeout(_autoTryTimer); _autoTryEnabled=false;
   stopSubTimer();
   if(document.fullscreenElement) document.exitFullscreen();
-  document.getElementById('plyOv').classList.remove('open');
+  document.getElementById('plyOv').classList.remove('open','embed-mode');
   document.getElementById('plyBox').innerHTML='<div class="ply-idle"><div class="spin"></div></div>';
   document.getElementById('plyBox').dataset.filmId='';
   document.getElementById('epWrap').style.display='none';
