@@ -326,6 +326,11 @@ git push
 | 🟡 À faire | Trouver de nouvelles sources streaming compatibles github.io (actuellement seulement 3). |
 | 🟢 Informatif | `brightadnetwork.com` chargé par les embed services (non bloquable depuis notre page). Bandeau uBlock Origin ajouté le 02/06/2026. |
 | 🟢 Fait | Barre tactile mobile ajoutée le 02/06/2026 — classe `embed-mode` sur `#plyOv`, CSS `.ply-mob-bar` / `.ply-mob-btn`. |
+| 🟢 Fait | Hash routing ajouté le 02/06/2026 — `initHashRouting()`, format `#tmdb=ID` ou `#tmdb=ID&type=tv`. |
+| 🟡 À tester | **Frembed.click** VF native — `https://frembed.click/api/film.php?id={id}&lang=vf` — rotation domaine (.pro→.bond→.click→.one). Si confirmé : ajouter `var FB_BASE='https://frembed.click'` et les deux entrées `_SRCS`. |
+| 🟡 À tester | **VidSrc.icu** — `https://vidsrc.icu/embed/movie/{id}` (même format que VidSrc.pm). |
+| 🟡 À tester | **Embed.su** — `https://embed.su/embed/movie/{id}` — était mort le 26/05, peut avoir repris. |
+| 🟡 À tester | **VidSrc.fyi** — `https://vidsrc.fyi/embed/movie/{id}` — récent, 1080p. |
 
 ---
 
@@ -347,6 +352,7 @@ git push
 | 12 | 26/05/2026 | Audit 40+ sources — 3 confirmées : AutoEmbed + VidSrc.pm + VidSrc.lol |
 | 13 | 02/06/2026 | Bandeau uBlock Origin dans lecteur, message VF corrigé, investigation brightadnetwork.com, ANALYSE-AI.md créé |
 | 14 | 02/06/2026 | Barre tactile mobile dans le lecteur embed (3 boutons : Suivante / Plein écran / Fermer) — visible uniquement sur mobile <600px et uniquement en mode streaming (classe `embed-mode`) |
+| 15 | 02/06/2026 | Hash routing : `#tmdb=27205` ou `#tmdb=1396&type=tv` ou `#local=xxx` — `initHashRouting()` au DOMContentLoaded, `playTmdb()` écrit le hash, `closePly()` le nettoie |
 
 ---
 

@@ -309,11 +309,55 @@ Breakpoints : `900px` (nav mobile) · `600px` (bottom sheets)
 - Découverte : VidSrc.me, VSembed, 2Embed, VidLink, MultiEmbed, StreamVault, vidsrcme.su = **ne fonctionnent pas** (X-Frame-Options bloque embedding)
 - **AutoEmbed.co** = seule source confirmée fonctionnelle par test utilisateur en navigateur
 - **VidAPI** retiré : affiche "Sandbox not allowed" explicitement
-- Nouveaux candidats ajoutés : **EzVidAPI** (sandbox-friendly), **VidLux**, **VikingEmbed**
-- Tooltip VF mis à jour (Frembed retiré de la mention)
-- IFRAME_WHITELIST réduite aux 4 domaines actifs
+- Nouveaux candidats ajoutés : EzVidAPI, VidLux, VikingEmbed → **testés ensuite, ne répondent pas**
+
+### Session 12 — 26/05/2026
+- Audit complet 40+ sources — résultat final : **3 sources confirmées** navigateur réel depuis github.io
+- **VidSrc.pm** et **VidSrc.lol** confirmées en plus d'AutoEmbed
+- EzVidAPI, VidLux, VikingEmbed, NontonGo, MoviesAPI.to → testés, ne répondent pas
+- ANALYSE-AI.md créé + memory/project_sources_audit.md mis à jour
+
+### Session 13 — 02/06/2026
+- Bandeau rouge "Pubs / uBlock Origin" ajouté dans `_buildSrcBar()`
+- Message VF corrigé (suppression références VidSrc.me/VSembed mortes)
+- Fix modal d'aide ligne ~894 (même correction)
+- Investigation `brightadnetwork.com` — non bloquable depuis notre page (chargé dans l'iframe par les embed services)
+- **ANALYSE-AI.md** créé — document complet 16 sections pour autres IA
+
+### Session 14 — 02/06/2026
+- **Barre tactile mobile** : 3 boutons (Suivante / Plein écran / Fermer) dans le lecteur embed
+- Visible uniquement mobile <600px via classe `embed-mode` sur `#plyOv`
+- `playTmdb()` ajoute la classe, `playLocal()` et `closePly()` la retirent
+
+### Session 15 — 02/06/2026
+- **Hash routing** : partage direct d'un film par URL
+- Format : `#tmdb=27205` (film) ou `#tmdb=1396&type=tv` (série) ou `#local=local_xxx`
+- `playTmdb()` écrit le hash, `closePly()` le nettoie
+- `initHashRouting()` appelé au `DOMContentLoaded` — ouvre automatiquement le film au chargement
 
 ## ⬜ RESTE À FAIRE
 
-- Tester EzVidAPI, VidLux, VikingEmbed en navigateur depuis github.io
+### Sources à tester en navigateur réel depuis github.io
+
+| Source | URL film à tester | Notes |
+|---|---|---|
+| **Frembed.click** | `https://frembed.click/api/film.php?id=27205&lang=vf` | VF native, 28k films, rotation domaine (.pro→.bond→.click→.one) — si confirmé, ajouter `var FB_BASE` |
+| **VidSrc.icu** | `https://vidsrc.icu/embed/movie/27205` | Même format que VidSrc.pm |
+| **Embed.su** | `https://embed.su/embed/movie/27205` | Était mort le 26/05, peut avoir été relancé |
+| **VidSrc.fyi** | `https://vidsrc.fyi/embed/movie/27205` | Récent, 1080p |
+
+Script de test console (à coller dans F12 sur github.io avec un film en streaming ouvert) :
+```js
+var ifr=document.querySelector('#plyBox iframe');
+var i=0,C=[
+  {n:'Frembed VF', u:'https://frembed.click/api/film.php?id=27205&lang=vf'},
+  {n:'VidSrc.icu', u:'https://vidsrc.icu/embed/movie/27205'},
+  {n:'Embed.su',   u:'https://embed.su/embed/movie/27205'},
+  {n:'VidSrc.fyi', u:'https://vidsrc.fyi/embed/movie/27205'},
+];
+window.tN=function(){if(i>=C.length){console.log('Fin');return;}var s=C[i++];ifr.src=s.u;console.log('Test: '+s.n+' — tape tN() après 8s');};
+tN();
+```
+
+### Autres
 - Convertir `How_High_DVDRiP11.avi` en `.mp4` pour lecture dans le navigateur
