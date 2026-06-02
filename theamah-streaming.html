@@ -1067,6 +1067,21 @@ async function api(path,params){
   return res.json();
 }
 
+// ════════ HASH ROUTING ════════
+var _hashInited=false;
+function initHashRouting(){
+  if(_hashInited)return; _hashInited=true;
+  var h=location.hash.slice(1); if(!h)return;
+  var p={};
+  h.split('&').forEach(function(s){var kv=s.split('=');if(kv[0])p[kv[0]]=decodeURIComponent(kv[1]||'');});
+  if(p.tmdb){
+    var id=parseInt(p.tmdb); var type=p.type||'movie';
+    if(!isNaN(id)) api('/'+type+'/'+id).then(function(d){playTmdb(id,type,d.title||d.name||'Film');}).catch(function(){playTmdb(id,type,'Film');});
+  } else if(p.local){
+    setTimeout(function(){playLocal(p.local);},300);
+  }
+}
+
 // ════════ HOME ════════
 async function loadHome(){
   document.getElementById('homeC').innerHTML=
@@ -1343,6 +1358,7 @@ async function playTmdb(id,type,title){
   document.getElementById('plyOv').classList.add('open','embed-mode');
   document.body.style.overflow='hidden';
   document.getElementById('plyBox').dataset.filmId='';
+  history.replaceState(null,'',location.pathname+location.search+'#tmdb='+id+(type==='tv'?'&type=tv':''));
   _loadEmbed();
   var ew=document.getElementById('epWrap');
   if(type==='tv'){
@@ -1485,6 +1501,7 @@ function closePly(){
   stopSubTimer();
   if(document.fullscreenElement) document.exitFullscreen();
   document.getElementById('plyOv').classList.remove('open','embed-mode');
+  history.replaceState(null,'',location.pathname+location.search);
   document.getElementById('plyBox').innerHTML='<div class="ply-idle"><div class="spin"></div></div>';
   document.getElementById('plyBox').dataset.filmId='';
   document.getElementById('epWrap').style.display='none';
@@ -1686,6 +1703,7 @@ document.addEventListener('DOMContentLoaded',function(){
   if(typeof emailjs!=='undefined'&&EJS_PUBLIC_KEY!=='VOTRE_PUBLIC_KEY'){
     emailjs.init(EJS_PUBLIC_KEY);
   }
+  initHashRouting();
 });
 function scrollC(id,d){document.getElementById(id).scrollBy({left:d*380,behavior:'smooth'});}
 
