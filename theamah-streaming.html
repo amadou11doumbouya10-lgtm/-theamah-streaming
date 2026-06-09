@@ -1734,6 +1734,7 @@ async function openDetail(id,type){
   var trailer=null;
   (v.results||[]).forEach(function(x){if(!trailer&&x.type==='Trailer'&&x.site==='YouTube')trailer=x;});
   if(!trailer)(v.results||[]).forEach(function(x){if(!trailer&&x.site==='YouTube')trailer=x;});
+  if(!trailer){try{var vEn=await api('/'+type+'/'+id+'/videos',{language:'en-US'});(vEn.results||[]).forEach(function(x){if(!trailer&&x.type==='Trailer'&&x.site==='YouTube')trailer=x;});if(!trailer)(vEn.results||[]).forEach(function(x){if(!trailer&&x.site==='YouTube')trailer=x;});}catch(e){}}
   var bd=d.backdrop_path?IMG+'w1280'+d.backdrop_path:(d.poster_path?IMG+'w500'+d.poster_path:'');
   var ps=(d.poster_path||'').replace(/'/g,"\\'");
   var loc=myLib.find(function(m){return m.title&&m.title.toLowerCase()===raw.toLowerCase();});
@@ -1782,14 +1783,16 @@ async function openDetail(id,type){
         ?'<button class="hbtn hbtn-play" onclick="closeMod();playTmdb('+id+',\''+type+'\',\''+t+'\')">&#9654; Regarder</button>'
         :'<button class="hbtn hbtn-info" onclick="window.open(\'https://www.youtube.com/results?search_query='+encodeURIComponent(raw)+' bande annonce\',\'_blank\')">&#9654; YouTube</button>'))+
     '<button class="hbtn hbtn-fav" id="mFavB" onclick="toggleFav(event,'+id+',\''+t+'\',\''+ps+'\',\''+type+'\');updMFav('+id+')">'+(isFav?'&#11088;':'&#9734;')+'</button>'+
+    (trailer?'<button class="hbtn hbtn-info" onclick="document.getElementById(\'trailerSec\').scrollIntoView({behavior:\'smooth\'});loadTrailer(\''+trailer.key+'\')">&#127916; Trailer</button>':'')+
     '<button class="hbtn hbtn-info" onclick="shareFilm(\''+t+'\','+id+')" title="Partager">&#128257; Partager</button>'+
     (loc?'':'<button class="hbtn hbtn-info" onclick="closeMod();openAdmin()">&#9881; Ajouter</button>')+
     '</div>'+
-    (trailer?'<p style="font-weight:700;font-size:0.85rem;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Bande-annonce</p><iframe style="width:100%;aspect-ratio:16/9;border-radius:9px;border:none;" src="https://www.youtube.com/embed/'+trailer.key+'?rel=0" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe>':'')+
+    (trailer?'<div id="trailerSec" style="margin-top:18px;"><p style="font-weight:700;font-size:0.85rem;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">&#127916; Bande-annonce</p><div onclick="loadTrailer(\''+trailer.key+'\')" style="position:relative;width:100%;aspect-ratio:16/9;border-radius:9px;overflow:hidden;cursor:pointer;background:#000;"><img src="https://img.youtube.com/vi/'+trailer.key+'/maxresdefault.jpg" style="width:100%;height:100%;object-fit:cover;opacity:0.75;display:block;" onerror="this.src=\'https://img.youtube.com/vi/'+trailer.key+'/hqdefault.jpg\'"><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;"><div style="width:68px;height:68px;background:rgba(229,9,20,0.92);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.9rem;box-shadow:0 4px 24px rgba(229,9,20,0.5);">&#9654;</div></div></div></div>':'')+
     simHtml+
     '</div>';
 }
 function updMFav(id){var f=favs.some(function(x){return x.id===id;});var b=document.getElementById('mFavB');if(b)b.innerHTML=f?'&#11088;':'&#9734;';}
+function loadTrailer(key){var s=document.getElementById('trailerSec');if(!s)return;s.innerHTML='<p style="font-weight:700;font-size:0.85rem;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">&#127916; Bande-annonce</p><iframe style="width:100%;aspect-ratio:16/9;border-radius:9px;border:none;" src="https://www.youtube.com/embed/'+key+'?rel=0&autoplay=1" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe>';}
 function closeMod(){document.getElementById('modOv').classList.remove('open');document.body.style.overflow='';}
 function modOut(e){if(e.target===document.getElementById('modOv'))closeMod();}
 function shareFilm(title,tmdbId){
