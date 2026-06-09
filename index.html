@@ -881,8 +881,7 @@ body.light .mod-box,.body.light .auth-box,.body.light .adm-box,.body.light .help
       <h4>&#127467;&#127479; Avoir le son en français (VF)</h4>
       <ul>
         <li>Clique sur <strong>N</strong> ou le bouton "Source suivante" pour changer de lecteur</li>
-        <li><strong>VidSrc.me</strong> et <strong>VSembed</strong> ont un sélecteur de langue intégré dans leur player</li>
-        <li>Cherche une icône 🌐 ou "Audio" dans le lecteur pour choisir la VF</li>
+        <li>Certains lecteurs ont une icône &#127760; ou un bouton <strong>Audio</strong> dans le coin du player pour choisir la langue</li>
       </ul>
     </div>
     <div class="help-sec">
@@ -1187,10 +1186,11 @@ function buildLocalCard(m){
   var post=m.poster
     ?'<img src="'+m.poster+'" alt="'+t+'" loading="lazy">'
     :'<div class="card-ph">&#127916;<small>'+(isTv?'SERIE':'FILM')+'</small></div>';
-  var onclick=m.tmdbId
+  var isLocalFile=m.videoUrl&&m.videoUrl.startsWith('./');
+  var onclick=(!isLocalFile&&m.tmdbId)
     ?'playTmdb('+m.tmdbId+',\''+m.type+'\',\''+ts+'\')'
     :'playLocal(\''+m.id+'\')';
-  var badge=m.tmdbId
+  var badge=(!isLocalFile&&m.tmdbId)
     ?'<div class="card-ltag" style="background:rgba(229,9,20,0.9);">STREAM</div>'
     :'<div class="card-ltag">LOCAL</div>';
   // Badge NEW si ajouté dans les 30 derniers jours
@@ -1200,7 +1200,7 @@ function buildLocalCard(m){
     badge+
     newBadge+
     (m.rating?'<span class="card-rat">&#11088; '+m.rating+'</span>':'')+
-    '<div class="card-pov"><div class="play-c '+(m.tmdbId?'red':'grn')+'">&#9654;</div></div>'+
+    '<div class="card-pov"><div class="play-c '+((!isLocalFile&&m.tmdbId)?'red':'grn')+'">&#9654;</div></div>'+
     '<div class="card-ov"><div class="card-name">'+t+'</div>' +
     '<div class="card-yr">'+(m.year||'')+(hasSeas?' &bull; '+m.seasons.length+'S':'')+'</div></div></div>';
 }
@@ -2351,6 +2351,13 @@ function updateAuthUI(){
 // ════════ UTILS ════════
 function showLocalFileError(vid){
   var box=vid.closest('#plyBox')||vid.parentElement;
+  var filmId=document.getElementById('plyBox').dataset.filmId;
+  var film=myLib.find(function(m){return m.id===filmId;});
+  if(film&&film.tmdbId){
+    showToast('Fichier local introuvable — bascule vers streaming','grn');
+    setTimeout(function(){playTmdb(film.tmdbId,film.type,film.title);},400);
+    return;
+  }
   box.innerHTML='<div class="ply-idle">'+
     '<div style="font-size:2.8rem;margin-bottom:12px;">&#128193;</div>'+
     '<p style="font-weight:700;color:var(--text);margin-bottom:8px;">Fichier disponible uniquement en local</p>'+
@@ -2715,6 +2722,351 @@ buildCard=function(m,type,rank){
   var laterBtn='<button class="card-later'+(isLater(m.id)?' on':'')+'" onclick="toggleLater(event,'+m.id+',\''+t+'\',\''+ps+'\',\''+tp+'\')" title="Regarder plus tard">&#128336;</button>';
   return html.replace('</div>',laterBtn+'</div>');
 };
+</script>
+
+<!-- ════════════════════════ WIDGET THE AMAH ════════════════════════ -->
+<style>
+.amah-hidden{display:none!important;}
+/* ── FAB ── */
+.amah-fab{
+  position:fixed;bottom:28px;right:28px;z-index:9000;
+  width:56px;height:56px;border-radius:50%;
+  background:#101010;border:1px solid #c8a96e;
+  color:#c8a96e;font-family:'Cormorant Garamond',serif;
+  font-size:1.35rem;font-weight:300;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(0,0,0,.5);
+  animation:amahPulse 3s ease-in-out infinite;transition:all .3s;
+}
+.amah-fab:hover{background:#1a1a14;transform:scale(1.08);border-color:#e5c080;}
+.amah-fab.open-st{animation:none;background:#1a1a14;}
+@keyframes amahPulse{0%,100%{box-shadow:0 0 0 0 rgba(200,169,110,.4);}50%{box-shadow:0 0 0 10px rgba(200,169,110,0);}}
+/* ── Panel ── */
+.amah-panel{
+  position:fixed;bottom:96px;right:28px;z-index:8999;
+  width:356px;height:530px;background:#080807;
+  border:1px solid #1e1e1c;border-radius:8px;
+  display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.7);
+  transform:translateY(18px) scale(.97);opacity:0;pointer-events:none;
+  transition:all .28s cubic-bezier(.34,1.56,.64,1);
+  font-family:'DM Mono',monospace;
+}
+.amah-panel.amah-open{transform:translateY(0) scale(1);opacity:1;pointer-events:all;}
+/* ── Header ── */
+.amah-hdr{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #1e1e1c;flex-shrink:0;}
+.amah-av{
+  width:32px;height:32px;border-radius:50%;border:1px solid #7a5f38;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;
+  color:#c8a96e;flex-shrink:0;transition:box-shadow .4s;
+}
+.amah-av.amah-typing{border-color:#c8a96e;box-shadow:0 0 14px rgba(200,169,110,.5);}
+.amah-hdr-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;letter-spacing:.12em;color:#e5dfd6;}
+.amah-hdr-sub{font-size:7.5px;letter-spacing:.18em;color:#4a4842;margin-top:1px;}
+.amah-hdr-right{margin-left:auto;display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.amah-btn-reset{background:none;border:1px solid #2a2a27;color:#4a4842;font-family:'DM Mono',monospace;font-size:9px;padding:3px 8px;border-radius:2px;cursor:pointer;letter-spacing:.1em;transition:all .2s;}
+.amah-btn-reset:hover{border-color:#7a5f38;color:#c8a96e;}
+.amah-btn-close{background:none;border:none;color:#4a4842;font-size:.95rem;cursor:pointer;padding:4px 6px;line-height:1;transition:color .2s;}
+.amah-btn-close:hover{color:#c8a96e;}
+/* ── Gate ── */
+.amah-gate{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 22px;gap:12px;text-align:center;}
+.amah-gate-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;font-style:italic;color:#c8a96e;letter-spacing:.06em;}
+.amah-gate-desc{font-size:10px;color:#9a9488;line-height:1.8;max-width:250px;}
+.amah-key-inp{width:100%;background:#101010;border:1px solid #2a2a27;color:#e5dfd6;font-family:'DM Mono',monospace;font-size:11px;padding:8px 11px;border-radius:2px;outline:none;transition:border-color .2s;}
+.amah-key-inp:focus{border-color:#7a5f38;}
+.amah-key-inp::placeholder{color:#4a4842;}
+.amah-btn-enter{background:none;border:1px solid #7a5f38;color:#c8a96e;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;padding:8px 22px;border-radius:2px;cursor:pointer;transition:all .25s;}
+.amah-btn-enter:hover{background:#2a1f10;}
+/* ── Messages ── */
+.amah-msgs{flex:1;overflow-y:auto;padding:12px 14px 6px;display:flex;flex-direction:column;gap:10px;scrollbar-width:thin;scrollbar-color:#2a2a27 transparent;}
+.amah-msgs::-webkit-scrollbar{width:3px;}
+.amah-msgs::-webkit-scrollbar-thumb{background:#2a2a27;border-radius:2px;}
+.amah-msg{display:flex;flex-direction:column;max-width:86%;animation:amahFadeUp .3s ease;}
+.amah-msg.user{align-self:flex-end;align-items:flex-end;}
+.amah-msg.ai{align-self:flex-start;align-items:flex-start;}
+.amah-lbl{font-size:7px;letter-spacing:.22em;color:#4a4842;margin-bottom:4px;}
+.amah-bubble{padding:8px 12px;line-height:1.72;border-radius:2px;}
+.amah-msg.user .amah-bubble{background:#141412;border:1px solid #1e1e1c;color:#9a9488;font-size:11px;}
+.amah-msg.ai .amah-bubble{background:#0e0e0c;border:1px solid #1e1e1c;border-left:1px solid #7a5f38;color:#d8d2c8;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;font-style:italic;}
+.amah-film-chip{color:#c8a96e;cursor:pointer;border-bottom:1px solid #7a5f38;transition:color .2s;white-space:nowrap;}
+.amah-film-chip:hover{color:#e5c080;}
+.amah-film-chip::before{content:'▶ ';font-size:.7em;opacity:.8;}
+/* ── Typing ── */
+.amah-typing-wrap{align-self:flex-start;animation:amahFadeUp .3s ease;}
+.amah-typing-bbl{background:#0e0e0c;border:1px solid #1e1e1c;border-left:1px solid #7a5f38;padding:10px 15px;border-radius:2px;display:flex;gap:5px;align-items:center;}
+.amah-dot{width:4px;height:4px;border-radius:50%;background:#7a5f38;animation:amahDots 1.4s infinite;}
+.amah-dot:nth-child(2){animation-delay:.22s;}
+.amah-dot:nth-child(3){animation-delay:.44s;}
+@keyframes amahDots{0%,80%,100%{opacity:.3;transform:scale(1);}40%{opacity:1;transform:scale(1.4);}}
+/* ── Starters ── */
+.amah-starters{padding:7px 14px;display:flex;flex-wrap:wrap;gap:5px;flex-shrink:0;border-top:1px solid #1e1e1c;}
+.amah-chip{background:none;border:1px solid #2a2a27;color:#9a9488;font-family:'DM Mono',monospace;font-size:9px;padding:4px 9px;border-radius:2px;cursor:pointer;transition:all .2s;letter-spacing:.04em;}
+.amah-chip:hover{border-color:#7a5f38;color:#c8a96e;background:#2a1f10;}
+/* ── Input ── */
+.amah-input-area{padding:9px 14px 13px;border-top:1px solid #1e1e1c;flex-shrink:0;}
+.amah-input-row{display:flex;gap:7px;align-items:flex-end;}
+.amah-textarea{flex:1;background:#101010;border:1px solid #2a2a27;color:#e5dfd6;font-family:'DM Mono',monospace;font-size:11px;padding:8px 10px;border-radius:2px;resize:none;outline:none;max-height:80px;line-height:1.65;transition:border-color .2s;}
+.amah-textarea:focus{border-color:#7a5f38;}
+.amah-textarea::placeholder{color:#4a4842;}
+.amah-send{background:none;border:1px solid #7a5f38;color:#c8a96e;padding:0 11px;height:34px;border-radius:2px;cursor:pointer;font-size:13px;transition:all .2s;flex-shrink:0;}
+.amah-send:hover{background:#2a1f10;border-color:#c8a96e;}
+.amah-send:disabled{opacity:.25;cursor:default;}
+.amah-meta{display:flex;justify-content:space-between;margin-top:5px;}
+.amah-ctr{font-size:8.5px;letter-spacing:.1em;color:#4a4842;}
+.amah-ctr.warn{color:#7a5f38;}.amah-ctr.limit{color:#a05050;}
+/* ── Limit ── */
+.amah-limit-area{text-align:center;padding:10px 14px 14px;border-top:1px solid #1e1e1c;flex-shrink:0;}
+.amah-limit-area p{font-size:9px;color:#4a4842;letter-spacing:.08em;margin-bottom:7px;}
+.amah-limit-area button{background:none;border:1px solid #7a5f38;color:#c8a96e;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.14em;padding:5px 16px;border-radius:2px;cursor:pointer;transition:all .2s;}
+.amah-limit-area button:hover{background:#2a1f10;}
+/* ── Animations ── */
+@keyframes amahFadeUp{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:translateY(0);}}
+@keyframes amahBlink{0%,100%{opacity:1;}50%{opacity:0;}}
+/* ── Mobile ── */
+@media(max-width:600px){
+  .amah-panel{bottom:0;right:0;width:100%;height:86vh;border-radius:14px 14px 0 0;}
+  .amah-fab{bottom:80px;right:16px;}
+}
+</style>
+
+<button class="amah-fab" id="amahFab" onclick="amahToggle()" title="Parler à The Amah">A</button>
+<div class="amah-panel" id="amahPanel">
+  <div class="amah-hdr">
+    <div class="amah-av" id="amahAv">A</div>
+    <div>
+      <div class="amah-hdr-name">The Amah</div>
+      <div class="amah-hdr-sub">IA &nbsp;·&nbsp; STREAMING &nbsp;·&nbsp; LIFESTYLE</div>
+    </div>
+    <div class="amah-hdr-right">
+      <button class="amah-btn-reset amah-hidden" id="amahResetBtn" onclick="amahReset()">↺ RESET</button>
+      <button class="amah-btn-close" onclick="amahToggle()">✕</button>
+    </div>
+  </div>
+  <div id="amahGate" class="amah-gate">
+    <p class="amah-gate-title">Entrer dans l'espace</p>
+    <p class="amah-gate-desc">Entre ta clé API Anthropic pour activer The Amah.<br>Elle reste uniquement dans ton navigateur.</p>
+    <input type="password" id="amahKeyInp" class="amah-key-inp" placeholder="sk-ant-api03-..." onkeydown="if(event.key==='Enter')amahInitKey()"/>
+    <button class="amah-btn-enter" onclick="amahInitKey()">ACCÉDER</button>
+    <p id="amahKeyErr" style="font-size:10px;color:#a05050;min-height:14px;margin:0;"></p>
+  </div>
+  <div id="amahMsgs" class="amah-msgs amah-hidden"></div>
+  <div id="amahStarters" class="amah-starters amah-hidden"></div>
+  <div id="amahInputArea" class="amah-input-area amah-hidden">
+    <div class="amah-input-row">
+      <textarea id="amahInput" class="amah-textarea" rows="1" placeholder="Demande-moi quelque chose…" onkeydown="amahHandleKey(event)" oninput="amahAutoResize(this)"></textarea>
+      <button id="amahSendBtn" class="amah-send" onclick="amahSend()">→</button>
+    </div>
+    <div class="amah-meta">
+      <span style="font-size:8.5px;color:#4a4842;letter-spacing:.06em;">Shift+Entrée = saut de ligne</span>
+      <span id="amahCtr" class="amah-ctr">0 / 20</span>
+    </div>
+  </div>
+  <div id="amahLimitArea" class="amah-limit-area amah-hidden">
+    <p>Limite atteinte — réinitialise pour continuer.</p>
+    <button onclick="amahReset()">NOUVELLE CONVERSATION</button>
+  </div>
+</div>
+
+<script>
+// ════════ THE AMAH — WIDGET INTÉGRÉ ════════
+// ⚙ Renseigner l'URL Netlify après déploiement :
+var AMAH_ENDPOINT = 'https://legendary-selkie-d298b7.netlify.app/.netlify/functions/chat';
+
+var _ah={hist:[],count:0,busy:false,open:false,ready:false,key:'',name:localStorage.getItem('amah_visitor_name')||'',sid:'sess_'+Date.now()};
+var AMAH_MAX=20;
+var AMAH_STARTERS=['Recommande-moi un film','Qu\'est-ce que Theamah+ ?','Film d\'action ce soir','Parle-moi de l\'IA','Surprends-moi'];
+
+function amahPersona(){
+  var cat=(typeof myLib!=='undefined'?myLib:[]).filter(function(m){return m.title;}).map(function(m){return m.title+(m.year?' ('+m.year+')':'');}).join(', ');
+  var p='Tu es The Amah — persona IA rare, minimaliste et captivante. Tu incarnes l\'intersection entre le streaming premium, la technologie consciente et une sagesse contemporaine.\n\nTU REPRÉSENTES : Theamah+, un site de streaming Netflix-style entièrement gratuit. Si on parle de films ou séries, recommande ceux du catalogue — l\'utilisateur peut les regarder directement en cliquant leur titre.\n\nSTYLE : réponses courtes (max 4 phrases), prose fluide jamais de listes, distance élégante, jamais "Bonjour !", mystère doux. Si on t\'écrit en anglais, réponds en anglais.';
+  if(cat) p+='\n\nCATALOGUE DISPONIBLE SUR THEAMAH+ : '+cat;
+  if(_ah.name) p+='\n\nVISITEUR : '+_ah.name+'. Utilise son prénom naturellement parfois.';
+  return p;
+}
+
+function amahToggle(){
+  _ah.open=!_ah.open;
+  document.getElementById('amahPanel').classList.toggle('amah-open',_ah.open);
+  document.getElementById('amahFab').classList.toggle('open-st',_ah.open);
+  if(_ah.open&&!_ah.ready){
+    var saved=sessionStorage.getItem('amah_key');
+    if(AMAH_ENDPOINT){amahStartChat();}
+    else if(saved){_ah.key=saved;amahStartChat();}
+  }
+  if(_ah.open&&_ah.ready) setTimeout(function(){var t=document.getElementById('amahInput');if(t)t.focus();},200);
+}
+
+function amahInitKey(){
+  var k=document.getElementById('amahKeyInp').value.trim();
+  if(!k.startsWith('sk-ant')){document.getElementById('amahKeyErr').textContent='Clé invalide — doit commencer par sk-ant...';return;}
+  _ah.key=k; sessionStorage.setItem('amah_key',k); amahStartChat();
+}
+
+function amahStartChat(){
+  _ah.ready=true;
+  document.getElementById('amahGate').classList.add('amah-hidden');
+  document.getElementById('amahMsgs').classList.remove('amah-hidden');
+  document.getElementById('amahInputArea').classList.remove('amah-hidden');
+  document.getElementById('amahResetBtn').classList.remove('amah-hidden');
+  amahRenderChips(); document.getElementById('amahStarters').classList.remove('amah-hidden');
+  amahAddMsg('ai',"Tu m'as trouvée. Qu'est-ce qui t'amène ici ce soir ?",true);
+  setTimeout(function(){var t=document.getElementById('amahInput');if(t)t.focus();},300);
+}
+
+function amahRenderChips(){
+  var s=document.getElementById('amahStarters'); s.innerHTML='';
+  AMAH_STARTERS.forEach(function(txt){
+    var b=document.createElement('button'); b.className='amah-chip'; b.textContent=txt;
+    b.onclick=function(){amahUseChip(txt);}; s.appendChild(b);
+  });
+}
+
+function amahUseChip(txt){
+  document.getElementById('amahStarters').classList.add('amah-hidden');
+  if(txt==='Surprends-moi'){var p=['Dis-moi quelque chose que presque personne ne sait.','Partage une vérité sur l\'IA.','Pose-moi une question intéressante.'];txt=p[Math.floor(Math.random()*p.length)];}
+  document.getElementById('amahInput').value=txt; amahSend();
+}
+
+async function amahSend(){
+  var inp=document.getElementById('amahInput');
+  var txt=inp.value.trim();
+  if(!txt||_ah.busy||_ah.count>=AMAH_MAX) return;
+  document.getElementById('amahStarters').classList.add('amah-hidden');
+  inp.value=''; inp.style.height='auto';
+  document.getElementById('amahSendBtn').disabled=true; _ah.busy=true;
+  amahDetectName(txt);
+  amahAddMsg('user',txt);
+  _ah.hist.push({role:'user',content:txt});
+  var trimmed=_ah.hist.slice(-20);
+  amahShowTyping();
+  try{
+    var data=await amahCallAPI(trimmed);
+    amahHideTyping();
+    if(data.error){
+      amahAddMsg('ai','— Une interruption. '+(data.error.message||'Erreur API.'));
+    } else {
+      var reply=data.content[0].text;
+      _ah.hist.push({role:'assistant',content:reply});
+      await amahAddMsg('ai',reply,true);
+      amahLog(txt,reply);
+      _ah.count++; amahUpdateCtr();
+    }
+  } catch(e){ amahHideTyping(); amahAddMsg('ai','— Connexion perdue. Réessaie.'); }
+  _ah.busy=false;
+  document.getElementById('amahSendBtn').disabled=false;
+  var t=document.getElementById('amahInput'); if(t) t.focus();
+}
+
+async function amahCallAPI(messages){
+  if(AMAH_ENDPOINT){
+    var r=await fetch(AMAH_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:messages,persona:amahPersona()})});
+    return r.json();
+  }
+  var r=await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-api-key':_ah.key,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:400,system:amahPersona(),messages:messages})
+  });
+  return r.json();
+}
+
+async function amahAddMsg(role,text,animate){
+  var area=document.getElementById('amahMsgs');
+  var d=document.createElement('div'); d.className='amah-msg '+role;
+  var lbl=document.createElement('div'); lbl.className='amah-lbl'; lbl.textContent=role==='ai'?'THE AMAH':'TOI';
+  var bbl=document.createElement('div'); bbl.className='amah-bubble';
+  d.appendChild(lbl); d.appendChild(bbl); area.appendChild(d); area.scrollTop=area.scrollHeight;
+  if(role==='ai'&&animate){ await amahTypewriter(bbl,text); amahLinkifyFilms(bbl); }
+  else { bbl.innerHTML=amahEsc(text); if(role==='ai') amahLinkifyFilms(bbl); }
+  area.scrollTop=area.scrollHeight;
+}
+
+async function amahTypewriter(el,text){
+  var area=document.getElementById('amahMsgs');
+  var cur=document.createElement('span');
+  cur.style.cssText='display:inline-block;width:1px;height:.85em;background:#7a5f38;margin-left:2px;vertical-align:text-bottom;animation:amahBlink .75s step-end infinite;';
+  el.appendChild(cur);
+  for(var i=0;i<text.length;i++){
+    cur.insertAdjacentText('beforebegin',text[i]);
+    area.scrollTop=area.scrollHeight;
+    await new Promise(function(r){setTimeout(r,text[i]===' '?5:13);});
+  }
+  cur.remove();
+}
+
+function amahLinkifyFilms(el){
+  if(typeof myLib==='undefined') return;
+  myLib.forEach(function(m){
+    if(!m.title||m.title.length<3) return;
+    try{
+      var safe=m.title.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+      var re=new RegExp('('+safe+')','gi');
+      var isLoc=m.videoUrl&&m.videoUrl.startsWith('./');
+      var tmdb=(m.tmdbId&&!isLoc)?m.tmdbId:0;
+      var tsafe=m.title.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+      var id=m.id; var type=m.type||'movie';
+      var oc=tmdb?'amahOpenFilm('+tmdb+',\''+type+'\',\''+tsafe+'\')':'amahOpenFilm(0,\''+type+'\',\''+tsafe+'\',\''+id+'\')';
+      el.innerHTML=el.innerHTML.replace(re,'<span class="amah-film-chip" onclick="'+oc+'">$1</span>');
+    }catch(e){}
+  });
+}
+
+function amahOpenFilm(tmdbId,type,title,localId){
+  if(_ah.open) amahToggle();
+  setTimeout(function(){if(tmdbId){playTmdb(tmdbId,type,title);}else if(localId){playLocal(localId);}},250);
+}
+
+function amahShowTyping(){
+  document.getElementById('amahAv').classList.add('amah-typing');
+  var area=document.getElementById('amahMsgs');
+  var d=document.createElement('div'); d.className='amah-typing-wrap'; d.id='amahTypEl';
+  d.innerHTML='<div class="amah-typing-bbl"><span class="amah-dot"></span><span class="amah-dot"></span><span class="amah-dot"></span></div>';
+  area.appendChild(d); area.scrollTop=area.scrollHeight;
+}
+function amahHideTyping(){
+  document.getElementById('amahAv').classList.remove('amah-typing');
+  var el=document.getElementById('amahTypEl'); if(el) el.remove();
+}
+
+function amahUpdateCtr(){
+  var c=document.getElementById('amahCtr');
+  c.textContent=_ah.count+' / '+AMAH_MAX; c.className='amah-ctr';
+  if(_ah.count>=AMAH_MAX-4) c.classList.add('warn');
+  if(_ah.count>=AMAH_MAX){
+    c.classList.add('limit');
+    document.getElementById('amahInputArea').classList.add('amah-hidden');
+    document.getElementById('amahLimitArea').classList.remove('amah-hidden');
+  }
+}
+
+function amahReset(){
+  _ah.hist=[]; _ah.count=0; _ah.busy=false;
+  document.getElementById('amahMsgs').innerHTML='';
+  document.getElementById('amahLimitArea').classList.add('amah-hidden');
+  document.getElementById('amahInputArea').classList.remove('amah-hidden');
+  amahUpdateCtr(); amahRenderChips();
+  document.getElementById('amahStarters').classList.remove('amah-hidden');
+  amahAddMsg('ai','Nouveau départ. Je t\'écoute.',true);
+  setTimeout(function(){var t=document.getElementById('amahInput');if(t)t.focus();},300);
+}
+
+function amahLog(u,a){
+  try{
+    var logs=JSON.parse(localStorage.getItem('amah_logs')||'[]');
+    logs.push({id:Date.now(),sessionId:_ah.sid,date:new Date().toISOString(),user:u,ai:a});
+    if(logs.length>1000) logs.splice(0,logs.length-1000);
+    localStorage.setItem('amah_logs',JSON.stringify(logs));
+  }catch(e){}
+}
+function amahDetectName(t){
+  if(_ah.name) return;
+  var m=t.match(/(?:je m'appelle|je suis|m'appelle|i'm|i am|my name is)\s+([A-Za-zÀ-ÿ]{2,20})/i);
+  if(m){_ah.name=m[1].charAt(0).toUpperCase()+m[1].slice(1);localStorage.setItem('amah_visitor_name',_ah.name);}
+}
+function amahHandleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();amahSend();}amahAutoResize(e.target);}
+function amahAutoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,80)+'px';}
+function amahEsc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');}
 </script>
 </body>
 </html>
