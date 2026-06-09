@@ -20,6 +20,7 @@ var BIBLIOTHEQUE = [
     videoUrl: "./filme/Cleaner.2025.MULTi.1080p.WEB.H264-TFA.mp4",
     mimeType: "video/mp4",
     isLocal: true,
+    tmdbId: 1125899,
     addedAt: "2026-05-06T00:00:00.000Z"
   },
   {
@@ -35,6 +36,7 @@ var BIBLIOTHEQUE = [
     videoUrl: "./filme/Dumb.Money.2023.MULTi.VFF.1080p.WEB.H265-FW.mkv.mp4",
     mimeType: "video/mp4",
     isLocal: true,
+    tmdbId: 926393,
     addedAt: "2026-05-06T00:00:00.000Z"
   },
   {
@@ -50,6 +52,7 @@ var BIBLIOTHEQUE = [
     videoUrl: "./filme/Le_Grand_jeu_2017_1080p_FR_X264_AC3-mHDgz.mkv.mp4",
     mimeType: "video/mp4",
     isLocal: true,
+    tmdbId: 443791,
     addedAt: "2026-05-06T00:00:00.000Z"
   },
   {
@@ -65,6 +68,7 @@ var BIBLIOTHEQUE = [
     videoUrl: "./filme/Night.Call.2014.Multi.Truefrench.1080p.HD.Light.AC3.5.1.Dread-Team.mkv.mp4",
     mimeType: "video/mp4",
     isLocal: true,
+    tmdbId: 242582,
     addedAt: "2026-05-06T00:00:00.000Z"
   },
   {
@@ -80,6 +84,7 @@ var BIBLIOTHEQUE = [
     videoUrl: "./filme/frankenstein.MP4",
     mimeType: "video/mp4",
     isLocal: true,
+    tmdbId: 1062722,
     addedAt: "2026-05-06T00:00:00.000Z"
   },
   {
@@ -95,6 +100,7 @@ var BIBLIOTHEQUE = [
     videoUrl: "./filme/%5B%20OxTorrent.com%20%5D%20How_High_DVDRiP11.avi",
     mimeType: "video/x-msvideo",
     isLocal: true,
+    tmdbId: 8386,
     addedAt: "2026-05-20T00:00:00.000Z"
   },
 
@@ -110,7 +116,7 @@ var BIBLIOTHEQUE = [
     rating: "8.4",
     poster: "https://image.tmdb.org/t/p/w300/edv5CZvWj09upOsy2Y6IwDhK8bt.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/s3TBrRGB1iav7gFOCNx3H31MoES.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/27205",
+    videoUrl: "https://autoembed.co/movie/tmdb/27205",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 27205,
@@ -126,7 +132,7 @@ var BIBLIOTHEQUE = [
     rating: "8.4",
     poster: "https://image.tmdb.org/t/p/w300/xJHokMbljvjADYdit5fK5VQsXEG.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/pbrkL804Y8agVAQKBvBFzdFESFb.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/157336",
+    videoUrl: "https://autoembed.co/movie/tmdb/157336",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 157336,
@@ -142,7 +148,7 @@ var BIBLIOTHEQUE = [
     rating: "8.5",
     poster: "https://image.tmdb.org/t/p/w300/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/hqkIcbrOHL86UncnHIsHVcVmzue.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/155",
+    videoUrl: "https://autoembed.co/movie/tmdb/155",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 155,
@@ -158,7 +164,7 @@ var BIBLIOTHEQUE = [
     rating: "8.5",
     poster: "https://image.tmdb.org/t/p/w300/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/suaEOtk1N1sgg2MTM7oZd2cfVp3.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/680",
+    videoUrl: "https://autoembed.co/movie/tmdb/680",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 680,
@@ -174,7 +180,7 @@ var BIBLIOTHEQUE = [
     rating: "8.2",
     poster: "https://image.tmdb.org/t/p/w300/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/hND7FFiNDBcf91VlKQOUJSL7wJ5.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/98",
+    videoUrl: "https://autoembed.co/movie/tmdb/98",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 98,
@@ -190,7 +196,7 @@ var BIBLIOTHEQUE = [
     rating: "8.2",
     poster: "https://image.tmdb.org/t/p/w300/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/fNG7i7RqMErkcqhohV2a6cV1Ehy.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/603",
+    videoUrl: "https://autoembed.co/movie/tmdb/603",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 603,
@@ -206,7 +212,7 @@ var BIBLIOTHEQUE = [
     rating: "8.4",
     poster: "https://image.tmdb.org/t/p/w300/or06FN3Dka5tukK1e9sl16pB3iy.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/299534",
+    videoUrl: "https://autoembed.co/movie/tmdb/299534",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 299534,
@@ -222,7 +228,7 @@ var BIBLIOTHEQUE = [
     rating: "8.2",
     poster: "https://image.tmdb.org/t/p/w300/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/n6bUvigpRFqSwmPp1m2YADdbRBc.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/475557",
+    videoUrl: "https://autoembed.co/movie/tmdb/475557",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 475557,
@@ -238,7 +244,7 @@ var BIBLIOTHEQUE = [
     rating: "8.5",
     poster: "https://image.tmdb.org/t/p/w300/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/496243",
+    videoUrl: "https://autoembed.co/movie/tmdb/496243",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 496243,
@@ -254,7 +260,7 @@ var BIBLIOTHEQUE = [
     rating: "8.4",
     poster: "https://image.tmdb.org/t/p/w300/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/rr7E0NoGKxvbkb89eR1GwfoYjpA.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/550",
+    videoUrl: "https://autoembed.co/movie/tmdb/550",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 550,
@@ -270,7 +276,7 @@ var BIBLIOTHEQUE = [
     rating: "7.9",
     poster: "https://image.tmdb.org/t/p/w300/uJYYizSuA9Y3DCs0qS4qWvHfZg4.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/634649",
+    videoUrl: "https://autoembed.co/movie/tmdb/634649",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 634649,
@@ -286,7 +292,7 @@ var BIBLIOTHEQUE = [
     rating: "8.3",
     poster: "https://image.tmdb.org/t/p/w300/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/rLb2cwF3Pazuxaj0sRXQ037tGI1.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/872585",
+    videoUrl: "https://autoembed.co/movie/tmdb/872585",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 872585,
@@ -302,7 +308,7 @@ var BIBLIOTHEQUE = [
     rating: "7.0",
     poster: "https://image.tmdb.org/t/p/w300/iuFNMS8vlbhRnMNFdDPcUTHHsiG.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/ctMserH8g2SeOAnCmxGkHHoIBBm.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/346698",
+    videoUrl: "https://autoembed.co/movie/tmdb/346698",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 346698,
@@ -318,7 +324,7 @@ var BIBLIOTHEQUE = [
     rating: "7.4",
     poster: "https://image.tmdb.org/t/p/w300/fZPSd91pGE1fsli0Wqk5T2rjkH3.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/umC04Cozevu8nn3ZTIU9MZAObE0.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/245891",
+    videoUrl: "https://autoembed.co/movie/tmdb/245891",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 245891,
@@ -334,7 +340,7 @@ var BIBLIOTHEQUE = [
     rating: "8.3",
     poster: "https://image.tmdb.org/t/p/w300/62HCnUTHjWE0KjhqoqBLAszKsia.jpg",
     backdrop: "https://image.tmdb.org/t/p/w1280/AkB37dSfJFnHjTvDiOVOj1OFZpV.jpg",
-    videoUrl: "https://vidsrc.to/embed/movie/361743",
+    videoUrl: "https://autoembed.co/movie/tmdb/361743",
     mimeType: "text/html",
     isLocal: true,
     tmdbId: 361743,
@@ -357,28 +363,28 @@ var BIBLIOTHEQUE = [
     tmdbId: 1396,
     seasons: [
       { episodes: [
-        {title:"Pilote", fileData:"https://vidsrc.to/embed/tv/1396/1/1", mimeType:"text/html"},
-        {title:"Le Chat dans le sac", fileData:"https://vidsrc.to/embed/tv/1396/1/2", mimeType:"text/html"},
-        {title:"...Et le sac dans la rivière", fileData:"https://vidsrc.to/embed/tv/1396/1/3", mimeType:"text/html"},
-        {title:"Cancer Man", fileData:"https://vidsrc.to/embed/tv/1396/1/4", mimeType:"text/html"},
-        {title:"Gris", fileData:"https://vidsrc.to/embed/tv/1396/1/5", mimeType:"text/html"},
-        {title:"Coyote Ugly", fileData:"https://vidsrc.to/embed/tv/1396/1/6", mimeType:"text/html"},
-        {title:"A No-Rough-Stuff Type Deal", fileData:"https://vidsrc.to/embed/tv/1396/1/7", mimeType:"text/html"}
+        {title:"Pilote", fileData:"https://vidsrc.lol/embed/tv/1396/1/1", mimeType:"text/html"},
+        {title:"Le Chat dans le sac", fileData:"https://vidsrc.lol/embed/tv/1396/1/2", mimeType:"text/html"},
+        {title:"...Et le sac dans la rivière", fileData:"https://vidsrc.lol/embed/tv/1396/1/3", mimeType:"text/html"},
+        {title:"Cancer Man", fileData:"https://vidsrc.lol/embed/tv/1396/1/4", mimeType:"text/html"},
+        {title:"Gris", fileData:"https://vidsrc.lol/embed/tv/1396/1/5", mimeType:"text/html"},
+        {title:"Coyote Ugly", fileData:"https://vidsrc.lol/embed/tv/1396/1/6", mimeType:"text/html"},
+        {title:"A No-Rough-Stuff Type Deal", fileData:"https://vidsrc.lol/embed/tv/1396/1/7", mimeType:"text/html"}
       ]},
       { episodes: [
-        {title:"Seven Thirty-Seven", fileData:"https://vidsrc.to/embed/tv/1396/2/1", mimeType:"text/html"},
-        {title:"Grilled", fileData:"https://vidsrc.to/embed/tv/1396/2/2", mimeType:"text/html"},
-        {title:"Bit by a Dead Bee", fileData:"https://vidsrc.to/embed/tv/1396/2/3", mimeType:"text/html"},
-        {title:"Down", fileData:"https://vidsrc.to/embed/tv/1396/2/4", mimeType:"text/html"},
-        {title:"Breakage", fileData:"https://vidsrc.to/embed/tv/1396/2/5", mimeType:"text/html"},
-        {title:"Peekaboo", fileData:"https://vidsrc.to/embed/tv/1396/2/6", mimeType:"text/html"},
-        {title:"Negro y Azul", fileData:"https://vidsrc.to/embed/tv/1396/2/7", mimeType:"text/html"},
-        {title:"Better Call Saul", fileData:"https://vidsrc.to/embed/tv/1396/2/8", mimeType:"text/html"},
-        {title:"4 jours hors du temps", fileData:"https://vidsrc.to/embed/tv/1396/2/9", mimeType:"text/html"},
-        {title:"Over", fileData:"https://vidsrc.to/embed/tv/1396/2/10", mimeType:"text/html"},
-        {title:"Mandala", fileData:"https://vidsrc.to/embed/tv/1396/2/11", mimeType:"text/html"},
-        {title:"Phoenix", fileData:"https://vidsrc.to/embed/tv/1396/2/12", mimeType:"text/html"},
-        {title:"ABQ", fileData:"https://vidsrc.to/embed/tv/1396/2/13", mimeType:"text/html"}
+        {title:"Seven Thirty-Seven", fileData:"https://vidsrc.lol/embed/tv/1396/2/1", mimeType:"text/html"},
+        {title:"Grilled", fileData:"https://vidsrc.lol/embed/tv/1396/2/2", mimeType:"text/html"},
+        {title:"Bit by a Dead Bee", fileData:"https://vidsrc.lol/embed/tv/1396/2/3", mimeType:"text/html"},
+        {title:"Down", fileData:"https://vidsrc.lol/embed/tv/1396/2/4", mimeType:"text/html"},
+        {title:"Breakage", fileData:"https://vidsrc.lol/embed/tv/1396/2/5", mimeType:"text/html"},
+        {title:"Peekaboo", fileData:"https://vidsrc.lol/embed/tv/1396/2/6", mimeType:"text/html"},
+        {title:"Negro y Azul", fileData:"https://vidsrc.lol/embed/tv/1396/2/7", mimeType:"text/html"},
+        {title:"Better Call Saul", fileData:"https://vidsrc.lol/embed/tv/1396/2/8", mimeType:"text/html"},
+        {title:"4 jours hors du temps", fileData:"https://vidsrc.lol/embed/tv/1396/2/9", mimeType:"text/html"},
+        {title:"Over", fileData:"https://vidsrc.lol/embed/tv/1396/2/10", mimeType:"text/html"},
+        {title:"Mandala", fileData:"https://vidsrc.lol/embed/tv/1396/2/11", mimeType:"text/html"},
+        {title:"Phoenix", fileData:"https://vidsrc.lol/embed/tv/1396/2/12", mimeType:"text/html"},
+        {title:"ABQ", fileData:"https://vidsrc.lol/embed/tv/1396/2/13", mimeType:"text/html"}
       ]}
     ],
     addedAt: "2026-05-15T00:00:00.000Z"
@@ -397,16 +403,16 @@ var BIBLIOTHEQUE = [
     tmdbId: 1399,
     seasons: [
       { episodes: [
-        {title:"L'Hiver vient", fileData:"https://vidsrc.to/embed/tv/1399/1/1", mimeType:"text/html"},
-        {title:"La Route royale", fileData:"https://vidsrc.to/embed/tv/1399/1/2", mimeType:"text/html"},
-        {title:"Lord Snow", fileData:"https://vidsrc.to/embed/tv/1399/1/3", mimeType:"text/html"},
-        {title:"L'Estropié", fileData:"https://vidsrc.to/embed/tv/1399/1/4", mimeType:"text/html"},
-        {title:"Le Loup et le Lion", fileData:"https://vidsrc.to/embed/tv/1399/1/5", mimeType:"text/html"},
-        {title:"Une Couronne d'or", fileData:"https://vidsrc.to/embed/tv/1399/1/6", mimeType:"text/html"},
-        {title:"Vous Gagnez ou vous Mourez", fileData:"https://vidsrc.to/embed/tv/1399/1/7", mimeType:"text/html"},
-        {title:"La Lame Pointée", fileData:"https://vidsrc.to/embed/tv/1399/1/8", mimeType:"text/html"},
-        {title:"Baelor", fileData:"https://vidsrc.to/embed/tv/1399/1/9", mimeType:"text/html"},
-        {title:"Fire and Blood", fileData:"https://vidsrc.to/embed/tv/1399/1/10", mimeType:"text/html"}
+        {title:"L'Hiver vient", fileData:"https://vidsrc.lol/embed/tv/1399/1/1", mimeType:"text/html"},
+        {title:"La Route royale", fileData:"https://vidsrc.lol/embed/tv/1399/1/2", mimeType:"text/html"},
+        {title:"Lord Snow", fileData:"https://vidsrc.lol/embed/tv/1399/1/3", mimeType:"text/html"},
+        {title:"L'Estropié", fileData:"https://vidsrc.lol/embed/tv/1399/1/4", mimeType:"text/html"},
+        {title:"Le Loup et le Lion", fileData:"https://vidsrc.lol/embed/tv/1399/1/5", mimeType:"text/html"},
+        {title:"Une Couronne d'or", fileData:"https://vidsrc.lol/embed/tv/1399/1/6", mimeType:"text/html"},
+        {title:"Vous Gagnez ou vous Mourez", fileData:"https://vidsrc.lol/embed/tv/1399/1/7", mimeType:"text/html"},
+        {title:"La Lame Pointée", fileData:"https://vidsrc.lol/embed/tv/1399/1/8", mimeType:"text/html"},
+        {title:"Baelor", fileData:"https://vidsrc.lol/embed/tv/1399/1/9", mimeType:"text/html"},
+        {title:"Fire and Blood", fileData:"https://vidsrc.lol/embed/tv/1399/1/10", mimeType:"text/html"}
       ]}
     ],
     addedAt: "2026-05-15T00:00:00.000Z"
@@ -425,15 +431,15 @@ var BIBLIOTHEQUE = [
     tmdbId: 93405,
     seasons: [
       { episodes: [
-        {title:"Le Jeu du calmar", fileData:"https://vidsrc.to/embed/tv/93405/1/1", mimeType:"text/html"},
-        {title:"L'Enfer", fileData:"https://vidsrc.to/embed/tv/93405/1/2", mimeType:"text/html"},
-        {title:"L'Homme au parapluie", fileData:"https://vidsrc.to/embed/tv/93405/1/3", mimeType:"text/html"},
-        {title:"Ensemble ou séparément", fileData:"https://vidsrc.to/embed/tv/93405/1/4", mimeType:"text/html"},
-        {title:"Un monde juste", fileData:"https://vidsrc.to/embed/tv/93405/1/5", mimeType:"text/html"},
-        {title:"Gganbu", fileData:"https://vidsrc.to/embed/tv/93405/1/6", mimeType:"text/html"},
-        {title:"VIPS", fileData:"https://vidsrc.to/embed/tv/93405/1/7", mimeType:"text/html"},
-        {title:"Ce que la vie nous réserve", fileData:"https://vidsrc.to/embed/tv/93405/1/8", mimeType:"text/html"},
-        {title:"Le Jeu principal", fileData:"https://vidsrc.to/embed/tv/93405/1/9", mimeType:"text/html"}
+        {title:"Le Jeu du calmar", fileData:"https://vidsrc.lol/embed/tv/93405/1/1", mimeType:"text/html"},
+        {title:"L'Enfer", fileData:"https://vidsrc.lol/embed/tv/93405/1/2", mimeType:"text/html"},
+        {title:"L'Homme au parapluie", fileData:"https://vidsrc.lol/embed/tv/93405/1/3", mimeType:"text/html"},
+        {title:"Ensemble ou séparément", fileData:"https://vidsrc.lol/embed/tv/93405/1/4", mimeType:"text/html"},
+        {title:"Un monde juste", fileData:"https://vidsrc.lol/embed/tv/93405/1/5", mimeType:"text/html"},
+        {title:"Gganbu", fileData:"https://vidsrc.lol/embed/tv/93405/1/6", mimeType:"text/html"},
+        {title:"VIPS", fileData:"https://vidsrc.lol/embed/tv/93405/1/7", mimeType:"text/html"},
+        {title:"Ce que la vie nous réserve", fileData:"https://vidsrc.lol/embed/tv/93405/1/8", mimeType:"text/html"},
+        {title:"Le Jeu principal", fileData:"https://vidsrc.lol/embed/tv/93405/1/9", mimeType:"text/html"}
       ]}
     ],
     addedAt: "2026-05-15T00:00:00.000Z"
@@ -452,12 +458,12 @@ var BIBLIOTHEQUE = [
     tmdbId: 2316,
     seasons: [
       { episodes: [
-        {title:"Pilote", fileData:"https://vidsrc.to/embed/tv/2316/1/1", mimeType:"text/html"},
-        {title:"Diversité en journée", fileData:"https://vidsrc.to/embed/tv/2316/1/2", mimeType:"text/html"},
-        {title:"Les Récompenses", fileData:"https://vidsrc.to/embed/tv/2316/1/3", mimeType:"text/html"},
-        {title:"Le Groupe de parole", fileData:"https://vidsrc.to/embed/tv/2316/1/4", mimeType:"text/html"},
-        {title:"Hot Girl", fileData:"https://vidsrc.to/embed/tv/2316/1/5", mimeType:"text/html"},
-        {title:"Basketball", fileData:"https://vidsrc.to/embed/tv/2316/1/6", mimeType:"text/html"}
+        {title:"Pilote", fileData:"https://vidsrc.lol/embed/tv/2316/1/1", mimeType:"text/html"},
+        {title:"Diversité en journée", fileData:"https://vidsrc.lol/embed/tv/2316/1/2", mimeType:"text/html"},
+        {title:"Les Récompenses", fileData:"https://vidsrc.lol/embed/tv/2316/1/3", mimeType:"text/html"},
+        {title:"Le Groupe de parole", fileData:"https://vidsrc.lol/embed/tv/2316/1/4", mimeType:"text/html"},
+        {title:"Hot Girl", fileData:"https://vidsrc.lol/embed/tv/2316/1/5", mimeType:"text/html"},
+        {title:"Basketball", fileData:"https://vidsrc.lol/embed/tv/2316/1/6", mimeType:"text/html"}
       ]}
     ],
     addedAt: "2026-05-15T00:00:00.000Z"
@@ -476,16 +482,16 @@ var BIBLIOTHEQUE = [
     tmdbId: 83867,
     seasons: [
       { episodes: [
-        {title:"Origines", fileData:"https://vidsrc.to/embed/tv/83867/1/1", mimeType:"text/html"},
-        {title:"Mensonges", fileData:"https://vidsrc.to/embed/tv/83867/1/2", mimeType:"text/html"},
-        {title:"Passé et présent", fileData:"https://vidsrc.to/embed/tv/83867/1/3", mimeType:"text/html"},
-        {title:"Double réalité", fileData:"https://vidsrc.to/embed/tv/83867/1/4", mimeType:"text/html"},
-        {title:"Vérités", fileData:"https://vidsrc.to/embed/tv/83867/1/5", mimeType:"text/html"},
-        {title:"Sic Mundus Creatus Est", fileData:"https://vidsrc.to/embed/tv/83867/1/6", mimeType:"text/html"},
-        {title:"Kiłometric", fileData:"https://vidsrc.to/embed/tv/83867/1/7", mimeType:"text/html"},
-        {title:"As You Sow, So You Shall Reap", fileData:"https://vidsrc.to/embed/tv/83867/1/8", mimeType:"text/html"},
-        {title:"À tout prix", fileData:"https://vidsrc.to/embed/tv/83867/1/9", mimeType:"text/html"},
-        {title:"Alpha and Omega", fileData:"https://vidsrc.to/embed/tv/83867/1/10", mimeType:"text/html"}
+        {title:"Origines", fileData:"https://vidsrc.lol/embed/tv/83867/1/1", mimeType:"text/html"},
+        {title:"Mensonges", fileData:"https://vidsrc.lol/embed/tv/83867/1/2", mimeType:"text/html"},
+        {title:"Passé et présent", fileData:"https://vidsrc.lol/embed/tv/83867/1/3", mimeType:"text/html"},
+        {title:"Double réalité", fileData:"https://vidsrc.lol/embed/tv/83867/1/4", mimeType:"text/html"},
+        {title:"Vérités", fileData:"https://vidsrc.lol/embed/tv/83867/1/5", mimeType:"text/html"},
+        {title:"Sic Mundus Creatus Est", fileData:"https://vidsrc.lol/embed/tv/83867/1/6", mimeType:"text/html"},
+        {title:"Kiłometric", fileData:"https://vidsrc.lol/embed/tv/83867/1/7", mimeType:"text/html"},
+        {title:"As You Sow, So You Shall Reap", fileData:"https://vidsrc.lol/embed/tv/83867/1/8", mimeType:"text/html"},
+        {title:"À tout prix", fileData:"https://vidsrc.lol/embed/tv/83867/1/9", mimeType:"text/html"},
+        {title:"Alpha and Omega", fileData:"https://vidsrc.lol/embed/tv/83867/1/10", mimeType:"text/html"}
       ]}
     ],
     addedAt: "2026-05-15T00:00:00.000Z"
@@ -504,19 +510,19 @@ var BIBLIOTHEQUE = [
     tmdbId: 71446,
     seasons: [
       { episodes: [
-        {title:"Episode 1", fileData:"https://vidsrc.to/embed/tv/71446/1/1", mimeType:"text/html"},
-        {title:"Episode 2", fileData:"https://vidsrc.to/embed/tv/71446/1/2", mimeType:"text/html"},
-        {title:"Episode 3", fileData:"https://vidsrc.to/embed/tv/71446/1/3", mimeType:"text/html"},
-        {title:"Episode 4", fileData:"https://vidsrc.to/embed/tv/71446/1/4", mimeType:"text/html"},
-        {title:"Episode 5", fileData:"https://vidsrc.to/embed/tv/71446/1/5", mimeType:"text/html"},
-        {title:"Episode 6", fileData:"https://vidsrc.to/embed/tv/71446/1/6", mimeType:"text/html"},
-        {title:"Episode 7", fileData:"https://vidsrc.to/embed/tv/71446/1/7", mimeType:"text/html"},
-        {title:"Episode 8", fileData:"https://vidsrc.to/embed/tv/71446/1/8", mimeType:"text/html"},
-        {title:"Episode 9", fileData:"https://vidsrc.to/embed/tv/71446/1/9", mimeType:"text/html"},
-        {title:"Episode 10", fileData:"https://vidsrc.to/embed/tv/71446/1/10", mimeType:"text/html"},
-        {title:"Episode 11", fileData:"https://vidsrc.to/embed/tv/71446/1/11", mimeType:"text/html"},
-        {title:"Episode 12", fileData:"https://vidsrc.to/embed/tv/71446/1/12", mimeType:"text/html"},
-        {title:"Episode 13", fileData:"https://vidsrc.to/embed/tv/71446/1/13", mimeType:"text/html"}
+        {title:"Episode 1", fileData:"https://vidsrc.lol/embed/tv/71446/1/1", mimeType:"text/html"},
+        {title:"Episode 2", fileData:"https://vidsrc.lol/embed/tv/71446/1/2", mimeType:"text/html"},
+        {title:"Episode 3", fileData:"https://vidsrc.lol/embed/tv/71446/1/3", mimeType:"text/html"},
+        {title:"Episode 4", fileData:"https://vidsrc.lol/embed/tv/71446/1/4", mimeType:"text/html"},
+        {title:"Episode 5", fileData:"https://vidsrc.lol/embed/tv/71446/1/5", mimeType:"text/html"},
+        {title:"Episode 6", fileData:"https://vidsrc.lol/embed/tv/71446/1/6", mimeType:"text/html"},
+        {title:"Episode 7", fileData:"https://vidsrc.lol/embed/tv/71446/1/7", mimeType:"text/html"},
+        {title:"Episode 8", fileData:"https://vidsrc.lol/embed/tv/71446/1/8", mimeType:"text/html"},
+        {title:"Episode 9", fileData:"https://vidsrc.lol/embed/tv/71446/1/9", mimeType:"text/html"},
+        {title:"Episode 10", fileData:"https://vidsrc.lol/embed/tv/71446/1/10", mimeType:"text/html"},
+        {title:"Episode 11", fileData:"https://vidsrc.lol/embed/tv/71446/1/11", mimeType:"text/html"},
+        {title:"Episode 12", fileData:"https://vidsrc.lol/embed/tv/71446/1/12", mimeType:"text/html"},
+        {title:"Episode 13", fileData:"https://vidsrc.lol/embed/tv/71446/1/13", mimeType:"text/html"}
       ]}
     ],
     addedAt: "2026-05-15T00:00:00.000Z"
@@ -535,14 +541,14 @@ var BIBLIOTHEQUE = [
     tmdbId: 66732,
     seasons: [
       { episodes: [
-        {title:"Le Monde à l'envers", fileData:"https://vidsrc.to/embed/tv/66732/1/1", mimeType:"text/html"},
-        {title:"La Bicyclette de Will", fileData:"https://vidsrc.to/embed/tv/66732/1/2", mimeType:"text/html"},
-        {title:"Holly, Jolly", fileData:"https://vidsrc.to/embed/tv/66732/1/3", mimeType:"text/html"},
-        {title:"Le Corps", fileData:"https://vidsrc.to/embed/tv/66732/1/4", mimeType:"text/html"},
-        {title:"La Justice des nains", fileData:"https://vidsrc.to/embed/tv/66732/1/5", mimeType:"text/html"},
-        {title:"Le Monstre", fileData:"https://vidsrc.to/embed/tv/66732/1/6", mimeType:"text/html"},
-        {title:"La Bouche", fileData:"https://vidsrc.to/embed/tv/66732/1/7", mimeType:"text/html"},
-        {title:"Le Portail", fileData:"https://vidsrc.to/embed/tv/66732/1/8", mimeType:"text/html"}
+        {title:"Le Monde à l'envers", fileData:"https://vidsrc.lol/embed/tv/66732/1/1", mimeType:"text/html"},
+        {title:"La Bicyclette de Will", fileData:"https://vidsrc.lol/embed/tv/66732/1/2", mimeType:"text/html"},
+        {title:"Holly, Jolly", fileData:"https://vidsrc.lol/embed/tv/66732/1/3", mimeType:"text/html"},
+        {title:"Le Corps", fileData:"https://vidsrc.lol/embed/tv/66732/1/4", mimeType:"text/html"},
+        {title:"La Justice des nains", fileData:"https://vidsrc.lol/embed/tv/66732/1/5", mimeType:"text/html"},
+        {title:"Le Monstre", fileData:"https://vidsrc.lol/embed/tv/66732/1/6", mimeType:"text/html"},
+        {title:"La Bouche", fileData:"https://vidsrc.lol/embed/tv/66732/1/7", mimeType:"text/html"},
+        {title:"Le Portail", fileData:"https://vidsrc.lol/embed/tv/66732/1/8", mimeType:"text/html"}
       ]}
     ],
     addedAt: "2026-05-15T00:00:00.000Z"
@@ -561,14 +567,14 @@ var BIBLIOTHEQUE = [
     tmdbId: 82856,
     seasons: [
       { episodes: [
-        {title:"Chapitre 1 : Le Mandalorien", fileData:"https://vidsrc.to/embed/tv/82856/1/1", mimeType:"text/html"},
-        {title:"Chapitre 2 : L'Enfant", fileData:"https://vidsrc.to/embed/tv/82856/1/2", mimeType:"text/html"},
-        {title:"Chapitre 3 : Le Péché", fileData:"https://vidsrc.to/embed/tv/82856/1/3", mimeType:"text/html"},
-        {title:"Chapitre 4 : Refuge", fileData:"https://vidsrc.to/embed/tv/82856/1/4", mimeType:"text/html"},
-        {title:"Chapitre 5 : Le Fugitif", fileData:"https://vidsrc.to/embed/tv/82856/1/5", mimeType:"text/html"},
-        {title:"Chapitre 6 : Le Prisonnier", fileData:"https://vidsrc.to/embed/tv/82856/1/6", mimeType:"text/html"},
-        {title:"Chapitre 7 : Le Règlement de comptes", fileData:"https://vidsrc.to/embed/tv/82856/1/7", mimeType:"text/html"},
-        {title:"Chapitre 8 : La Rédemption", fileData:"https://vidsrc.to/embed/tv/82856/1/8", mimeType:"text/html"}
+        {title:"Chapitre 1 : Le Mandalorien", fileData:"https://vidsrc.lol/embed/tv/82856/1/1", mimeType:"text/html"},
+        {title:"Chapitre 2 : L'Enfant", fileData:"https://vidsrc.lol/embed/tv/82856/1/2", mimeType:"text/html"},
+        {title:"Chapitre 3 : Le Péché", fileData:"https://vidsrc.lol/embed/tv/82856/1/3", mimeType:"text/html"},
+        {title:"Chapitre 4 : Refuge", fileData:"https://vidsrc.lol/embed/tv/82856/1/4", mimeType:"text/html"},
+        {title:"Chapitre 5 : Le Fugitif", fileData:"https://vidsrc.lol/embed/tv/82856/1/5", mimeType:"text/html"},
+        {title:"Chapitre 6 : Le Prisonnier", fileData:"https://vidsrc.lol/embed/tv/82856/1/6", mimeType:"text/html"},
+        {title:"Chapitre 7 : Le Règlement de comptes", fileData:"https://vidsrc.lol/embed/tv/82856/1/7", mimeType:"text/html"},
+        {title:"Chapitre 8 : La Rédemption", fileData:"https://vidsrc.lol/embed/tv/82856/1/8", mimeType:"text/html"}
       ]}
     ],
     addedAt: "2026-05-15T00:00:00.000Z"

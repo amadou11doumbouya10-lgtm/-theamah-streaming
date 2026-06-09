@@ -1,6 +1,6 @@
 # ANALYSE COMPLÈTE — Theamah+ Streaming
 > Document destiné aux IA (Claude, GPT, Gemini…) pour prendre en main le projet immédiatement.
-> Mis à jour le 02/06/2026. À relire au début de chaque session.
+> Mis à jour le 09/06/2026. À relire au début de chaque session.
 
 ---
 
@@ -82,12 +82,12 @@ var ADMIN_HASH = 'd956b3c...'; // SHA-256 de "theamah2026"
 
 ---
 
-## 5. Sources de streaming — État au 02/06/2026
+## 5. Sources de streaming — État au 09/06/2026
 
 ### 3 sources actives (confirmées navigateur réel depuis github.io)
 
 ```js
-// Ligne ~1205 dans theamah-streaming.html
+// Ligne ~1274 dans theamah-streaming.html
 var _SRCS=[
   {n:'AutoEmbed',  mu:'https://autoembed.co/movie/tmdb/{id}',   tu:'https://autoembed.co/tv/tmdb/{id}-{s}-{e}',                    vf:false},
   {n:'VidSrc.pm',  mu:'https://vidsrc.pm/embed/movie/{id}',    tu:'https://vidsrc.pm/embed/tv?tmdb={id}&season={s}&episode={e}',  vf:false},
@@ -95,7 +95,7 @@ var _SRCS=[
 ];
 ```
 
-### Whitelist iframe (ligne ~893)
+### Whitelist iframe (ligne ~942)
 
 ```js
 var IFRAME_WHITELIST=['autoembed.co','vidsrc.pm','vidsrc.lol','www.youtube.com','youtube.com','github.com','raw.githubusercontent.com'];
@@ -142,13 +142,14 @@ Les services embed injectent des publicités via des réseaux tiers (dont `brigh
 
 ## 6. Bibliothèque (`bibliotheque.js`)
 
-- ~51 entrées (films + séries, locaux + streaming)
+- ~47 entrées (films + séries, locaux + streaming)
 - Chargée via `<script src="bibliotheque.js">` → disponible sous `window.SHARED_LIBRARY`
 - Fusionnée avec `localStorage['t_lib']` dans `mergLib()`
+- **0 lien `vidsrc.to`** depuis le 09/06/2026 (tous remplacés)
 
 ### Types d'entrées
 
-**Film local (MP4 sur le PC)**
+**Film local avec fallback streaming (⭐ nouveau depuis 09/06/2026)**
 ```js
 {
   id: "local_xxx",
@@ -156,14 +157,16 @@ Les services embed injectent des publicités via des réseaux tiers (dont `brigh
   genre: "Action", desc: "...", rating: "7.5",
   poster: "https://image.tmdb.org/t/p/w300/...",
   backdrop: "https://image.tmdb.org/t/p/w1280/...",
-  videoUrl: "./filme/film.mp4",
+  videoUrl: "./filme/film.mp4",   // ← chemin local, commence par "./"
   mimeType: "video/mp4",
   isLocal: true,
+  tmdbId: 1125899,               // ← ajouté pour fallback streaming
   addedAt: "2026-05-15T00:00:00.000Z"
 }
 ```
+> Comportement : `playLocal()` en premier. Si le fichier est introuvable (github.io), `showLocalFileError()` déclenche automatiquement `playTmdb(tmdbId)`.
 
-**Film streaming (embed TMDB)**
+**Film streaming pur (embed TMDB)**
 ```js
 {
   id: "stream_xxx_27205",
@@ -171,13 +174,14 @@ Les services embed injectent des publicités via des réseaux tiers (dont `brigh
   genre: "...", desc: "...", rating: "8.4",
   poster: "https://image.tmdb.org/t/p/w300/...",
   backdrop: "https://image.tmdb.org/t/p/w1280/...",
-  videoUrl: "https://vidsrc.pm/embed/movie/27205",
+  videoUrl: "https://autoembed.co/movie/tmdb/27205",
   mimeType: "text/html",
   isLocal: true,
   tmdbId: 27205,
   addedAt: "2026-05-15T00:00:00.000Z"
 }
 ```
+> `videoUrl` commence par `https://` (pas `./`) → `buildLocalCard()` utilise `playTmdb()` directement.
 
 **Série locale (épisodes)**
 ```js
@@ -230,7 +234,7 @@ Les services embed injectent des publicités via des réseaux tiers (dont `brigh
 | `applyMyFilters()` | Filtre/tri dans Ma Bibliothèque |
 | `startPlyAutoSave()` | Sauvegarde progression toutes les 30s |
 | `startNextEpCountdown()` | Compte à rebours 10s avant épisode suivant |
-| `showLocalFileError()` | Affiche message si fichier local introuvable |
+| `showLocalFileError()` | Si le film a un `tmdbId` → bascule automatiquement vers `playTmdb()`. Sinon affiche message d'erreur. |
 | `mergLib(shared, local)` | Fusionne SHARED_LIBRARY + localStorage t_lib |
 
 ---
@@ -321,16 +325,16 @@ git push
 
 | Priorité | Description |
 |---|---|
-| 🔴 URGENT | `How_High_DVDRiP11.avi` dans `filme/` → format `.avi` non lisible dans le navigateur. Besoin de conversion en `.mp4`. |
-| 🟡 À corriger | Modal d'aide (ligne ~894) mentionne encore "VidSrc.me · VSembed" (sources mortes). |
-| 🟡 À faire | Trouver de nouvelles sources streaming compatibles github.io (actuellement seulement 3). |
-| 🟢 Informatif | `brightadnetwork.com` chargé par les embed services (non bloquable depuis notre page). Bandeau uBlock Origin ajouté le 02/06/2026. |
-| 🟢 Fait | Barre tactile mobile ajoutée le 02/06/2026 — classe `embed-mode` sur `#plyOv`, CSS `.ply-mob-bar` / `.ply-mob-btn`. |
-| 🟢 Fait | Hash routing ajouté le 02/06/2026 — `initHashRouting()`, format `#tmdb=ID` ou `#tmdb=ID&type=tv`. |
-| 🟡 À tester | **Frembed.click** VF native — `https://frembed.click/api/film.php?id={id}&lang=vf` — rotation domaine (.pro→.bond→.click→.one). Si confirmé : ajouter `var FB_BASE='https://frembed.click'` et les deux entrées `_SRCS`. |
+| 🔴 URGENT | `How_High_DVDRiP11.avi` → `.avi` non lisible nativement dans le navigateur. Sur github.io, le fallback streaming (tmdbId:8386) se déclenche automatiquement. En local, conversion en `.mp4` requise. |
+| 🟡 À faire | Trouver de nouvelles sources streaming compatibles github.io (actuellement 3 sources). |
+| 🟡 À tester | **Frembed.click** VF native — `https://frembed.click/api/film.php?id={id}&lang=vf` — si confirmé : ajouter `var FB_BASE='https://frembed.click'` et les deux entrées `_SRCS`. |
 | 🟡 À tester | **VidSrc.icu** — `https://vidsrc.icu/embed/movie/{id}` (même format que VidSrc.pm). |
 | 🟡 À tester | **Embed.su** — `https://embed.su/embed/movie/{id}` — était mort le 26/05, peut avoir repris. |
 | 🟡 À tester | **VidSrc.fyi** — `https://vidsrc.fyi/embed/movie/{id}` — récent, 1080p. |
+| 🟢 Fait 09/06 | Films locaux : `tmdbId` ajouté sur 6 films, fallback auto vers `playTmdb()` dans `showLocalFileError()`. |
+| 🟢 Fait 09/06 | 0 lien `vidsrc.to` dans `bibliotheque.js` : films → `autoembed.co`, épisodes séries → `vidsrc.lol`. |
+| 🟢 Fait 09/06 | Modal d'aide : suppression des références VidSrc.me / VSembed (sources mortes). |
+| 🟢 Informatif | `brightadnetwork.com` chargé par les embed services (non bloquable depuis notre page). Bandeau uBlock Origin dans le lecteur. |
 
 ---
 
@@ -353,10 +357,54 @@ git push
 | 13 | 02/06/2026 | Bandeau uBlock Origin dans lecteur, message VF corrigé, investigation brightadnetwork.com, ANALYSE-AI.md créé |
 | 14 | 02/06/2026 | Barre tactile mobile dans le lecteur embed (3 boutons : Suivante / Plein écran / Fermer) — visible uniquement sur mobile <600px et uniquement en mode streaming (classe `embed-mode`) |
 | 15 | 02/06/2026 | Hash routing : `#tmdb=27205` ou `#tmdb=1396&type=tv` ou `#local=xxx` — `initHashRouting()` au DOMContentLoaded, `playTmdb()` écrit le hash, `closePly()` le nettoie |
+| 16 | 09/06/2026 | Films locaux PC : `tmdbId` ajouté (Cleaner/1125899, DumbMoney/926393, LeGrandJeu/443791, NightCall/242582, Frankenstein/1062722, HowHigh/8386). `showLocalFileError()` bascule auto vers streaming. `buildLocalCard()` : détection `isLocalFile` via `videoUrl.startsWith('./')`. Nettoyage complet : 0 lien vidsrc.to. Modal aide corrigée. |
 
 ---
 
-## 16. Règles absolues pour l'IA
+## 16. Mécanisme fallback local → streaming (depuis 09/06/2026)
+
+### Problème résolu
+Les fichiers `./filme/...` sont exclus de Git (`.gitignore`). Sur github.io, ils n'existent pas → le `<video>` déclenche `onerror`.
+
+### Solution en 3 couches
+
+**Couche 1 — `buildLocalCard()` (ligne ~1190)**
+```js
+var isLocalFile = m.videoUrl && m.videoUrl.startsWith('./');
+var onclick = (!isLocalFile && m.tmdbId)
+  ? 'playTmdb('+m.tmdbId+',\''+m.type+'\',\''+ts+'\')'
+  : 'playLocal(\''+m.id+'\')';
+```
+- Chemin local (`./...`) → toujours `playLocal()`, badge LOCAL
+- URL streaming (`https://...`) + tmdbId → `playTmdb()`, badge STREAM
+
+**Couche 2 — `showLocalFileError()` (ligne ~2352)**
+```js
+function showLocalFileError(vid){
+  var filmId = document.getElementById('plyBox').dataset.filmId;
+  var film = myLib.find(function(m){ return m.id === filmId; });
+  if(film && film.tmdbId){
+    showToast('Fichier local introuvable — bascule vers streaming','grn');
+    setTimeout(function(){ playTmdb(film.tmdbId, film.type, film.title); }, 400);
+    return;
+  }
+  // sinon : affiche message d'erreur statique
+}
+```
+
+**Couche 3 — `tmdbId` sur tous les films locaux**
+Tous les 6 films locaux (`./filme/...`) ont maintenant un `tmdbId`. Si le fichier n'existe pas (github.io) ou si le codec est incompatible, le streaming prend le relais automatiquement.
+
+### Résultat
+| Contexte | Comportement |
+|---|---|
+| Local (`http.server 8765`) | Lit le fichier MP4 local directement |
+| GitHub Pages (`github.io`) | Fichier 404 → onerror → auto-switch streaming |
+| Fichier AVI (How High) | AVI non supporté → onerror → auto-switch streaming |
+
+---
+
+## 17. Règles absolues pour l'IA
 
 1. **Ne jamais retirer le `sandbox` des iframes** — casse la sécurité anti-pub.
 2. **Tester les nouvelles sources EN NAVIGATEUR RÉEL depuis github.io** — WebFetch retourne 403 même si la source est vivante.
