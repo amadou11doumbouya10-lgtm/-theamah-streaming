@@ -11,7 +11,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Site en ligne** : https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/
 - **Repo GitHub** : https://github.com/amadou11doumbouya10-lgtm/-theamah-streaming
 - **Lien court** : https://tinyurl.com/27k6aabj
-- **Mot de passe admin** : `theamah2026`
+- **Mot de passe admin** : ne pas stocker en clair dans ce fichier public (ancien mot de passe compromis et changé le 2026-06-11). Le hash SHA-256 actuel est dans `ADMIN_HASH` (theamah-streaming.html) ; demander le mot de passe en clair au propriétaire du projet hors GitHub.
 
 ## Comment lancer le projet en local
 
@@ -55,7 +55,7 @@ var TK  = '4e44d9029b1270a757cddc766a1bcb63'; // Clé API TMDB
 var TB  = 'https://api.themoviedb.org/3';
 var IMG = 'https://image.tmdb.org/t/p/';
 var LG  = 'fr-FR';
-var ADMIN_HASH = 'd956b3c...'; // SHA-256 de "theamah2026"
+var ADMIN_HASH = '9954d8b...'; // SHA-256 du mot de passe admin (changé le 2026-06-11, ne pas documenter le mot de passe en clair ici)
 ```
 
 ## Persistence des données
