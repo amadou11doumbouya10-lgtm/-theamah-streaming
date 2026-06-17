@@ -7,7 +7,7 @@
 
 ### Critiques
 - ✅ C1 — Badge STREAM rouge (tmdbId) vs LOCAL vert (fichier local)
-- ✅ C2 — Modal admin HTML stylisée, max 5 tentatives (mot de passe : theamah2026)
+- ✅ C2 — Modal admin HTML stylisée, max 5 tentatives (mot de passe changé le 2026-06-11, voir ADMIN_HASH)
 - ✅ C3 — Mots de passe utilisateurs hashés SHA-256 + migration automatique
 - ✅ C4 — Sauvegarde progression toutes les 30 secondes (startPlyAutoSave)
 - ✅ C5 — Lien actif dans la navigation (classe .active dans showPage)

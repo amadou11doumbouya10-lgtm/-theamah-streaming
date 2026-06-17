@@ -16,7 +16,7 @@
 | URL production | `https://amadou11doumbouya10-lgtm.github.io/-theamah-streaming/` |
 | Lien court | `https://tinyurl.com/27k6aabj` |
 | Repo GitHub | `https://github.com/amadou11doumbouya10-lgtm/-theamah-streaming` |
-| Mot de passe admin | `theamah2026` |
+| Mot de passe admin | non documenté ici (repo public) — voir `ADMIN_HASH` dans theamah-streaming.html, demander au propriétaire |
 | Créateur | Amadou Doumbouya |
 
 ---
@@ -77,7 +77,7 @@ var TK   = '4e44d9029b1270a757cddc766a1bcb63'; // Clé API TMDB (publique)
 var TB   = 'https://api.themoviedb.org/3';
 var IMG  = 'https://image.tmdb.org/t/p/';
 var LG   = 'fr-FR';
-var ADMIN_HASH = 'd956b3c...'; // SHA-256 de "theamah2026"
+var ADMIN_HASH = '9954d8b...'; // SHA-256 du mot de passe admin (changé le 2026-06-11)
 ```
 
 ---
