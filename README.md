@@ -37,3 +37,4 @@ cd -theamah-streaming
 ---
 
 > ⚠️ Projet réalisé à des fins de démonstration technique et de portfolio.
+ ⭐ Si ce projet t'inspire, laisse une étoile !
